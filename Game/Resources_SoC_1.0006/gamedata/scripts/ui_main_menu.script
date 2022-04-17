@@ -159,6 +159,19 @@ function main_menu:OnButton_options_clicked()
 	self:Show(false)
 end
 
+function main_menu:OnButton_coordinats_clicked() 
+	local text 
+	local vid 
+	local gvid 
+	local a = vector()  
+	local text 
+	a = db.actor:position()  
+	vid = db.actor:level_vertex_id()  
+	gvid = db.actor:game_vertex_id()  
+	text = "Позиция:\\nX= "..a.x.."\\nY= "..a.y.."\\nZ= "..a.z.."\\nlevel_vertex= "..vid.."\\ngame_vertex_id= "..gvid 
+	news_manager.send_tip(db.actor, text, nil, nil, 30000) 
+end 
+
 function main_menu:OnKeyboard(dik, keyboard_action)
 	CUIScriptWnd.OnKeyboard(self, dik, keyboard_action)
 
@@ -169,6 +182,8 @@ function main_menu:OnKeyboard(dik, keyboard_action)
 			end
 		elseif dik == DIK_keys.DIK_N then --personal_test
 			xpcall(function() dofile(getFS():update_path("$game_scripts$", "personal_test.lua")) end, log1)
+		elseif dik == DIK_keys.DIK_F10 then
+			self:OnButton_coordinats_clicked()
 		end
 	end
 

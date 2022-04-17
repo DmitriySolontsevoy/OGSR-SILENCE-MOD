@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <window>
-	<back_video x="0" y="0" width="1024" height="430">
+	<back_video x="1000000" y="1000000" width="1024" height="430">
 		<texture x="0" y="0" width="1024" height="430">ui\ui_mm_window_back_crop</texture>
 	</back_video>
 
@@ -13,7 +13,7 @@
 		<texture>ui\ui_static_mm_back_03</texture>
 	</background>
 
-	<rug_video x="275" y="425" width="128" height="256">
+	<rug_video x="1000000" y="1000000" width="128" height="256">
 		<texture>ui\ui_mm_rug02</texture>
 	</rug_video>
 	<main_dialog>
@@ -699,11 +699,6 @@
 			<options_item entry="hud_small_font" group="mm_opt_gameplay"/>
 			<text font="letterica16" r="215" g="195" b="170">ui_mm_small_font</text>
 		</check_small_font>
-
-		<check_crosshair_hard x="20" y="305" width="243" height="21">
-			<options_item entry="hud_crosshair_hard" group="mm_opt_gameplay"/>
-			<text font="letterica16" r="215" g="195" b="170">ui_mm_crosshair_hard</text>
-		</check_crosshair_hard>
 
 	</tab_gameplay>
 	<tab_controls>

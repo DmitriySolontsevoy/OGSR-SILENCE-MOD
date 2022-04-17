@@ -1,0 +1,103 @@
+local prev_suit_sect = "exo"
+local new_game = true
+
+local suit_texture_table = {
+	no_outfit = "0",
+	novice_outfit = "8",
+	stalker_outfit = "1",
+	scientific_outfit = "5",
+	exo_outfit = "exo",
+	exo_outfit_dolg = "exo",
+	exo_outfit_svoboda = "exo",
+	bandit_outfit = "6",
+	killer_outfit = "10",
+	monolit_outfit = "7",
+	military_outfit = "13",
+	specops_outfit = "12",
+	svoboda_light_outfit = "4",
+	svoboda_heavy_outfit = "11",
+	dolg_outfit = "9",
+	dolg_scientific_outfit = "5",
+	ecolog_outfit = "2",
+	protection_outfit = "3",
+	outfit_novice_m1 = "8",
+	outfit_stalker_m1 = "1",
+	outfit_stalker_m2 = "1",
+	outfit_exo_m1 = "exo",
+	outfit_bandit_m1 = "6",
+	outfit_killer_m1 = "10",
+	outfit_specnaz_m1 = "12",
+	outfit_svoboda_m1 = "11",
+	outfit_dolg_m1 = "6",
+	mp_exo_outfit = "exo"
+}
+
+local exo_shlangi_table = {
+	no_outfit = "act_exo_missing",
+	novice_outfit = "act_exo_missing",
+	stalker_outfit = "act_exo_missing",
+	scientific_outfit = "act_exo_missing",
+	exo_outfit = "act_exo_shlangi",
+	exo_outfit_dolg = "act_exo_dolg",
+	exo_outfit_svoboda = "act_exo_svoboda",
+	bandit_outfit = "act_exo_missing",
+	killer_outfit = "act_exo_missing",
+	monolit_outfit = "act_exo_missing",
+	military_outfit = "act_exo_missing",
+	specops_outfit = "act_exo_missing",
+	svoboda_light_outfit = "act_exo_missing",
+	svoboda_heavy_outfit = "act_exo_missing",
+	dolg_outfit = "act_exo_missing",
+	dolg_scientific_outfit = "act_exo_missing",
+	ecolog_outfit = "act_exo_missing",
+	protection_outfit = "act_exo_missing",
+	outfit_novice_m1 = "act_exo_missing",
+	outfit_stalker_m1 = "act_exo_missing",
+	outfit_stalker_m2 = "act_exo_missing",
+	outfit_exo_m1 = "act_exo_shlangi",
+	outfit_bandit_m1 = "act_exo_missing",
+	outfit_killer_m1 = "act_exo_missing",
+	outfit_specnaz_m1 = "act_exo_missing",
+	outfit_svoboda_m1 = "act_exo_missing",
+	outfit_dolg_m1 = "act_exo_missing",
+	mp_exo_outfit = "act_exo_shlangi"
+}
+
+function update()
+	local suit = db.actor:item_in_slot(6)
+	
+	local suit_sect
+	if suit then
+		suit_sect = suit:section()
+	else
+		suit_sect = "no_outfit"
+	end
+
+	if prev_suit_sect == suit_sect and not new_game then
+		return
+	end
+
+	local changed = false
+	
+	local arms = texture_find("act\\act_arm_exo")
+	if arms then
+		for n, t in pairs(arms) do
+			local name = "act\\act_arm_" .. suit_texture_table[suit_sect]
+			t:load(name)
+			changed = true
+		end
+	end
+
+	local exo = texture_find("act\\act_exo_shlangi")
+	if exo then
+		for n, t in pairs(exo) do
+			local name = "act\\" .. exo_shlangi_table[suit_sect]
+			t:load(name)
+		end
+	end
+
+	if changed then
+		prev_suit_sect = suit_sect
+		new_game = false
+	end
+end

@@ -1,0 +1,40 @@
+function main(npc,actor)
+	local hud = repair_ui(get_hud())
+	level.start_stop_menu(hud, true)
+	npc:stop_talk()
+	actor:stop_talk()
+	db.actor:hide_weapon()
+end
+
+----GUI CLASS----
+
+class "repair_ui" (CUIScriptWnd)
+
+function repair_ui:__init(owner) super()
+	self.owner = owner
+	self:Init_Controls()
+	self:InitCallBacks()
+end
+
+function repair_ui:__finalize()
+end
+ 
+function repair_ui:Init_Controls()
+	self:Init(0,0,1920,1080)
+	local xml = CScriptXmlInit()
+	xml:ParseFile("ui_repair.xml")
+
+	xml:InitStatic("main_window", self)
+	xml:InitDragDropList("dragdrop_list", self)
+	
+	self:Register(xml:Init3tButton("btn_quit", self),"btn_quit")
+end
+
+function repair_ui:InitCallBacks()
+	self:AddCallback("btn_quit", ui_events.BUTTON_CLICKED, self.on_quit, self)
+end
+
+function repair_ui:on_quit()
+	self:GetHolder():start_stop_menu(self, true)
+	db.actor:restore_weapon()
+end

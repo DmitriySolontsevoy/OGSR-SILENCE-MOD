@@ -5,6 +5,7 @@
 /ogsr_engine/_LIB
 /ogsr_engine/_TEMP
 /bin*
+/.idea
 
 # Precompiled Headers
 *.ipch

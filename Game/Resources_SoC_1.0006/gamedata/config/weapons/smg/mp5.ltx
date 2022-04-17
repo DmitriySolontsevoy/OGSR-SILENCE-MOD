@@ -1,0 +1,214 @@
+; Пистолет-пулемет Heckler-Koch MP5A3
+;-(правлено SR)-------------------------------------
+; калибр 				9х19 мм
+; длина ствола 				225 мм
+; магазин				30
+; вес без магазина			3.08
+; эффективная дальность стрельбы	25-100 м
+; прицельная дальность			---
+; дульная скорость пули			400 м/с
+; темп стрельбы				800 в/с
+;---------------------------------------------------
+[wpn_mp5]:identity_immunities
+GroupControlSection		= spawn_group
+discovery_dependency 		= 
+$spawn 				= "weapons\mp5"	; option for Level Editor
+$npc				= on		; option for Level Editor
+$prefetch 			= 8
+scheduled 			= off 		; option for ALife Simulator
+cform 				= skeleton
+class 				= WP_LR300
+min_radius 			= 1
+max_radius			= 20
+description			= enc_weapons1_wpn-mp5
+
+ef_main_weapon_type		= 2
+ef_weapon_type			= 5
+
+;-----------------------------------------------------------------------------------
+holder_range_modifier		= 1.0		 				; во сколько раз увеличивается eye_range 
+holder_fov_modifier		= 1.2 						; во сколько раз увеличивается eye_fov
+;-----------------------------------------------------------------------------------
+
+cost				= 2500
+weapon_class			= assault_rifle
+
+ammo_limit			= 210
+ammo_current			= 210
+ammo_elapsed			= 30
+ammo_mag_size			= 30
+
+ammo_class			= ammo_9x19_pbp, ammo_9x19_fmj
+
+
+fire_modes			= 1, 2, 3, -1
+
+hand_dependence			= 1
+single_handed			= 0
+
+slot 				= 1,2		; primary
+animation_slot			= 8		; type of the animation that will be used
+
+inv_name			= MP5
+inv_name_short			= MP5
+inv_weight			= 3.08
+
+inv_grid_width			= 3
+inv_grid_height			= 1
+inv_grid_x			= 5
+inv_grid_y			= 11
+
+;спавнить автоматически боеприпасы при подъеме оружия
+auto_spawn_ammo			= false
+
+;-----------------------------------------------------------------------------------
+;базовая дисперсия
+dispersion_start		= 0
+fire_dispersion_base		= 0.18 			; угол (в градусах) базовой дисперсии оружия (оружия зажатого в тисках)
+control_inertion_factor		= 1.07f
+
+;отдача
+cam_relax_speed 		= 6.5			; скорость возврата в исходное положение
+cam_dispersion 			= 0.2			; увеличения угла (в градусах) с каждым выстрелом
+cam_dispersion_inc		= 0.12			; увеличениe cam_dispersion с каждым выстрелом
+cam_dispertion_frac		= 0.4			; ствол будет подыматься на cam_dispersion*cam_dispertion_frac +- cam_dispersion*(1-cam_dispertion_frac)
+cam_max_angle			= 6.0			; максимальный угол отдачи
+cam_max_angle_horz		= 9.0			; (degree) maximum shot horizontal degree 
+cam_step_angle_horz		= 0.4			; (degree) size of step camera moved in horizontal position while shooting
+
+fire_dispersion_condition_factor= 5			; увеличение дисперсии в процентах при максимальном износе 
+misfire_probability 		= 0.003			; вероятность осечки при максимальном износе 
+misfire_condition_k		= 0.05
+condition_shot_dec 		= 0.0002 		; увеличение износа при каждом выстреле
+;-----------------------------------------------------------------------------------
+
+direction 			= 0, 0, 1
+
+fire_point 			= 0.0, 0.2, 0.392
+
+flame_particles			= weapons\generic_weapon05
+smoke_particles 		= weapons\generic_shoot_00
+
+shell_point		 	= 0.0, 0.188, 0.082
+shell_dir		 	= 0.0, 1.0, 0.0
+shell_particles	 		= weapons\arsenal_shells1
+
+PDM_disp_base 			= 1.0
+PDM_disp_vel_factor 		= 1.4
+PDM_disp_accel_factor 		= 1.6
+PDM_crouch	 		= 0.8
+PDM_crouch_no_acc 		= 0.6
+
+; ttc
+hit_power 			= 0.32, 0.36, 0.39, 0.42
+hit_impulse		 	= 64
+hit_type 			= fire_wound
+
+fire_distance 			= 100
+bullet_speed			= 400			; начальная скорость пули
+rpm 				= 800
+rpm_empty_click 	 	= 400
+; end ttc
+
+use_aim_bullet			= false			; Поддерживается ли первая суппер пуля
+time_to_aim			= 1.0	
+
+hud 				= wpn_mp5_hud
+normal 				= 0, 1, 0
+position         	    = -0.026,-0.16,0.00
+orientation 			= 0, 0, 0
+
+;--STRAP PARAMETERS-----------------------------------------------------------------
+strap_position 			= -0.16,-0.36,0.15	; position (offset) and orientation of the weapon when it is strapped
+strap_orientation 		= -10,-5,10		; (3rd person view in degrees)
+strap_bone0			= bip01_spine2 
+strap_bonebone1			= bip01_spine1
+
+visual 				= weapons\mp5\wpn_mp5.ogf
+
+light_color		 	= 0.6,0.5,0.3
+light_range		 	= 5
+light_var_color		 	= 0.05
+light_var_range		 	= 0.1
+light_time 		 	= 0.2
+
+ph_mass			 	= 3
+
+;addons
+scope_status			= 0
+silencer_status			= 2
+grenade_launcher_status		= 0
+
+zoom_enabled			= true
+scope_zoom_factor	 	= 60
+
+silencer_name 			= wpn_addon_silencer
+silencer_x 			= 113
+silencer_y 			= -15
+
+;sounds (name of the sound, volume (0.0 - 1.0), delay (sec))
+snd_draw			= weapons\mp5\draw
+snd_holster			= weapons\mp5\pistol_holster
+snd_shoot			= weapons\mp5\mp5_shoot
+snd_shoot1			= weapons\mp5\mp5_shoot1    
+snd_shoot2			= weapons\mp5\mp5_shoot2   
+snd_shoot3			= weapons\mp5\mp5_shoot3          
+snd_empty			= weapons\mp5\mp5_empty, 0.5
+snd_reload			= weapons\mp5\mp5_reload
+snd_reload_partly	= weapons\mp5\mp5_reload_partly
+snd_silncer_shot		= weapons\mp5\mp5_shot_sil
+
+;silencer_flame_particles 	= weapons\generic_weapon01
+silencer_smoke_particles 	= weapons\generic_shoot_00
+
+silencer_hit_power 		= 0.32
+silencer_hit_impulse	 	= 64
+silencer_fire_distance 		= 73
+silencer_bullet_speed	 	= 290
+
+silencer_light_color		= 0.6,0.5,0.3
+silencer_light_range		= 0.01
+silencer_light_var_color	= 0.05
+silencer_light_var_range	= 0.5
+silencer_light_time 		= 0.2
+
+;-----------------------------------------------------------------------------
+;-- HUD DESCRIPTION
+;-----------------------------------------------------------------------------
+[wpn_mp5_hud]
+
+allow_inertion			= true
+
+shell_point          	= 0.00, 0.00, -0.6
+shell_dir		 		=    0.0, 0.0, 0.0
+
+fire_point				= 0.01,0.07,-0.09
+fire_bone               = wpn_body
+orientation             = 0, 0, 0
+position                = 0.03, -0.19, 0.28
+visual                  = weapons\mp5\wpn_mp5_hud.ogf
+
+anim_reload_effector = reload
+
+anim_idle			= mp5_idle
+anim_idle_aim		= mp5_aim
+anim_reload			= mp5_reload
+anim_reload_partly	= mp5_reload_partly
+anim_draw			= mp5_draw
+anim_holster		= mp5_holster
+anim_shoot			= mp5_shoot
+anim_idle_sprint	= mp5_sprint
+
+
+;смещения HUD для режима приближения
+zoom_offset			= -0.1822, 0.013, -0.15
+zoom_rotate_x		= -0.035
+zoom_rotate_y		= 0
+
+;-----------------------------------------------------------------------------
+;прячем перекрестие прицела в зуме
+zoom_hide_crosshair		= true
+
+;время поворота HUD (сек)
+zoom_rotate_time		= 0.3
+rotate_time			= 0.3

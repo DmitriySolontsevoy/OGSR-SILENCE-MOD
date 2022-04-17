@@ -4,16 +4,16 @@
 		<texture>ui_menu_backgraund</texture>
 	</background>
 	
-	<back_movie x="148" y="0" width="876" height="400">
+	<back_movie x="10000" y="10000" width="876" height="400">
 		<texture x="0" y="0" width="876" height="400">ui\ui_mm_main_back_crop</texture>
 	</back_movie>
 	
-	<fire_movie x="525" y="459" width="128" height="256">
+	<fire_movie x="10000" y="10000" width="128" height="256">
 		<texture>ui\ui_mm_fire</texture>
 	</fire_movie>
 
 	<shniaga_wnd x="590" y="419" width="392" height="280">
-		<buttons_region	x="110" y="0" width="164" height="280" always_show_scroll="false"/>
+		<buttons_region	x="110" y="0" width="180" height="280" always_show_scroll="false"/>
 		
 		<shniaga x="9" y="0" width="392" height="73">
 			<texture>ui_menu_move</texture>			

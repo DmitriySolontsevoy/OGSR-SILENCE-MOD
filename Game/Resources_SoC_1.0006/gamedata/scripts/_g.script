@@ -1454,6 +1454,17 @@ function start_game_callback()
 	dialog_manager.fill_phrase_table()	
 end
 
+function on_actor_thirst() --Туториал на жажду
+	
+end
+
+function give_object_to_actor(obj, count)
+	if count==nil then count=1 end
+	for i=1, count do
+		alife():create(obj,db.actor:position(),db.actor:level_vertex_id(),db.actor:game_vertex_id(),db.actor:id())
+	end
+end
+
 ammo_section = {}
 ammo_section["ammo_9x18_fmj"]		= true
 ammo_section["ammo_9x18_pbp"]		= true

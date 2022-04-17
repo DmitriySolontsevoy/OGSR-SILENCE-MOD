@@ -8,14 +8,14 @@
 
 
 	<!-- Картинка загружаемого уровня -->
-    <loading_logo x="255" y="366" width="462" height="256"/>
+    <loading_logo x="257.5" y="370.5"/>
 
 
 	<!-- Прогрессбар загрузки -->
 	<!-- Новые режимы: mode="from_center" - от центра к краям, mode="horz" - слева направо, mode="back" - справа налево -->
 	<!-- Так же есть и вертикальные режимы. Для лоадскрина они конечно не пригодятся, но для информации напишу здесь, есть mode="vert", mode="down", mode="vert_from_center" -->
 	<!-- По умолчанию ЗП-стайл прогрессбар рисуется ПОД фоном (background). Чтобы рисовать прогрессбар НАД background - надо сделать under_background="0" -->
-    <loading_progress x="378" y="729" width="506" height="34" min="0" max="100" pos="0" inertion="5.0" mode="horz" under_background="0">
+    <loading_progress x="378" y="729" width="506" height="34" min="0" max="100" pos="0" inertion="5.0" under_background="0">
 		<!--Текстура фона прогрессбара-->
         <!--background>
             <texture x="400" y="800" width="506" height="4">ui\ui_load_new</texture>
@@ -35,31 +35,13 @@
 
 
 	<!-- Проценты загрузки числами-->
-    <loading_progress_percent x="260" y="654" width="506" height="20">
+    <!--<loading_progress_percent x="260" y="654" width="506" height="20">
         <text align="c" r="216" g="186" b="140" font="graffiti32"/>
-    </loading_progress_percent>
+    </loading_progress_percent>-->
 
 
 	<!-- Стадия загрузки текстом-->
     <loading_stage x="260" y="695" width="506" height="20">
         <text align="c" r="240" g="217" b="182" font="graffiti22"/>
     </loading_stage>
-
-
-<!-- Всё что ниже - у нас не используется -->
-
-	<!-- Рубрика 100 советов в Зоне-->
-    <!--loading_header x="260" y="622" width="506" height="20">
-        <text align="c" r="103" g="103" b="103" font="letterica18"/>
-    </loading_header-->
-
-	<!-- Номер Совета-->
-    <!--loading_tip_number x="260" y="658" width="506" height="20">
-        <text align="c" r="103" g="103" b="103" font="letterica18"/>
-    </loading_tip_number-->
-
-	<!-- Текст совета-->
-    <!--loading_tip x="163" y="676" width="700" height="80" complex_mode="1">
-        <text alignment="c" align="c" r="103" g="103" b="103" font="letterica18"/>
-    </loading_tip-->
 </w>

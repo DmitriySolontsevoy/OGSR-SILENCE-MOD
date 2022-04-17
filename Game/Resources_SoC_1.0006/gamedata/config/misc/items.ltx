@@ -66,6 +66,7 @@ wounds_heal_perc = 0
 eat_portions_num = -1
 
 ; food item
+slot				= 4
 animation_slot		= 4
 
 ;hud item
@@ -111,6 +112,7 @@ wounds_heal_perc = 0
 eat_portions_num = -1
 
 ; food item
+slot				= 4
 animation_slot		= 4
 
 ;hud item
@@ -171,6 +173,7 @@ wounds_heal_perc = 0
 eat_portions_num = -1
 
 ; food item
+slot				= 4
 animation_slot		= 4
 
 ;hud item
@@ -244,16 +247,19 @@ bone_name				= bip01_r_hand
 position_offset			 = 0.0,0.0,0.0
 angle_offset			 = 1.570790,1.570790,3.92699
 
+slot				= 4
+
 ; eatable item
 eat_health		= 0.01
 eat_satiety		= 0.01
 eat_power		= 0
-eat_radiation	= -0.3
+eat_radiation	= 0
 eat_alcohol		= 0.1
 wounds_heal_perc 	= 0
 eat_portions_num 	= -1
 
 ; food item
+slot				= 4
 animation_slot		= 4
 
 ;hud item
@@ -340,6 +346,65 @@ animation_slot		= 4
 ;hud item
 hud = wpn_vodka_hud
 
+[rad_shield]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency =
+$spawn 				= "food and drugs\rad_shield"
+$prefetch 			= 8
+class				= II_ANTIR
+cform				= skeleton
+visual				= medicine\rad_shield.ogf
+description			= enc_equipment_medi_medkit1
+inv_name			= RadShield
+inv_name_short		= RadShield
+inv_weight			= 0.1
+
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 16
+inv_grid_y			= 4
+cost				= 350
+
+eat_health			= 0
+eat_satiety			= 0
+eat_power			= 0
+eat_radiation		= 0
+wounds_heal_perc	= 0
+eat_portions_num	= 1
+eat_max_power		= 0
+
+; food item
+animation_slot		= 4
+
+[adrenaline_shot]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency =
+$spawn 				= "food and drugs\adrenaline_shot"
+$prefetch 			= 8
+class				= II_ANTIR
+cform				= skeleton
+visual				= medicine\adrenaline_shot.ogf
+description			= enc_equipment_medi_medkit1
+inv_name			= RadShield
+inv_name_short		= RadShield
+inv_weight			= 0.1
+
+inv_grid_width		= 2
+inv_grid_height		= 1
+inv_grid_x			= 17
+inv_grid_y			= 4
+cost				= 500
+
+eat_health			= 0
+eat_satiety			= 0
+eat_power			= 0
+eat_radiation		= 0
+wounds_heal_perc	= 0
+eat_portions_num	= 1
+eat_max_power		= 0
+
+; food item
+animation_slot		= 4
 
 [medkit]:identity_immunities
 GroupControlSection	= spawn_group
@@ -354,14 +419,14 @@ inv_name			= Medkit
 inv_name_short		= Medkit
 inv_weight			= 0.3	;0.2
 
-inv_grid_width		= 2
+inv_grid_width		= 1
 inv_grid_height		= 1
 inv_grid_x			= 6
 inv_grid_y			= 14
 cost				= 150
 
 ; eatable item
-eat_health			= 0.6
+eat_health			= 0.5
 eat_satiety			= 0
 eat_power			= 0.0
 eat_radiation		= -0.1
@@ -388,17 +453,17 @@ inv_name			= Medkit_army
 inv_name_short		= Medkit_army
 inv_weight			= 0.3	;0.2
 
-inv_grid_width		= 2
+inv_grid_width		= 1
 inv_grid_height		= 1
 inv_grid_x			= 16
 inv_grid_y			= 20
 cost				= 220
 
 ; eatable item
-eat_health			= 1.0
+eat_health			= 0.75
 eat_satiety			= 0
 eat_power			= 0.0
-eat_radiation		= -0.1
+eat_radiation		= -0.2
 wounds_heal_perc	= 1.0
 eat_portions_num	= 1
 eat_max_power		= 0.1
@@ -422,7 +487,7 @@ inv_name			= Medkit_scientific
 inv_name_short		= Medkit_scientific
 inv_weight			= 0.3	;0.2
 
-inv_grid_width		= 2
+inv_grid_width		= 1
 inv_grid_height		= 1
 inv_grid_x			= 14
 inv_grid_y			= 20
@@ -480,7 +545,7 @@ $spawn 				= "food and drugs\bandage"
 $prefetch 			= 8
 class				= II_BANDG
 cform				= skeleton
-visual				= equipments\item_bandage.ogf
+visual				= medicine\bandage.ogf
 description			= enc_equipment_medi_bandage1
 
 inv_name			= bandage
@@ -494,7 +559,7 @@ inv_grid_y			= 18
 cost				= 20
 
 ; eatable item
-eat_health = 	0.1
+eat_health = 	0
 eat_satiety = 	0
 eat_power = 	0.0
 eat_radiation = 0.0
@@ -547,7 +612,7 @@ inv_name			= PDA
 inv_name_short		= PDA
 inv_weight			= 0.3	;0.2
 
-inv_grid_width		= 2
+inv_grid_width		= 1
 inv_grid_height		= 1
 inv_grid_x			= 6
 inv_grid_y			= 13
@@ -783,9 +848,36 @@ attach_position_offset	= 0.160570,-0.060214,0.020071
 attach_bone_name		= bip01_l_hand
 auto_attach				= false
 
+[water]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency =
+$spawn 				= "food and drugs\water_bottle"
+$prefetch 			= 8
+class				= II_ANTIR
+cform				= skeleton
+visual				= food\water_bottle.ogf
+description			= Water
+inv_name			= Water
+inv_name_short		= Water
+inv_weight			= 1
 
+inv_grid_width		= 1
+inv_grid_height		= 2
+inv_grid_x			= 20
+inv_grid_y			= 5
+cost				= 35
 
+eat_thirst			= 1
+eat_health			= 0
+eat_satiety			= 0
+eat_power			= 0
+eat_radiation		= 0
+wounds_heal_perc	= 0
+eat_portions_num	= 1
+eat_max_power		= 0
 
+; food item
+animation_slot		= 4
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;	OTHERS
