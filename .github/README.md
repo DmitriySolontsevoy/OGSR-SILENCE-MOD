@@ -1,5 +1,4 @@
-![splash]
-(https://user-images.githubusercontent.com/27158522/163794119-c0fe7b0c-56b4-4cb8-ae68-6c7036bd3caa.jpg)
+![splash](https://user-images.githubusercontent.com/27158522/163794119-c0fe7b0c-56b4-4cb8-ae68-6c7036bd3caa.jpg)
 
 # DESCRIPTION
 This is a global modification for S.T.A.L.K.E.R. Shadow of Chernobyl
