@@ -39,6 +39,18 @@ public:
 	virtual void			LoadCondition			(LPCSTR section);
 	virtual void			remove_links			(const CObject *object);
 
+	virtual void			ApplyHealthBooster			 (float time, float value);
+	virtual void			ApplyPsyHealthBooster		 (float time, float value);
+	virtual void			ApplyPowerBooster			 (float time, float value);
+	virtual void			ApplyRadiationBooster		 (float time, float value);
+	virtual void			ApplyBleedingBooster		 (float time, float value);
+	virtual void			ApplyMaxWeightBooster		 (float time, float value);
+	virtual void			ApplyRadiationImmunityBooster(float time, float value);
+	virtual void			ApplyChemicalImmunityBooster (float time, float value);
+	virtual void			ApplyThermalImmunityBooster	 (float time, float value);
+	virtual void			ApplyElectricImmunityBooster (float time, float value);
+	virtual void			ApplyPsychicImmunityBooster	 (float time, float value);
+
 	virtual void			save					(NET_Packet &output_packet);
 	virtual void			load					(IReader &input_packet);
 
@@ -88,6 +100,8 @@ public:
 	IC void 				SetCanBeHarmedState		(bool CanBeHarmed) 			{m_bCanBeHarmed = CanBeHarmed;}
 	IC bool					CanBeHarmed				() const					{return OnServer() && m_bCanBeHarmed;};
 	
+	virtual float			ApplyImmunityBoosts(float, ALife::EHitType);
+
 	void					ClearWounds();
 protected:
 	void					UpdateHealth			();
@@ -96,7 +110,6 @@ protected:
 	void					UpdatePsyHealth			(float k=1.0f);
 
 	void					UpdateEntityMorale		();
-
 
 	//изменение силы хита в зависимости от надетого костюма
 	//(только для InventoryOwner)
@@ -132,6 +145,40 @@ protected:
 	float m_fDeltaRadiation;
 	float m_fDeltaPsyHealth;
 	float m_fDeltaEntityMorale{};
+
+	//поля для бустер-предметов
+	float m_fHealthBoostTime;
+	float m_fHealthBoostValue;
+
+	float m_fPsyHealthBoostTime;
+	float m_fPsyHealthBoostValue;
+
+	float m_fPowerBoostTime;
+	float m_fPowerBoostValue;
+
+	float m_fRadiationBoostTime;
+	float m_fRadiationBoostValue;
+
+	float m_fBleedingBoostTime;
+	float m_fBleedingBoostValue;
+
+	float m_fMaxWeightBoostTime;
+	float m_fMaxWeightBoostValue;
+
+	float m_fRadiationImmunityBoostTime;
+	float m_fRadiationImmunityBoostValue;
+
+	float m_fChemicalImmunityBoostTime;
+	float m_fChemicalImmunityBoostValue;
+
+	float m_fThermalImmunityBoostTime;
+	float m_fThermalImmunityBoostValue;
+
+	float m_fElectricImmunityBoostTime;
+	float m_fElectricImmunityBoostValue;
+
+	float m_fPsychicImmunityBoostTime;
+	float m_fPsychicImmunityBoostValue;
 
 	struct SConditionChangeV
 	{

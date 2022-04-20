@@ -41,6 +41,8 @@ CActorCondition::CActorCondition(CActor *object) :
 	m_fSatiety					= 1.0f;
 	m_fThirst					= 1.0f;
 
+	m_fMaxWeightBoostActive			= false;
+
 	m_bJumpRequirePower			= false;
 
 	VERIFY						(object);
@@ -130,7 +132,7 @@ void CActorCondition::LoadCondition(LPCSTR entity_section)
 		m_fV_ThirstPower = pSettings->r_float(section, "thirst_power_v");
 		m_fV_ThirstHealth = pSettings->r_float(section, "thirst_health_v");
 	}
-	
+
 	m_MaxWalkWeight					= pSettings->r_float(section,"max_walk_weight");
 }
 
@@ -214,12 +216,13 @@ void CActorCondition::UpdateCondition()
 	if(fis_zero(GetPsyHealth()))
 		health() =0.0f;
 
-	UpdateSatiety				();
+	UpdateSatiety();
+	UpdateBoosters();
 
 	if (Core.Features.test(xrCore::Feature::actor_thirst))
 		UpdateThirst();
 
-	inherited::UpdateCondition	();
+	inherited::UpdateCondition();
 
 	UpdateTutorialThresholds();
 
@@ -257,26 +260,6 @@ void CActorCondition::AffectDamage_InjuriousMaterialAndMonstersInfluence()
 	  radiation_influence += monster->get_radiation_influence();
 	  fire_influence      += monster->get_fire_influence();
 	}
-/*
-	CPda* const pda						=	m_object->GetPDA();
-
-	if ( pda )
-	{
-		using monsters = xr_vector<CObject*>;
-
-		for ( monsters::const_iterator	it	=	pda->feel_touch.begin();
-										it	!=	pda->feel_touch.end();
-										++it )
-		{
-			CBaseMonster* const	monster		=	smart_cast<CBaseMonster*>(*it);
-			if ( !monster || !monster->g_Alive() ) continue;
-
-			psy_influence					+=	monster->get_psy_influence();
-			radiation_influence				+=	monster->get_radiation_influence();
-			fire_influence					+=	monster->get_fire_influence();
-		}
-	}
-*/
 
 	struct 
 	{
@@ -369,6 +352,131 @@ void CActorCondition::UpdateSatiety()
 
 	m_fDeltaHealth += m_fV_SatietyHealth * satiety_health_koef * m_fDeltaTime;
 	m_fDeltaPower += m_fV_SatietyPower * satiety_power_koef * m_fDeltaTime;
+}
+
+void CActorCondition::UpdateBoosters()
+{
+	if (m_fHealthBoostTime > 0)
+	{
+		ChangeHealth(m_fHealthBoostValue);
+		m_fHealthBoostTime -= m_fDeltaTime / Level().GetGameTimeFactor();
+	}
+	else
+	{
+		m_fHealthBoostTime = 0;
+	}
+
+	if (m_fPsyHealthBoostTime > 0)
+	{
+		ChangePsyHealth(m_fPsyHealthBoostValue);
+		m_fPsyHealthBoostTime -= m_fDeltaTime / Level().GetGameTimeFactor();
+	}
+	else
+	{
+		m_fPsyHealthBoostTime = 0;
+	}
+
+	if (m_fPowerBoostTime > 0)
+	{
+		ChangePower(m_fPowerBoostValue);
+		m_fPowerBoostTime -= m_fDeltaTime / Level().GetGameTimeFactor();
+	}
+	else
+	{
+		m_fPowerBoostTime = 0;
+	}
+
+	if (m_fRadiationBoostTime > 0)
+	{
+		ChangeRadiation(m_fRadiationBoostValue);
+		m_fRadiationBoostTime -= m_fDeltaTime / Level().GetGameTimeFactor();
+	}
+	else
+	{
+		m_fRadiationBoostTime = 0;
+	}
+
+	if (m_fBleedingBoostTime > 0)
+	{
+		ChangeBleeding(m_fBleedingBoostValue);
+		m_fBleedingBoostTime -= m_fDeltaTime / Level().GetGameTimeFactor();
+	}
+	else
+	{
+		m_fBleedingBoostTime = 0;
+	}
+
+	if (m_fMaxWeightBoostTime > 0)
+	{
+		if (!m_fMaxWeightBoostActive)
+		{
+			m_object->inventory().SetMaxWeight(object().inventory().GetMaxWeight() + m_fMaxWeightBoostValue);
+			SetMaxWalkWeight(m_MaxWalkWeight + m_fMaxWeightBoostValue);
+			m_fMaxWeightBoostActive = true;
+		}
+
+		m_fMaxWeightBoostTime -= m_fDeltaTime / Level().GetGameTimeFactor();
+	}
+	else
+	{
+		if (m_fMaxWeightBoostActive)
+		{
+			m_object->inventory().SetMaxWeight(object().inventory().GetMaxWeight() - m_fMaxWeightBoostValue);
+			SetMaxWalkWeight(m_MaxWalkWeight - m_fMaxWeightBoostValue);
+			m_fMaxWeightBoostTime = 0;
+			m_fMaxWeightBoostActive = false;
+		}
+	}
+
+	if (m_fRadiationImmunityBoostTime > 0)
+	{
+		m_fRadiationImmunityBoostTime -= m_fDeltaTime / Level().GetGameTimeFactor();
+	}
+	else
+	{
+		m_fRadiationImmunityBoostValue = 0;
+		m_fRadiationImmunityBoostTime = 0;
+	}
+
+	if (m_fChemicalImmunityBoostTime > 0)
+	{
+		m_fChemicalImmunityBoostTime -= m_fDeltaTime / Level().GetGameTimeFactor();
+	}
+	else
+	{
+		m_fChemicalImmunityBoostValue = 0;
+		m_fChemicalImmunityBoostTime = 0;
+	}
+
+	if (m_fThermalImmunityBoostTime > 0)
+	{
+		m_fThermalImmunityBoostTime -= m_fDeltaTime / Level().GetGameTimeFactor();
+	}
+	else
+	{
+		m_fThermalImmunityBoostValue = 0;
+		m_fThermalImmunityBoostTime = 0;
+	}
+
+	if (m_fElectricImmunityBoostTime > 0)
+	{
+		m_fElectricImmunityBoostTime -= m_fDeltaTime / Level().GetGameTimeFactor();
+	}
+	else
+	{
+		m_fElectricImmunityBoostValue = 0;
+		m_fElectricImmunityBoostTime = 0;
+	}
+
+	if (m_fPsychicImmunityBoostTime > 0)
+	{
+		m_fPsychicImmunityBoostTime -= m_fDeltaTime / Level().GetGameTimeFactor();
+	}
+	else
+	{
+		m_fPsychicImmunityBoostValue = 0;
+		m_fPsychicImmunityBoostTime = 0;
+	}
 }
 
 void CActorCondition::UpdateThirst()

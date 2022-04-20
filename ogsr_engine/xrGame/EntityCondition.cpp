@@ -9,11 +9,10 @@
 #include "entity_alive.h"
 #include "../Include/xrRender/Kinematics.h"
 #include "object_broker.h"
+#include "CustomHelmet.h"
 
 #define MAX_HEALTH 1.0f
 #define MIN_HEALTH -0.01f
-
-
 #define MAX_POWER 1.0f
 #define MAX_RADIATION 1.0f
 #define MAX_PSY_HEALTH 1.0f
@@ -27,8 +26,7 @@ CEntityConditionSimple::CEntityConditionSimple()
 CEntityConditionSimple::~CEntityConditionSimple()
 {}
 
-CEntityCondition::CEntityCondition(CEntityAlive *object)
-:CEntityConditionSimple()
+CEntityCondition::CEntityCondition(CEntityAlive *object):CEntityConditionSimple()
 {
 	VERIFY				(object);
 
@@ -50,7 +48,6 @@ CEntityCondition::CEntityCondition(CEntityAlive *object)
 
 	m_fMinWoundSize			= 0.00001f;
 
-	
 	m_fPowerHitPart			= 0.5f;
 
 	m_fDeltaHealth			= 0;
@@ -58,6 +55,38 @@ CEntityCondition::CEntityCondition(CEntityAlive *object)
 	m_fDeltaRadiation		= 0;
 	m_fDeltaPsyHealth		= 0;
 
+	m_fHealthBoostTime = 0.f;
+	m_fHealthBoostValue = 0.f;
+
+	m_fPsyHealthBoostTime = 0.f;
+	m_fPsyHealthBoostValue = 0.f;
+
+	m_fPowerBoostTime = 0.f;
+	m_fPowerBoostValue = 0.f;
+
+	m_fRadiationBoostTime = 0.f;
+	m_fRadiationBoostValue = 0.f;
+
+	m_fBleedingBoostTime = 0.f;
+	m_fBleedingBoostValue = 0.f;
+
+	m_fMaxWeightBoostTime = 0.f;
+	m_fMaxWeightBoostValue = 0.f;
+
+	m_fRadiationImmunityBoostTime = 0.f;
+	m_fRadiationImmunityBoostValue = 0.f;
+
+	m_fChemicalImmunityBoostTime = 0.f;
+	m_fChemicalImmunityBoostValue = 0.f;
+
+	m_fThermalImmunityBoostTime = 0.f;
+	m_fThermalImmunityBoostValue = 0.f;
+
+	m_fElectricImmunityBoostTime = 0.f;
+	m_fElectricImmunityBoostValue = 0.f;
+
+	m_fPsychicImmunityBoostTime = 0.f;
+	m_fPsychicImmunityBoostValue = 0.f;
 
 	m_fHealthLost			= 0.f;
 	m_pWho					= NULL;
@@ -106,7 +135,7 @@ void CEntityCondition::LoadCondition(LPCSTR entity_section)
 	m_limping_threshold		= READ_IF_EXISTS(pSettings,r_float,section,"limping_threshold",.5f);
 }
 
-void CEntityCondition::reinit	()
+void CEntityCondition::reinit()
 {
 	m_iLastTimeCalled		= 0;
 	m_bTimeValid			= false;
@@ -134,8 +163,7 @@ void CEntityCondition::reinit	()
 	m_pWho					= NULL;
 	m_iWhoID				= NULL;
 
-	ClearWounds				();
-
+	ClearWounds();
 }
 
 void CEntityCondition::ChangeEntityMorale(float value)
@@ -175,19 +203,85 @@ void CEntityCondition::ChangeBleeding(float percent)
 	}
 }
 
-bool RemoveWoundPred(CWound* pWound)
+void CEntityCondition::ApplyHealthBooster(float time, float value)
 {
-	if(pWound->GetDestroy())
-	{
-		xr_delete		(pWound);
-		return			true;
-	}
-	return				false;
+	m_fHealthBoostTime = time;
+	m_fHealthBoostValue = value;
 }
 
-void  CEntityCondition::UpdateWounds		()
+void CEntityCondition::ApplyPsyHealthBooster(float time, float value)
 {
-	//убрать все зашившие раны из списка
+	m_fPsyHealthBoostTime = time;
+	m_fPsyHealthBoostValue = value;
+}
+
+void CEntityCondition::ApplyPowerBooster(float time, float value)
+{
+	m_fPowerBoostTime = time;
+	m_fPowerBoostValue = value;
+}
+
+void CEntityCondition::ApplyRadiationBooster(float time, float value)
+{
+	m_fRadiationBoostTime = time;
+	m_fRadiationBoostValue = value;
+}
+
+void CEntityCondition::ApplyBleedingBooster(float time, float value)
+{
+	m_fBleedingBoostTime = time;
+	m_fBleedingBoostValue = value;
+}
+
+void CEntityCondition::ApplyMaxWeightBooster(float time, float value)
+{
+	m_fMaxWeightBoostTime = time;
+	m_fMaxWeightBoostValue = value;
+}
+
+void CEntityCondition::ApplyRadiationImmunityBooster(float time, float value)
+{
+	m_fRadiationImmunityBoostTime = time;
+	m_fRadiationImmunityBoostValue = value;
+}
+
+void CEntityCondition::ApplyChemicalImmunityBooster(float time, float value)
+{
+	m_fChemicalImmunityBoostTime = time;
+	m_fChemicalImmunityBoostValue = value;
+}
+
+void CEntityCondition::ApplyThermalImmunityBooster(float time, float value)
+{
+	m_fThermalImmunityBoostTime = time;
+	m_fThermalImmunityBoostValue = value;
+}
+
+void CEntityCondition::ApplyElectricImmunityBooster(float time, float value)
+{
+	m_fElectricImmunityBoostTime = time;
+	m_fElectricImmunityBoostValue = value;
+}
+
+void CEntityCondition::ApplyPsychicImmunityBooster(float time, float value)
+{
+	m_fPsychicImmunityBoostTime = time;
+	m_fPsychicImmunityBoostValue = value;
+}
+
+bool RemoveWoundPred(CWound* pWound)
+{
+	if (pWound->GetDestroy())
+	{
+		xr_delete(pWound);
+		return true;
+	}
+	return false;
+}
+
+void  CEntityCondition::UpdateWounds()
+{
+	//убрать все зажившие раны из списка
 	m_WoundVector.erase(
 		std::remove_if(
 			m_WoundVector.begin(),
@@ -204,11 +298,12 @@ void CEntityCondition::UpdateConditionTime()
 	
 	if(m_bTimeValid)
 	{
-		if (_cur_time > m_iLastTimeCalled){
+		if (_cur_time > m_iLastTimeCalled)
+		{
 			float x					= float(_cur_time-m_iLastTimeCalled)/1000.0f;
 			SetConditionDeltaTime	(x);
-
-		}else 
+		}
+		else 
 			SetConditionDeltaTime(0.0f);
 	}
 	else
@@ -275,27 +370,47 @@ void CEntityCondition::UpdateCondition()
 	clamp						(m_fPsyHealth,		0.0f,		m_fPsyHealthMax);
 }
 
-
-
 float CEntityCondition::HitOutfitEffect(float hit_power, ALife::EHitType hit_type, s16 element, float AP)
 {
     CInventoryOwner* pInvOwner		= smart_cast<CInventoryOwner*>(m_object);
 	if(!pInvOwner)					return hit_power;
 
-	CCustomOutfit* pOutfit			= (CCustomOutfit*)pInvOwner->inventory().m_slots[OUTFIT_SLOT].m_pIItem;
-	if(!pOutfit)					return hit_power;
+	CCustomOutfit* pOutfit = (CCustomOutfit*)pInvOwner->inventory().m_slots[OUTFIT_SLOT].m_pIItem;
+	CCustomHelmet* pHelmet = (CCustomHelmet*)pInvOwner->inventory().m_slots[HELMET_SLOT].m_pIItem;
 
-	float new_hit_power				= hit_power;
+	if (!pOutfit && !pHelmet)
+		return hit_power;
 
-	if (hit_type == ALife::eHitTypeFireWound)
-		new_hit_power				= pOutfit->HitThruArmour(hit_power, element, AP);
-	else
-		new_hit_power				*= pOutfit->GetHitTypeProtection(hit_type,element);
+	float new_hit_power	= hit_power;
 
-	//увеличить изношенность костюма
-	pOutfit->Hit(hit_power, hit_type);
+	if (pOutfit) 
+	{
+		if (hit_type == ALife::eHitTypeFireWound)
+		{
+			new_hit_power = pOutfit->HitThroughArmour(new_hit_power, element, AP);
+		}
+		else
+		{
+			new_hit_power *= pOutfit->GetHitTypeProtection(hit_type, element);
+		}
 
-	return							new_hit_power;
+		pOutfit->Hit(hit_power, hit_type);
+	}
+	/*if (pHelmet)
+	{
+		if (hit_type == ALife::eHitTypeFireWound)
+		{
+			new_hit_power = pHelmet->HitThroughHelmet(new_hit_power, element, AP);
+		}
+		else
+		{
+			new_hit_power *= pHelmet->GetHitTypeProtection(hit_type, element);
+		}
+
+		pHelmet->Hit(hit_power, hit_type);
+	}*/
+
+	return new_hit_power;
 }
 
 float CEntityCondition::HitPowerEffect(float power_loss)
@@ -360,36 +475,17 @@ CWound* CEntityCondition::ConditionHit(SHit* pHDS)
 	float hit_power_org = pHDS->damage();
 	float hit_power = hit_power_org;
 	hit_power = HitOutfitEffect(hit_power, pHDS->hit_type, pHDS->boneID, pHDS->ap);
+	hit_power = ApplyImmunityBoosts(hit_power, pHDS->hit_type);
 
 	bool bAddWound = true;
 	switch(pHDS->hit_type)
 	{
 	case ALife::eHitTypeTelepatic:
-		// -------------------------------------------------
-		// temp (till there is no death from psy hits)
 		hit_power *= m_HitTypeK[pHDS->hit_type];
-/*
-		m_fHealthLost = hit_power*m_fHealthHitPart*m_fHitBoneScale;
-		m_fDeltaHealth -= CanBeHarmed() ? m_fHealthLost : 0;
-		m_fDeltaPower -= hit_power*m_fPowerHitPart;
-*/
-		// -------------------------------------------------
 
-//		hit_power *= m_HitTypeK[pHDS->hit_type];
 		ChangePsyHealth(-hit_power);
-		bAddWound =false;
+		bAddWound = false;
 		break;
-/*
-	case ALife::eHitTypeBurn:
-		hit_power *= m_HitTypeK[pHDS->hit_type];
-		m_fHealthLost = hit_power*m_fHealthHitPart*m_fHitBoneScale;
-		m_fDeltaHealth -= CanBeHarmed() ? m_fHealthLost : 0;
-		m_fDeltaPower -= hit_power*m_fPowerHitPart;
-		bAddWound		=  false;
-		break;
-dsh: обработка перенесена ниже, вместе с eHitTypeFireWound, что бы работала
-секция entity_fire_particles.
-*/
 	case ALife::eHitTypeChemicalBurn:
 		hit_power *= m_HitTypeK[pHDS->hit_type];
 		break;
@@ -426,7 +522,7 @@ dsh: обработка перенесена ниже, вместе с eHitTypeF
 		}break;
 	}
 
-	if (bDebug) Msg("%s hitted in %s with %f[%f]", m_object->Name(), smart_cast<IKinematics*>(m_object->Visual())->LL_BoneName_dbg(pHDS->boneID), m_fHealthLost*100.0f, hit_power_org);
+	if (bDebug) Msg("%s hit %s with %f[%f]", m_object->Name(), smart_cast<IKinematics*>(m_object->Visual())->LL_BoneName_dbg(pHDS->boneID), m_fHealthLost*100.0f, hit_power_org);
 	//раны добавляются только живому
 	if(bAddWound && GetHealth()>0)
 		return AddWound(hit_power*m_fWoundBoneScale, pHDS->hit_type, pHDS->boneID);
@@ -434,6 +530,24 @@ dsh: обработка перенесена ниже, вместе с eHitTypeF
 		return NULL;
 }
 
+float CEntityCondition::ApplyImmunityBoosts(float hit_power, ALife::EHitType hit_type)
+{
+	switch (hit_type)
+	{
+		case ALife::eHitTypeTelepatic:
+			return hit_power * (1 - m_fPsychicImmunityBoostValue);
+		case ALife::eHitTypeChemicalBurn:
+			return hit_power * (1 - m_fChemicalImmunityBoostValue);
+		case ALife::eHitTypeShock:
+			return hit_power * (1 - m_fElectricImmunityBoostValue);
+		case ALife::eHitTypeRadiation:
+			return hit_power * (1 - m_fRadiationImmunityBoostValue);
+		case ALife::eHitTypeBurn:
+			return hit_power * (1 - m_fThermalImmunityBoostValue);
+		default:
+			return hit_power;
+	}
+}
 
 float CEntityCondition::BleedingSpeed()
 {
@@ -445,7 +559,6 @@ float CEntityCondition::BleedingSpeed()
 	
 	return (m_WoundVector.empty() ? 0.f : bleeding_speed / m_WoundVector.size());
 }
-
 
 void CEntityCondition::UpdateHealth()
 {

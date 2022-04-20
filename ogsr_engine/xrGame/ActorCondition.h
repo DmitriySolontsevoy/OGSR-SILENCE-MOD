@@ -36,8 +36,9 @@ public:
 	Flags16											m_condition_flags;
 private:
 	CActor*											m_object;
-	void				UpdateTutorialThresholds	();
-	void 				UpdateSatiety				();
+	void				UpdateTutorialThresholds();
+	void 				UpdateSatiety();
+	void 				UpdateBoosters();
 	void				UpdateThirst();
 public:
 						CActorCondition				(CActor *object);
@@ -122,10 +123,12 @@ protected:
 	float m_fAccelK;
 	float m_fSprintK;
 
+	bool m_fMaxWeightBoostActive;
+
 	bool m_bJumpRequirePower;
 
-	float	m_f_time_affected;
-	
+	float m_f_time_affected;
+
 	//порог силы и здоровья меньше которого актер начинает хромать
 	float m_fLimpingPowerBegin;
 	float m_fLimpingPowerEnd;

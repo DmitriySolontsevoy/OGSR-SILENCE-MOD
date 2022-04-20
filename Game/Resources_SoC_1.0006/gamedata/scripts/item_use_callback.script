@@ -7,11 +7,17 @@ local tSound ={
 	conserva = "consumption\\inv_food",
 	vodka = "consumption\\inv_vodka",
 	energy_drink = "consumption\\inv_drink",
-	water_bottle = "consumption\\inv_drink",
+	water = "consumption\\inv_drink",
+	hercules = "consumption\\inv_drink",
 	bandage = "consumption\\inv_bandage",
 	antirad = "consumption\\inv_pills",
 	rad_shield = "consumption\\inv_pills",
-	adrenaline_shot = "consumption\\inv_syringe"
+	fulgurine_pills = "consumption\\inv_pills",
+	ignisorb_pills = "consumption\\inv_pills",
+	dismurol_pills = "consumption\\inv_pills",
+	psycho_pills = "consumption\\inv_pills",
+	adrenaline_shot = "consumption\\inv_syringe",
+	anabiotics = "consumption\\inv_syringe"
 }
 
 function on_use_item(obj)
@@ -19,12 +25,6 @@ function on_use_item(obj)
 	local item_name = obj:section()
 
 	use_snd(obj)
-
-	if item_name=="rad_shield" then
-		rad_shield_used(actor)
-	elseif item_name=="adrenaline_shot" then
-		adrenaline_shot_used(actor)
-	end
 end
 
 function use_snd(obj)
@@ -34,12 +34,4 @@ function use_snd(obj)
 			snd:play_no_feedback(db.actor, sound_object.s2d, 0, vector(), 2.0)
 		end
 	end
-end
-
-function rad_shield_used(actor)
-	
-end
-
-function adrenaline_shot_used(actor)
-	
 end

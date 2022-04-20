@@ -365,13 +365,10 @@ inv_grid_x			= 16
 inv_grid_y			= 4
 cost				= 350
 
-eat_health			= 0
-eat_satiety			= 0
-eat_power			= 0
-eat_radiation		= 0
-wounds_heal_perc	= 0
 eat_portions_num	= 1
-eat_max_power		= 0
+
+eat_boost_radiation_immunity_time  = 10
+eat_boost_radiation_immunity_value = 0.5
 
 ; food item
 animation_slot		= 4
@@ -395,15 +392,167 @@ inv_grid_x			= 17
 inv_grid_y			= 4
 cost				= 500
 
-eat_health			= 0
-eat_satiety			= 0
-eat_power			= 0
-eat_radiation		= 0
-wounds_heal_perc	= 0
 eat_portions_num	= 1
-eat_max_power		= 0
 
-; food item
+eat_boost_health_time  = 5.0
+eat_boost_health_value = 0.001
+
+animation_slot		= 4
+
+[fulgurine_pills]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency =
+$spawn 				= "food and drugs\fulgurine_pills"
+$prefetch 			= 8
+class				= II_ANTIR
+cform				= skeleton
+visual				= medicine\rad_shield.ogf
+description			= enc_equipment_medi_medkit1
+inv_name			= Fulgurine
+inv_name_short		= Fulgurine
+inv_weight			= 0.1
+
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 22
+inv_grid_y			= 3
+cost				= 500
+
+eat_portions_num	= 1
+
+eat_boost_electric_immunity_time  = 30.0
+eat_boost_electric_immunity_value = 0.5
+
+animation_slot		= 4
+
+[ignisorb_pills]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency =
+$spawn 				= "food and drugs\ignisorb_pills"
+$prefetch 			= 8
+class				= II_ANTIR
+cform				= skeleton
+visual				= medicine\rad_shield.ogf
+description			= enc_equipment_medi_medkit1
+inv_name			= Ignisorb
+inv_name_short		= Ignisorb
+inv_weight			= 0.1
+
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 23
+inv_grid_y			= 3
+cost				= 500
+
+eat_portions_num	= 1
+
+eat_boost_thermal_immunity_time  = 30.0
+eat_boost_thermal_immunity_value = 0.5
+
+animation_slot		= 4
+
+[dismurol_pills]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency =
+$spawn 				= "food and drugs\ignisorb_pills"
+$prefetch 			= 8
+class				= II_ANTIR
+cform				= skeleton
+visual				= medicine\rad_shield.ogf
+description			= enc_equipment_medi_medkit1
+inv_name			= Dismurol
+inv_name_short		= Dismurol
+inv_weight			= 0.1
+
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 24
+inv_grid_y			= 2
+cost				= 500
+
+eat_portions_num	= 1
+
+eat_boost_chemical_immunity_time  = 30.0
+eat_boost_chemical_immunity_value = 0.5
+
+animation_slot		= 4
+
+[psycho_pills]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency =
+$spawn 				= "food and drugs\psycho_pills"
+$prefetch 			= 8
+class				= II_ANTIR
+cform				= skeleton
+visual				= medicine\rad_shield.ogf
+description			= enc_equipment_medi_medkit1
+inv_name			= Psycho+
+inv_name_short		= Psycho+
+inv_weight			= 0.1
+
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 23
+inv_grid_y			= 2
+cost				= 500
+
+eat_portions_num	= 1
+
+eat_boost_psychic_immunity_time  = 30.0
+eat_boost_psychic_immunity_value = 0.5
+
+animation_slot		= 4
+
+[anabiotics]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency =
+$spawn 				= "food and drugs\anabiotics"
+$prefetch 			= 8
+class				= II_ANTIR
+cform				= skeleton
+visual				= medicine\rad_shield.ogf
+description			= enc_equipment_medi_medkit1
+inv_name			= Anabiotics
+inv_name_short		= Anabiotics
+inv_weight			= 0.2
+
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 24
+inv_grid_y			= 3
+cost				= 1000
+
+eat_portions_num	= 1
+
+eat_boost_radiation_time  = 5.0
+eat_boost_radiation_value = -0.05
+
+animation_slot		= 4
+
+[hercules]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency =
+$spawn 				= "food and drugs\anabiotics"
+$prefetch 			= 8
+class				= II_ANTIR
+cform				= skeleton
+visual				= medicine\rad_shield.ogf
+description			= enc_equipment_medi_medkit1
+inv_name			= Hercules
+inv_name_short		= Hercules
+inv_weight			= 0.3
+
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 22
+inv_grid_y			= 2
+cost				= 2000
+
+eat_portions_num	= 1
+
+eat_boost_max_weight_time  = 5.0
+eat_boost_max_weight_value = 20.0
+
 animation_slot		= 4
 
 [medkit]:identity_immunities

@@ -14,18 +14,18 @@ public:
 
 	virtual void					Load				(LPCSTR section);
 	
-	//уменьшенная версия хита, для вызова, когда костюм надет на персонажа
+	//уменьшенная версия хита, для вызова, когда шлем надет на персонажа
 	virtual void					Hit					(float P, ALife::EHitType hit_type);
 
 	//коэффициенты на которые домножается хит
 	//при соответствующем типе воздействия
-	//если на персонаже надет костюм
+	//если на персонаже надет шлем
 	float							GetHitTypeProtection(ALife::EHitType hit_type, s16 element);
 	float							GetDefHitTypeProtection(ALife::EHitType hit_type);
 
-	float							HitThruArmour		(float hit_power, s16 element, float AP);
+	float							HitThroughArmour		(float hit_power, s16 element, float AP);
 	//коэффициент на который домножается потеря силы
-	//если на персонаже надет костюм
+	//если на персонаже надет шлем
 	float							GetPowerLoss		();
 
 

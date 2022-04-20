@@ -41,6 +41,40 @@ protected:
 	//заживление ран на кол-во процентов
 	float					m_fWoundsHealPerc{};
 
+    //бустер-параметры
+    float                   m_fHealthBoostTime;
+    float                   m_fHealthBoostValue;
+
+    float                   m_fPsyHealthBoostTime;
+    float                   m_fPsyHealthBoostValue;
+
+    float                   m_fPowerBoostTime;
+    float                   m_fPowerBoostValue;
+
+    float                   m_fRadiationBoostTime;
+    float                   m_fRadiationBoostValue;
+
+    float                   m_fBleedingBoostTime;
+    float                   m_fBleedingBoostValue;
+
+    float                   m_fMaxWeightBoostTime;
+    float                   m_fMaxWeightBoostValue;
+
+    float                   m_fRadiationImmunityBoostTime;
+    float                   m_fRadiationImmunityBoostValue;
+
+    float                   m_fChemicalImmunityBoostTime;
+    float                   m_fChemicalImmunityBoostValue;
+
+    float                   m_fThermalImmunityBoostTime;
+    float                   m_fThermalImmunityBoostValue;
+
+    float                   m_fElectricImmunityBoostTime;
+    float                   m_fElectricImmunityBoostValue;
+
+    float                   m_fPsychicImmunityBoostTime;
+    float                   m_fPsychicImmunityBoostValue;
+
 	//количество порций еды, 
 	//-1 - порция одна и больше не бывает (чтоб не выводить надпись в меню)
 	int						m_iPortionsNum;
