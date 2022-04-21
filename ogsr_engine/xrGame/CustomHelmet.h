@@ -20,10 +20,10 @@ public:
 	//коэффициенты на которые домножается хит
 	//при соответствующем типе воздействия
 	//если на персонаже надет костюм
-	virtual float							GetHitTypeProtection(ALife::EHitType hit_type, s16 element);
-	virtual float							GetDefHitTypeProtection(ALife::EHitType hit_type);
+	float							GetHitTypeProtection(ALife::EHitType hit_type, s16 element);
+	float							GetDefHitTypeProtection(ALife::EHitType hit_type);
 
-	virtual float							HitThroughHelmet		(float hit_power, s16 element, float AP);
+	float							HitThroughHelmet(float hit_power, s16 element, float AP);
 	//коэффициент на который домножается потеря силы
 	//если на персонаже надет костюм
 	float							GetPowerLoss		();

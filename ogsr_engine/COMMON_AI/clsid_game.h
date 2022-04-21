@@ -199,6 +199,7 @@ constexpr auto CLSID_EQUIPMENT_SCIENTIFIC     = MK_CLSID('E','Q','U','_','S','C'
 constexpr auto CLSID_EQUIPMENT_STALKER        = MK_CLSID('E','Q','U','_','S','T','L','K');
 constexpr auto CLSID_EQUIPMENT_MILITARY       = MK_CLSID('E','Q','U','_','M','L','T','R');
 constexpr auto CLSID_EQUIPMENT_EXO            = MK_CLSID('E','Q','U','_','E','X','O',' ');
+constexpr auto CLSID_EQUIPMENT_HELMET		  = MK_CLSID('E','_','H','E','L','M','E','T');
 
 // Game types
 constexpr auto CLSID_SV_GAME_SINGLE           = MK_CLSID('S','V','_','S','I','N','G','L');

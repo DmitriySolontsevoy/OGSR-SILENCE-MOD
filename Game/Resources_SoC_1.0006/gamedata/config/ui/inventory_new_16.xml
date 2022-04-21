@@ -36,7 +36,7 @@
 
 	<dragdrop_helmet x="882" y="70" width="78" height="104"
 			cell_width="39" cell_height="52" rows_num="2" cols_num="2"
-			condition_progress_bar="1"/>
+			custom_placement="0" condition_progress_bar="1"/>
 
     <dragdrop_outfit x="878" y="200" width="83" height="266" 
             cell_width="43" cell_height="57" rows_num="3" cols_num="2" 

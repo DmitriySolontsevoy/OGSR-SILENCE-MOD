@@ -396,7 +396,8 @@ float CEntityCondition::HitOutfitEffect(float hit_power, ALife::EHitType hit_typ
 
 		pOutfit->Hit(hit_power, hit_type);
 	}
-	/*if (pHelmet)
+
+	if (pHelmet)
 	{
 		if (hit_type == ALife::eHitTypeFireWound)
 		{
@@ -408,7 +409,7 @@ float CEntityCondition::HitOutfitEffect(float hit_power, ALife::EHitType hit_typ
 		}
 
 		pHelmet->Hit(hit_power, hit_type);
-	}*/
+	}
 
 	return new_hit_power;
 }
