@@ -65,7 +65,7 @@ ID3DBaseTexture*	CTexture::surface_get	()
 	return pSurface;
 }
 
-void CTexture::PostLoad	()
+void CTexture::PostLoad()
 {
 	if (pTheora)				bind = fastdelegate::MakeDelegate(this, &CTexture::apply_theora);
 	else if (pAVI)				bind = fastdelegate::MakeDelegate(this, &CTexture::apply_avi);
@@ -136,6 +136,7 @@ void CTexture::apply_seq	(u32 dwStage)	{
 	}
 	CHK_DX(HW.pDevice->SetTexture(dwStage,pSurface));
 };
+
 void CTexture::apply_normal	(u32 dwStage)	{
 	CHK_DX(HW.pDevice->SetTexture(dwStage,pSurface));
 };
@@ -150,7 +151,6 @@ void CTexture::Preload(const char* Name)
 	m_bumpmap = DEV->m_textures_description.GetBumpName(Name);
 	m_material = DEV->m_textures_description.GetMaterial(Name);
 }
-
 
 void CTexture::Load() {
 	Load(cName.c_str());
@@ -296,11 +296,10 @@ void CTexture::Load(const char* Name)
 		}
 //#endif
 	}
-	PostLoad	()		;
+	PostLoad();
 }
 
-
-void CTexture::Unload	()
+void CTexture::Unload()
 {
 #ifdef DEBUG
 	string_path				msg_buff;
@@ -332,7 +331,7 @@ void CTexture::Unload	()
 	bind = fastdelegate::MakeDelegate(this, &CTexture::apply_load);
 }
 
-void CTexture::desc_update	()
+void CTexture::desc_update()
 {
 	desc_cache	= pSurface;
 	if (pSurface && (D3DRTYPE_TEXTURE == pSurface->GetType()))

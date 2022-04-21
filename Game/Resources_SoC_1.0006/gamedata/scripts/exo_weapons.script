@@ -63,6 +63,14 @@ local exo_shlangi_table = {
 	mp_exo_outfit = "act_exo_shlangi"
 }
 
+function concat(table1, table2)
+	for n, t in pairs(table2) do
+		table.insert(table1, t)
+	end
+	
+	return table1
+end
+
 function update()
 	local suit = db.actor:item_in_slot(6)
 	
@@ -87,7 +95,51 @@ function update()
 			changed = true
 		end
 	end
-
+	
+	arms = texture_find("act\\act_arm_exo_bump")
+	arms = concat(arms, texture_find("act\\act_arm_0_bump"))
+	arms = concat(arms, texture_find("act\\act_arm_1_bump"))
+	arms = concat(arms, texture_find("act\\act_arm_2_bump"))
+	arms = concat(arms, texture_find("act\\act_arm_3_bump"))
+	arms = concat(arms, texture_find("act\\act_arm_4_bump"))
+	arms = concat(arms, texture_find("act\\act_arm_5_bump"))
+	arms = concat(arms, texture_find("act\\act_arm_6_bump"))
+	arms = concat(arms, texture_find("act\\act_arm_7_bump"))
+	arms = concat(arms, texture_find("act\\act_arm_8_bump"))
+	arms = concat(arms, texture_find("act\\act_arm_9_bump"))
+	arms = concat(arms, texture_find("act\\act_arm_10_bump"))
+	arms = concat(arms, texture_find("act\\act_arm_11_bump"))
+	arms = concat(arms, texture_find("act\\act_arm_12_bump"))
+	arms = concat(arms, texture_find("act\\act_arm_13_bump"))
+	if arms then
+		for n, t in pairs(arms) do
+			local name = "act\\act_arm_" .. suit_texture_table[suit_sect] .. "_bump"
+			t:load(name)
+		end
+	end
+	
+	arms = texture_find("act\\act_arm_exo_bump#")
+	arms = concat(arms, texture_find("act\\act_arm_0_bump#"))
+	arms = concat(arms, texture_find("act\\act_arm_1_bump#"))
+	arms = concat(arms, texture_find("act\\act_arm_2_bump#"))
+	arms = concat(arms, texture_find("act\\act_arm_3_bump#"))
+	arms = concat(arms, texture_find("act\\act_arm_4_bump#"))
+	arms = concat(arms, texture_find("act\\act_arm_5_bump#"))
+	arms = concat(arms, texture_find("act\\act_arm_6_bump#"))
+	arms = concat(arms, texture_find("act\\act_arm_7_bump#"))
+	arms = concat(arms, texture_find("act\\act_arm_8_bump#"))
+	arms = concat(arms, texture_find("act\\act_arm_9_bump#"))
+	arms = concat(arms, texture_find("act\\act_arm_10_bump#"))
+	arms = concat(arms, texture_find("act\\act_arm_11_bump#"))
+	arms = concat(arms, texture_find("act\\act_arm_12_bump#"))
+	arms = concat(arms, texture_find("act\\act_arm_13_bump#"))
+	if arms then
+		for n, t in pairs(arms) do
+			local name = "act\\act_arm_" .. suit_texture_table[suit_sect] .. "_bump#"
+			t:load(name)
+		end
+	end
+	
 	local exo = texture_find("act\\act_exo_shlangi")
 	if exo then
 		for n, t in pairs(exo) do
@@ -95,7 +147,7 @@ function update()
 			t:load(name)
 		end
 	end
-
+	
 	if changed then
 		prev_suit_sect = suit_sect
 		new_game = false

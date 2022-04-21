@@ -371,7 +371,6 @@ void CTexture::Preload(const char* Name)
 	m_material = DEV->m_textures_description.GetMaterial(Name);
 }
 
-
 void CTexture::Load() {
 	Load(cName.c_str());
 }
@@ -554,7 +553,7 @@ void CTexture::Load(const char* Name)
 			PostLoad	()		;
 }
 
-void CTexture::Unload	()
+void CTexture::Unload()
 {
 #ifdef DEBUG
 	string_path				msg_buff;
