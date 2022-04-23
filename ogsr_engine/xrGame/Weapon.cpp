@@ -62,6 +62,8 @@ CWeapon::CWeapon(LPCSTR name)
 	iMagazineSize			= -1;
 	m_ammoType				= 0;
 
+	iСartridgeBullet		= false;
+
 	eHandDependence			= hdNone;
 
 	m_fZoomFactor = Core.Features.test(xrCore::Feature::ogse_wpn_zoom_system) ? 1.f : g_fov;
@@ -292,8 +294,10 @@ void CWeapon::Load		(LPCSTR section)
 		}
 	}
 
-	iAmmoElapsed		= pSettings->r_s32		(section,"ammo_elapsed"		);
-	iMagazineSize		= pSettings->r_s32		(section,"ammo_mag_size"	);
+	iAmmoElapsed		= pSettings->r_s32(section,"ammo_elapsed");
+	iMagazineSize		= pSettings->r_s32(section,"ammo_mag_size");
+
+	iСartridgeBullet		= READ_IF_EXISTS(pSettings, r_bool, section, "cartridge_bullet", false);
 	
 	////////////////////////////////////////////////////
 	// дисперсия стрельбы

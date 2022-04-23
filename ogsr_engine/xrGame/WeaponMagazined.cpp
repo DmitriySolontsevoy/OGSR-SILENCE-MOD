@@ -335,12 +335,13 @@ void CWeaponMagazined::ReloadMagazine()
 	
 	if (!m_pCurrentInventory) return;
 
-	if(m_set_next_ammoType_on_reload != u32(-1)){		
+	if (m_set_next_ammoType_on_reload != u32(-1))
+	{	
 		m_ammoType						= m_set_next_ammoType_on_reload;
 		m_set_next_ammoType_on_reload	= u32(-1);
 	}
 	
-	if(!unlimited_ammo()) 
+	if (!unlimited_ammo()) 
 	{
 		bool forActor = ParentIsActor();
 
@@ -370,31 +371,42 @@ void CWeaponMagazined::ReloadMagazine()
 	}
 
 	//нет патронов для перезарядки
-	if(!m_pAmmo && !unlimited_ammo() ) return;
+	if (!m_pAmmo && !unlimited_ammo())
+		return;
 
 	//разрядить магазин, если загружаем патронами другого типа
-	if (Core.Features.test(xrCore::Feature::hard_ammo_reload)) {
+	if (Core.Features.test(xrCore::Feature::hard_ammo_reload))
+	{
 		if (!m_bLockType && !m_magazine.empty())
 			if ((ParentIsActor() && !unlimited_ammo()) || (!m_pAmmo || xr_strcmp(m_pAmmo->cNameSect(), *m_magazine.back().m_ammoSect)))
 				UnloadMagazine();
 	}
-	else {
-		if (!m_bLockType && !m_magazine.empty() &&
-			(!m_pAmmo || xr_strcmp(m_pAmmo->cNameSect(),
-				*m_magazine.back().m_ammoSect)))
+	else 
+	{
+		if (!m_bLockType && !m_magazine.empty()
+			&& (!m_pAmmo || xr_strcmp(m_pAmmo->cNameSect(), *m_magazine.back().m_ammoSect)))
+		{
 			UnloadMagazine();
+		}
 	}
 
 	VERIFY((u32)iAmmoElapsed == m_magazine.size());
 
 	if (m_DefaultCartridge.m_LocalAmmoType != m_ammoType)
 		m_DefaultCartridge.Load(*m_ammoTypes[m_ammoType], u8(m_ammoType));
+
 	CCartridge l_cartridge = m_DefaultCartridge;
-	while(iAmmoElapsed < iMagazineSize)
+	int32 control_mag_size = iMagazineSize;
+
+	if (iAmmoElapsed > 0 && iСartridgeBullet)
+		control_mag_size++;
+
+	while (iAmmoElapsed < control_mag_size)
 	{
 		if (!unlimited_ammo())
 		{
-			if (!m_pAmmo->Get(l_cartridge)) break; //-V595
+			if (!m_pAmmo->Get(l_cartridge))
+				break;
 		}
 		++iAmmoElapsed;
 		l_cartridge.m_LocalAmmoType = u8(m_ammoType);
@@ -404,22 +416,25 @@ void CWeaponMagazined::ReloadMagazine()
 	VERIFY((u32)iAmmoElapsed == m_magazine.size());
 
 	//выкинуть коробку патронов, если она пустая
-	if(m_pAmmo && !m_pAmmo->m_boxCurr && OnServer()) 
+	if (m_pAmmo && !m_pAmmo->m_boxCurr && OnServer()) 
 		m_pAmmo->SetDropManual(TRUE);
 
 	if (Core.Features.test(xrCore::Feature::hard_ammo_reload) && ParentIsActor() && m_pAmmo ) {
-          int box_size = m_pAmmo->m_boxSize;
-	  if ( !m_bLockType && iMagazineSize > iAmmoElapsed && iMagazineSize > box_size ) {
-	    m_bLockType = true;
-	    int need_ammo = iMagazineSize - box_size;
-	    while ( need_ammo > 0 ) {
-	      ReloadMagazine();
-	      if ( need_ammo < box_size )
-	        break;
-	      need_ammo -= box_size;
-	    }
-	    m_bLockType = false;
-	  }
+        int box_size = m_pAmmo->m_boxSize;
+		if ( !m_bLockType && iMagazineSize > iAmmoElapsed && iMagazineSize > box_size ) 
+		{
+			m_bLockType = true;
+			int need_ammo = iMagazineSize - box_size;
+			while ( need_ammo > 0 )
+			{
+				ReloadMagazine();
+				if (need_ammo < box_size)
+					break;
+				need_ammo -= box_size;
+			}
+
+			m_bLockType = false;
+		}
 	}
 	else if (iMagazineSize > iAmmoElapsed) 
 	{ 
