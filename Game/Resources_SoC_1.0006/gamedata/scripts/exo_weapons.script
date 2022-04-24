@@ -148,6 +148,22 @@ function update()
 		end
 	end
 	
+	exo = texture_find("act\\act_exo_shlangi_bump")
+	if exo then
+		for n, t in pairs(exo) do
+			local name = "act\\" .. exo_shlangi_table[suit_sect] .. "_bump"
+			t:load(name)
+		end
+	end
+	
+	exo = texture_find("act\\act_exo_shlangi_bump#")
+	if exo then
+		for n, t in pairs(exo) do
+			local name = "act\\" .. exo_shlangi_table[suit_sect] .. "_bump#"
+			t:load(name)
+		end
+	end
+	
 	if changed then
 		prev_suit_sect = suit_sect
 		new_game = false

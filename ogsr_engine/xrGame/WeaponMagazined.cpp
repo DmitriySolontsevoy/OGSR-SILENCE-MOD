@@ -226,24 +226,24 @@ void CWeaponMagazined::Reload()
 
 bool CWeaponMagazined::TryReload() 
 {
-	if(m_pCurrentInventory) 
+	if (m_pCurrentInventory) 
 	{
 		bool forActor = ParentIsActor();
 
 		m_pAmmo = smart_cast<CWeaponAmmo*>(m_pCurrentInventory->GetAmmo(*m_ammoTypes[m_ammoType], forActor));
 
-		if((m_pAmmo || m_set_next_ammoType_on_reload != u32(-1)) || unlimited_ammo() || (IsMisfire() && iAmmoElapsed))
+		if ((m_pAmmo || m_set_next_ammoType_on_reload != u32(-1)) || unlimited_ammo() || (IsMisfire() && iAmmoElapsed))
 		{
 			SetPending(TRUE);
 			SwitchState(eReload); 
 			return true;
 		}
-		else for(u32 i = 0; i < m_ammoTypes.size(); ++i) 
+		else for (u32 i = 0; i < m_ammoTypes.size(); ++i) 
 		{
 			m_pAmmo = smart_cast<CWeaponAmmo*>(m_pCurrentInventory->GetAmmo( *m_ammoTypes[i], forActor));
-			if(m_pAmmo) 
+			if (m_pAmmo) 
 			{ 
-				m_set_next_ammoType_on_reload = i; // https://github.com/revolucas/CoC-Xray/pull/5/commits/3c45cad1edb388664efbe3bb20a29f92e2d827ca
+				m_set_next_ammoType_on_reload = i;
 				SetPending(TRUE);
 				SwitchState(eReload);
 				return true; 
@@ -324,7 +324,8 @@ void CWeaponMagazined::ReloadMagazine()
 	m_dwAmmoCurrentCalcFrame = 0;	
 
 	//устранить осечку при перезарядке
-	if(IsMisfire())	bMisfire = false;
+	if (IsMisfire())
+		bMisfire = false;
 	
 	//переменная блокирует использование
 	//только разных типов патронов
@@ -346,14 +347,14 @@ void CWeaponMagazined::ReloadMagazine()
 		bool forActor = ParentIsActor();
 
 		//попытаться найти в инвентаре патроны текущего типа 
-		if ( Core.Features.test(xrCore::Feature::hard_ammo_reload) && forActor )
+		if (Core.Features.test(xrCore::Feature::hard_ammo_reload) && forActor)
 		  m_pAmmo = smart_cast<CWeaponAmmo*>( m_pCurrentInventory->GetAmmoMaxCurr( *m_ammoTypes[ m_ammoType ], forActor ) );
 		else
 		  m_pAmmo = smart_cast<CWeaponAmmo*>( m_pCurrentInventory->GetAmmo( *m_ammoTypes[ m_ammoType ], forActor ) );
 		
-		if(!m_pAmmo && !m_bLockType) 
+		if (!m_pAmmo && !m_bLockType) 
 		{
-			for(u32 i = 0; i < m_ammoTypes.size(); ++i) 
+			for (u32 i = 0; i < m_ammoTypes.size(); ++i) 
 			{
 				//проверить патроны всех подходящих типов
 				if ( Core.Features.test(xrCore::Feature::hard_ammo_reload) && forActor )
@@ -361,7 +362,7 @@ void CWeaponMagazined::ReloadMagazine()
 				else
 				  m_pAmmo = smart_cast<CWeaponAmmo*>( m_pCurrentInventory->GetAmmo( *m_ammoTypes[ i ], forActor ) );
 
-				if(m_pAmmo) 
+				if (m_pAmmo) 
 				{ 
 					m_ammoType = i; 
 					break; 
@@ -842,8 +843,8 @@ bool CWeaponMagazined::Action(s32 cmd, u32 flags)
 	case kWPN_RELOAD:
 		{
 		if ( !Core.Features.test(xrCore::Feature::lock_reload_in_sprint) || ( !ParentIsActor() || !(g_actor->get_state() & mcSprint) ) )
-			if(flags&CMD_START) 
-				if(iAmmoElapsed < iMagazineSize || IsMisfire()) 
+			if (flags&CMD_START) 
+				if (iAmmoElapsed < iMagazineSize + 1 || IsMisfire()) 
 					Reload();
 		} 
 		return true;
