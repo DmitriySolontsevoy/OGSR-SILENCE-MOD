@@ -53,6 +53,8 @@ void CUICustomMap::Init	(shared_str name, CInifile& gameLtx, LPCSTR sh_name)
 		tmp.z *= UI()->get_current_kx();
 	}
 	m_BoundRect.set		(tmp.x, tmp.y, tmp.z, tmp.w);
+	m_BoundRect.set		(tmp.x, tmp.y, tmp.z, tmp.w);
+
 	CUIStatic::InitEx	(tex, sh_name, 0, 0, m_BoundRect.width(), m_BoundRect.height() );
 	
 	SetStretchTexture	(true);
