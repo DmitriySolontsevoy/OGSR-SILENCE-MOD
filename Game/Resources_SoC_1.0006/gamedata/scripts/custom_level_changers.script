@@ -1,5 +1,5 @@
 function create_level_changer( 
-		p_story_id, -- STORY_ID нового level_changer (понадобится нам позже) 
+		p_story_id, -- STORY_ID нового level_changer
 		p_position, -- вектор, координаты точки, в которой будет располагаться центр нового level_changer 
 		p_lvertex_id, -- level_vertext_id - идентифицируют уровень, на котором будет создан level_changer 
 		p_gvertex_id, -- game_vertext_id
@@ -109,6 +109,19 @@ end
 function spawn_changers()
 	create_agroprom_yantar()
 	create_stancia_pripyat()
+	create_predbannik_escape()
+	create_atp_abandoned_road()
+	create_escape_abandoned_road()
+	create_atp_swamp()
+	create_hospital_zaton()
+	create_limansk_red_forest()
+	create_red_forest_puzir()
+	create_jupiter_underground()
+	create_military_dead_city()
+	create_yantar_dead_city()
+	create_red_forest_dead_city()
+	create_pripyat_underground()
+	create_abandoned_road_darkvalley()
 end
 
 function create_agroprom_yantar()
@@ -144,7 +157,7 @@ function create_agroprom_yantar()
 			0
 		) 
 	db.actor:give_info_portion("yantar-agroprom") 
-	end 
+	end
 end
 
 function create_stancia_pripyat()
@@ -163,5 +176,439 @@ function create_stancia_pripyat()
 			0
 		) 
 	db.actor:give_info_portion("stancia-pripyat") 
+	end 
+end
+
+function create_predbannik_escape()
+	-- создается переход c ПРЕДБАННИКА на КОРДОН
+	if (not has_alife_info( "predbannik-escape" )) then 
+		create_level_changer(
+			20018, 
+			vector():set( -580.758, 19.055, 440.438 ),
+			59179,
+			3877, 
+			127466, 
+			11, 
+			vector():set( -124.299, -26.41, -470.446 ), 
+			vector():set( 0.0,0.0,0.0 ),
+			"l01_escape",
+			0
+		) 
+		db.actor:give_info_portion("predbannik-escape") 
+	end 
+	
+	-- создается переход с КОРДОНА на ПРЕДБАННИК 
+	if (not has_alife_info( "escape-predbannik" )) then 
+		create_level_changer(
+			20019,
+			vector():set( -123.524, -26.326, -476.933 ),
+			129144,
+			11, 
+			65447, 
+			3877, 
+			vector():set( -576.69, 18.24, 430.241 ), 
+			vector():set( 0.0,3.0,0.0 ),
+			"predbannik",
+			0
+		) 
+	db.actor:give_info_portion("escape-predbannik") 
+	end
+end
+
+function create_atp_abandoned_road()
+	-- создается переход c АТП на БРОШЕННУЮ ДОРОГУ
+	if (not has_alife_info( "atp-abandoned_road" )) then 
+		create_level_changer(
+			20020, 
+			vector():set( -240.743, 3.69, -15.16 ),
+			26764,
+			2793, 
+			675360, 
+			4163, 
+			vector():set( 5.002, 0.211, -696.615 ), 
+			vector():set( 0.0,0.0,0.0 ),
+			"garbage_old",
+			0
+		) 
+		db.actor:give_info_portion("atp-abandoned_road") 
+	end 
+	
+	-- создается переход с БРОШЕННОЙ ДОРОГИ на АТП 
+	if (not has_alife_info( "abandoned_road-atp" )) then 
+		create_level_changer(
+			20021,
+			vector():set( 5.002, 0.211, -696.615 ),
+			675360,
+			4163, 
+			26764, 
+			2793, 
+			vector():set( -240.743, 3.69, -15.16 ),
+			vector():set( 0.0,4.5,0.0 ),
+			"atp_for_test22",
+			0
+		) 
+	db.actor:give_info_portion("abandoned_road-atp") 
+	end
+end
+
+function create_escape_abandoned_road()
+	-- создается переход c КОРДОНА на БРОШЕННУЮ ДОРОГУ
+	if (not has_alife_info( "escape-abandoned_road" )) then 
+		create_level_changer(
+			20022, 
+			vector():set( 370.58, 15.009, -41.49 ),
+			594398,
+			0, 
+			308635, 
+			4038, 
+			vector():set( -120.622, 21.007, -2.934 ), 
+			vector():set( 0.0,4.5,0.0 ),
+			"garbage_old",
+			0
+		) 
+		db.actor:give_info_portion("escape-abandoned_road") 
+	end 
+	
+	-- создается переход с БРОШЕННОЙ ДОРОГИ на КОРДОН 
+	if (not has_alife_info( "abandoned_road-escape" )) then 
+		create_level_changer(
+			20023,
+			vector():set( -127.854, 21.065, -3.017 ),
+			308635,
+			4038, 
+			594398, 
+			0, 
+			vector():set( 370.58, 15.009, -41.49 ),
+			vector():set( 0.0,4.5,0.0 ),
+			"l01_escape",
+			0
+		) 
+	db.actor:give_info_portion("abandoned_road-escape") 
+	end
+end
+
+function create_atp_swamp()
+	-- создается переход c АТП на ТОПИ
+	if (not has_alife_info( "atp-swamp" )) then 
+		create_level_changer(
+			20024, 
+			vector():set( 451.031, -4.869, -25.742 ),
+			1024456,
+			2860, 
+			459783, 
+			4386, 
+			vector():set( -318.829, 2.259, 69.741 ), 
+			vector():set( 0.0,4.5,0.0 ),
+			"swamp_old",
+			0
+		) 
+		db.actor:give_info_portion("atp-swamp") 
+	end 
+	
+	-- создается переход с ТОПЕЙ на АТП 
+	if (not has_alife_info( "swamp-atp" )) then 
+		create_level_changer(
+			20025,
+			vector():set( -327.32, 2.289, 63.653 ),
+			434196,
+			4386, 
+			1024456, 
+			2860, 
+			vector():set( 451.031, -4.869, -25.742 ),
+			vector():set( 0.0,1.5,0.0 ),
+			"atp_for_test22",
+			0
+		) 
+	db.actor:give_info_portion("swamp-atp") 
+	end
+end
+
+function create_hospital_zaton()
+	-- создается переход c ГОСПИТАЛЯ на ЗАТОН
+	if (not has_alife_info( "hospital-zaton" )) then 
+		create_level_changer(
+			20027, 
+			vector():set( -73.009, 19.774, 567.028 ),
+			7486,
+			3075, 
+			139177, 
+			3664, 
+			vector():set( -426.04, 24.072, -345.911 ), 
+			vector():set( 0.0,4.5,0.0 ),
+			"zaton",
+			0
+		) 
+		db.actor:give_info_portion("hospital-zaton") 
+	end 
+	
+	-- создается переход с ЗАТОНА на ГОСПИТАЛЬ 
+	if (not has_alife_info( "zaton-hospital" )) then 
+		create_level_changer(
+			20028,
+			vector():set( -429.613, 24.075, -345.71 ),
+			134451,
+			3664, 
+			7423, 
+			3075, 
+			vector():set( -73.418, 19.81, 567.206 ),
+			vector():set( 0.0,1.5,0.0 ),
+			"hospital",
+			0
+		) 
+	db.actor:give_info_portion("zaton-hospital") 
+	end
+end
+
+function create_limansk_red_forest()
+	-- создается переход с ЛИМАНСКА на РЫЖИЙ ЛЕС 
+	if (not has_alife_info( "limansk-red_forest" )) then 
+		create_level_changer(
+			20029,
+			vector():set( 7.618, -0.008, -371.737 ),
+			29075,
+			3006, 
+			142123, 
+			2270, 
+			vector():set( -174.3, 0.125, -279.325 ), 
+			vector():set( 0.0,3.0,0.0 ),
+			"red_forest",
+			0
+		) 
+	db.actor:give_info_portion("limansk-red_forest") 
+	end 
+end
+
+function create_red_forest_puzir()
+	-- создается переход с РЫЖЕГО ЛЕСА на ПРОКЛЯТЫЙ ЛЕС 
+	if (not has_alife_info( "red_forest-puzir" )) then 
+		create_level_changer(
+			20030,
+			vector():set( 260.458, -1.381, -313.158 ),
+			156430,
+			3321, 
+			13760, 
+			2881, 
+			vector():set( -220.22, -0.569, 214.075 ), 
+			vector():set( 0.0,3.0,0.0 ),
+			"puzir",
+			0
+		) 
+	db.actor:give_info_portion("red_forest-puzir") 
+	end 
+end
+
+function create_jupiter_underground()
+	-- создается переход c ЮПИТЕРА на ТОННЕЛЬ
+	if (not has_alife_info( "jupiter_underground" )) then 
+		create_level_changer(
+			20031, 
+			vector():set( 330.041, 20.348, -330.02  ),
+			1243400,
+			3745, 
+			1221, 
+			3772, 
+			vector():set( -46.981, 8.028, 442.918 ), 
+			vector():set( 0.0,4.5,0.0 ),
+			"jupiter_underground",
+			0
+		) 
+		db.actor:give_info_portion("jupiter_underground") 
+	end 
+	
+	-- создается переход с ТОННЕЛЯ на ЮПИТЕР 
+	if (not has_alife_info( "underground_jupiter" )) then 
+		create_level_changer(
+			20032,
+			vector():set( -47.073, 8.007, 449.699 ),
+			1230,
+			3772, 
+			1254867, 
+			3745, 
+			vector():set( 337.053, 21.566, -329.593 ),
+			vector():set( 0.0,1.5,0.0 ),
+			"jupiter",
+			0
+		) 
+	db.actor:give_info_portion("underground_jupiter") 
+	end
+end
+
+function create_military_dead_city()
+	-- создается переход c СКЛАДОВ на МЁРТВЫЙ ГОРОД
+	if (not has_alife_info( "military_dead" )) then 
+		create_level_changer(
+			20033, 
+			vector():set( -382.941, -14.073, 399.073 ),
+			364,
+			1848, 
+			478427, 
+			3654, 
+			vector():set( 140.219, 1.227, -132.089 ), 
+			vector():set( 0.0,2.0,0.0 ),
+			"dead_city",
+			0
+		) 
+		db.actor:give_info_portion("military_dead") 
+	end 
+	
+	-- создается переход с МЁРТВОГО ГОРОДА на СКЛАДЫ 
+	if (not has_alife_info( "dead_military" )) then 
+		create_level_changer(
+			20034,
+			vector():set( 144.524, 1.192, -136.544 ),
+			480914,
+			3654, 
+			943, 
+			1848, 
+			vector():set( -372.219, -14.035, 396.651 ),
+			vector():set( 0.0,4.5,0.0 ),
+			"l07_military",
+			0
+		) 
+	db.actor:give_info_portion("dead_military") 
+	end
+end
+
+function create_yantar_dead_city()
+	-- создается переход c ЯНТАРЯ на МЁРТВЫЙ ГОРОД
+	if (not has_alife_info( "yantar_dead" )) then 
+		create_level_changer(
+			20035, 
+			vector():set( -23.304, 0.376, -0.072 ),
+			30489,
+			1500, 
+			86730, 
+			3594, 
+			vector():set( -255.451, 3.652, -136.661 ), 
+			vector():set( 0.0,3.0,0.0 ),
+			"dead_city",
+			0
+		) 
+		db.actor:give_info_portion("yantar_dead") 
+	end 
+	
+	-- создается переход с МЁРТВОГО ГОРОДА на ЯНТАРЬ 
+	if (not has_alife_info( "dead_yantar" )) then 
+		create_level_changer(
+			20036,
+			vector():set( -262.203, 3.819, -142.12 ),
+			81377,
+			3594, 
+			33683, 
+			1500, 
+			vector():set( -13.705, 0.054, -4.91 ),
+			vector():set( 0.0,0.0,0.0 ),
+			"l08_yantar",
+			0
+		) 
+	db.actor:give_info_portion("dead_yantar") 
+	end
+end
+
+function create_red_forest_dead_city()
+	-- создается переход c РЫЖЕГО ЛЕСА на МЁРТВЫЙ ГОРОД
+	if (not has_alife_info( "red-forest_dead" )) then 
+		create_level_changer(
+			20037, 
+			vector():set( -18.105, 0.625, -455.865 ),
+			51745,
+			3270, 
+			54960, 
+			3278, 
+			vector():set( -14.998, 0.772, -447.709 ), 
+			vector():set( 0.0,4.5,0.0 ),
+			"dead_city",
+			0
+		) 
+		db.actor:give_info_portion("red-forest_dead") 
+	end 
+	
+	-- создается переход с МЁРТВОГО ГОРОДА на РЫЖИЙ ЛЕС 
+	if (not has_alife_info( "dead_red-forest" )) then 
+		create_level_changer(
+			20038,
+			vector():set( -248.132, -0.387, 309.698 ),
+			99748,
+			3593, 
+			473424, 
+			3655, 
+			vector():set( -241.68, -1.706, 302.173 ),
+			vector():set( 0.0,3.0,0.0 ),
+			"red_forest",
+			0
+		) 
+	db.actor:give_info_portion("dead_red-forest") 
+	end
+end
+
+function create_pripyat_underground()
+	-- создается переход c ПРИПЯТИ на ТОННЕЛЬ
+	if (not has_alife_info( "pripyat_underground" )) then 
+		create_level_changer(
+			20040, 
+			vector():set( 185.539, -15.491, -259.77 ),
+			415470,
+			3765, 
+			40566, 
+			3827, 
+			vector():set( 79.559, 4.233, -222.466 ), 
+			vector():set( 0.0,1.5,0.0 ),
+			"jupiter_underground",
+			0
+		) 
+		db.actor:give_info_portion("pripyat_underground") 
+	end 
+	
+	-- создается переход с ТОННЕЛЯ на ПРИПЯТЬ 
+	if (not has_alife_info( "underground_pripyat" )) then 
+		create_level_changer(
+			20041,
+			vector():set( 82.617, 21.181, -222.547 ),
+			40755,
+			3827, 
+			415473, 
+			3765, 
+			vector():set( 185.496, -0.51, -258.073 ),
+			vector():set( 0.0,0.0,0.0 ),
+			"pripyat",
+			0
+		) 
+	db.actor:give_info_portion("underground_pripyat") 
+	end
+end
+
+function create_abandoned_road_darkvalley()
+	-- создается переход c БРОШЕННОЙ ДОРОГИ на ТЁМНУЮ ДОЛИНУ
+	if (not has_alife_info( "abandoned_road-darkvalley" )) then 
+		create_level_changer(
+			20042, 
+			vector():set( 83.088, 15.803, 664.532 ),
+			868011,
+			4265, 
+			121711, 
+			815, 
+			vector():set( -44.529, 0.433, -542.012 ), 
+			vector():set( 0.0,3.0,0.0 ),
+			"l04_darkvalley",
+			0
+		) 
+		db.actor:give_info_portion("abandoned_road-darkvalley") 
+	end 
+	
+	-- создается второй переход c БРОШЕННОЙ ДОРОГИ на ТЁМНУЮ ДОЛИНУ
+	if (not has_alife_info( "abandoned_road-darkvalley2" )) then 
+		create_level_changer(
+			20043, 
+			vector():set( -93.36, 3.252, 659.122 ),
+			407404,
+			4081, 
+			121711, 
+			815, 
+			vector():set( -44.529, 0.433, -542.012 ), 
+			vector():set( 0.0,1.5,0.0 ),
+			"l04_darkvalley",
+			0
+		) 
+		db.actor:give_info_portion("abandoned_road-darkvalley2") 
 	end 
 end

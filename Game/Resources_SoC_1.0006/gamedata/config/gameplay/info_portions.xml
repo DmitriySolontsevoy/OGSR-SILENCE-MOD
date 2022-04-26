@@ -1,6 +1,31 @@
 <?xml version='1.0' encoding="windows-1251"?>
 
 <game_information_portions>
+	<info_portion id="predbannik-escape"></info_portion>
+	<info_portion id="escape-predbannik"></info_portion>
+	<info_portion id="atp-abandoned_road"></info_portion>
+	<info_portion id="abandoned_road-atp"></info_portion>
+	<info_portion id="escape-abandoned_road"></info_portion>
+	<info_portion id="abandoned_road-escape"></info_portion>
+	<info_portion id="atp-swamp"></info_portion>
+	<info_portion id="swamp-atp"></info_portion>
+	<info_portion id="hospital-zaton"></info_portion>
+	<info_portion id="zaton-hospital"></info_portion>
+	<info_portion id="limansk-red_forest"></info_portion>
+	<info_portion id="red_forest-puzir"></info_portion>
+	<info_portion id="jupiter_underground"></info_portion>
+	<info_portion id="underground_jupiter"></info_portion>
+	<info_portion id="military_dead"></info_portion>
+	<info_portion id="dead_military"></info_portion>
+	<info_portion id="yantar_dead"></info_portion>
+	<info_portion id="dead_yantar"></info_portion>
+	<info_portion id="red-forest_dead"></info_portion>
+	<info_portion id="dead_red-forest"></info_portion>
+	<info_portion id="pripyat_underground"></info_portion>
+	<info_portion id="underground_pripyat"></info_portion>
+	<info_portion id="abandoned_road-darkvalley"></info_portion>
+	<info_portion id="abandoned_road-darkvalley2"></info_portion>
+	
   <info_portion id="storyline_actor_start">
     <task>storyline_eliminate_gunslinger</task>
   </info_portion>

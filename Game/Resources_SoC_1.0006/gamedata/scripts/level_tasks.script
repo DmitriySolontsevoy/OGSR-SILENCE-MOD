@@ -461,9 +461,138 @@ function add_lchanger_location()
 		if obj then
 			level.map_add_object_spot(obj.id, "level_changer", "to_pripyat")
 		end
+		
+		obj = sim:story_object(20018)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_escape")
+		end
+
+		obj = sim:story_object(20019)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_predbannik")
+		end
+		
+		obj = sim:story_object(20020)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_abandoned_road")
+		end
+
+		obj = sim:story_object(20021)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_atp")
+		end
+		
+		obj = sim:story_object(20022)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_abandoned_road")
+		end
+
+		obj = sim:story_object(20023)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_escape")
+		end
+		
+		obj = sim:story_object(20024)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_swamp")
+		end
+
+		obj = sim:story_object(20025)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_atp")
+		end
+		
+		obj = sim:story_object(20026)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_hospital")
+		end
+		
+		obj = sim:story_object(20027)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_zaton")
+		end
+		
+		obj = sim:story_object(20028)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_hospital")
+		end
+		
+		obj = sim:story_object(20029)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_red_forest")
+		end
+		
+		obj = sim:story_object(20030)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_puzir")
+		end
+		
+		obj = sim:story_object(20031)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_jupiter_underground")
+		end
+		
+		obj = sim:story_object(20032)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_jupiter")
+		end
+		
+		obj = sim:story_object(20033)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_dead_city")
+		end
+		
+		obj = sim:story_object(20034)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_military")
+		end
+		
+		obj = sim:story_object(20035)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_dead_city")
+		end
+		
+		obj = sim:story_object(20036)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_yantar")
+		end
+		
+		obj = sim:story_object(20037)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_dead_city")
+		end
+		
+		obj = sim:story_object(20038)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_red_forest")
+		end
+		
+		obj = sim:story_object(20039)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_radar")
+		end
+		
+		obj = sim:story_object(20040)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_jupiter_underground")
+		end
+		
+		obj = sim:story_object(20041)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_pripyat")
+		end
+		
+		obj = sim:story_object(20042)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_darkvalley")
+		end
+		
+		obj = sim:story_object(20043)
+		if obj then
+			level.map_add_object_spot(obj.id, "level_changer", "to_darkvalley")
+		end
 	end
 end
-
 
 function set_task_state(id_state, id_task, id_subtask)
 	if db.actor then
