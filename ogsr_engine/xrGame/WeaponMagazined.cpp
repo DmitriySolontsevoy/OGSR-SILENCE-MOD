@@ -843,9 +843,12 @@ bool CWeaponMagazined::Action(s32 cmd, u32 flags)
 	case kWPN_RELOAD:
 		{
 		if ( !Core.Features.test(xrCore::Feature::lock_reload_in_sprint) || ( !ParentIsActor() || !(g_actor->get_state() & mcSprint) ) )
-			if (flags&CMD_START) 
-				if (iAmmoElapsed < iMagazineSize + 1 || IsMisfire()) 
+			if (flags & CMD_START)
+			{
+				int32 control_mag_size = iСartridgeBullet ? iMagazineSize + 1 : iMagazineSize;
+				if (iAmmoElapsed < control_mag_size || IsMisfire())
 					Reload();
+			}
 		} 
 		return true;
 	case kWPN_FIREMODE_PREV:
