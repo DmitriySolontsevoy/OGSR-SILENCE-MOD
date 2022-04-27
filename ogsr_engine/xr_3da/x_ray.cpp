@@ -106,7 +106,6 @@ void InitConsole	()
 	CORE_FEATURE_SET( ogse_wpn_zoom_system,       "features" );
 	CORE_FEATURE_SET( wpn_cost_include_addons,    "features" );
 	CORE_FEATURE_SET( lock_reload_in_sprint,      "features" );
-	CORE_FEATURE_SET( hard_ammo_reload,           "features" );
 	CORE_FEATURE_SET( engine_ammo_repacker,       "features" );
 	CORE_FEATURE_SET( ruck_flag_preferred,        "features" );
 	CORE_FEATURE_SET( old_outfit_slot_style,      "features" );

@@ -293,10 +293,6 @@ void CUITradeWnd::Show()
 	SetCurrentItem					(NULL);
 	ResetAll						();
 	m_uidata->UIDealMsg				= NULL;
-
-	if (Core.Features.test(xrCore::Feature::engine_ammo_repacker) && !Core.Features.test(xrCore::Feature::hard_ammo_reload))
-		if (auto pActor = Actor())
-			pActor->RepackAmmo();
 }
 
 void CUITradeWnd::Hide()

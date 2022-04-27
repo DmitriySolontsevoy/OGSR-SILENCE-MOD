@@ -429,10 +429,6 @@ void CUICarBodyWnd::Show()
 	SetCurrentItem							(NULL);
 	InventoryUtilities::UpdateWeight		(*m_pUIOurBagWnd);
 
-	if (Core.Features.test(xrCore::Feature::engine_ammo_repacker) && !Core.Features.test(xrCore::Feature::hard_ammo_reload))
-		if (auto pActor = Actor())
-			pActor->RepackAmmo();
-
 	PlaySnd(eInvSndOpen);
 }
 

@@ -323,10 +323,6 @@ void CUIInventoryWnd::Show()
 	PlaySnd								(eInvSndOpen);
 
 	m_b_need_update_stats = true;
-
-	if (Core.Features.test(xrCore::Feature::engine_ammo_repacker) && !Core.Features.test(xrCore::Feature::hard_ammo_reload))
-		if (auto pActor = Actor())
-			pActor->RepackAmmo();
 }
 
 void CUIInventoryWnd::Hide()

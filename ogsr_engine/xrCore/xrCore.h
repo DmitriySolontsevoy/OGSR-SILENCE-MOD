@@ -198,7 +198,7 @@ public:
 	  ogse_wpn_zoom_system       = 1ull << 25,
 	  wpn_cost_include_addons    = 1ull << 26,
 	  lock_reload_in_sprint      = 1ull << 27,
-	  hard_ammo_reload           = 1ull << 28,
+	  // !Место свободно!        = 1ull << 28,
 	  engine_ammo_repacker       = 1ull << 29,
 	  ruck_flag_preferred        = 1ull << 30,
 	  colorize_ammo              = 1ull << 31,
