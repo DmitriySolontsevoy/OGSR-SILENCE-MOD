@@ -388,6 +388,10 @@ void CWeaponMagazined::ReloadMagazine()
 		{
 			if (!m_pAmmo->Get(l_cartridge))
 			{
+				//выкинуть коробку патронов, если она пустая
+				if (m_pAmmo && !m_pAmmo->m_boxCurr && OnServer())
+					m_pAmmo->SetDropManual(TRUE);
+
 				m_pAmmo = smart_cast<CWeaponAmmo*>(m_pCurrentInventory->GetAmmo(*m_ammoTypes[m_ammoType], forActor));
 				if (!m_pAmmo)
 				{
@@ -402,7 +406,7 @@ void CWeaponMagazined::ReloadMagazine()
 	}
 
 	//выкинуть коробку патронов, если она пустая
-	if (m_pAmmo && !m_pAmmo->m_boxCurr && OnServer()) 
+	if (m_pAmmo && !m_pAmmo->m_boxCurr && OnServer())
 		m_pAmmo->SetDropManual(TRUE);
 }
 
