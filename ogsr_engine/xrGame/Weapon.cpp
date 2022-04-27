@@ -689,7 +689,7 @@ BOOL CWeapon::net_Spawn		(CSE_Abstract* DC)
 		// нож автоматически заряжается двумя патронами, хотя
 		// размер магазина у него 0. Что бы зря не ругаться, проверим
 		// что в конфиге размер магазина не нулевой.
-		if ( iMagazineSize && iAmmoElapsed > iMagazineSize ) {
+		if ( iMagazineSize && iAmmoElapsed > iMagazineSize && !iСartridgeBullet ) {
 		  Msg( "! [%s]: %s: wrong iAmmoElapsed[%u/%u]", __FUNCTION__, cName().c_str(), iAmmoElapsed, iMagazineSize );
 		  iAmmoElapsed = iMagazineSize;
 		  auto se_obj = alife_object();
