@@ -568,9 +568,8 @@ void CUIMiniMap::Init(shared_str name, CInifile& gameLtx, LPCSTR sh_name)
 void CUIMiniMap::UpdateSpots()
 {
 	DetachAll();
-	Locations& ls =Level().MapManager().Locations();
-	for(Locations_it it=ls.begin(); it!=ls.end(); ++it){
+	Locations& ls = Level().MapManager().Locations();
+	for (Locations_it it=ls.begin(); it!=ls.end(); ++it){
 			(*it).location->UpdateMiniMap(this);
 	}
-
 }

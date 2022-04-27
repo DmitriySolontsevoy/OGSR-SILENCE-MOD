@@ -456,10 +456,9 @@ void CMapLocation::UpdateSpotPointer(CUICustomMap* map, CMapSpotPointer* sp )
 void CMapLocation::UpdateMiniMap(CUICustomMap* map)
 {
 	CMapSpot* sp = m_minimap_spot;
-	if(!sp) return;
-	if(SpotEnabled())
+	if (!sp) return;
+	if (SpotEnabled())
 		UpdateSpot(map, sp);
-
 }
 
 void CMapLocation::UpdateLevelMap(CUICustomMap* map)
