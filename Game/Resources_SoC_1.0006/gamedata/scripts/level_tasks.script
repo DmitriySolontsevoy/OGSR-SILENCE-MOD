@@ -10,7 +10,6 @@ local level_scripts = {
 	pripyat_tasks
 }
 
-
 local jump_level_by_name = {
 	l01_escape = "l02_garbage",
 	l02_garbage = "l03_agroprom",
