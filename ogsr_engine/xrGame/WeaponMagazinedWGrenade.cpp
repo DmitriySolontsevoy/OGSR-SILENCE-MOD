@@ -453,10 +453,16 @@ void CWeaponMagazinedWGrenade::OnEvent(NET_Packet& P, u16 type)
 
 void CWeaponMagazinedWGrenade::ReloadMagazine() 
 {
+	bool gun_misfire = IsMisfire();
+	
 	inherited::ReloadMagazine();
 
+	// Return to jammed state if grenade reloading
+	if (gun_misfire && m_bGrenadeMode)
+		bMisfire = true;
+
 	//перезарядка подствольного гранатомета
-	if(iAmmoElapsed && !getRocketCount() && m_bGrenadeMode) 
+	if (iAmmoElapsed && !getRocketCount() && m_bGrenadeMode) 
 	{
 //.		shared_str fake_grenade_name = pSettings->r_string(*m_pAmmo->cNameSect(), "fake_grenade_name");
 		shared_str fake_grenade_name = pSettings->r_string(*m_ammoTypes[m_ammoType], "fake_grenade_name");
@@ -850,7 +856,37 @@ bool CWeaponMagazinedWGrenade::IsNecessaryItem	    (const shared_str& item_sect)
 			);
 }
 
-
 float CWeaponMagazinedWGrenade::Weight() const {
   return inherited::Weight() + GetMagazineWeight( m_magazine2 );
+}
+
+void CWeaponMagazinedWGrenade::FireStart()
+{
+	if (IsValid() && (!IsMisfire() || IsMisfire() && m_bGrenadeMode))
+	{
+		if (!IsWorking() || AllowFireWhileWorking())
+		{
+			if (GetState() == eReload) return;
+			if (GetState() == eShowing) return;
+			if (GetState() == eHiding) return;
+			if (GetState() == eMisfire) return;
+
+			inherited::FireStart();
+
+			if (iAmmoElapsed == 0)
+				OnMagazineEmpty();
+			else
+				SwitchState(eFire);
+		}
+	}
+	else if (IsMisfire()) {
+		if (smart_cast<CActor*>(H_Parent()) && Level().CurrentViewEntity() == H_Parent())
+			HUD().GetUI()->AddInfoMessage("gun_jammed");
+		OnEmptyClick();
+		// Callbacks added by Cribbledirge.
+		StateSwitchCallback(GameObject::eOnActorWeaponJammed, GameObject::eOnNPCWeaponJammed);
+	}
+	else
+		if (eReload != GetState() && eMisfire != GetState())
+			OnMagazineEmpty();
 }
