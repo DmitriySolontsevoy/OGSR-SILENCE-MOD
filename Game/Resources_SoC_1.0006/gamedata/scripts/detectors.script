@@ -1,0 +1,48 @@
+local MAX_ARTEFACTS = 50
+local MAX_ANOMALIES = 50
+local map_radius = 30
+
+function on_update()
+	local det = db.actor:item_in_slot(8)
+	
+	if not det then
+		return
+	end
+	
+	local sect = det:section()
+	if sect == "detector_veles" or sect == "detector_svarog" then
+		reset_view()
+		
+		-- перебор онлайновых артефактов в таблице
+		local act_pos = db.actor:position()
+		local det_radius = 50
+		local i = 0
+		
+		for id, art in pairs (artefact_store.get()) do
+			-- проверяем, не в рюкзаке ли артефакт. Их детектировать не надо
+			if art:parent() == nil then
+				local art_pos = art:position()
+				local dist = act_pos:distance_to(art_pos)
+				
+				-- проверка на попадание в радиус детектирования
+				if dist < det_radius and i < MAX_ARTEFACTS then
+					set_artefact_slot(i, art_pos.x, art_pos.y, art_pos.z)
+					i = i + 1
+				end
+			end
+		end
+		
+		if sect == "detector_svarog" then
+			for id, anm in pairs (anomaly_store.get()) do
+				local anm_pos = anm:position()
+				local dist = act_pos:distance_to(anm_pos)
+				
+				-- проверка на попадание в радиус детектирования
+				if dist < det_radius and i < MAX_ANOMALIES then
+					set_anomaly_slot(i, anm_pos.x, anm_pos.y, anm_pos.z)
+					i = i + 1
+				end
+			end
+		end
+	end
+end

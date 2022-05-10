@@ -13,13 +13,17 @@ void CAdvancedDetector::CreateUI()
     ui().construct(this);
 }
 
-CUIArtefactDetectorAdv& CAdvancedDetector::ui() { return *((CUIArtefactDetectorAdv*)m_ui); }
+CUIArtefactDetectorAdv& CAdvancedDetector::ui()
+{
+    return *((CUIArtefactDetectorAdv*)m_ui);
+}
+
 void CAdvancedDetector::UpdateAf()
 {
     ui().SetValue(0.0f, Fvector{});
     if (m_artefacts.m_ItemInfos.empty())
         return;
-
+        
     auto it_b = m_artefacts.m_ItemInfos.begin();
     auto it_e = m_artefacts.m_ItemInfos.end();
     auto it = it_b;
@@ -95,14 +99,22 @@ void CUIArtefactDetectorAdv::construct(CAdvancedDetector* p)
     m_bid = u16(-1);
 }
 
-void CUIArtefactDetectorAdv::SetValue(const float val1, const Fvector& val2) { m_target_dir = val2; }
+void CUIArtefactDetectorAdv::SetValue(const float val1, const Fvector& val2)
+{
+    m_target_dir = val2; 
+}
+
 void CUIArtefactDetectorAdv::update()
 {
-    if (!m_parent->HudItemData() || m_bid == u16(-1))
-        return;
     inherited::update();
+
     attachable_hud_item* itm = m_parent->HudItemData();
-    R_ASSERT(itm);
+
+    if (!itm)
+        return;
+
+    if (m_bid == u16(-1))
+        m_bid = itm->m_model->LL_BoneID("screen_bone");
 
     BOOL b_visible = !fis_zero(m_target_dir.magnitude());
     if (b_visible != itm->m_model->LL_GetBoneVisible(m_bid))
@@ -120,6 +132,7 @@ void CUIArtefactDetectorAdv::update()
 
     m_cur_y_rot = angle_inertion_var(m_cur_y_rot, dest_y_rot, PI_DIV_4, PI_MUL_4, PI_MUL_2, Device.fTimeDelta);
 }
+
 void CAdvancedDetector::on_a_hud_attach()
 {
     inherited::on_a_hud_attach();

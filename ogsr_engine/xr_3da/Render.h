@@ -339,14 +339,20 @@ class ShExports final
 		}
 	};
 
-	PositionsStorage<Fvector2, 24> artefacts_position{};
-	PositionsStorage<Fvector2, 24> anomalys_position{};
+	PositionsStorage<Fvector2, 96> artefacts_position{};
+	PositionsStorage<Fvector2, 96> anomalys_position{};
 	Ivector2 detector_params{};
 
 public:
 	void set_artefact_position(const u32& _i, const Fvector2& _pos) { artefacts_position[_i] =_pos; };
 	void set_anomaly_position(const u32& _i, const Fvector2& _pos) { anomalys_position[_i] = _pos; };
 	void set_detector_params(const Ivector2& _pos) { detector_params = _pos; };
+
+	void remove_all() 
+	{
+		artefacts_position = {};
+		anomalys_position = {};
+	}
 
 	const Fvector2& get_artefact_position(const u32& _i) { return artefacts_position[_i]; }
 	const Fvector2& get_anomaly_position(const u32& _i) { return anomalys_position[_i]; }

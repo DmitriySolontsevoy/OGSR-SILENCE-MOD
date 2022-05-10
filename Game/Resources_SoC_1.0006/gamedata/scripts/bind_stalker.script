@@ -35,7 +35,7 @@ function actor_binder:net_spawn(data)
 	self.weapon_hide = false -- спрятано или нет оружие при разговоре.
 	weapon_hide = false -- устанавливаем глобальный дефолтовый флаг.
 
-	if object_binder.net_spawn(self,data) == false then
+	if not object_binder.net_spawn(self,data) then
 		return false
 	end
 
@@ -274,6 +274,9 @@ function actor_binder:update(delta)
 			self.weapon_hide = false
 		end
 	end	
+
+	-- обновление экрана детектора
+	detectors.on_update()
 
 	-- обновление рестрикторов, которые под логикой, срабатывает через интервалы времени
 	if self.next_restrictors_update_time < time then

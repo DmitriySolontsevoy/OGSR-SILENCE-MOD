@@ -87,7 +87,8 @@ void CUICustomItem::Render(const Fvector2& pos_ns, u32 color, float angle)
 	UIRender->GetActiveTextureResolution(ts);
 	hp.set(0.5f/ts.x,0.5f/ts.y);
 
-	if (!uFlags.test(flValidRect))	SetRect(0, 0, ts.x, ts.y);
+	if (!uFlags.test(flValidRect))
+		SetRect(0, 0, ts.x, ts.y);
 
 	if (!uFlags.test(flValidOriginalRect)) {
 		iOriginalRect.set(0,0,ts.x,ts.y);
@@ -140,7 +141,7 @@ void CUICustomItem::Render(const Fvector2& pos_ns, u32 color, float angle)
 	S[3].pt.add		(offset);
 
 	for(int i=0; i<4;++i)
-		UI()->ClientToScreenScaled		(S[i].pt);
+		UI()->ClientToScreenScaled(S[i].pt);
 
 	sPoly2D D;
 	sPoly2D* R		= UI()->ScreenFrustum().ClipPoly(S,D);

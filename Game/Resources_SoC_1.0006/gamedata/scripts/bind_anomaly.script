@@ -1,0 +1,53 @@
+function init(obj)
+   obj:bind_object(anomaly_binder(obj))
+end
+
+class "anomaly_binder" (object_binder)
+-- default methods
+function anomaly_binder:__init(obj) super(obj)
+end
+
+function anomaly_binder:load(reader)
+	object_binder.load(self, reader)
+end
+
+function anomaly_binder:reload(section)
+	object_binder.reload(self, section)
+end
+
+function anomaly_binder:save(packet)
+   object_binder.save(self, packet)
+end
+
+function anomaly_binder:reload(section)
+	object_binder.reload(self, section)
+end
+
+function anomaly_binder:net_save_relevant()
+	return true
+end
+
+-- custom methods
+function anomaly_binder:net_spawn(server_object)
+	if not object_binder.net_spawn(self, data) then
+		return false
+	end
+	anomaly_store.put(self.object)
+	return true
+end
+
+function anomaly_binder:reinit()
+	object_binder.reinit(self)
+	anomaly_store.put(self.object)
+	self.st = anomaly_store.get()[self.object:id()]
+end
+
+function anomaly_binder:net_destroy()
+	anomaly_store.expunge(self.object:id())
+	object_binder.net_destroy(self)
+end
+
+function anomaly_binder:update(delta)
+	object_binder.update(self, delta)
+	-- reserved for future use 
+end

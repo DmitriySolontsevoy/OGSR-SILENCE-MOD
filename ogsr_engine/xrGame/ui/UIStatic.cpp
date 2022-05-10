@@ -138,7 +138,7 @@ void CUIStatic::InitTextureEx(LPCSTR tex_name, LPCSTR sh_name)
 
 void  CUIStatic::Draw()
 {
-	if(m_bClipper){
+	if (m_bClipper) {
 		Frect clip_rect;
 		if (-1 == m_ClipRect.left && -1 == m_ClipRect.right && -1 == m_ClipRect.top){
 			Frect			our_rect;
@@ -157,7 +157,7 @@ void  CUIStatic::Draw()
 	inherited::Draw			();
 	DrawText				();
 
-	if(m_bClipper)	UI()->PopScissor();
+	if (m_bClipper)	UI()->PopScissor();
 }
 
 
@@ -177,13 +177,13 @@ void CUIStatic::DrawText(){
 	}
 }
 
-void CUIStatic::DrawTexture(){
-
+void CUIStatic::DrawTexture()
+{
 	if (m_bTextureEnable && GetShader() && GetShader()->inited())
 	{
-		Frect			rect;
-		GetAbsoluteRect	(rect);
-		m_UIStaticItem.SetPos	(rect.left + m_TextureOffset.x, rect.top + m_TextureOffset.y);
+		Frect rect;
+		GetAbsoluteRect(rect);
+		m_UIStaticItem.SetPos(rect.left + m_TextureOffset.x, rect.top + m_TextureOffset.y);
 
 		if (m_bStretchTexture)
 		{
@@ -200,10 +200,14 @@ void CUIStatic::DrawTexture(){
 			}
 			m_UIStaticItem.SetRect(0, 0, rect.width(), rect.height());
 		}
-		else{
-			Frect r={0.0f,0.0f,
+		else
+		{
+			Frect r = {
+				0.0f,
+				0.0f,
 				m_UIStaticItem.GetOriginalRectScaled().width(),
-				m_UIStaticItem.GetOriginalRectScaled().height()};
+				m_UIStaticItem.GetOriginalRectScaled().height()
+			};
 			if (r.width() && r.height())
 			{
 				if (Heading())
@@ -218,9 +222,9 @@ void CUIStatic::DrawTexture(){
 			}
 		}
 
-		if( Heading() ){
-			m_UIStaticItem.Render( GetHeading() );
-		}else
+		if (Heading())
+			m_UIStaticItem.Render(GetHeading());
+		else
 			m_UIStaticItem.Render();
 	}
 }

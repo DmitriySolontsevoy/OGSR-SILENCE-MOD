@@ -151,6 +151,9 @@ public:
     virtual void shedule_Update(u32 dt) override;
     virtual void UpdateCL() override;
 
+    virtual bool Activate(bool = false);
+    virtual void Deactivate(bool = false);
+
     bool IsWorking() const;
 
     virtual void OnMoveToSlot() override;
@@ -166,15 +169,13 @@ public:
     void HideDetector(bool bFastMode);
     void ShowDetector(bool bFastMode);
     float m_fAfDetectRadius;
-    virtual bool CheckCompatibility(CHudItem* itm) override;
 
     virtual u32 ef_detector_type() const  override { return 1; }
 protected:
-    bool CheckCompatibilityInt(CHudItem* itm, u16* slot_to_activate);
     void TurnDetectorInternal(bool b);
     //void UpdateNightVisionMode(bool b_off);
     void UpdateVisibility();
-    virtual void UpfateWork();
+    virtual void UpdateWork();
     virtual void UpdateAf() {}
     virtual void CreateUI() {}
 

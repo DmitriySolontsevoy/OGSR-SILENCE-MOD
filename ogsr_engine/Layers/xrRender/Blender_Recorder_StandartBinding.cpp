@@ -355,7 +355,7 @@ static class cl_artifacts : public R_constant_setup {
 public:
 	cl_artifacts() = delete;
 	cl_artifacts(u32 v) :start_val(v) {}
-} binder_artifacts{ 0 }, binder_artifacts2{ 8 }, binder_artifacts3{ 16 };
+} binder_artifacts{ 0 }, binder_artifacts2{ 8 }, binder_artifacts3{ 16 }, binder_artifacts4{ 24 }, binder_artifacts5{ 32 };
 
 static class cl_anomalys : public R_constant_setup {
 	u32 marker{};
@@ -387,7 +387,7 @@ static class cl_anomalys : public R_constant_setup {
 public:
 	cl_anomalys() = delete;
 	cl_anomalys(u32 v) :start_val(v) {}
-} binder_anomalys{ 0 }, binder_anomalys2{ 8 }, binder_anomalys3{ 16 };
+} binder_anomalies{ 0 }, binder_anomalies2{ 8 }, binder_anomalies3{ 16 }, binder_anomalies4{ 24 }, binder_anomalies5{ 32 };
 
 static class cl_detector : public R_constant_setup {
 	u32 marker;
@@ -488,19 +488,25 @@ void	CBlender_Compile::SetMapping	()
 	r_Constant				("L_sun_color",		&binder_sun0_color);
 	r_Constant				("L_sun_dir_w",		&binder_sun0_dir_w);
 	r_Constant				("L_sun_dir_e",		&binder_sun0_dir_e);
-//	r_Constant				("L_lmap_color",	&binder_lm_color);
 	r_Constant				("L_hemi_color",	&binder_hemi_color);
 	r_Constant				("L_ambient",		&binder_amb_color);
 
 	r_Constant				("screen_res",		&binder_screen_res);
+
+	// detectors
 	r_Constant("ogse_c_screen", &binder_screen_params);
 
 	r_Constant("ogse_c_artefacts", &binder_artifacts);
 	r_Constant("ogse_c_artefacts2", &binder_artifacts2);
 	r_Constant("ogse_c_artefacts3", &binder_artifacts3);
-	r_Constant("ogse_c_anomalys", &binder_anomalys);
-	r_Constant("ogse_c_anomalys2", &binder_anomalys2);
-	r_Constant("ogse_c_anomalys3", &binder_anomalys3);
+	r_Constant("ogse_c_artefacts4", &binder_artifacts4);
+	r_Constant("ogse_c_artefacts5", &binder_artifacts5);
+	r_Constant("ogse_c_anomalies", &binder_anomalies);
+	r_Constant("ogse_c_anomalies2", &binder_anomalies2);
+	r_Constant("ogse_c_anomalies3", &binder_anomalies3);
+	r_Constant("ogse_c_anomalies4", &binder_anomalies4);
+	r_Constant("ogse_c_anomalies5", &binder_anomalies5);
+
 	r_Constant("ogse_c_detector", &binder_detector);
 
 	// detail

@@ -16,7 +16,11 @@ void CEliteDetector::CreateUI()
     ui().construct(this);
 }
 
-CUIArtefactDetectorElite& CEliteDetector::ui() { return *((CUIArtefactDetectorElite*)m_ui); }
+CUIArtefactDetectorElite& CEliteDetector::ui()
+{
+    return *((CUIArtefactDetectorElite*)m_ui);
+}
+
 void CEliteDetector::UpdateAf()
 {
     ui().Clear();
@@ -147,7 +151,7 @@ void CUIArtefactDetectorElite::Draw()
 {
     if (!m_wrk_area)
         return;
-
+        
     Fmatrix LM;
     GetUILocatorMatrix(LM);
 
@@ -176,6 +180,7 @@ void CUIArtefactDetectorElite::Draw()
 
     auto it = m_items_to_draw.cbegin();
     auto it_e = m_items_to_draw.cend();
+
     for (; it != it_e; ++it)
     {
         Fvector p = (*it).pos;
@@ -191,11 +196,9 @@ void CUIArtefactDetectorElite::Draw()
         Fvector2 pos;
         pos.set(pt3d.x, -pt3d.z);
         pos.sub(rp);
-        if (1 /* r.in(pos)*/)
-        {
-            (*it).pStatic->SetWndPos(pos);
-            (*it).pStatic->Draw();
-        }
+
+        (*it).pStatic->SetWndPos(pos);
+        (*it).pStatic->Draw();
     }
 
     UI()->m_currentPointType = bk;
@@ -210,29 +213,40 @@ void CUIArtefactDetectorElite::GetUILocatorMatrix(Fmatrix& _m)
     _m.mulB_43(m_map_attach_offset);
 }
 
-void CUIArtefactDetectorElite::Clear() { m_items_to_draw.clear(); }
+void CUIArtefactDetectorElite::Clear()
+{
+    m_items_to_draw.clear();
+}
+
 void CUIArtefactDetectorElite::RegisterItemToDraw(const Fvector& p, const shared_str& palette_idx)
 {
     auto it = m_palette.find(palette_idx);
+
     if (it == m_palette.end())
-    {
-        //Msg("! RegisterItemToDraw. static not found for [%s]", palette_idx.c_str());
         return;
-    }
+
     CUIStatic* S = m_palette[palette_idx];
     SDrawOneItem itm(S, p);
     m_items_to_draw.push_back(itm);
 }
 
-CScientificDetector::CScientificDetector() { m_artefacts.m_af_rank = 3; }
-CScientificDetector::~CScientificDetector() { m_zones.destroy(); }
+CScientificDetector::CScientificDetector()
+{
+    m_artefacts.m_af_rank = 3;
+}
+
+CScientificDetector::~CScientificDetector()
+{
+    m_zones.destroy();
+}
+
 void CScientificDetector::Load(LPCSTR section)
 {
     inherited::Load(section);
     m_zones.load(section, "zone");
 }
 
-void CScientificDetector::UpfateWork()
+void CScientificDetector::UpdateWork()
 {
     ui().Clear();
 

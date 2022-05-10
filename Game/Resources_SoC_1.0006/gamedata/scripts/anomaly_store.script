@@ -1,0 +1,13 @@
+local anomalies = {}
+
+function get()
+	return anomalies
+end
+
+function put(object)
+	anomalies[object:id()] = object
+end
+
+function expunge(object_id)
+	anomalies[object_id] = nil
+end

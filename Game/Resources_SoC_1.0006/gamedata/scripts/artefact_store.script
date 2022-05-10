@@ -1,0 +1,13 @@
+local artefacts = {}
+
+function get()
+	return artefacts
+end
+
+function put(object)
+	artefacts[object:id()] = object
+end
+
+function expunge(object_id)
+	artefacts[object_id] = nil
+end

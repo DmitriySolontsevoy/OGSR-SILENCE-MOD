@@ -40,8 +40,6 @@ function l_special	(shader, t_base, t_second, t_detail)
 			: zb 		(true,false)
 			: fog		(false)
 			: emissive 	(true)
-	shader:dx10texture ("s_wave", t_wave)
-	shader:dx10texture ("s_numbers", t_numbers)
 	shader:dx10sampler ("smp_linear")
 	shader:dx10color_write_enable( true, true, true, false)
 end

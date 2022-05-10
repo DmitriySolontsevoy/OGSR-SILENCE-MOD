@@ -36,7 +36,7 @@ enum	EGameActions
 	kWPN_4,
 	kWPN_5,
 	kWPN_6,
-	kWPN_8, //kDETECTOR
+	kWPN_8,
 	kLASER_ON,
 	kWPN_NEXT,
 	kWPN_FIRE,

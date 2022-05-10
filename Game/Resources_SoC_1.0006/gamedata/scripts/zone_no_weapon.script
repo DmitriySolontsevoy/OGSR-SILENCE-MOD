@@ -16,5 +16,5 @@ function CZoneNoWeapon:on_enter( actor )
 end
 
 function CZoneNoWeapon:on_leave( actor )
-	actor:restore_weapon()
+	--actor:restore_weapon()
 end

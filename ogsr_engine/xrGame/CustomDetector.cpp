@@ -16,61 +16,17 @@ ITEM_INFO::~ITEM_INFO()
         CParticlesObject::Destroy(pParticle);
 }
 
-
-bool CCustomDetector::CheckCompatibilityInt(CHudItem* itm, u16* slot_to_activate)
+bool CCustomDetector::Activate(bool now)
 {
-    if (itm == nullptr)
-        return true;
-
-    CInventoryItem& iitm = itm->item();
-    u32 slot = iitm.BaseSlot();
-    bool bres = (slot == FIRST_WEAPON_SLOT || slot == KNIFE_SLOT || slot == BOLT_SLOT);
-    CActor* pActor = smart_cast<CActor*>(H_Parent());
-    auto& Inv = pActor->inventory();
-
-    if (!bres && slot_to_activate)
-    {
-        *slot_to_activate = NO_ACTIVE_SLOT;
-        if (Inv.ItemFromSlot(BOLT_SLOT))
-            *slot_to_activate = BOLT_SLOT;
-
-        if (Inv.ItemFromSlot(KNIFE_SLOT))
-            *slot_to_activate = KNIFE_SLOT;
-
-        if (Inv.ItemFromSlot(SECOND_WEAPON_SLOT) && Inv.ItemFromSlot(SECOND_WEAPON_SLOT)->BaseSlot() != SECOND_WEAPON_SLOT)
-            *slot_to_activate = SECOND_WEAPON_SLOT;
-
-        if (Inv.ItemFromSlot(FIRST_WEAPON_SLOT) && Inv.ItemFromSlot(FIRST_WEAPON_SLOT)->BaseSlot() != SECOND_WEAPON_SLOT)
-            *slot_to_activate = FIRST_WEAPON_SLOT;
-
-        if (*slot_to_activate != NO_ACTIVE_SLOT)
-            bres = true;
-    }
-
-    if (itm->GetState() != CHUDState::eShowing)
-        bres = bres && !itm->IsPending();
-
-    if (bres)
-    {
-        CWeapon* W = smart_cast<CWeapon*>(itm);
-        if (W)
-            bres = bres && (W->GetState() != CHUDState::eBore) && (W->GetState() != CWeapon::eReload) &&
-            (W->GetState() != CWeapon::eSwitch) && !W->IsZoomed();
-    }
-    return bres;
+    inherited::Activate(now);
+    ToggleDetector(false);
+    return true;
 }
 
-bool CCustomDetector::CheckCompatibility(CHudItem* itm)
+void CCustomDetector::Deactivate(bool now)
 {
-    if (!inherited::CheckCompatibility(itm))
-        return false;
-
-    if (!CheckCompatibilityInt(itm, nullptr))
-    {
-        HideDetector(true);
-        return false;
-    }
-    return true;
+    inherited::Deactivate(now);
+    ToggleDetector(false);
 }
 
 void CCustomDetector::HideDetector(bool bFastMode)
@@ -93,22 +49,17 @@ void CCustomDetector::ToggleDetector(bool bFastMode)
     if (GetState() == eHidden)
     {
         CActor* pActor = smart_cast<CActor*>(H_Parent());
-        PIItem iitem = pActor->inventory().ActiveItem();
-        CHudItem* itm = (iitem) ? iitem->cast_hud_item() : nullptr;
         u16 slot_to_activate = NO_ACTIVE_SLOT;
 
-        if (CheckCompatibilityInt(itm, &slot_to_activate))
+        if (slot_to_activate != NO_ACTIVE_SLOT)
         {
-            if (slot_to_activate != NO_ACTIVE_SLOT)
-            {
-                pActor->inventory().Activate(slot_to_activate);
-                m_bNeedActivation = true;
-            }
-            else
-            {
-                SwitchState(eShowing);
-                TurnDetectorInternal(true);
-            }
+            pActor->inventory().Activate(slot_to_activate);
+            m_bNeedActivation = true;
+        }
+        else
+        {
+            SwitchState(eShowing);
+            TurnDetectorInternal(true);
         }
     }
     else if (GetState() == eIdle)
@@ -125,7 +76,7 @@ void CCustomDetector::OnStateSwitch(u32 S, u32 oldState)
     {
         g_player_hud->attach_item(this);
         HUD_SOUND::PlaySound(sndShow, Fvector{}, this, !!GetHUDmode(), false, false);
-        PlayHUDMotion({ m_bFastAnimMode ? "anm_show_fast" : "anm_show" }, false, GetState());
+        PlayHUDMotion({ m_bFastAnimMode ? "anim_show_fast" : "anim_show" }, false, GetState());
         SetPending(TRUE);
     }
     break;
@@ -134,7 +85,7 @@ void CCustomDetector::OnStateSwitch(u32 S, u32 oldState)
         if (oldState != eHiding)
         {
             HUD_SOUND::PlaySound(sndHide, Fvector{}, this, !!GetHUDmode(), false, false);
-            PlayHUDMotion({ m_bFastAnimMode ? "anm_hide_fast" : "anm_hide" }, false, GetState());
+            PlayHUDMotion({ m_bFastAnimMode ? "anim_hide_fast" : "anim_hide" }, false, GetState());
             SetPending(TRUE);
         }
     }
@@ -226,7 +177,7 @@ void CCustomDetector::shedule_Update(u32 dt)
 
 bool CCustomDetector::IsWorking() const { return m_bWorking && H_Parent() && H_Parent() == Level().CurrentViewEntity(); }
 
-void CCustomDetector::UpfateWork()
+void CCustomDetector::UpdateWork()
 {
     UpdateAf();
     m_ui->update();
@@ -234,9 +185,7 @@ void CCustomDetector::UpfateWork()
 
 void CCustomDetector::UpdateVisibility()
 {
-    // check visibility
-    attachable_hud_item* i0 = g_player_hud->attached_item(0);
-    if (i0 && HudItemData())
+    if (HudItemData())
     {
         bool bClimb = ((Actor()->MovingState() & mcClimb) != 0);
         if (bClimb)
@@ -244,31 +193,13 @@ void CCustomDetector::UpdateVisibility()
             HideDetector(true);
             m_bNeedActivation = true;
         }
-        else
-        {
-            auto wpn = smart_cast<CWeapon*>(i0->m_parent_hud_item);
-            if (wpn)
-            {
-                u32 state = wpn->GetState();
-                if (wpn->IsZoomed() || state == CWeapon::eReload || state == CWeapon::eSwitch)
-                {
-                    HideDetector(true);
-                    m_bNeedActivation = true;
-                }
-            }
-        }
     }
     else if (m_bNeedActivation)
     {
-        attachable_hud_item* i0 = g_player_hud->attached_item(0);
         bool bClimb = ((Actor()->MovingState() & mcClimb) != 0);
         if (!bClimb)
         {
-            CHudItem* huditem = (i0) ? i0->m_parent_hud_item : nullptr;
-            bool bChecked = !huditem || CheckCompatibilityInt(huditem, 0);
-
-            if (bChecked)
-                ShowDetector(true);
+            ShowDetector(true);
         }
     }
 }
@@ -283,7 +214,8 @@ void CCustomDetector::UpdateCL()
     UpdateVisibility();
     if (!IsWorking())
         return;
-    UpfateWork();
+        
+    UpdateWork();
 }
 
 void CCustomDetector::OnH_A_Chield() { inherited::OnH_A_Chield(); }
@@ -296,7 +228,6 @@ void CCustomDetector::OnH_B_Independent(bool just_before_destroy)
 
     if (GetState() != eHidden)
     {
-        // Detaching hud item and animation stop in OnH_A_Independent
         TurnDetectorInternal(false);
         SwitchState(eHidden);
     }

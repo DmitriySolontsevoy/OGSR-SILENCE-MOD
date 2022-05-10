@@ -9,7 +9,7 @@
 #include "eatable_item.h"
 #include "script_engine.h"
 #include "xrmessages.h"
-//#include "game_cl_base.h"
+#include "player_hud.h"
 #include "xr_level_controller.h"
 #include "level.h"
 #include "ai_space.h"
@@ -17,6 +17,7 @@
 #include "game_base_space.h"
 #include "clsid_game.h"
 #include "CustomOutfit.h"
+#include "CustomDetector.h"
 #include "HudItem.h"
 
 #include "UIGameSP.h"
@@ -92,10 +93,10 @@ CInventory::CInventory()
 	m_slots[PDA_SLOT].m_bVisible				= false;
 	m_slots[OUTFIT_SLOT].m_bVisible				= false;
 	m_slots[TORCH_SLOT].m_bVisible				= false;
-	m_slots[HELMET_SLOT].m_bVisible				= false;
+	m_slots[HELMET_SLOT].m_bVisible				= true;
 	m_slots[NIGHT_VISION_SLOT].m_bVisible		= false;
 	m_slots[BIODETECTOR_SLOT].m_bVisible		= false;
-	m_slots[DETECTOR_SLOT].m_bVisible = false; //KRodin: это очень важно! Слот для зп-стайл детекторов должен быть НЕ активируемым!
+	m_slots[DETECTOR_SLOT].m_bVisible			= true;
 
 	for (u32 i = 0; i < m_slots.size(); ++i)
 	{
@@ -439,21 +440,20 @@ void CInventory::Activate_deffered	(u32 slot, u32 _frame)
 
 bool CInventory::Activate(u32 slot, EActivationReason reason, bool bForce, bool now ) 
 {	
-	if(	m_ActivationSlotReason==eKeyAction	&& reason==eImportUpdate )
+	if (m_ActivationSlotReason==eKeyAction	&& reason==eImportUpdate)
 		return false;
 
 	bool res = false;
 
-	if(Device.dwFrame == m_iLoadActiveSlotFrame) 
+	if (Device.dwFrame == m_iLoadActiveSlotFrame) 
 	{
-		 if( (m_iLoadActiveSlot == slot) && m_slots[slot].m_pIItem )
-			m_iLoadActiveSlotFrame = u32(-1);
+		 if ((m_iLoadActiveSlot == slot) && m_slots[slot].m_pIItem)
+			 m_iLoadActiveSlotFrame = u32(-1);
 		 else
-			{
+		 {
 			 res = false;
 			 goto _finish;
-			}
-
+		 }
 	}
 
 	if( (slot!=NO_ACTIVE_SLOT && m_slots[slot].IsBlocked()) && !bForce)
@@ -464,25 +464,23 @@ bool CInventory::Activate(u32 slot, EActivationReason reason, bool bForce, bool 
 
 	ASSERT_FMT(slot == NO_ACTIVE_SLOT || slot<m_slots.size(), "wrong slot number: [%u]", slot);
 
-	if(slot != NO_ACTIVE_SLOT && !m_slots[slot].m_bVisible) 
+	if (slot != NO_ACTIVE_SLOT && !m_slots[slot].m_bVisible) 
 	{
 		res = false;
 		goto _finish;
 	}
 	
-	if(m_iActiveSlot == slot && m_iActiveSlot != NO_ACTIVE_SLOT && m_slots[m_iActiveSlot].m_pIItem)
+	if (m_iActiveSlot == slot && m_iActiveSlot != NO_ACTIVE_SLOT && m_slots[m_iActiveSlot].m_pIItem)
 	{
 		m_slots[m_iActiveSlot].m_pIItem->Activate();
 	}
 
-	if(	m_iActiveSlot == slot || 
-		(m_iNextActiveSlot == slot &&
-		 m_iActiveSlot != NO_ACTIVE_SLOT &&
-		 m_slots[m_iActiveSlot].m_pIItem &&
-		 m_slots[m_iActiveSlot].m_pIItem->cast_hud_item() &&
-		 m_slots[m_iActiveSlot].m_pIItem->cast_hud_item()->IsHiding()
-		 )
-	   )
+	if (m_iActiveSlot == slot || 
+		(m_iNextActiveSlot == slot
+			&& m_iActiveSlot != NO_ACTIVE_SLOT 
+			&& m_slots[m_iActiveSlot].m_pIItem
+			&& m_slots[m_iActiveSlot].m_pIItem->cast_hud_item()
+			&& m_slots[m_iActiveSlot].m_pIItem->cast_hud_item()->IsHiding()))
 	{
 		res = false;
 		goto _finish;
@@ -521,10 +519,10 @@ bool CInventory::Activate(u32 slot, EActivationReason reason, bool bForce, bool 
 		}
 	}
 	//активный слот задействован
-	else if(slot == NO_ACTIVE_SLOT || m_slots[slot].m_pIItem)
+	else if (slot == NO_ACTIVE_SLOT || m_slots[slot].m_pIItem)
 	{
-		if ( m_slots[ m_iActiveSlot ].m_pIItem ) {
-		  m_slots[ m_iActiveSlot ].m_pIItem->Deactivate( now || ( slot != NO_ACTIVE_SLOT && m_slots[ slot ].maySwitchFast() ) );
+		if (m_slots[m_iActiveSlot].m_pIItem) {
+			m_slots[m_iActiveSlot].m_pIItem->Deactivate(now || (slot != NO_ACTIVE_SLOT && m_slots[ slot ].maySwitchFast()));
 		}
 
 		m_iNextActiveSlot		= slot;
@@ -536,7 +534,7 @@ bool CInventory::Activate(u32 slot, EActivationReason reason, bool bForce, bool 
 
 	_finish:
 
-	if(res)
+	if (res)
 		m_ActivationSlotReason	= reason;
 	return res;
 }
@@ -616,26 +614,40 @@ bool CInventory::Action(s32 cmd, u32 flags)
 			m_slots[m_iActiveSlot].m_pIItem->Action(cmd, flags)) 
 											return true;
 	bool b_send_event = false;
-	switch(cmd) 
+	switch (cmd) 
 	{
-	case kWPN_1:
-	case kWPN_2:
-	case kWPN_3:
-	case kWPN_4:
-	case kWPN_5:
-	case kWPN_6:
-       {
-			if(flags&CMD_START)
+		case kWPN_1:
+		case kWPN_2:
+		case kWPN_3:
+		case kWPN_4:
+		case kWPN_5:
+		case kWPN_6:
+		{
+			if (flags&CMD_START)
 			{
-                if((int)m_iActiveSlot == cmd - kWPN_1 && m_slots[m_iActiveSlot].m_pIItem )
+				if ((int)m_iActiveSlot == cmd - kWPN_1 && m_slots[m_iActiveSlot].m_pIItem )
 					b_send_event = Activate(NO_ACTIVE_SLOT);
 				else				
 					b_send_event = Activate(cmd - kWPN_1, eKeyAction);
 			}
-		}break;
+		}
+		break;
+		case kWPN_8:
+	    {
+			if (flags & CMD_START)
+			{
+				if ((int)m_iActiveSlot == DETECTOR_SLOT && m_slots[m_iActiveSlot].m_pIItem)
+					b_send_event = Activate(NO_ACTIVE_SLOT);
+				else
+				{
+					b_send_event = Activate(DETECTOR_SLOT, eKeyAction);
+				}
+			}
+		}
+		break;
 	}
 
-	if(b_send_event && g_pGameLevel && OnClient() && pActor)
+	if (b_send_event && g_pGameLevel && OnClient() && pActor)
 			SendActionEvent(cmd, flags);
 
 	return false;

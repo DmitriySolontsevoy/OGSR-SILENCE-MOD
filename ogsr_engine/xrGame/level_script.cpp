@@ -742,6 +742,11 @@ static void g_set_anomaly_position(const u32 i, const float x, const float y, co
 	}
 }
 
+static void g_clear_positions()
+{
+	shader_exports.remove_all();
+}
+
 static void g_set_detector_params(const int _one, const int _two)
 {
 	shader_exports.set_detector_params(Ivector2{ _one, _two });
@@ -1172,6 +1177,7 @@ void CLevel::script_register(lua_State *L)
 			def("set_detector_mode", &g_set_detector_params),
 			def("update_inventory_window", &update_inventory_window),
 			def("update_inventory_weight", &update_inventory_weight),
+			def("reset_view", &g_clear_positions),
 
 			class_<enum_exporter<collide::rq_target> >("rq_target")
 			.enum_("rq_target")
