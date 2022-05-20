@@ -32,15 +32,19 @@ Frect& CIconParams::original_rect() const {
 }
 
 
-void CIconParams::set_shader( CUIStatic* img ) {
-  if ( name.size() > 0 ) {
-    img->InitTexture( name.c_str() );
-  }
-  else {
-    img->SetShader( get_shader() );
-    img->GetUIStaticItem().SetOriginalRect( original_rect() );
-  }
-  img->SetStretchTexture( true );
+void CIconParams::set_shader(CUIStatic* img)
+{
+	if (name.size() > 0)
+	{
+		img->InitTexture(name.c_str());
+	}
+	else
+	{
+		img->SetShader(get_shader());
+		img->GetUIStaticItem().SetOriginalRect(original_rect());
+	}
+
+	img->SetStretchTexture(true);
 }
 
 

@@ -80,8 +80,13 @@ void CUITalkDialogWnd::Init(float x, float y, float width, float height)
 
 	//кнопка перехода в режим торговли
 	AttachChild					(&UIToTradeButton);
-	CUIXmlInit::Init3tButton	(*m_uiXml, "button", 0, &UIToTradeButton);
+	CUIXmlInit::Init3tButton	(*m_uiXml, "button_trade", 0, &UIToTradeButton);
 	UIToTradeButton.SetWindowName("trade_btn");
+
+	//кнопка перехода в режим торговли
+	AttachChild(&UIToUpgradeButton);
+	CUIXmlInit::Init3tButton(*m_uiXml, "button_upgrade", 0, &UIToUpgradeButton);
+	UIToUpgradeButton.SetWindowName("upgrade_btn");
 
 	//Элементы автоматического добавления
 	CUIXmlInit::InitAutoStatic	(*m_uiXml, "auto_static", this);
@@ -96,8 +101,10 @@ void CUITalkDialogWnd::Init(float x, float y, float width, float height)
 	SetWindowName				("----CUITalkDialogWnd");
 
 	Register					(&UIToTradeButton);
+	Register					(&UIToUpgradeButton);
 	AddCallback("question_item", LIST_ITEM_CLICKED, fastdelegate::MakeDelegate(this, &CUITalkDialogWnd::OnQuestionClicked));
 	AddCallback("trade_btn", BUTTON_CLICKED, fastdelegate::MakeDelegate(this, &CUITalkDialogWnd::OnTradeClicked));
+	AddCallback("upgrade_btn", BUTTON_CLICKED, fastdelegate::MakeDelegate(this, &CUITalkDialogWnd::OnUpgradeClicked));
 }
 
 #include "UIInventoryUtilities.h"
@@ -120,13 +127,18 @@ void CUITalkDialogWnd::Hide()
 
 void CUITalkDialogWnd::OnQuestionClicked(CUIWindow* w, void*)
 {
-		m_ClickedQuestionID = ((CUIQuestionItem*)w)->m_s_value;
-		GetMessageTarget()->SendMessage(this, TALK_DIALOG_QUESTION_CLICKED);
+	m_ClickedQuestionID = ((CUIQuestionItem*)w)->m_s_value;
+	GetMessageTarget()->SendMessage(this, TALK_DIALOG_QUESTION_CLICKED);
 }
 
 void CUITalkDialogWnd::OnTradeClicked(CUIWindow* w, void*)
 {
-		GetTop()->SendMessage(this, TALK_DIALOG_TRADE_BUTTON_CLICKED);
+	GetTop()->SendMessage(this, TALK_DIALOG_TRADE_BUTTON_CLICKED);
+}
+
+void CUITalkDialogWnd::OnUpgradeClicked(CUIWindow* w, void*)
+{
+	GetTop()->SendMessage(this, TALK_DIALOG_UPGRADE_BUTTON_CLICKED);
 }
 
 //пересылаем сообщение родительскому окну для обработки

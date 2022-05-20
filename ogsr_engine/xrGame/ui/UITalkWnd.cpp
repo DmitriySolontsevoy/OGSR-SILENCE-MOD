@@ -21,6 +21,7 @@
 #include "UIXmlInit.h"
 #include "UIInventoryUtilities.h"
 #include "../inventory.h"
+#include <ui/UIUpgradeWnd.h>
 
 CUITalkWnd::CUITalkWnd()
 {
@@ -63,6 +64,12 @@ void CUITalkWnd::Init()
 	UITradeWnd = xr_new<CUITradeWnd>();UITradeWnd->SetAutoDelete(true);
 	AttachChild(UITradeWnd);
 	UITradeWnd->Hide();
+
+	/////////////////////////
+	//Меню апгрейда
+	UIUpgradeWnd = xr_new<CUIUpgradeWnd>(); UIUpgradeWnd->SetAutoDelete(true);
+	AttachChild(UIUpgradeWnd);
+	UIUpgradeWnd->Hide();
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -95,6 +102,7 @@ void CUITalkWnd::InitTalkDialog()
 	UITalkDialogWnd->Show					();
 
 	UITradeWnd->Hide							();
+	UIUpgradeWnd->Hide();
 }
 
 void CUITalkWnd::InitOthersStartDialog()
@@ -175,6 +183,10 @@ void CUITalkWnd::SendMessage(CUIWindow* pWnd, s16 msg, void* pData)
 	{
 		SwitchToTrade();
 	}
+	else if (pWnd == UITalkDialogWnd && msg == TALK_DIALOG_UPGRADE_BUTTON_CLICKED)
+	{
+		SwitchToUpgrade();
+	}
 	else if(pWnd == UITalkDialogWnd && msg == TALK_DIALOG_QUESTION_CLICKED)
 	{
 		AskQuestion();
@@ -183,6 +195,11 @@ void CUITalkWnd::SendMessage(CUIWindow* pWnd, s16 msg, void* pData)
 	{
 		UITalkDialogWnd->Show();
 		UITradeWnd->Hide();
+	}
+	else if (pWnd == UIUpgradeWnd && msg == UPGRADE_WND_CLOSED)
+	{
+		UITalkDialogWnd->Show();
+		UIUpgradeWnd->Hide();
 	}
 
 	inherited::SendMessage(pWnd, msg, pData);
@@ -371,6 +388,19 @@ void CUITalkWnd::SwitchToTrade()
 		UITradeWnd->StartTrade		();
 		UITradeWnd->BringAllToTop	();
 		StopSnd						();
+	}
+}
+
+void CUITalkWnd::SwitchToUpgrade()
+{
+	if (m_pOthersInvOwner->IsUpgradeEnabled()) {
+		UITalkDialogWnd->Hide();
+
+		UIUpgradeWnd->InitUpgrade(m_pOurInvOwner, m_pOthersInvOwner);
+		UIUpgradeWnd->Show();
+		UIUpgradeWnd->StartUpgrade();
+		UIUpgradeWnd->BringAllToTop();
+		StopSnd();
 	}
 }
 

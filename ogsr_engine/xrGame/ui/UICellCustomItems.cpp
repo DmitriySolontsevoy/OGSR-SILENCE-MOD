@@ -19,9 +19,9 @@ CUIInventoryCellItem::CUIInventoryCellItem(CInventoryItem* itm)
 	m_pData											= (void*)itm;
 	itm->m_cell_item								= this;
 
-	itm->m_icon_params.set_shader( this );
+	itm->m_icon_params.set_shader(this);
 
-	m_grid_size.set									(itm->GetGridWidth(),itm->GetGridHeight());
+	m_grid_size.set(itm->GetGridWidth(),itm->GetGridHeight());
 	b_auto_drag_childs = true;
 }
 

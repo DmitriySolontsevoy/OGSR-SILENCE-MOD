@@ -299,6 +299,7 @@ void CUIWindow::script_register(lua_State *L)
 
 	// CUITalkDialogWnd
 				value("TALK_DIALOG_TRADE_BUTTON_CLICKED",	int(TALK_DIALOG_TRADE_BUTTON_CLICKED)),
+				value("TALK_DIALOG_UPGRADE_BUTTON_CLICKED",	int(TALK_DIALOG_UPGRADE_BUTTON_CLICKED)),
 				value("TALK_DIALOG_QUESTION_CLICKED",		int(TALK_DIALOG_QUESTION_CLICKED)),
 
 	// CUIPdaContactsWnd
@@ -307,6 +308,7 @@ void CUIWindow::script_register(lua_State *L)
 
 	// CUITradeWnd
 				value("TRADE_WND_CLOSED",							int(TRADE_WND_CLOSED)),
+				value("UPGRADE_WND_CLOSED",							int(UPGRADE_WND_CLOSED)),
 
 	// CUIInventroyWnd
 				value("INVENTORY_DROP_ACTION",						int(INVENTORY_DROP_ACTION)),

@@ -71,6 +71,7 @@ public:
 
 	CUICustomMap*				m_tgtMap;
 	Fvector2					m_tgtCenter;
+	LPCSTR						m_travelTo;
 								CUIMapWnd				();
 	virtual						~CUIMapWnd				();
 

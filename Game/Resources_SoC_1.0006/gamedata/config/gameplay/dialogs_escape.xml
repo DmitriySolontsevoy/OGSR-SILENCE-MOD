@@ -1581,12 +1581,4 @@
 			</phrase>
 		</phrase_list>
     </dialog>
-	<dialog id="repair_dialog">
-		<phrase_list>
-			<phrase id="0">
-				<text>Мне нужно кое-что починить.</text>
-				<action>repair.main</action>
-			</phrase>
-		</phrase_list>
-	</dialog>
 </game_dialogs>

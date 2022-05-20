@@ -2125,6 +2125,9 @@
     <Filter Include="AI\AScript\ScriptClasses\UI\LoadScreen">
       <UniqueIdentifier>{a98119e5-515e-4cbe-844d-ef75fbe162e4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Client\Objects\Upgrade">
+      <UniqueIdentifier>{f747bbd7-4e0d-4735-b695-a2a42e8c8089}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mt_config.h">
@@ -6116,6 +6119,14 @@
     <ClInclude Include="SimpleDetectorSHOC.h">
       <Filter>Core\Client\Objects\items &amp; weapons\Devices\Detectors</Filter>
     </ClInclude>
+    <ClInclude Include="CustomHelmet.h" />
+    <ClInclude Include="StalkerHelmet.h" />
+    <ClInclude Include="ui\UIUpgradeWnd.h">
+      <Filter>AI\AScript\ScriptClasses\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Upgrade.h">
+      <Filter>Core\Client\Objects\Upgrade</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="damage_manager.cpp">
@@ -8926,6 +8937,14 @@
     </ClCompile>
     <ClCompile Include="SimpleDetectorSHOC.cpp">
       <Filter>Core\Client\Objects\items &amp; weapons\Devices\Detectors</Filter>
+    </ClCompile>
+    <ClCompile Include="CustomHelmet.cpp" />
+    <ClCompile Include="StalkerHelmet.cpp" />
+    <ClCompile Include="ui\UIUpgradeWnd.cpp">
+      <Filter>AI\AScript\ScriptClasses\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Upgrade.cpp">
+      <Filter>Core\Client\Objects\Upgrade</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

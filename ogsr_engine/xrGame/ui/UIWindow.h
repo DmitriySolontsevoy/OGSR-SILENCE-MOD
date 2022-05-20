@@ -191,18 +191,17 @@ protected:
 	bool					m_bPP;
 	//разрешен ли ввод пользователя
 	bool					m_bIsEnabled;
-
-	// Если курсор над окном
-	bool					m_bCursorOverWindow;
-	bool					m_bCursorOverWindowChanged;
-	bool					m_bClickable;
-
-#ifdef DEBUG
+	#ifdef DEBUG
 	int m_dbg_id;
 	Flags32					m_dbg_flag;
 #endif
 
 public:
+	// Если курсор над окном
+	bool					m_bCursorOverWindow;
+	bool					m_bCursorOverWindowChanged;
+	bool					m_bClickable;
+
 	inline float			GetMousePosX		() const					{ return cursor_pos.x;}
 	inline float			GetMousePosY		() const					{ return cursor_pos.y;}
 

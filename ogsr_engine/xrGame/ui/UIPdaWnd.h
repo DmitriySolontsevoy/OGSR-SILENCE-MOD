@@ -17,8 +17,6 @@ class CUIStalkersRankingWnd;
 class CUIEventsWnd;
 class CUIPdaContactsWnd;
 
- 
-
 class CUIPdaWnd: public CUIDialogWnd
 {
 private:

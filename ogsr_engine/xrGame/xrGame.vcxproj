@@ -468,7 +468,9 @@
     <ClInclude Include="ui\UIIconParams.h" />
     <ClInclude Include="ui\UILoadingScreen.h" />
     <ClInclude Include="ui\UIPdaSpot.h" />
+    <ClInclude Include="ui\UIUpgradeWnd.h" />
     <ClInclude Include="ui_defs.h" />
+    <ClInclude Include="Upgrade.h" />
     <ClInclude Include="wrapper_abstract.h" />
     <ClInclude Include="wrapper_abstract_inline.h" />
     <ClInclude Include="action_management_config.h" />
@@ -1701,6 +1703,7 @@
     <ClCompile Include="script_vars_storage.cpp" />
     <ClCompile Include="SimpleDetectorSHOC.cpp" />
     <ClCompile Include="sound_memory_manager.cpp" />
+    <ClCompile Include="Upgrade.cpp" />
     <ClCompile Include="steering_behaviour.cpp" />
     <ClCompile Include="trajectories.cpp" />
     <ClCompile Include="ui\ArtefactDetectorUI.cpp" />
@@ -1708,6 +1711,7 @@
     <ClCompile Include="ui\UIIconParams.cpp" />
     <ClCompile Include="ui\UILoadingScreen.cpp" />
     <ClCompile Include="ui\UIPdaSpot.cpp" />
+    <ClCompile Include="ui\UIUpgradeWnd.cpp" />
     <ClCompile Include="visual_memory_manager.cpp" />
     <ClCompile Include="visual_memory_params.cpp" />
     <ClCompile Include="vision_client.cpp" />

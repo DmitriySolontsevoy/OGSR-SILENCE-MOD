@@ -1,0 +1,17 @@
+<ui_texture>
+    <file_name>ui\ui_upgrades</file_name>
+	<texture id="ui_no_upgrade_e" x="0" y="0" width="75" height="75" />
+	<texture id="ui_no_upgrade_d" x="0" y="0" width="75" height="75" />
+	<texture id="ui_no_upgrade_h" x="0" y="0" width="75" height="75" />
+	<texture id="ui_no_upgrade_t" x="0" y="0" width="75" height="75" />
+	
+    <texture id="ui_mag_upgrade_e" x="75" y="0" width="75" height="75" />
+    <texture id="ui_mag_upgrade_d" x="75" y="75" width="75" height="75" />
+    <texture id="ui_mag_upgrade_t" x="75" y="150" width="75" height="75" />
+    <texture id="ui_mag_upgrade_h" x="75" y="225" width="75" height="75" />
+	
+    <texture id="ui_cond_upgrade_e" x="150" y="0" width="75" height="75" />
+    <texture id="ui_cond_upgrade_d" x="150" y="75" width="75" height="75" />
+    <texture id="ui_cond_upgrade_t" x="150" y="150" width="75" height="75" />
+    <texture id="ui_cond_upgrade_h" x="150" y="225" width="75" height="75" />
+</ui_texture>

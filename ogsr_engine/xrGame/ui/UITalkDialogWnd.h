@@ -48,6 +48,7 @@ public:
 	CUIStatic			UIStaticBottom;
 
 	CUI3tButton			UIToTradeButton;
+	CUI3tButton			UIToUpgradeButton;
 
 	//информация о персонажах 
 	CUIStatic			UIOurIcon;
@@ -73,10 +74,10 @@ private:
 	u32					m_uOurReplicsColor;
 
 	void OnTradeClicked			(CUIWindow* w, void*);
+	void OnUpgradeClicked		(CUIWindow* w, void*);
 	void OnQuestionClicked		(CUIWindow* w, void*);
 	
 };
-
 
 class CUIQuestionItem :public CUIWindow, public CUIWndCallback
 {

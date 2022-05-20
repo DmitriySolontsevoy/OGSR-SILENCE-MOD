@@ -60,7 +60,6 @@
 		<actor_dialog>dm_help_wounded_medkit_dialog</actor_dialog>
 		<actor_dialog>tm_wolf_dialog</actor_dialog>
 		<actor_dialog>tm_wolf_reward</actor_dialog>
-		<actor_dialog>repair_dialog</actor_dialog>
 	</specific_character>
 <!---------------------------------------esc_fanat----------------------------------------------------->	
 	<specific_character id="esc_fanat" team_default = "1">

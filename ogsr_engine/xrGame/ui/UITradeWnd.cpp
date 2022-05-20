@@ -95,7 +95,7 @@ CUITradeWnd::~CUITradeWnd()
 	m_uidata->UIOurTradeList.ClearAll	(true);
 	m_uidata->UIOthersBagList.ClearAll	(true);
 	m_uidata->UIOthersTradeList.ClearAll(true);
-	xr_delete							(m_uidata);
+	xr_delete(m_uidata);
 }
 
 void CUITradeWnd::Init()
@@ -525,7 +525,6 @@ void CUITradeWnd::ActivatePropertiesBox()
 	m_pUIPropertiesBox->Show(vis_rect, cursor_pos);
 }
 
-
 void CUITradeWnd::DisableAll()
 {
 	m_uidata->UIOurBagWnd.Enable			(false);
@@ -562,10 +561,12 @@ void CUITradeWnd::UpdatePrices()
 	sprintf_s					(buf, "%d RU", m_pInvOwner->get_money());
 	m_uidata->UIOurMoneyStatic.SetText(buf);
 
-	if(!m_pOthersInvOwner->InfinitiveMoney()){
+	if (!m_pOthersInvOwner->InfinitiveMoney())
+	{
           sprintf_s( buf, "%d RU", (int)m_pOthersInvOwner->get_money() );
           m_uidata->UIOtherMoneyStatic.SetText(buf);
-	}else
+	}
+	else
 	{
 		m_uidata->UIOtherMoneyStatic.SetText("---");
 	}
@@ -586,10 +587,10 @@ void CUITradeWnd::TransferItems(CUIDragDropListEx* pSellList,
 		pBuyList->SetItem		(itm);
 	}
 
-        if ( !others_zero_trade ) {
-          pTrade->pThis.inv_owner->set_money ( pTrade->pThis.inv_owner->get_money(), true );
-          pTrade->pPartner.inv_owner->set_money( pTrade->pPartner.inv_owner->get_money(), true );
-        }
+    if ( !others_zero_trade ) {
+        pTrade->pThis.inv_owner->set_money ( pTrade->pThis.inv_owner->get_money(), true );
+        pTrade->pPartner.inv_owner->set_money( pTrade->pPartner.inv_owner->get_money(), true );
+    }
 }
 
 void CUITradeWnd::UpdateLists(EListType mode)

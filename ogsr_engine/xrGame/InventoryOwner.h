@@ -83,6 +83,7 @@ public:
 	void EnableTrade			()		{m_bAllowTrade = true;}
 	void DisableTrade			()		{m_bAllowTrade = false;}
 	bool IsTradeEnabled			()		{ return m_bAllowTrade;}
+	bool IsUpgradeEnabled		()		{ return m_bAllowTrade;} // REPLACE LATER!!!!!!
 	
 	CInventoryOwner* GetTalkPartner()	{return m_pTalkPartner;}
 	virtual void	 NewPdaContact		(CInventoryOwner*);

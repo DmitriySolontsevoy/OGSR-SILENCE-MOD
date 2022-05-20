@@ -83,6 +83,8 @@ CInventoryItem::~CInventoryItem()
 
 void CInventoryItem::Load(LPCSTR section) 
 {
+	m_section_name = section;
+
 	CHitImmunity::LoadImmunities	(pSettings->r_string(section,"immunities_sect"),pSettings);
 	m_icon_params.Load(section);
 

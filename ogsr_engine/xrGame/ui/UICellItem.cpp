@@ -345,98 +345,98 @@ void CUICellItem::Update()
 }
 
 void CUICellItem::ColorizeItems( std::initializer_list<CUIDragDropListEx*> args ) {
-  auto inventoryitem = reinterpret_cast<CInventoryItem*>(this->m_pData);
-  if (!inventoryitem) return;
+	auto inventoryitem = reinterpret_cast<CInventoryItem*>(this->m_pData);
+	if (!inventoryitem) return;
 
-  static const bool colorize_ammo = Core.Features.test(xrCore::Feature::colorize_ammo);
-  static const u32 Color = READ_IF_EXISTS( pSettings, r_color, "dragdrop", "color_ammo", color_argb( 255, 0, 128, 0) );
+	static const bool colorize_ammo = Core.Features.test(xrCore::Feature::colorize_ammo);
+	static const u32 Color = READ_IF_EXISTS( pSettings, r_color, "dragdrop", "color_ammo", color_argb( 255, 0, 128, 0) );
 
-  auto ProcessColorize = [](CUICellItem* Itm, u32 Clr) {
-	  Itm->SetTextureColor(Clr);
-	  if (auto WpnCell = smart_cast<CUIWeaponCellItem*>(Itm))
-		  for (auto* Child : WpnCell->m_addons)
-			  if (Child)
-				  Child->SetTextureColor(Clr);
-  };
+	auto ProcessColorize = [](CUICellItem* Itm, u32 Clr) {
+		Itm->SetTextureColor(Clr);
+		if (auto WpnCell = smart_cast<CUIWeaponCellItem*>(Itm))
+			for (auto* Child : WpnCell->m_addons)
+				if (Child)
+					Child->SetTextureColor(Clr);
+	};
 
-  for ( auto* DdListEx : args ) {
-    if (!DdListEx) continue;
-    DdListEx->clear_select_armament();
-    if ( !colorize_ammo) continue;
-    for ( u32 i = 0, item_count = DdListEx->ItemsCount(); i < item_count; ++i ) {
-      CUICellItem* CellItem = DdListEx->GetItemIdx( i );
-	  if (CellItem->GetTextureColor() == Color) {
-		  if (CellItem->m_select_untradable)
-			  ProcessColorize(CellItem, reinterpret_cast<CInventoryItem*>(CellItem->m_pData)->ClrUntradable);
-		  else if (CellItem->m_select_equipped)
-			  ProcessColorize(CellItem, reinterpret_cast<CInventoryItem*>(CellItem->m_pData)->ClrEquipped);
-		  else
-			  ProcessColorize(CellItem, 0xffffffff);
-	  }
-    }
-  }
+	for ( auto* DdListEx : args ) {
+		if (!DdListEx) continue;
+		DdListEx->clear_select_armament();
+		if ( !colorize_ammo) continue;
+		for ( u32 i = 0, item_count = DdListEx->ItemsCount(); i < item_count; ++i ) {
+			CUICellItem* CellItem = DdListEx->GetItemIdx( i );
+			if (CellItem->GetTextureColor() == Color) {
+				if (CellItem->m_select_untradable)
+					ProcessColorize(CellItem, reinterpret_cast<CInventoryItem*>(CellItem->m_pData)->ClrUntradable);
+				else if (CellItem->m_select_equipped)
+					ProcessColorize(CellItem, reinterpret_cast<CInventoryItem*>(CellItem->m_pData)->ClrEquipped);
+				else
+					ProcessColorize(CellItem, 0xffffffff);
+			}
+		}
+	}
 
-  std::vector<shared_str> ColorizeSects;
+	std::vector<shared_str> ColorizeSects;
 
-  auto WpnScanner = [&ColorizeSects](CWeaponMagazined* Wpn) {
-	  ColorizeSects.clear();
+	auto WpnScanner = [&ColorizeSects](CWeaponMagazined* Wpn) {
+		ColorizeSects.clear();
 
-	  std::copy(Wpn->m_ammoTypes.begin(), Wpn->m_ammoTypes.end(), std::back_inserter(ColorizeSects));
-	  if (auto WpnGl = smart_cast<CWeaponMagazinedWGrenade*>(Wpn); WpnGl && WpnGl->IsGrenadeLauncherAttached())
-		  std::copy(WpnGl->m_ammoTypes2.begin(), WpnGl->m_ammoTypes2.end(), std::back_inserter(ColorizeSects));
-	  if (Wpn->SilencerAttachable())
-		  ColorizeSects.push_back(Wpn->GetSilencerName());
-	  if (Wpn->ScopeAttachable())
-		  ColorizeSects.push_back(Wpn->GetScopeName());
-	  if (Wpn->GrenadeLauncherAttachable())
-		  ColorizeSects.push_back(Wpn->GetGrenadeLauncherName());
-	  std::copy(Wpn->m_highlightAddons.begin(), Wpn->m_highlightAddons.end(), std::back_inserter(ColorizeSects));
-  };
+		std::copy(Wpn->m_ammoTypes.begin(), Wpn->m_ammoTypes.end(), std::back_inserter(ColorizeSects));
+		if (auto WpnGl = smart_cast<CWeaponMagazinedWGrenade*>(Wpn); WpnGl && WpnGl->IsGrenadeLauncherAttached())
+			std::copy(WpnGl->m_ammoTypes2.begin(), WpnGl->m_ammoTypes2.end(), std::back_inserter(ColorizeSects));
+		if (Wpn->SilencerAttachable())
+			ColorizeSects.push_back(Wpn->GetSilencerName());
+		if (Wpn->ScopeAttachable())
+			ColorizeSects.push_back(Wpn->GetScopeName());
+		if (Wpn->GrenadeLauncherAttachable())
+			ColorizeSects.push_back(Wpn->GetGrenadeLauncherName());
+		std::copy(Wpn->m_highlightAddons.begin(), Wpn->m_highlightAddons.end(), std::back_inserter(ColorizeSects));
+	};
 
-  auto ColorizeAmmoAddons = [&] {
-	  for (auto* DdListEx : args) {
-		  if (!DdListEx) continue;
-		  for (u32 i = 0, item_count = DdListEx->ItemsCount(); i < item_count; ++i) {
-			  CUICellItem* CellItem = DdListEx->GetItemIdx(i);
-			  auto invitem = reinterpret_cast<CInventoryItem*>(CellItem->m_pData);
-			  if (invitem && std::find(ColorizeSects.begin(), ColorizeSects.end(), invitem->object().cNameSect()) != ColorizeSects.end()) {
-				  CellItem->m_select_armament = true;
-				  if (colorize_ammo)
-					  ProcessColorize(CellItem, Color);
-			  }
-		  }
-	  }
-  };
+	auto ColorizeAmmoAddons = [&] {
+		for (auto* DdListEx : args) {
+			if (!DdListEx) continue;
+			for (u32 i = 0, item_count = DdListEx->ItemsCount(); i < item_count; ++i) {
+				CUICellItem* CellItem = DdListEx->GetItemIdx(i);
+				auto invitem = reinterpret_cast<CInventoryItem*>(CellItem->m_pData);
+				if (invitem && std::find(ColorizeSects.begin(), ColorizeSects.end(), invitem->object().cNameSect()) != ColorizeSects.end()) {
+					CellItem->m_select_armament = true;
+					if (colorize_ammo)
+						ProcessColorize(CellItem, Color);
+				}
+			}
+		}
+	};
 
-  auto ColorizeWeapons = [&](const shared_str& Sect ) {
-	  for (auto* DdListEx : args) {
-		  if (!DdListEx) continue;
-		  for (u32 i = 0, item_count = DdListEx->ItemsCount(); i < item_count; ++i) {
-			  CUICellItem* CellItem = DdListEx->GetItemIdx(i);
-			  auto invitem = reinterpret_cast<CInventoryItem*>(CellItem->m_pData);
-			  if (invitem) {
-				  if (auto Wpn = smart_cast<CWeaponMagazined*>(invitem)) {
-					  WpnScanner(Wpn);
-					  if (std::find(ColorizeSects.begin(), ColorizeSects.end(), Sect) != ColorizeSects.end()) {
-						  CellItem->m_select_armament = true;
-						  if (colorize_ammo)
-							  ProcessColorize(CellItem, Color);
-					  }
-				  }
-			  }
-		  }
-	  }
-  };
+	auto ColorizeWeapons = [&](const shared_str& Sect ) {
+		for (auto* DdListEx : args) {
+			if (!DdListEx) continue;
+			for (u32 i = 0, item_count = DdListEx->ItemsCount(); i < item_count; ++i) {
+				CUICellItem* CellItem = DdListEx->GetItemIdx(i);
+				auto invitem = reinterpret_cast<CInventoryItem*>(CellItem->m_pData);
+				if (invitem) {
+					if (auto Wpn = smart_cast<CWeaponMagazined*>(invitem)) {
+						WpnScanner(Wpn);
+						if (std::find(ColorizeSects.begin(), ColorizeSects.end(), Sect) != ColorizeSects.end()) {
+							CellItem->m_select_armament = true;
+							if (colorize_ammo)
+								ProcessColorize(CellItem, Color);
+						}
+					}
+				}
+			}
+		}
+	};
 
-  //Подкраска выбранного предмета
-  if (colorize_ammo && this->m_select_armament)
-	  ProcessColorize(this, Color);
+	//Подкраска выбранного предмета
+	if (colorize_ammo && this->m_select_armament)
+		ProcessColorize(this, Color);
 
-  if (auto Wpn = smart_cast<CWeaponMagazined*>(inventoryitem)) {
-	  WpnScanner(Wpn);
-	  ColorizeAmmoAddons();
-  }
-  else { //Надо подумать, какое условие тут сделать. Аддоны например, могут быть не именно аддонами, а фейк-предметами, например. Лушчше наверно вообще без каких-либо условий.
-	  ColorizeWeapons(inventoryitem->object().cNameSect());
-  }
+	if (auto Wpn = smart_cast<CWeaponMagazined*>(inventoryitem)) {
+		WpnScanner(Wpn);
+		ColorizeAmmoAddons();
+	}
+	else { //Надо подумать, какое условие тут сделать. Аддоны например, могут быть не именно аддонами, а фейк-предметами, например. Лушчше наверно вообще без каких-либо условий.
+		ColorizeWeapons(inventoryitem->object().cNameSect());
+	}
 }

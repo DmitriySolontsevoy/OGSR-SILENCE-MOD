@@ -357,10 +357,11 @@ void CUIDragDropListEx::ReinitScroll()
 
 #include "../xr_3da/xr_input.h"
 #include "../Level.h"
+#include <ui/UIUpgradeWnd.h>
 
 bool CUIDragDropListEx::OnMouse(float x, float y, EUIMessages mouse_action)
 {
-	bool b = inherited::OnMouse		(x,y,mouse_action);
+	bool b = inherited::OnMouse(x,y,mouse_action);
 
 	if(m_vScrollBar->IsShown())
 	{
@@ -1015,13 +1016,15 @@ void CUICellContainer::clear_select_armament()
 	auto InvWnd = smart_cast<CUIInventoryWnd*>(TopWnd);
 	auto CarBodyWnd = smart_cast<CUICarBodyWnd*>(TopWnd);
 	CUITradeWnd* TradeWnd = nullptr;
+	CUIUpgradeWnd* UpgradeWnd = nullptr;
 
 	if (!InvWnd && !CarBodyWnd) { //Окно торговли приаттачено к CUITalkWnd, поэтому придётся извращаться с его поиском
 		auto Parent = this->GetParent();
 		do {
 			TradeWnd = smart_cast<CUITradeWnd*>(Parent);
+			UpgradeWnd = smart_cast<CUIUpgradeWnd*>(Parent);
 			Parent = Parent->GetParent();
-		} while (!TradeWnd);
+		} while (!TradeWnd && !UpgradeWnd);
 	}
 
 	for (auto& cell : m_cells) {

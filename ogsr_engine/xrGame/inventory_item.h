@@ -47,6 +47,8 @@ class CInventoryItem :
 private:
 	typedef CAttachableItem inherited;
 public:
+	LPCSTR m_section_name;
+
 	enum EIIFlags {
 		FdropManual = (1 << 0),
 		FCanTake = (1 << 1),

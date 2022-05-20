@@ -256,12 +256,25 @@ bool CWeaponMagazinedWGrenade::Action(s32 cmd, u32 flags)
 	if (m_bGrenadeMode && (cmd == kWPN_FIREMODE_PREV || cmd == kWPN_FIREMODE_NEXT))
 		return false;
 
-	if(inherited::Action(cmd, flags))
+	if (cmd == kWPN_RELOAD)
+	{
+		if (!Core.Features.test(xrCore::Feature::lock_reload_in_sprint) || (!ParentIsActor() || !(g_actor->get_state() & mcSprint)))
+			if (flags & CMD_START)
+			{
+				int32 control_mag_size = iСartridgeBullet && !m_bGrenadeMode ? iMagazineSize + 1 : iMagazineSize;
+				if ((iAmmoElapsed < control_mag_size || IsMisfire()) && GetState() != eReload)
+				{
+					Reload();
+				}				
+			}
+		return true;
+	}
+
+	if (inherited::Action(cmd, flags))
 		return true;
 	
 	switch(cmd) 
 	{
-	// case kWPN_ZOOM:  ??? 
 	case kWPN_FUNC: 
 	{
 		if (!IsZoomed())

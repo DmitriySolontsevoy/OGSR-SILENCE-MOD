@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding="UTF-8"?>
 <window x="0" y="0" w="640" h="480" r="227" g="121" b="222" texture="1">
 
-	<static_icon x="27" y="22" width="150" height="220" stretch="1">
+	<static_icon x="30" y="22" width="150" height="220" stretch="1">
 		<texture>ui_charinfo_left</texture>
 	</static_icon>
 	<static_icon x="850" y="22" width="150" height="220" stretch="1">

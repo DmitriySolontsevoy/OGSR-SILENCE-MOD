@@ -26,6 +26,10 @@
 #include <dinput.h>				//remove me !!!
 #include "..\..\xr_3da\xr_input.h"		//remove me !!!
 
+#include "../alife_simulator.h"
+#include "../ai_space.h"
+#include "../alife_object_registry.h"
+
 const	int			SCROLLBARS_SHIFT			= 5;
 const	int			VSCROLLBAR_STEP				= 20; // В пикселях
 const	int			HSCROLLBAR_STEP				= 20; // В пикселях
@@ -396,6 +400,17 @@ bool CUIMapWnd::OnMouse(float x, float y, EUIMessages mouse_action)
 				return							true;
 			}
 		break;
+
+		case WINDOW_RBUTTON_DOWN:
+			for (auto& level : m_GameMaps) {
+				if (level.second->m_bCursorOverWindow)
+				{
+					m_UIPropertiesBox->AddItem("TP!");
+					ActivatePropertiesBox(level.second);
+					return true;
+				}	
+			}
+		break;
 /*
 		case WINDOW_LBUTTON_DOWN:
 			if (	((mouse_action==WINDOW_LBUTTON_DOWN)&&(m_flags.is_any(lmZoomIn+lmZoomOut))) || 
@@ -490,6 +505,15 @@ void CUIMapWnd::SendMessage(CUIWindow* pWnd, s16 msg, void* pData)
 			HideHint( (CUIWindow*)item->GetData() );
 			Level().MapManager().RemoveMapLocation(m_cur_location);
 			m_cur_location = nullptr;
+			break;
+		}
+		case MAP_TELEPORT_TO_LOCATION:
+		{
+			if (ai().get_alife() && ai().get_game_graph())
+			{
+				ai().alife().jump_to_level(m_travelTo);
+			}
+				
 			break;
 		}
 		}
@@ -749,21 +773,38 @@ void CUIMapWnd::ActivatePropertiesBox(CUIWindow* w)
 	m_UIPropertiesBox->RemoveAll();
 
 	CMapSpot* sp = smart_cast<CMapSpot*>(w);
-	if (!sp)
-		return;
+	CUICustomMap* cp = smart_cast<CUICustomMap*>(w);
 
-	m_cur_location = sp->MapLocation();
-	if (!m_cur_location)
-		return;
-
-	if (sp->MapLocation()->IsUserDefined())
+	if (sp)
 	{
-		m_UIPropertiesBox->AddItem("st_pda_change_spot_hint", w, MAP_CHANGE_SPOT_HINT_ACT);
-		m_UIPropertiesBox->AddItem("st_pda_delete_spot", w, MAP_REMOVE_SPOT_ACT);
+		m_cur_location = sp->MapLocation();
+		if (!m_cur_location)
+			return;
+
+		if (sp->MapLocation()->IsUserDefined())
+		{
+			m_UIPropertiesBox->AddItem("st_pda_change_spot_hint", w, MAP_CHANGE_SPOT_HINT_ACT);
+			m_UIPropertiesBox->AddItem("st_pda_delete_spot", w, MAP_REMOVE_SPOT_ACT);
+		}
+
+		if (m_UIPropertiesBox->GetItemsCount() > 0)
+		{
+			m_UIPropertiesBox->AutoUpdateSize();
+
+			Fvector2 cursor_pos;
+			Frect vis_rect;
+
+			GetAbsoluteRect(vis_rect);
+			cursor_pos = GetUICursor()->GetCursorPosition();
+			cursor_pos.sub(vis_rect.lt);
+			m_UIPropertiesBox->Show(vis_rect, cursor_pos);
+		}
 	}
-
-	if (m_UIPropertiesBox->GetItemsCount() > 0)
+	else if (cp)
 	{
+		m_travelTo = cp->MapName().c_str();
+		m_UIPropertiesBox->AddItem("ui_st_travel", w, MAP_TELEPORT_TO_LOCATION);
+
 		m_UIPropertiesBox->AutoUpdateSize();
 
 		Fvector2 cursor_pos;

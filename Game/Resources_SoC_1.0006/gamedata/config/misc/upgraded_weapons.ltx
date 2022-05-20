@@ -1,0 +1,40 @@
+;;;WEAPON MODS;;;
+
+;;;VINTOREZ;;;
+;;;Reliability increase - (-25%)
+[wpn_vintorez:cond]:wpn_vintorez
+inv_grid_x						= 16
+inv_grid_y						= 31
+
+condition_shot_dec 				= 0.0005
+
+;;;Extended mag size - 20 (+10)
+[wpn_vintorez:mag]:wpn_vintorez
+ammo_mag_size					= 20
+inv_grid_x						= 16
+inv_grid_y						= 33
+
+visual							= weapons\vintorez\wpn_vintorez_extended_mag.ogf
+
+hud								= wpn_vintorez_extended_mag_hud
+
+[wpn_vintorez_extended_mag_hud]:wpn_vintorez_hud
+visual							= weapons\vintorez\wpn_vintorez_extended_mag_hud.ogf
+
+;;;MAG+COND
+[wpn_vintorez:cond:mag]:wpn_vintorez:mag
+condition_shot_dec 				= 0.0005
+
+;;;LR300;;;
+;;;Extended mag size - 45 (+15)
+[wpn_lr300:mag]:wpn_lr300
+ammo_mag_size					= 45
+inv_grid_x						= 20
+inv_grid_y						= 7
+
+visual							= weapons\lr300\wpn_lr300_extended_mag.ogf
+
+hud								= wpn_lr300_extended_mag_hud
+
+[wpn_lr300_extended_mag_hud]:wpn_lr300_hud
+visual							= weapons\lr300\wpn_lr300_extended_mag_hud.ogf
