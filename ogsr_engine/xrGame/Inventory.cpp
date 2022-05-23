@@ -440,7 +440,7 @@ void CInventory::Activate_deffered	(u32 slot, u32 _frame)
 
 bool CInventory::Activate(u32 slot, EActivationReason reason, bool bForce, bool now ) 
 {	
-	if (m_ActivationSlotReason==eKeyAction	&& reason==eImportUpdate)
+	if (m_ActivationSlotReason==eKeyAction && reason==eImportUpdate)
 		return false;
 
 	bool res = false;
@@ -639,9 +639,7 @@ bool CInventory::Action(s32 cmd, u32 flags)
 				if ((int)m_iActiveSlot == DETECTOR_SLOT && m_slots[m_iActiveSlot].m_pIItem)
 					b_send_event = Activate(NO_ACTIVE_SLOT);
 				else
-				{
 					b_send_event = Activate(DETECTOR_SLOT, eKeyAction);
-				}
 			}
 		}
 		break;

@@ -1,5 +1,6 @@
 #pragma once
 #include "inventory_item_object.h"
+#include "SimpleDetectorSHOC.h"
 #include "..\xr_3da\feel_touch.h"
 #include "HudSound.h"
 #include "CustomZone.h"
@@ -129,7 +130,9 @@ public:
 
 class CUIArtefactDetectorBase;
 
-class CCustomDetector : public CHudItemObject
+class CCustomDetector :
+    public CHudItemObject,
+    public Feel::Touch
 {
     typedef CHudItemObject inherited;
 
@@ -150,6 +153,13 @@ public:
 
     virtual void shedule_Update(u32 dt) override;
     virtual void UpdateCL() override;
+
+    virtual void feel_touch_new(CObject* O);
+    virtual void feel_touch_delete(CObject* O);
+    virtual BOOL feel_touch_contact(CObject* O);
+
+    void TurnOn();
+    void TurnOff();
 
     virtual bool Activate(bool = false);
     virtual void Deactivate(bool = false);
@@ -179,12 +189,41 @@ protected:
     virtual void UpdateAf() {}
     virtual void CreateUI() {}
 
+    void StopAllSounds();
+    void UpdateMapLocations();
+    void AddRemoveMapSpot(CCustomZone* pZone, bool bAdd);
+    void UpdateNightVisionMode();
+
+    bool m_hasHud;
+    bool m_sndWorking;
     bool m_bWorking;
     float m_fAfVisRadius;
-    float m_fDecayRate; //Alundaio
+    float m_fDecayRate;
     CAfList m_artefacts;
 
     HUD_SOUND sndShow, sndHide;
+
+    float m_fRadius;
+
+    //если хозяин текущий актер
+    CActor* m_pCurrentActor;
+    CInventoryOwner* m_pCurrentInvOwner;
+
+    //информация об онаруживаемых зонах
+    DEFINE_MAP(CLASS_ID, ZONE_TYPE_SHOC, ZONE_TYPE_MAP, ZONE_TYPE_MAP_IT);
+    ZONE_TYPE_MAP m_ZoneTypeMap;
+
+    //список обнаруженных зон и информация о них
+    DEFINE_MAP(CCustomZone*, ZONE_INFO_SHOC, ZONE_INFO_MAP, ZONE_INFO_MAP_IT);
+    ZONE_INFO_MAP m_ZoneInfoMap;
+
+    shared_str						m_nightvision_particle;
+
+    bool m_detect_actor_radiation;
+    u32  radiation_snd_time;
+    void update_actor_radiation();
+
+    u32					m_ef_detector_type;
 };
 
 class CZoneList : public CDetectList<CCustomZone>

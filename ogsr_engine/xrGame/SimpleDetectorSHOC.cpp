@@ -34,7 +34,6 @@ CCustomDetectorSHOC::~CCustomDetectorSHOC(void)
 	ZONE_TYPE_MAP_IT it;
 	for (it = m_ZoneTypeMap.begin(); m_ZoneTypeMap.end() != it; ++it)
 		HUD_SOUND::DestroySound(it->second.detect_snds);
-	//		it->second.detect_snd.destroy();
 
 	m_ZoneInfoMap.clear();
 }
@@ -122,7 +121,6 @@ void CCustomDetectorSHOC::StopAllSounds()
 	{
 		ZONE_TYPE_SHOC& zone_type = (*it).second;
 		HUD_SOUND::StopSound(zone_type.detect_snds);
-		//		zone_type.detect_snd.stop();
 	}
 }
 

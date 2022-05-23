@@ -215,6 +215,37 @@ bone_name				= bip01_r_hand
 position_offset			 = 0.0,0.0,0.0
 angle_offset			 = 1.570790,1.570790,3.92699
 
+[water]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency =
+$spawn 				= "food and drugs\water_bottle"
+$prefetch 			= 8
+class				= II_ANTIR
+cform				= skeleton
+visual				= food\water_bottle.ogf
+description			= Water
+inv_name			= Water
+inv_name_short		= Water
+inv_weight			= 1
+
+inv_grid_width		= 1
+inv_grid_height		= 2
+inv_grid_x			= 20
+inv_grid_y			= 5
+cost				= 35
+
+eat_thirst			= 1
+eat_health			= 0
+eat_satiety			= 0
+eat_power			= 0
+eat_radiation		= 0
+wounds_heal_perc	= 0
+eat_portions_num	= 1
+eat_max_power		= 0
+
+; food item
+animation_slot		= 4
+
 [vodka]:identity_immunities
 GroupControlSection	= spawn_group
 discovery_dependency =
@@ -839,20 +870,16 @@ inv_grid_width		= 1
 inv_grid_height		= 1
 inv_grid_x			= 9
 inv_grid_y			= 14
-cost				= 500	;30
-;belt				= true;
+cost				= 500
 default_to_ruck		= false
-
 
 ;описание распознаваемых детектором зон
 zone_class_1		= zone_mosquito_bald
-
 zone_sound_1_		= detectors\DA-2_beep1
 zone_sound_1_1		= detectors\DA-2_beep1
 zone_sound_1_2		= detectors\DA-2_beep1
 zone_sound_1_3		= detectors\DA-2_beep1
-
-zone_min_freq_1		= 0.1	;0.5
+zone_min_freq_1		= 0.1
 zone_max_freq_1		= 40
 
 zone_class_2		= zone_mincer
@@ -861,7 +888,6 @@ zone_min_freq_2		= 0.1
 zone_max_freq_2		= 20
 
 zone_class_3		= zone_radioactive
-; zone_sound_3_		= detectors\DA-2_beep1
 zone_sound_3_		= detectors\geiger_1
 zone_sound_3_1		= detectors\geiger_2
 zone_sound_3_2		= detectors\geiger_3
@@ -879,155 +905,8 @@ zone_sound_4_		= detectors\DA-2_beep1
 zone_min_freq_4		= 0.5
 zone_max_freq_4		= 30
 
-
-[detector_advances]:identity_immunities
-GroupControlSection	= spawn_group
-discovery_dependency =
-$spawn 				= "devices\detector_advanced"
-$prefetch 			= 32
-class				= D_SIMDET
-cform				= skeleton
-visual				= equipments\item_datchik2.ogf
-radius				= 10	;15
-buzzer_radius		= 1.5
-noise				= zone_mosquito_bald       ;detectors\geiger_noise_loop
-buzzer				= zone_mosquito_bald       ;detectors\DA-2_alarm_loop
-
-ef_detector_type	= 1
-
-night_vision_particle		= damage_fx\heli_burn
-
-;описание распознаваемых детектором зон
-zone_class_1		= zone_mosquito_bald
-zone_sound_1_		= detectors\DA-2_beep1
-zone_min_freq_1		= 0.1	;0.5
-zone_max_freq_1		= 40
-zone_map_location_1 = anomaly_zone_location
-
-zone_class_2		= zone_mincer
-zone_sound_2_		= detectors\DA-2_beep1
-zone_min_freq_2		= 0.1
-zone_max_freq_2		= 20
-zone_map_location_2 = anomaly_zone_location
-
-zone_class_3		= zone_radioactive
-zone_sound_3_		= detectors\DA-2_beep1
-zone_min_freq_3		= 1
-zone_max_freq_3		= 20
-zone_map_location_3 = anomaly_zone_location
-
-zone_class_4		= zone_gravi_zone
-zone_sound_4_		= detectors\DA-2_beep1
-zone_min_freq_4		= 0.5
-zone_max_freq_4		= 30
-zone_map_location_4 = anomaly_zone_location
-
-inv_name			= Detector
-inv_name_short		= Detector
-inv_weight			= 0
-
-inv_grid_width		= 1
-inv_grid_height		= 1
-inv_grid_x			= 15
-inv_grid_y			= 7
-cost				= 1000	;30
-;belt				= true;
-default_to_ruck		= false
-slot				= 8
-
-
-[detector_elite]:identity_immunities
-GroupControlSection	= spawn_group
-discovery_dependency =
-$spawn 				= "devices\detector_elite"
-$prefetch 			= 32
-class				= D_SIMDET
-cform				= skeleton
-visual				= equipments\item_datchik3.ogf
-radius				= 10	;15
-buzzer_radius		= 1.5
-noise				= zone_mosquito_bald       ;detectors\geiger_noise_loop
-buzzer				= zone_mosquito_bald       ;detectors\DA-2_alarm_loop
-
-ef_detector_type	= 1
-night_vision_particle		= damage_fx\heli_burn
-
-
-;описание распознаваемых детектором зон
-zone_class_1		= zone_mosquito_bald
-zone_sound_1_		= detectors\DA-2_beep1
-zone_min_freq_1		= 0.1	;0.5
-zone_max_freq_1		= 40
-zone_map_location_1 = anomaly_zone_location
-
-zone_class_2		= zone_mincer
-zone_sound_2_		= detectors\DA-2_beep1
-zone_min_freq_2		= 0.1
-zone_max_freq_2		= 20
-zone_map_location_2 = anomaly_zone_location
-
-zone_class_3		= zone_radioactive
-zone_sound_3_		= detectors\geiger_click3
-zone_min_freq_3		= 1
-zone_max_freq_3		= 20
-zone_map_location_3 = anomaly_zone_location
-
-zone_class_4		= zone_gravi_zone
-zone_sound_4_		= detectors\DA-2_beep1
-zone_min_freq_4		= 0.5
-zone_max_freq_4		= 30
-zone_map_location_4 = anomaly_zone_location
-
-inv_name			= st_detector
-inv_name_short		= st_detector
-description			= st_detector_descr
-
-inv_weight			= 0
-
-inv_grid_width		= 1
-inv_grid_height		= 1
-inv_grid_x			= 5
-inv_grid_y			= 14
-cost				= 1500	;30
-;belt				= true;
-slot				= 8
-
-attach_angle_offset		= -0.160570,-1.425061,-0.361283
-attach_position_offset	= 0.160570,-0.060214,0.020071
-attach_bone_name		= bip01_l_hand
-auto_attach				= false
-
-[water]:identity_immunities
-GroupControlSection	= spawn_group
-discovery_dependency =
-$spawn 				= "food and drugs\water_bottle"
-$prefetch 			= 8
-class				= II_ANTIR
-cform				= skeleton
-visual				= food\water_bottle.ogf
-description			= Water
-inv_name			= Water
-inv_name_short		= Water
-inv_weight			= 1
-
-inv_grid_width		= 1
-inv_grid_height		= 2
-inv_grid_x			= 20
-inv_grid_y			= 5
-cost				= 35
-
-eat_thirst			= 1
-eat_health			= 0
-eat_satiety			= 0
-eat_power			= 0
-eat_radiation		= 0
-wounds_heal_perc	= 0
-eat_portions_num	= 1
-eat_max_power		= 0
-
-; food item
-animation_slot		= 4
-
+[detector_advances]:detector_simple
+[detector_elite]:detector_simple
 
 [detector_otklick]:identity_immunities
 GroupControlSection	= spawn_group
@@ -1036,6 +915,12 @@ $prefetch 		= 32
 class			= DET_SIMP
 cform			= skeleton
 visual			= dynamics\devices\dev_detector_1\dev_detector_1.ogf
+radius				= 10	;15
+buzzer_radius		= 1.5
+noise				= zone_mosquito_bald       ;detectors\geiger_noise_loop
+buzzer				= zone_mosquito_bald       ;detectors\DA-2_alarm_loop
+slot				= 8
+ef_detector_type	= 1
 
 hud			= detector_simple_hud
 animation_slot		= 7
@@ -1101,6 +986,37 @@ af_freq_11		= 0.05, 2
 snd_draw                = weapons\_general\rifle_draw
 snd_holster             = weapons\generic_holster
 
+;описание распознаваемых детектором зон
+snd_zone_class_1		= zone_mosquito_bald
+zone_sound_1_		= detectors\DA-2_beep1
+zone_sound_1_1		= detectors\DA-2_beep1
+zone_sound_1_2		= detectors\DA-2_beep1
+zone_sound_1_3		= detectors\DA-2_beep1
+zone_min_freq_1		= 0.1	;0.5
+zone_max_freq_1		= 40
+
+snd_zone_class_2		= zone_mincer
+zone_sound_2_		= detectors\DA-2_beep1
+zone_min_freq_2		= 0.1
+zone_max_freq_2		= 20
+
+snd_zone_class_3		= zone_radioactive
+zone_sound_3_		= detectors\geiger_1
+zone_sound_3_1		= detectors\geiger_2
+zone_sound_3_2		= detectors\geiger_3
+zone_sound_3_3		= detectors\geiger_4
+zone_sound_3_4		= detectors\geiger_5
+zone_sound_3_5		= detectors\geiger_6
+zone_sound_3_6		= detectors\geiger_1
+zone_sound_3_7		= detectors\geiger_1
+zone_sound_3_8		= detectors\geiger_1
+zone_min_freq_3		= 1
+zone_max_freq_3		= 20
+
+snd_zone_class_4		= zone_gravi_zone
+zone_sound_4_		= detectors\DA-2_beep1
+zone_min_freq_4		= 0.5
+zone_max_freq_4		= 30
 
 [detector_simple_hud]
 orientation              	= 0,0,0
@@ -1192,6 +1108,38 @@ af_freq_11		= 0.05, 2
 snd_draw                = weapons\_general\rifle_draw
 snd_holster             = weapons\generic_holster
 
+;описание распознаваемых детектором зон
+snd_zone_class_1		= zone_mosquito_bald
+zone_sound_1_		= detectors\DA-2_beep1
+zone_sound_1_1		= detectors\DA-2_beep1
+zone_sound_1_2		= detectors\DA-2_beep1
+zone_sound_1_3		= detectors\DA-2_beep1
+zone_min_freq_1		= 0.1	;0.5
+zone_max_freq_1		= 40
+
+snd_zone_class_2		= zone_mincer
+zone_sound_2_		= detectors\DA-2_beep1
+zone_min_freq_2		= 0.1
+zone_max_freq_2		= 20
+
+snd_zone_class_3		= zone_radioactive
+zone_sound_3_		= detectors\geiger_1
+zone_sound_3_1		= detectors\geiger_2
+zone_sound_3_2		= detectors\geiger_3
+zone_sound_3_3		= detectors\geiger_4
+zone_sound_3_4		= detectors\geiger_5
+zone_sound_3_5		= detectors\geiger_6
+zone_sound_3_6		= detectors\geiger_1
+zone_sound_3_7		= detectors\geiger_1
+zone_sound_3_8		= detectors\geiger_1
+zone_min_freq_3		= 1
+zone_max_freq_3		= 20
+
+snd_zone_class_4		= zone_gravi_zone
+zone_sound_4_		= detectors\DA-2_beep1
+zone_min_freq_4		= 0.5
+zone_max_freq_4		= 30
+
 [detector_advanced_hud]
 orientation              	= 0,0,0
 position                 	= 0.05,-0.18,0.1
@@ -1262,6 +1210,38 @@ af_freq_26		= 0.05, 2
 
 snd_draw                = device\elite_detector_draw
 snd_holster             = weapons\generic_holster
+
+;описание распознаваемых детектором зон
+snd_zone_class_1		= zone_mosquito_bald
+zone_sound_1_		= detectors\DA-2_beep1
+zone_sound_1_1		= detectors\DA-2_beep1
+zone_sound_1_2		= detectors\DA-2_beep1
+zone_sound_1_3		= detectors\DA-2_beep1
+zone_min_freq_1		= 0.1	;0.5
+zone_max_freq_1		= 40
+
+snd_zone_class_2		= zone_mincer
+zone_sound_2_		= detectors\DA-2_beep1
+zone_min_freq_2		= 0.1
+zone_max_freq_2		= 20
+
+snd_zone_class_3		= zone_radioactive
+zone_sound_3_		= detectors\geiger_1
+zone_sound_3_1		= detectors\geiger_2
+zone_sound_3_2		= detectors\geiger_3
+zone_sound_3_3		= detectors\geiger_4
+zone_sound_3_4		= detectors\geiger_5
+zone_sound_3_5		= detectors\geiger_6
+zone_sound_3_6		= detectors\geiger_1
+zone_sound_3_7		= detectors\geiger_1
+zone_sound_3_8		= detectors\geiger_1
+zone_min_freq_3		= 1
+zone_max_freq_3		= 20
+
+snd_zone_class_4		= zone_gravi_zone
+zone_sound_4_		= detectors\DA-2_beep1
+zone_min_freq_4		= 0.5
+zone_max_freq_4		= 30
 
 [detector_veles_hud]
 orientation              	= 0,0,0
@@ -1418,6 +1398,38 @@ zone_freq_30		= 0.05, 2
 zone_freq_31		= 0.05, 2
 zone_freq_32		= 0.05, 2
 zone_freq_33		= 0.05, 2
+
+;описание распознаваемых детектором зон
+snd_zone_class_1		= zone_mosquito_bald
+zone_sound_1_		= detectors\DA-2_beep1
+zone_sound_1_1		= detectors\DA-2_beep1
+zone_sound_1_2		= detectors\DA-2_beep1
+zone_sound_1_3		= detectors\DA-2_beep1
+zone_min_freq_1		= 0.1	;0.5
+zone_max_freq_1		= 40
+
+snd_zone_class_2		= zone_mincer
+zone_sound_2_		= detectors\DA-2_beep1
+zone_min_freq_2		= 0.1
+zone_max_freq_2		= 20
+
+snd_zone_class_3		= zone_radioactive
+zone_sound_3_		= detectors\geiger_1
+zone_sound_3_1		= detectors\geiger_2
+zone_sound_3_2		= detectors\geiger_3
+zone_sound_3_3		= detectors\geiger_4
+zone_sound_3_4		= detectors\geiger_5
+zone_sound_3_5		= detectors\geiger_6
+zone_sound_3_6		= detectors\geiger_1
+zone_sound_3_7		= detectors\geiger_1
+zone_sound_3_8		= detectors\geiger_1
+zone_min_freq_3		= 1
+zone_max_freq_3		= 20
+
+snd_zone_class_4		= zone_gravi_zone
+zone_sound_4_		= detectors\DA-2_beep1
+zone_min_freq_4		= 0.5
+zone_max_freq_4		= 30
 
 [detector_svarog_hud]
 orientation              	= 0,0,0
