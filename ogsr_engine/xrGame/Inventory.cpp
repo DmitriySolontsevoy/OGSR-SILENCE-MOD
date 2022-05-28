@@ -954,6 +954,14 @@ bool CInventory::InSlot(PIItem pIItem) const
 		return true;
 	return false;
 }
+
+bool CInventory::InGivenSlot(u32 slot, PIItem pIItem) const
+{
+	if (m_slots[slot].m_pIItem == pIItem)
+		return true;
+	return false;
+}
+
 bool CInventory::InBelt(PIItem pIItem) const
 {
 	if(Get(pIItem->object().ID(), false)) return true;

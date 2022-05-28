@@ -273,7 +273,7 @@ void CWeaponMagazined::OnMagazineEmpty()
 	inherited::OnMagazineEmpty();
 }
 
-void CWeaponMagazined::UnloadMagazine(bool spawn_ammo)
+void CWeaponMagazined::UnloadMagazine(bool fromUI, bool spawn_ammo)
 {
 	xr_map<LPCSTR, u16> l_ammo;
 	
@@ -316,6 +316,16 @@ void CWeaponMagazined::UnloadMagazine(bool spawn_ammo)
 			}
 		}
 		if(l_it->second && !unlimited_ammo()) SpawnAmmo(l_it->second, l_it->first);
+	}
+
+	if (fromUI)
+	{
+		u32 activeSlot = Actor()->inventory().GetActiveSlot();
+
+		if (Actor()->inventory().InGivenSlot(activeSlot, this))
+		{
+			PlayAnimShow();
+		}
 	}
 }
 
@@ -370,7 +380,7 @@ void CWeaponMagazined::ReloadMagazine()
 	//разрядить магазин, если загружаем патронами другого типа
 	if (!m_bLockType && !m_magazine.empty() && (!m_pAmmo || xr_strcmp(m_pAmmo->cNameSect(), *m_magazine.back().m_ammoSect)))
 	{
-		UnloadMagazine();
+		UnloadMagazine(false);
 	}
 
 	if (m_DefaultCartridge.m_LocalAmmoType != m_ammoType)
@@ -745,6 +755,7 @@ void CWeaponMagazined::switch2_Empty()
 		inherited::FireEnd();
 	}
 }
+
 void CWeaponMagazined::PlayReloadSound()
 {
 	if (IsPartlyReloading() && sndReloadPartlyExist)

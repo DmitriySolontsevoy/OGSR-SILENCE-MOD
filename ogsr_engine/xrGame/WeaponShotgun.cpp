@@ -402,7 +402,7 @@ bool CWeaponShotgun::HaveCartridgeInInventory( u8 cnt ) {
     m_ammoType = m_set_next_ammoType_on_reload;
     m_set_next_ammoType_on_reload = u32(-1);
     if ( !m_magazine.empty() )
-      UnloadMagazine();
+      UnloadMagazine(false);
   }
 
   u32 ac = GetAmmoCount( m_ammoType, cnt );

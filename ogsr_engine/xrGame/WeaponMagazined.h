@@ -105,7 +105,7 @@ public:
 	virtual void	InitZoomParams(LPCSTR section, bool useTexture);
 
 	virtual bool	Action			(s32 cmd, u32 flags);
-	virtual void	UnloadMagazine	(bool spawn_ammo = true);
+	virtual void	UnloadMagazine	(bool fromUI, bool spawn_ammo = true);
 
 	virtual void	GetBriefInfo				(xr_string& str_name, xr_string& icon_sect_name, xr_string& str_count);
 

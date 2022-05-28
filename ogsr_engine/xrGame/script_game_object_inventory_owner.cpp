@@ -255,14 +255,14 @@ void CScriptGameObject::UnloadMagazine(bool spawn_ammo, bool unload_gl)
 	if (stalker && stalker->hammer_is_clutched())
 		return;
 
-	weapon_magazined->UnloadMagazine(spawn_ammo);
+	weapon_magazined->UnloadMagazine(true, spawn_ammo);
 	if (unload_gl)
 	{
 		auto WpnMagazWgl = smart_cast<CWeaponMagazinedWGrenade*>(weapon_magazined);
 		if (WpnMagazWgl && WpnMagazWgl->IsGrenadeLauncherAttached())
 		{
 			WpnMagazWgl->PerformSwitchGL();
-			WpnMagazWgl->UnloadMagazine(spawn_ammo);
+			WpnMagazWgl->UnloadMagazine(true, spawn_ammo);
 			WpnMagazWgl->PerformSwitchGL();
 		}
 	}

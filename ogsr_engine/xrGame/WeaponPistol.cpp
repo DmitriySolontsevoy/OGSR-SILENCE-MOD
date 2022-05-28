@@ -7,6 +7,7 @@ CWeaponPistol::CWeaponPistol(LPCSTR name) : CWeaponCustomPistol(name)
 {
 	m_eSoundClose		= ESoundTypes(SOUND_TYPE_WEAPON_RECHARGING /*| eSoundType*/);
 	m_opened = false;
+	m_fullReload = false;
 	SetPending(FALSE);
 }
 
@@ -37,6 +38,33 @@ void CWeaponPistol::Load	(LPCSTR section)
 	inherited::Load		(section);
 
 	HUD_SOUND::LoadSound(section, "snd_close", sndClose, m_eSoundClose);
+
+	sndReloadFullSet = false;
+
+	if (pSettings->line_exist(section, "snd_reload_full")) {
+		HUD_SOUND::LoadSound(section, "snd_reload_full", sndReloadFull, m_eSoundReload);
+		sndReloadFullSet = true;
+	}
+}
+
+void CWeaponPistol::PlayReloadSound()
+{
+	if (IsPartlyReloading() && sndReloadPartlyExist)
+		PlaySound(sndReloadPartly, get_LastFP());
+	else if (m_fullReload && sndReloadFullSet)
+		PlaySound(sndReloadFull, get_LastFP());
+	else
+		PlaySound(sndReload, get_LastFP());
+}
+
+bool CWeaponPistol::Action(s32 cmd, u32 flags)
+{
+	if (cmd == kWPN_NEXT) 
+		m_fullReload = true;
+	else 
+		m_fullReload = false;
+
+	return inherited::Action(cmd, flags);
 }
 
 void CWeaponPistol::OnH_B_Chield		()
@@ -160,9 +188,12 @@ void CWeaponPistol::PlayAnimReload()
 	VERIFY(GetState() == eReload);
 	if (m_opened)
 		PlayHUDMotion({ "anim_reload_empty", "anm_reload_empty" }, true, GetState());
+	else if (m_fullReload)
+		PlayHUDMotion({ "anim_reload_full", "anim_reload_empty", "anm_reload_empty" }, true, GetState());
 	else 
 		inherited::PlayAnimReload();
 
+	m_fullReload = false;
 	m_opened = false;
 }
 

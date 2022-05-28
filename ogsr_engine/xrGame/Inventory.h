@@ -52,6 +52,7 @@ public:
 	bool					Ruck				(PIItem pIItem);
 
 	bool 					InSlot				(PIItem pIItem) const;
+	bool 					InGivenSlot         (u32 slot, PIItem pIItem) const;
 	bool 					InBelt				(PIItem pIItem) const;
 	bool 					InRuck				(PIItem pIItem) const;
 

@@ -273,13 +273,13 @@ void CUIInventoryWnd::ProcessPropertiesBoxClicked	()
 			{
 				auto ProcessUnload = [](void* pWpn) {
 					auto WpnMagaz = static_cast<CWeaponMagazined*>(pWpn);
-					WpnMagaz->UnloadMagazine();
+					WpnMagaz->UnloadMagazine(true);
 					if (auto WpnMagazWgl = smart_cast<CWeaponMagazinedWGrenade*>(WpnMagaz))
 					{
 						if (WpnMagazWgl->IsGrenadeLauncherAttached())
 						{
 							WpnMagazWgl->PerformSwitchGL();
-							WpnMagazWgl->UnloadMagazine();
+							WpnMagazWgl->UnloadMagazine(true);
 							WpnMagazWgl->PerformSwitchGL();
 						}
 					}

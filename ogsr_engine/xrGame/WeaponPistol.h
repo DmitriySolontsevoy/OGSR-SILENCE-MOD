@@ -10,7 +10,7 @@ public:
 	virtual ~CWeaponPistol(void);
 
 	virtual void	Load			(LPCSTR section);
-	
+	virtual bool    Action(s32 cmd, u32 flags);
 	virtual void	switch2_Reload	();
 
 	//virtual void	OnShot			();
@@ -35,12 +35,17 @@ public:
 	virtual void	PlayAnimReload	() override;
 	virtual void	PlayAnimShoot	() override;
 
+	virtual void	PlayReloadSound ();
+
 	virtual void	UpdateSounds	();
 protected:	
 	virtual bool	AllowFireWhileWorking() {return true;}
 
 	HUD_SOUND			sndClose;
+	HUD_SOUND			sndReloadFull;
+	bool sndReloadFullSet;
 	ESoundTypes			m_eSoundClose;
 
 	bool m_opened;
+	bool m_fullReload;
 };
