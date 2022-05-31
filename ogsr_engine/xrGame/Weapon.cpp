@@ -1149,11 +1149,19 @@ void CWeapon::UpdatePosition(const Fmatrix& trans)
 
 bool CWeapon::Action(s32 cmd, u32 flags) 
 {
-	if(inherited::Action(cmd, flags)) return true;
+	if (inherited::Action(cmd, flags)) return true;
 
-	
 	switch(cmd) 
 	{
+		case kWPN_INSPECT:
+		{
+			if (pSettings->line_exist(this->hud_sect, "anim_inspect") && GetState() == eIdle)
+			{
+				PlayHUDMotion("anim_inspect", true, GetState());
+				return false;
+			}
+			return true;
+		}
 		case kWPN_FIRE: 
 			{
 				//если оружие чем-то занято, то ничего не делать

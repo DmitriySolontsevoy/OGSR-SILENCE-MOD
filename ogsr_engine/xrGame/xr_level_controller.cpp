@@ -55,6 +55,7 @@ std::vector<_action> actions = {
 	DEF_ACTION("wpn_func",			kWPN_FUNC)
 	DEF_ACTION("wpn_firemode_prev",	kWPN_FIREMODE_PREV)
 	DEF_ACTION("wpn_firemode_next",	kWPN_FIREMODE_NEXT)
+	DEF_ACTION("wpn_inspect",	    kWPN_INSPECT)
 
 	DEF_ACTION("pause",				kPAUSE)
 	DEF_ACTION("drop",				kDROP)
