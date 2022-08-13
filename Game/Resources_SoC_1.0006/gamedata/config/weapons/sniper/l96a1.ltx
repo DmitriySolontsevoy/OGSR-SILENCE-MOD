@@ -61,7 +61,7 @@ animation_slot			= 2		; type of the animation that will be used
 
 inv_name				= L96A1
 inv_name_short			= L96A1
-inv_weight				= 4.9
+inv_weight				= 6.1
 
 inv_grid_width			= 6
 inv_grid_height			= 2
@@ -97,7 +97,7 @@ hit_impulse		 	= 190
 hit_type 			= fire_wound
 
 fire_distance           	= 1000
-bullet_speed		 	= 850	;начальная скорость пули
+bullet_speed		 		= 850	;начальная скорость пули
 rpm                     	= 45
 ; end ttc
 
@@ -161,7 +161,7 @@ silencer_light_time 		= 0.2
 
 [wpn_l96a1_hud]
 
-shell_point			= 0.0,0.0,0.0
+shell_point			= 0.0,-100.0,0.0
 shell_dir		 		= 0.0, 1.0, 0.0
 
 fire_point				= 0.08, -0.1, 0.0
@@ -173,16 +173,18 @@ visual                  = weapons\l96a1\wpn_l96a1_hud.ogf
 anim_reload_effector = reload
 
 anim_holster			= awp_holster
-anim_idle				= awp_idle_aim
+anim_idle				= awp_idle
 anim_idle_aim			= awp_idle_aim
 anim_reload				= awp_reload
 anim_reload_partly		= awp_reload_partly
 anim_draw				= awp_draw
 anim_shoot				= awp_shoot
-anim_idle_sprint 		= awp_idle_aim
+anim_idle_sprint 		= awp_sprint
 
-anim_reload_speed_k 			= 0.45
-anim_reload_partly_speed_k 		= 0.45
+anim_idle_speed_k 		   = 0.1
+anim_idle_sprint_speed_k   = 0.9
+anim_reload_speed_k 	   = 0.45
+anim_reload_partly_speed_k = 0.45
 
 anim_draw_speed_k = 0.35
 anim_holster_speed_k = 0.35
