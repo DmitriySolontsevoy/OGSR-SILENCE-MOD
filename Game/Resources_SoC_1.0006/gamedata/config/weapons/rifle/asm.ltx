@@ -1,0 +1,213 @@
+; Автомат специальный АС "Вал" (6П30)
+;-(правлено SR)-------------------------------------
+; калибр 				9x39 мм
+; длина ствола 				200 мм
+; магазин				20
+; вес без магазина			2.5
+; эффективная дальность стрельбы	250 м 
+; прицельная дальность			400 м
+; дульная скорость пули			280 м/с
+; темп стрельбы				800-900 в/с
+;---------------------------------------------------
+[wpn_asm]:identity_immunities
+GroupControlSection		= spawn_group
+discovery_dependency 		= 
+$spawn                   	= "weapons\val"					; option for Level Editor
+$npc                     	= off
+$prefetch 		         	= 8
+scheduled                	= off                              ; option for ALife Simulator
+cform                    	= skeleton
+class                    	= WP_VAL
+min_radius			= 5
+max_radius			= 100
+description			= enc_weapons1_wpn-val
+ 
+ef_main_weapon_type		= 2
+ef_weapon_type			= 6
+
+;-----------------------------------------------------------------------------------
+holder_range_modifier		= 1.0		; во сколько раз увеличивается eye_range 
+holder_fov_modifier		= 0.75 		; во сколько раз увеличивается eye_fov
+;-----------------------------------------------------------------------------------
+
+cartridge_bullet    = true
+
+cost		 		= 9000
+weapon_class			= assault_rifle
+
+ammo_limit			= 210
+ammo_current			= 210
+ammo_elapsed			= 30
+ammo_mag_size			= 30
+
+ammo_class			= ammo_9x39_pab9, ammo_9x39_ap 
+tracers				= off
+
+fire_modes			= 1, -1
+		
+hand_dependence			= 1
+single_handed			= 0
+	
+slot 				= 1,2		; secondary
+animation_slot			= 2		; type of the animation that will be used
+
+inv_name	 		= "АСМ "ВАЛ""
+inv_name_short		= "АСМ "ВАЛ""
+inv_weight			= 2.5
+
+inv_grid_width			= 5
+inv_grid_height			= 2
+inv_grid_x				= 0
+inv_grid_y				= 36
+
+;спавнить автоматически боеприпасы при подъеме оружия
+auto_spawn_ammo			= false
+
+;-----------------------------------------------------------------------------------
+;базовая дисперсия
+dispersion_start		= 0
+fire_dispersion_base		= 0.12		;угол (в градусах) базовой дисперсии оружия (оружия зажатого в тисках)
+control_inertion_factor		= 1.04f
+
+;отдача
+cam_relax_speed 		= 5		;скорость возврата в исходное положение
+cam_relax_speed_ai         	= 120.75
+cam_dispersion 			= 0.28		;увеличения угла (в градусах) с каждым выстрелом
+cam_dispersion_inc		= 0.11		;увеличениe cam_dispersion с каждым выстрелом
+cam_dispertion_frac		= 0.9 		;ствол будет подыматься на cam_dispersion*cam_dispertion_frac +- cam_dispersion*(1-cam_dispertion_frac)
+cam_max_angle			= 8.0		;максимальный угол отдачи
+cam_max_angle_horz		= 10.0		;(degree) maximum shot horizontal degree 
+cam_step_angle_horz		= 2.1		;(degree) size of step camera moved in horizontal position while shooting
+
+fire_dispersion_condition_factor = 4 		;увеличение дисперсии в процентах при максимальном износе 
+misfire_probability 		= 0.0005	;вероятность осечки при максимальном износе 
+misfire_condition_k 		= 0.2
+condition_shot_dec 		= 0.00067 	;увеличение износа при каждом выстреле
+;-----------------------------------------------------------------------------------
+
+direction                	= 0, 0, 1
+
+fire_point               	= 0.0, 0.207, 0.474
+
+smoke_particles				= weapons\generic_shoot_00
+
+shell_point		 			= 0.0, 0.211, 0.99
+shell_dir		 			= 0.0, 1.0, 0.0
+shell_particles	 			= weapons\arsenal_shells1
+
+PDM_disp_base 			= 1.0
+PDM_disp_vel_factor 		= 1.2
+PDM_disp_accel_factor 		= 1.5
+PDM_crouch	 		= 0.9
+PDM_crouch_no_acc 		= 0.8
+
+; ttc
+hit_power			= 1.296, 1.296,	1.296, 1.296
+hit_impulse		 	= 64
+hit_type 			= fire_wound
+
+fire_distance 	 		= 250
+bullet_speed			= 295			;начальная скорость пули
+rpm 				= 800
+rpm_empty_click 		= 400
+; end ttc
+
+use_aim_bullet			= false			;Поддерживается ли первая суппер пуля
+time_to_aim			= 1.0	
+
+hud                      	= wpn_asm_hud
+normal                   	= 0, 1, 0
+position         	    	= -0.026,-0.172,0
+orientation              	= 0, 0, 0
+
+;--STRAP PARAMETERS-----------------------------------------------------------------
+;на плечо
+strap_position         		= -0.26,-0.11,0.20			; position (offset) and orientation of the weapon when it is strapped
+strap_orientation      		= -15,-9,110				; (3rd person view in degrees)
+strap_bone0					= bip01_spine2
+strap_bone1					= bip01_spine1
+
+startup_ammo             	= 1000
+visual                   	= weapons\asm\wpn_asm.ogf
+
+light_disabled				= true
+
+ph_mass			 	= 3
+
+;addons
+scope_status			= 2
+silencer_status			= 1
+grenade_launcher_status		= 0
+
+zoom_enabled			= true
+scope_zoom_factor		= 60
+
+scope_name 			= wpn_addon_scope
+scope_texture			= wpn\wpn_crosshair_red
+scope_x 					= 55						; offset in inventory icon
+scope_y 					= 2
+
+
+;sounds (name of the sound, volume (0.0 - 1.0), delay (sec))
+snd_draw					= weapons\_general\rifle_draw
+snd_holster					= weapons\sig_550\holster
+snd_shoot					= weapons\asm\asm_shoot
+snd_shoot1					= weapons\asm\asm_shoot
+snd_shoot2					= weapons\asm\asm_shoot
+snd_shoot3					= weapons\asm\asm_shoot
+snd_empty					= weapons\val\val_empty, 0.7
+snd_reload					= weapons\val\val_reload
+snd_close					= weapons\generic_close
+
+;params when silencer is attached 
+;similar to corresponding params without prefix silencer_
+
+;silencer_flame_particles 	= weapons\generic_weapon01
+silencer_smoke_particles 	= weapons\generic_shoot_00
+
+silencer_hit_power 		= 0.796, 0.796,	0.796, 0.796
+silencer_hit_impulse	 	= 64
+silencer_fire_distance 		= 250
+silencer_bullet_speed	 	= 295
+
+silencer_light_color		= 0.6, 0.5, 0.3
+silencer_light_range		= 0.01
+silencer_light_var_color	= 0.05
+silencer_light_var_range	= 0.5
+silencer_light_time 		= 0.2
+
+;-----------------------------------------------------------------------------
+;-- HUD DESCRIPTION
+;-----------------------------------------------------------------------------
+[wpn_asm_hud]
+shell_point          		= 0,-0.1,-0.74
+shell_dir			 		= 0.0, 1.0, 0.0
+
+fire_point               	= 0,0,-0.5
+fire_bone                	= wpn_silencer
+orientation              	= 0, 0, 0
+position                	= -0.03, -0.13, 0.15
+visual                   	= weapons\asm\wpn_asm_hud.ogf
+
+anim_reload_effector = reload
+
+anim_idle			= lancew_val_idle
+anim_reload			= lancew_val_reload
+anim_reload_partly  = lancew_val_reload
+anim_draw			= lancew_val_draw
+anim_holster		= lancew_val_holster
+anim_shoot			= lancew_val_shoot
+anim_idle_aim		= lancew_val_idle_aim
+anim_idle_sprint	= lancew_val_sprint
+
+anim_reload_speed_k 			= 1.2
+anim_reload_partly_speed_k 		= 1.2
+anim_holster_speed_k 			= 1.4
+anim_reload_partly_stop_k 		= 0.57
+
+zoom_hide_crosshair			= true
+zoom_rotate_time			= 0.30
+
+zoom_offset					= -0.119, 0.042, -0.1
+zoom_rotate_x				= -0.01
+zoom_rotate_y				= 0.0
