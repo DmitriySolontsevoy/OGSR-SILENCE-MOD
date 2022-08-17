@@ -1,188 +1,151 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Глушители
-[wpn_sil_9p]:identity_immunities
-GroupControlSection	= spawn_group
-discovery_dependency = 
-$spawn			= "weapons\addons\sil_9_p" ; option for Level Editor
-class			= W_SILENC
-cform           = skeleton
-visual          = weapons\upgrade\wpn_sil_9.ogf
-description		= "Прибор бесшумной стрельбы для пистолетов калибра 9мм."
-$prefetch 		= 32
-
-cost					 = 100
-inv_name		= "Глушитель М9-П"
-inv_name_short	= "Глушитель М9-П"
-inv_weight		= .1
-
-inv_grid_width		= 1
-inv_grid_height		= 1
-inv_grid_x			= 10
-inv_grid_y			= 28
-
-bullet_hit_power_k	= 0.8
-bullet_speed_k	 	= 0.8
-fire_dispersion_base_k = 1.25
-cam_dispersion_k	= 0.8
-
-;----------------------------------------------------------------
-
-[wpn_sil_545]:identity_immunities
-GroupControlSection	= spawn_group
-discovery_dependency = 
-$spawn			= "weapons\addons\sil_545_ar" ; option for Level Editor
-class			= W_SILENC
-cform           = skeleton
-visual          = weapons\upgrade\wpn_sil_545.ogf
-description		= "Прибор бесшумной стрельбы для автоматов калибра 5.45мм."
-$prefetch 		= 32
-
-cost					 = 100
-inv_name		= "Глушитель 5.45мм"
-inv_name_short	= "Глушитель 5.45мм"
-inv_weight		= .1
-
-inv_grid_width		= 2
-inv_grid_height		= 1
-inv_grid_x			= 10
-inv_grid_y			= 29
-
-bullet_hit_power_k	= 0.8
-bullet_speed_k	 	= 0.8
-fire_dispersion_base_k = 1.25
-cam_dispersion_k	= 0.8
-
-;----------------------------------------------------------------
-
-[wpn_sil_556]:identity_immunities
-GroupControlSection	= spawn_group
-discovery_dependency = 
-$spawn			= "weapons\addons\sil_556_ar" ; option for Level Editor
-class			= W_SILENC
-cform           = skeleton
-visual          = weapons\upgrade\wpn_sil_556.ogf
-description		= "Прибор бесшумной стрельбы для автоматов калибра 5.56мм."
-$prefetch 		= 32
-
-cost					 = 750
-inv_name		= "Глушитель М5.56-А"
-inv_name_short	= "Глушитель М5.56-А"
-inv_weight		= .1
-
-inv_grid_width		= 2
-inv_grid_height		= 1
-inv_grid_x			= 10
-inv_grid_y			= 30
-
-bullet_hit_power_k	= 0.8
-bullet_speed_k	 	= 0.8
-fire_dispersion_base_k = 1.25
-cam_dispersion_k	= 0.8
-
-;----------------------------------------------------------------
-
-[wpn_sil_1143]:identity_immunities
-GroupControlSection	= spawn_group
-discovery_dependency = 
-$spawn			= "weapons\addons\sil_1143_p" ; option for Level Editor
-class			= W_SILENC
-cform           = skeleton
-visual          = weapons\upgrade\sil_1143_p.ogf
-description		= "Прибор бесшумной стрельбы для пистолетов калибра 11.43мм (.45)."
-$prefetch 		= 32
-
-cost					 = 750
-inv_name		= "Глушитель М11.43-П"
-inv_name_short	= "Глушитель М11.43-П"
-inv_weight		= .1
-
-inv_grid_width		= 1
-inv_grid_height		= 1
-inv_grid_x			= 12
-inv_grid_y			= 30
-
-bullet_hit_power_k	= 0.8
-bullet_speed_k	 	= 0.8
-fire_dispersion_base_k = 1.25
-cam_dispersion_k	= 0.8
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Прицелы
-[wpn_scope_acog]:identity_immunities
-GroupControlSection	= spawn_group
-discovery_dependency = 
-$spawn			= "weapons\addons\scope_acog" ; option for Level Editor
-class			= WP_SCOPE
-cform           = skeleton
-visual          = weapons\upgrade\wpn_scope_acog.ogf
-$prefetch 		= 32
-description		= "Оптический прицел ACOG TA01 NSN. Этот оптический прицел с четырехкратным увеличением был включен в комплект модульных систем и приспособлений для стрелкового оружия SOPMOD3, который разрабатывался с 1994 года в центре наземных операций ВМС США. В комплекте SOPMOD Block 1, внедрявшемся в войска для оснащения карабинов М4А1 в период с 1995 по 2005 год, прицел ACOG ТА01 NSN обозначается как 4 х Day Optical Scope (четырехкратный дневной оптический прицел). В настоящее время модель ТА01 NSN используется уже не только спецподразделениями в комплекте SOPMOD, но и получила довольно широкое распространение в обычных частях и подразделениях американских войск."
-cost			= 4000
-
-holder_range_modifier	= 1.2
-holder_fov_modifier		= 0.3
-
-inv_name		= "ACOG TA01 NSN"
-inv_name_short	= "ACOG TA01 NSN"
-inv_weight		= 0.6
-
-inv_grid_width     = 1
-inv_grid_height    = 1
-inv_grid_x         = 11
-inv_grid_y         = 24
-scope_texture		= wpn\cross\ACOG_X4
-scope_zoom_factor	= 25
-
-;-----------------------------------------------------------------
-
-[wpn_addon_scope_m1]:identity_immunities
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;	WEAPON ADDON
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wpn_addon_scope]:identity_immunities
 GroupControlSection	= spawn_group
 discovery_dependency = 
 $spawn			= "weapons\addons\scope" ; option for Level Editor
 class			= WP_SCOPE
 cform           = skeleton
-visual          = weapons\upgrade\upg_pso-3.ogf
+visual          = weapons\upgrade\wpn_scope.ogf
 $prefetch 		= 32
-description		= "ПОСП 3-9х42В относится к оптическим прицелам, которые можно использовать в сумерках благодаря встроенной подсветке. Конструкция данной модели предусматривает корректировку боковых и угловых поправок с помощью маховиков. Переменное увеличение и дальномерная модернизированная сетка позволяет ПОСП 3-9х42В без проблем определять расстояние до наблюдаемого объекта. Герметичность прицела обеспечивается за счет азота, которым заполнена внутренняя часть корпуса, также это предупреждает образование влаги на линзах изнутри и возможную коррозию металлических составляющих. Крепление ПОСП 3-9х42В стандартное, по типу "ласточкин хвост" так как присоединительный диаметр цилиндрической части составляет 1 дюйм. Предназначен для использования на снайперской винтовке СВУ-АС."
-cost			= 2000
+description		= enc_weapons1_wpn-addon-scope
+cost			= 200
 
 holder_range_modifier	= 1.2
 holder_fov_modifier		= 0.3
 
-inv_name		= "ПОСП 3-9х42В"
-inv_name_short	= "ПОСП 3-9х42В"
-inv_weight		= 0.9
-
-inv_grid_width     = 2
-inv_grid_height    = 1
-inv_grid_x         = 12
-inv_grid_y         = 28
-
-scope_texture			= wpn\cross\svd
-scope_zoom_factor	    = 15		;ПСО1M1-AMK 4X
-
-;-----------------------------------------------------------------
-
-[wpn_addon_scope_po_4x34]:identity_immunities
-GroupControlSection	= spawn_group
-discovery_dependency = 
-$spawn			= "weapons\addons\scope_po_4x34" ; option for Level Editor
-class			= WP_SCOPE
-cform           = skeleton
-visual          = weapons\upgrade\wpn_scope_po_4x34.ogf
-$prefetch 		= 32
-description		= "Прицел для ОЦ-14"
-cost			= 2000
-
-holder_range_modifier	= 1.2
-holder_fov_modifier		= 0.3
-
-inv_name		= ПО4х34
-inv_name_short	= ПО4х34
-inv_weight		= 0.13
+inv_name		= wpn-addon-scope
+inv_name_short	= wpn-addon-scope
+inv_weight		= .2
 
 inv_grid_width		= 2
 inv_grid_height		= 1
-inv_grid_x			= 12
-inv_grid_y			= 29
-scope_texture				= wpn\cross\oc14
-scope_zoom_factor	= 25		
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+inv_grid_x			= 18
+inv_grid_y			= 2
+scope_texture		= wpn\wpn_crosshair
+scope_zoom_factor	= 30		;ПСО-1 2X
+
+
+[wpn_addon_scope_1p86]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\scope" ; option for Level Editor
+class			= WP_SCOPE
+cform           = skeleton
+visual          = weapons\upgrade\wpn_addon_scope_1p86.ogf
+$prefetch 		= 32
+description		= enc_weapons1_wpn-addon-scope
+cost			= 200
+
+holder_range_modifier	= 1.2
+holder_fov_modifier		= 0.3
+
+inv_name		= 1P86
+inv_name_short	= 1P86
+inv_weight		= .2
+
+inv_grid_width		= 2
+inv_grid_height		= 1
+inv_grid_x			= 13
+inv_grid_y			= 6
+scope_texture		= wpn\wpn_crosshair
+scope_zoom_factor	= 30
+
+
+
+[wpn_addon_scope_susat]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\scope_susat" ; option for Level Editor
+class			= WP_SCOPE
+cform           = skeleton
+visual          = weapons\upgrade\wpn_scope_susat.ogf
+description		= enc_weapons1_wpn-addon-scope-susat
+
+;$prefetch 		= 64
+
+cost			= 200
+
+holder_range_modifier	= 1.3
+holder_fov_modifier		= 0.3
+
+inv_name		= wpn-addon-scope-susat
+inv_name_short	= wpn-addon-scope-susat
+inv_weight		= .2
+
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 19
+inv_grid_y			= 1
+scope_texture		= wpn\wpn_crosshair_l85
+scope_zoom_factor	= 30		;SUSAT 2X
+
+
+[wpn_addon_silencer]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\silencer" ; option for Level Editor
+class			= W_SILENC
+cform           = skeleton
+visual          = weapons\upgrade\wpn_silencer.ogf
+description		= enc_weapons1_wpn-addon-silencer
+$prefetch 		= 32
+
+cost					 = 100;150
+inv_name		= wpn-addon-silencer
+inv_name_short	= wpn-addon-silencer
+inv_weight		= .1
+
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 18
+inv_grid_y			= 1
+
+bullet_hit_power_k	= 0.8
+bullet_speed_k	 	= 0.8
+fire_dispersion_base_k = 1.25;2
+cam_dispersion_k	= 0.8
+
+[wpn_addon_grenade_launcher]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\grenade_launcher" ; option for Level Editor
+class			= W_GLAUNC
+cform           = skeleton
+visual          = weapons\upgrade\wpn_grenade_launcher.ogf
+description		= enc_weapons1_wpn-addon-grenade-launcher
+$prefetch 		= 32
+
+cost					 = 250
+inv_name		= wpn-addon-grenade-launcher
+inv_name_short	= wpn-addon-grenade-launcher
+inv_weight		= 1.3
+
+inv_grid_width		= 2
+inv_grid_height		= 1
+inv_grid_x			= 18
+inv_grid_y			= 0
+grenade_vel			= 76
+
+
+[wpn_addon_grenade_launcher_m203]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\grenade_launcher_m203" ; option for Level Editor
+class			= W_GLAUNC
+cform           = skeleton
+visual          = weapons\upgrade\wpn_grenade_launcher_m203.ogf
+description		= enc_weapons1_wpn-addon-grenade-launcher-m203
+$prefetch 		= 32
+
+cost					 = 250
+inv_name		= wpn-addon-grenade-launcher-m203
+inv_name_short	= wpn-addon-grenade-launcher-m203
+inv_weight		= 1.36
+
+inv_grid_width		= 2
+inv_grid_height		= 1
+inv_grid_x			= 17
+inv_grid_y			= 3
+grenade_vel			= 71
