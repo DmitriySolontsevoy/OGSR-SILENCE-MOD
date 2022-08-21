@@ -266,6 +266,12 @@ void player_hud::tune(Ivector _values)
 				Msg("aim_hud_offset_rot%s				= %f,%f,%f", is_16x9 ? "_16x9" : "", rot_.x, rot_.y, rot_.z);
 				Log("-----------");
 			}
+			else if (idx == hud_item_measures::m_hands_offset_type_scope) {
+				Msg("[%s]", m_attached_items[g_bHudAdjustItemIdx]->m_sect_name.c_str());
+				Msg("scope_hud_offset_pos%s				= %f,%f,%f", is_16x9 ? "_16x9" : "", pos_.x, pos_.y, pos_.z);
+				Msg("scope_hud_offset_rot%s				= %f,%f,%f", is_16x9 ? "_16x9" : "", rot_.x, rot_.y, rot_.z);
+				Log("-----------");
+			}
 			else if (idx == hud_item_measures::m_hands_offset_type_gl) {
 				Msg("[%s]", m_attached_items[g_bHudAdjustItemIdx]->m_sect_name.c_str());
 				Msg("gl_hud_offset_pos%s				= %f,%f,%f", is_16x9 ? "_16x9" : "", pos_.x, pos_.y, pos_.z);

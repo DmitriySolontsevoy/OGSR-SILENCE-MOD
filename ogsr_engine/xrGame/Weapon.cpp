@@ -1928,6 +1928,8 @@ u8 CWeapon::GetCurrentHudOffsetIdx()
 		{
 			if (m_bUseScopeZoom && has_scope)
 				return hud_item_measures::m_hands_offset_type_aim_scope;
+			else if (has_scope)
+				return hud_item_measures::m_hands_offset_type_scope;
 			else
 				return hud_item_measures::m_hands_offset_type_aim;
 		}

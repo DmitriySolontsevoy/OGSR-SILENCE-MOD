@@ -33,6 +33,10 @@
 #include "../script_game_object.h"
 #include "../xr_3da/xr_input.h"
 
+#include <string>
+#include <vector>
+#include <sstream>
+
 #define	UPGRADE_XML "ui_repair.xml"
 #define	TRADE_CHARACTER_XML	"trade_character.xml"
 

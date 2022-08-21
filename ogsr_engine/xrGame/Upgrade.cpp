@@ -6,6 +6,10 @@
 #include <CustomOutfit.h>
 #include <smart_cast.h>
 
+#include <string>
+#include <vector>
+#include <sstream>
+
 char* CUpgrade::ComposeNewSectionName(LPCSTR sectionBase, std::string upgradeName)
 {
     char* buf = new char[100];
