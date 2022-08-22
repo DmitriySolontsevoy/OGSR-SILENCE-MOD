@@ -53,7 +53,7 @@
     <texture id="ui_hud_icon_radiation" x="97" y="290" width="64" height="64" />
     <texture id="ui_hud_icon_eat" x="161" y="226" width="64" height="64" />
     <texture id="ui_hud_icon_goodmode" x="161" y="290" width="64" height="64" />
-    <texture id="ui_hud_icon_psycho" x="225" y="226" width="64" height="64" />
+    <texture id="ui_hud_icon_psycho" x="161" y="290" width="64" height="64" />
     <texture id="ui_hud_icon_drop" x="225" y="290" width="64" height="64" />
     <texture id="ui_hud_icon_drink" x="225" y="226" width="64" height="64" />
     <texture id="ui_hud_icon_artefact" x="289" y="226" width="64" height="64" />

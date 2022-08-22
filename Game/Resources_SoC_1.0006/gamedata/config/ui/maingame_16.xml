@@ -23,6 +23,15 @@
 		</progress>
 	</progress_bar_armor>
 
+
+	<static_psy x="910" y="641.5" width="110" height="14" stretch="1">
+		<texture>ui_hud_psy_full</texture>		
+	</static_psy>
+	<progress_bar_psy x="18.5" y="3" width="84" height="10" horz="1" min="0" max="100" pos="0">
+		<progress>
+			<texture>ui_hud_shk_psy</texture>
+		</progress>
+	</progress_bar_psy>
 	
 	<static_weapon x="890" y="692" width="140" height="65" stretch="1">
 		<text complex_mode="0" x="45" y="0" font="letterica16" r="255" g="255" b="255" a="130"/>

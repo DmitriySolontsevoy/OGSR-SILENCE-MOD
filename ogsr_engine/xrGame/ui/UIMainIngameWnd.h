@@ -43,9 +43,11 @@ protected:
 	CUIStatic			UIStaticDiskIO;
 	CUIStatic			UIStaticHealth;
 	CUIStatic			UIStaticArmor;
+	CUIStatic			UIStaticPsy;
 	CUIStatic			UIStaticQuickHelp;
 	CUIProgressBar		UIHealthBar;
 	CUIProgressBar		UIArmorBar;
+	CUIProgressBar		UIPsyBar;
 	CUICarPanel			UICarPanel;
 	CUIMotionIcon		UIMotionIcon;	
 	CUIZoneMap*			UIZoneMap;

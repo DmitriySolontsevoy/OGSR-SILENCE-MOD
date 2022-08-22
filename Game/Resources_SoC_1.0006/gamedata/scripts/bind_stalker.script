@@ -229,9 +229,6 @@ function actor_binder:update(delta)
 	-- Обновление визуала костюма
 	exo_weapons.update()
 
-	-- Отображение шкалы пси-здоровья
-	ui_psy_bar.show()
-
 	--Спавн переходов
 	custom_level_changers.spawn_changers()
 

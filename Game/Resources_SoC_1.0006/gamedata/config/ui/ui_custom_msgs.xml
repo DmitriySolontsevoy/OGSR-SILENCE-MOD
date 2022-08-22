@@ -87,13 +87,4 @@
     <text x="80" y="50" font="graffiti32" r="238" g="155" b="23" a="255"/>
   </max_ping_warn_4>
 
-	<static_psy x="0" y="0" width="1" height="1" stretch="1" complex_mode="1">
-		<texture>ui_hud_psy_full</texture>		
-	</static_psy>
-	<progress_bar_psy x="18.5" y="2" width="84" height="10" horz="1" min="0" max="100" pos="0">
-		<progress>
-			<texture>ui_hud_shk_psy</texture>
-		</progress>
-	</progress_bar_psy>
-
 </header>

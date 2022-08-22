@@ -146,6 +146,9 @@ void CUIMainIngameWnd::Init()
 	AttachChild					(&UIStaticArmor);
 	xml_init.InitStatic			(uiXml, "static_armor", 0, &UIStaticArmor);
 
+	AttachChild					(&UIStaticPsy);
+	xml_init.InitStatic			(uiXml, "static_psy", 0, &UIStaticPsy);
+
 	AttachChild					(&UIWeaponBack);
 	xml_init.InitStatic			(uiXml, "static_weapon", 0, &UIWeaponBack);
 
@@ -182,16 +185,16 @@ void CUIMainIngameWnd::Init()
 
 
 	//Полоса прогресса здоровья
-	UIStaticHealth.AttachChild	(&UIHealthBar);
-//.	xml_init.InitAutoStaticGroup(uiXml,"static_health", &UIStaticHealth);
-	xml_init.InitProgressBar	(uiXml, "progress_bar_health", 0, &UIHealthBar);
+	UIStaticHealth.AttachChild(&UIHealthBar);
+	xml_init.InitProgressBar(uiXml, "progress_bar_health", 0, &UIHealthBar);
 
 	//Полоса прогресса армора
-	UIStaticArmor.AttachChild	(&UIArmorBar);
-//.	xml_init.InitAutoStaticGroup(uiXml,"static_armor", &UIStaticArmor);
-	xml_init.InitProgressBar	(uiXml, "progress_bar_armor", 0, &UIArmorBar);
+	UIStaticArmor.AttachChild(&UIArmorBar);
+	xml_init.InitProgressBar(uiXml, "progress_bar_armor", 0, &UIArmorBar);
 
-	
+	//Полоса прогресса пси-здоровья
+	UIStaticPsy.AttachChild(&UIPsyBar);
+	xml_init.InitProgressBar(uiXml, "progress_bar_psy", 0, &UIPsyBar);
 
 	// Подсказки, которые возникают при наведении прицела на объект
 	AttachChild					(&UIStaticQuickHelp);
@@ -463,6 +466,7 @@ void CUIMainIngameWnd::Update()
 
 	// health&armor
 	UIHealthBar.SetProgressPos		(m_pActor->GetfHealth()*100.0f);
+	UIPsyBar.SetProgressPos			(m_pActor->conditions().GetPsyHealth()*100.0f);
 	UIMotionIcon.SetPower			(m_pActor->conditions().GetPower()*100.0f);
 
 	UIZoneMap->UpdateRadar			(Device.vCameraPosition);

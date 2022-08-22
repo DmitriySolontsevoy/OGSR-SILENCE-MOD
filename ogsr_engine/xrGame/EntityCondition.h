@@ -128,8 +128,7 @@ protected:
 	//все величины от 0 до 1			
 	float m_fPower;					//сила
 	float m_fRadiation;				//доза радиактивного облучения
-	float m_fPsyHealth;				//здоровье
-
+	float m_fPsyHealth;
 	float m_fEntityMorale;			//мораль
 
 	//максимальные величины
