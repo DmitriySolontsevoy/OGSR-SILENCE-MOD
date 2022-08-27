@@ -84,6 +84,9 @@ anim_hide					= holster
 anim_show					= draw
 anim_activate				= activate
 
+
+
+
 ; Артефакты для аномалии "Комариная плешь"
 [af_medusa]:af_base
 GroupControlSection	= spawn_group
@@ -104,9 +107,7 @@ inv_grid_y			= 4
 
 cost				= 1000
 
-jump_height			= .5
-
-particles			= anomaly2\artefact\artefact_gravi
+jump_height			= 0
 
 lights_enabled = false
 
@@ -152,13 +153,9 @@ inv_grid_y			= 4
 
 cost				= 2500
 
-jump_height			= .4
+jump_height			= 0
 
-particles			= anomaly2\artefact\artefact_gravi
-
-lights_enabled = true	;true			;???? ?????? 
-trail_light_color = 0.6,0.7,0.5
-trail_light_range = 0.5
+lights_enabled = false
 
 artefact_activation_seq		= af_activation_bold
 
@@ -201,13 +198,9 @@ inv_grid_y			= 4
 
 cost				= 5000
 
-jump_height			= .2
+jump_height			= 0
 
-particles			= anomaly2\artefact\artefact_gravi
-
-lights_enabled = true	;true			;???? ?????? 
-trail_light_color = 0.6,0.7,0.5
-trail_light_range = 3.0
+lights_enabled = false
 
 
 artefact_activation_seq		= af_activation_bold
@@ -256,11 +249,9 @@ inv_grid_y			= 0
 
 cost				= 1000
 
-jump_height			= .3
+jump_height			= 0
 
-particles			= anomaly2\artefact\artefact_gravi
-
-lights_enabled = false	;true			;???? ?????? 
+lights_enabled = false
 
 artefact_activation_seq		= af_activation_gravi
 
@@ -304,13 +295,9 @@ inv_grid_y			= 0
 
 cost				= 2500
 
-jump_height			= .3
+jump_height			= 0
 
-particles			= anomaly2\artefact\artefact_gravi
-
-lights_enabled = true	;true			;???? ?????? 
-trail_light_color = 0.6,0.7,0.5
-trail_light_range = 0.5
+lights_enabled = false
 
 artefact_activation_seq		= af_activation_gravi
 ;скорости увеличения (уменьшения) 
@@ -353,13 +340,9 @@ inv_grid_y			= 0
 
 cost				= 5000
 
-jump_height			= .2
+jump_height			= 0
 
-particles			= anomaly2\artefact\artefact_gravi
-
-lights_enabled = true	;true			;???? ?????? 
-trail_light_color = 0.6,0.7,0.5
-trail_light_range = 2.0
+lights_enabled = false
 
 artefact_activation_seq		= af_activation_gravi
 
@@ -406,12 +389,10 @@ inv_grid_x			= 12
 inv_grid_y			= 4
 
 cost				= 1000
-jump_height			= .1
 
-particles			= anomaly2\artefact\artefact_zharka
-lights_enabled = true	;true			;???? ?????? 
-trail_light_color = 0.6,0.7,0.5
-trail_light_range = 0.5
+jump_height			= 0
+
+lights_enabled = false
 
 
 ;скорости увеличения (уменьшения) 
@@ -458,12 +439,9 @@ impulse_threshold		= 10
 radius					= 10
 strike_impulse			= 20
 
+jump_height			= 0
 
-particles			= anomaly2\artefact\artefact_zharka
-
-lights_enabled = true	;true			;???? ?????? 
-trail_light_color = 0.9,0.5,0.5
-trail_light_range = 3.0
+lights_enabled = false
 
 
 ;скорости увеличения (уменьшения) 
@@ -503,13 +481,10 @@ inv_weight			= 0.5
 inv_grid_x			= 14
 inv_grid_y			= 4
 cost				= 5000
-jump_height			= .1
 
-particles			= anomaly2\artefact\artefact_zharka
+jump_height			= 0
 
-lights_enabled = true	;true			;???? ?????? 
-trail_light_color = 0.9,0.5,0.5
-trail_light_range = 3.0
+lights_enabled = false
 
 
 artefact_activation_seq		= af_activation_mincer
@@ -556,11 +531,9 @@ inv_grid_y			= 0
 
 cost				= 1000
 
-jump_height			= .01
+jump_height			= 0
 
-particles			= anomaly2\artefact\artefact_mincer
-
-lights_enabled = false	;true			;???? ?????? 
+lights_enabled = false
 
 artefact_activation_seq		= af_activation_mincer
 ;скорости увеличения (уменьшения) 
@@ -603,11 +576,9 @@ inv_grid_y			= 16
 
 cost				= 2500
 
-jump_height			= .1
+jump_height			= 0
 
-particles			= anomaly2\artefact\artefact_mincer
-
-lights_enabled = false	;true			;???? ?????? 
+lights_enabled = false
 
 artefact_activation_seq		= af_activation_mincer
 ;скорости увеличения (уменьшения) 
@@ -650,9 +621,7 @@ inv_grid_y			= 16
 
 cost				= 5000
 
-jump_height			= .1
-
-particles			= anomaly2\artefact\artefact_mincer
+jump_height			= 0
 
 lights_enabled = false
 
@@ -688,7 +657,7 @@ $spawn				= "artifacts\electra sparkler"
 
 $prefetch 			= 64
 cform				= skeleton
-class				= SCRPTART
+class				= ARTEFACT
 
 visual				= physics\anomaly\artefact_electra4.ogf
 description			= enc_zone_artifact_af-electra-sparkler 
@@ -701,13 +670,9 @@ inv_grid_y			= 11
 
 cost				= 1000
 
-jump_height			= .5
+jump_height			= 0
 
-particles			= anomaly2\artefact\artefact_electra
-
-lights_enabled = true	;true			;???? ?????? 
-trail_light_color = 0.5,0.5,0.9
-trail_light_range = 0.50
+lights_enabled = false
 
 artefact_activation_seq		= af_activation_electra
 ;скорости увеличения (уменьшения) 
@@ -736,7 +701,7 @@ $spawn				= "artifacts\electra flash"
 
 $prefetch 			= 64
 cform				= skeleton
-class				= SCRPTART
+class				= ARTEFACT
 
 visual				= physics\anomaly\artefact_electra3.ogf
 description			= enc_zone_artifact_af-electra-flash
@@ -750,13 +715,9 @@ inv_grid_y			= 8
 
 cost				= 2500
 
-jump_height			= .1
+jump_height			= 0
 
-particles			= anomaly2\artefact\artefact_electra
-
-lights_enabled = true	;true			;???? ?????? 
-trail_light_color = 0.6,0.7,0.9
-trail_light_range = 2.5
+lights_enabled = false
 
 artefact_activation_seq		= af_activation_electra
 ;скорости увеличения (уменьшения) 
@@ -786,7 +747,7 @@ $spawn				= "artifacts\electra moonlight"
 
 $prefetch 			= 64
 cform				= skeleton
-class				= SCRPTART
+class				= ARTEFACT
 
 visual				= physics\anomaly\artefact_electra1.ogf 
 description			= enc_zone_artifact_af-electra-moonlight
@@ -799,13 +760,9 @@ inv_grid_y			= 10
 
 cost				= 5000
 
-jump_height			= .1
+jump_height			= 0
 
-particles			= anomaly2\artefact\artefact_electra
-
-lights_enabled = true	;true			;???? ?????? 
-trail_light_color = 0.6,0.7,0.9
-trail_light_range = 1.0
+lights_enabled = false
 
 
 artefact_activation_seq		= af_activation_electra
@@ -851,9 +808,7 @@ inv_grid_y			= 4
 
 cost				= 1000
 
-jump_height			= .0
-
-particles			= anomaly2\artefact\artefact_ameba
+jump_height			= 0
 
 lights_enabled = false
 
@@ -898,13 +853,9 @@ inv_grid_y			= 4
 
 cost				= 2500
 
-jump_height			= .1
+jump_height			= 0
 
-particles			= anomaly2\artefact\artefact_ameba
-
-lights_enabled = true	;true			;???? ?????? 
-trail_light_color = 0.6,0.6,0.5
-trail_light_range = 1.0
+lights_enabled = false
 
 
 ;скорости увеличения (уменьшения) 
@@ -946,13 +897,9 @@ inv_grid_y			= 4
 
 cost				= 5000
 
-jump_height			= .1
+jump_height			= 0
 
-particles			= anomaly2\artefact\artefact_ameba
-
-lights_enabled = true	;true			;???? ?????? 
-trail_light_color = 0.6,0.7,0.6
-trail_light_range = 1
+lights_enabled = false
 
 
 ;скорости увеличения (уменьшения) 
@@ -995,9 +942,10 @@ inv_weight			= 0.5
 inv_grid_x			= 14
 inv_grid_y			= 1
 cost				= 5000
-jump_height			= .2
 
-lights_enabled = false			;???? ?????? ??????, ?? ????? ??????
+jump_height			= 0
+
+lights_enabled = false
 
 
 ;скорости увеличения (уменьшения) 
@@ -1038,9 +986,10 @@ inv_weight			= 0.5
 inv_grid_x			= 19
 inv_grid_y			= 6
 cost				= 5000
-jump_height			= .0
 
-lights_enabled = false			;???? ?????? ??????, ?? ????? ??????
+jump_height			= 0
+
+lights_enabled = false
 
 
 ;скорости увеличения (уменьшения) 
@@ -1081,12 +1030,12 @@ inv_weight			= 0.5
 
 inv_grid_x			= 8
 inv_grid_y			= 4
-jump_height			= .2
 
 cost				= 5000	;200
-particles			= anomaly2\artefact\artefact_gravi
 
-lights_enabled = false			;???? ?????? ??????, ?? ????? ??????
+jump_height			= 0
+
+lights_enabled = false
 
 
 ;скорости увеличения (уменьшения) 
@@ -1126,12 +1075,11 @@ inv_weight			= 0.5
 inv_grid_x			= 4
 inv_grid_y			= 9
 
-jump_height			= .2
-
 cost				= 5000	;200
-particles			= anomaly2\artefact\artefact_ameba
 
-lights_enabled = false			;???? ?????? ??????, ?? ????? ??????
+jump_height			= 0
+
+lights_enabled = false
 
 
 ;скорости увеличения (уменьшения) 
@@ -1173,9 +1121,7 @@ inv_grid_y			= 1
 
 cost				= 5000	;200
 
-jump_height			= .2
-
-particles			= anomaly2\artefact\artefact_mincer
+jump_height			= 0
 
 lights_enabled = false
 
@@ -1218,9 +1164,10 @@ inv_weight			= 0.5
 inv_grid_x			= 9
 inv_grid_y			= 11
 cost				= 1000
-jump_height			= .3
 
-lights_enabled = false			;???? ?????? ??????, ?? ????? ??????
+jump_height			= 0
+
+lights_enabled = false
 
 ;скорости увеличения (уменьшения) 
 health_restore_speed = 0.0			
@@ -1259,9 +1206,10 @@ inv_weight			= 0.5
 inv_grid_x			= 9
 inv_grid_y			= 10
 cost				= 2500	;100
-jump_height			= .4
 
-lights_enabled = false			;???? ?????? ??????, ?? ????? ??????
+jump_height			= 0
+
+lights_enabled = false
 
 
 ;скорости увеличения (уменьшения) 
@@ -1301,7 +1249,8 @@ inv_weight			= 0.5
 inv_grid_x			= 15
 inv_grid_y			= 1
 cost				= 5000
-jump_height			= .5
+
+jump_height			= 0
 
 lights_enabled = false
 
@@ -1337,7 +1286,7 @@ $npc			= on				; option for Level Editor
 cform           = skeleton
 class   		= ARTEFACT
 
-visual				= physics\anomaly\artefact_rusty_hairs.ogf
+visual				= physics\anomaly\artefact_bun.ogf
 description			= enc_zone_artifact_af-fuzz-kolobok
 inv_name			= af-fuzz-kolobok
 inv_name_short		= 
@@ -1346,9 +1295,9 @@ inv_weight			= 0.5
 inv_grid_x			= 17
 inv_grid_y			= 1
 cost				= 5000
-jump_height			= .5
 
-particles			= anomaly2\artefact\artefact_puxx
+jump_height			= 0
+
 lights_enabled = false
 
 
