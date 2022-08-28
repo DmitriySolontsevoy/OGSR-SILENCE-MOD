@@ -761,50 +761,28 @@ static BOOL pick_trace_callback( collide::rq_result& result, LPVOID params ) {
   return FALSE;
 }
 
-
-static float GetDofZoomDist() {
-  collide::rq_result& RQ = HUD().GetCurrentRayQuery();
-  if ( !RQ.O ) {
-    CDB::TRI* T = Level().ObjectSpace.GetStaticTris() + RQ.element;
-    if ( T->material < GMLib.CountMaterial() ) {
-      float vis = GMLib.GetMaterialByIdx( T->material )->fVisTransparencyFactor;
-      if ( !fis_zero( vis ) ) {
-        collide::rq_result  RQ2;
-        collide::rq_results RQR;
-        RQ2.range = GamePersistent().Environment().CurrentEnv->far_plane * 0.99f;
-        collide::ray_defs RD( Device.vCameraPosition, Device.vCameraDirection, RQ2.range, CDB::OPT_CULL, collide::rqtBoth );
-        if ( Level().ObjectSpace.RayQuery( RQR, RD, pick_trace_callback, &RQ2, NULL, Level().CurrentEntity() ) ) {
-          clamp( RQ2.range, RQ.range, RQ2.range );
-          return RQ2.range;
-        }
-      }
-    }
-  }
-  return RQ.range;
-}
-
-
-int g_dof_zoom_far  = 100;
-int g_dof_zoom_near = 50;
-//	m_dof		[4];	// 0-dest 1-current 2-from 3-original
 void CGamePersistent::UpdateDof()
 {
-	if(m_bPickableDOF)
+	if (m_bPickableDOF)
 	{
 		Fvector pick_dof;
-		pick_dof.y	= GetDofZoomDist();
-		pick_dof.x	= pick_dof.y - g_dof_zoom_near;
-		pick_dof.z	= pick_dof.y + g_dof_zoom_far;
+		{
+			pick_dof.y = 1;
+			pick_dof.x = 10;
+			pick_dof.z = 20;
+		}
+
 		m_dof[0]	= pick_dof;
-		m_dof[2]	= m_dof[1]; //current
+		m_dof[2]	= m_dof[1];
 	}
-	if(m_dof[1].similar(m_dof[0]))
-						return;
+
+	if (m_dof[1].similar(m_dof[0]))
+		return;
 
 	float td			= Device.fTimeDelta;
 	Fvector				diff;
 	diff.sub			(m_dof[0], m_dof[2]);
-	diff.mul			(td/0.2f); //0.2 sec
+	diff.mul			(td/0.2f);
 	m_dof[1].add		(diff);
 	(m_dof[0].x<m_dof[2].x)?clamp(m_dof[1].x,m_dof[0].x,m_dof[2].x):clamp(m_dof[1].x,m_dof[2].x,m_dof[0].x);
 	(m_dof[0].y<m_dof[2].y)?clamp(m_dof[1].y,m_dof[0].y,m_dof[2].y):clamp(m_dof[1].y,m_dof[2].y,m_dof[0].y);

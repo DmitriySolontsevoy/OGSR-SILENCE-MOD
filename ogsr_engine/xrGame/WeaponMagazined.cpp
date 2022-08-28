@@ -23,6 +23,7 @@
 #include "script_callback_ex.h"
 #include "script_game_object.h"
 #include <regex>
+#include "GamePersistent.h"
 
 CWeaponMagazined::CWeaponMagazined(LPCSTR name, ESoundTypes eSoundType) : CWeapon(name)
 {
@@ -173,6 +174,7 @@ void CWeaponMagazined::Load	(LPCSTR section)
 	m_fire_zoomout_time = READ_IF_EXISTS( pSettings, r_u32, section, "fire_zoomout_time", u32(-1) );
 
 	m_str_count_tmpl = READ_IF_EXISTS( pSettings, r_string, "features", "wpn_magazined_str_count_tmpl", "{AE}/{AC}" );
+
 }
 
 void CWeaponMagazined::FireStart		()
@@ -249,6 +251,8 @@ bool CWeaponMagazined::TryReload()
 				return true; 
 			}
 		}
+
+		return false;
 	}
 	
 	SwitchState(eIdle);
@@ -680,6 +684,9 @@ void CWeaponMagazined::OnAnimationEnd(u32 state)
 
 void CWeaponMagazined::switch2_Idle()
 {
+	if (GetHUDmode())
+		GamePersistent().SetPickableEffectorDOF(false);
+
 	SetPending(FALSE);
 	PlayAnimIdle();
 }
@@ -766,6 +773,9 @@ void CWeaponMagazined::PlayReloadSound()
 
 void CWeaponMagazined::switch2_Reload()
 {
+	if (GetHUDmode())
+		GamePersistent().SetPickableEffectorDOF(true);
+
 	CWeapon::FireEnd();
 
 	PlayReloadSound	();
