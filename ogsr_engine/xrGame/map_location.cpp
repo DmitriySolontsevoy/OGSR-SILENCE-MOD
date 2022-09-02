@@ -445,10 +445,10 @@ void CMapLocation::UpdateSpotPointer(CUICustomMap* map, CMapSpotPointer* sp )
 		sp->SetClipRect( clip_rect );
 		map->AttachChild(sp);
 
-		Fvector2 tt = map->ConvertLocalToReal(m_position_on_map);
+		Fvector2 tt = sp->MapLocation()->Position();
 		Fvector ttt;
-		ttt.set		(tt.x, 0.0f, tt.y);
-		float dist_to_target = Level().CurrentEntity()->Position().distance_to(ttt);
+		ttt.set(tt.x, 0.0f, tt.y);
+		float dist_to_target = Actor()->Position().distance_to(ttt);
 		map->SetPointerDistance	(dist_to_target);
 	}
 }
