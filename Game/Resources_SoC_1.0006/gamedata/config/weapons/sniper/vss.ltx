@@ -1,14 +1,3 @@
-; Винтовка снайперская специальная ВСС "Винторез" (6П29)
-;-(правлено SR)-------------------------------------
-; калибр 				9x39 мм
-; длина ствола 				200 мм
-; магазин				20
-; вес без магазина			3.16
-; эффективная дальность стрельбы	250 м 
-; прицельная дальность			400 м
-; дульная скорость пули			290 м/с
-; темп стрельбы				700 в/с
-;---------------------------------------------------
 [wpn_vintorez]:identity_immunities
 GroupControlSection		= spawn_group
 discovery_dependency 		= 
@@ -185,7 +174,7 @@ position                	= -0.02, -0.14, 0.2
 visual                   	= weapons\vintorez\wpn_vintorez_hud.ogf
 
 anim_reload_effector = reload
-anim_reload_partly_effector = reload
+anim_reload_partly_effector = short_reload
 
 anim_idle			= lancew_val_idle
 anim_reload			= lancew_val_reload

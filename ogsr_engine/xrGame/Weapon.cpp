@@ -869,6 +869,7 @@ static float state_time_heat = 0;			// таймер нагрева оружия
 static float previous_heating = 0;		// "нагретость" оружия в предыдущем состоянии
 
 #include "WeaponBinoculars.h"
+#include <GamePersistent.h>
 
 void CWeapon::UpdateWeaponParams()
 {
@@ -1156,6 +1157,9 @@ bool CWeapon::Action(s32 cmd, u32 flags)
 		{
 			if (pSettings->line_exist(this->hud_sect, "anim_inspect") && GetState() == eIdle)
 			{
+				if (GetHUDmode())
+					GamePersistent().SetPickableEffectorDOF(true);
+
 				PlayHUDMotion("anim_inspect", true, GetState());
 				return false;
 			}
@@ -1163,7 +1167,8 @@ bool CWeapon::Action(s32 cmd, u32 flags)
 		}
 		case kWPN_FIRE: 
 			{
-				//если оружие чем-то занято, то ничего не делать
+			if (GetHUDmode())
+				GamePersistent().SetPickableEffectorDOF(false);
 				{				
 					if(flags&CMD_START) 
 					{
@@ -1207,6 +1212,9 @@ bool CWeapon::Action(s32 cmd, u32 flags)
 
 		case kWPN_ZOOM:
 		{
+			if (GetHUDmode())
+				GamePersistent().SetPickableEffectorDOF(false);
+
 			if (IsZoomEnabled())
 			{
 				if (flags & CMD_START && !IsPending())
@@ -2274,8 +2282,13 @@ void CWeapon::Hide(bool now)
 		StopHUDSounds();
 	}
 	else
-		SwitchState(eHiding);
+	{
+		if (GetHUDmode())
+			GamePersistent().SetPickableEffectorDOF(false);
 
+		SwitchState(eHiding);
+	}
+		
 	OnZoomOut();
 }
 
