@@ -129,6 +129,12 @@ void CInventoryItem::Load(LPCSTR section)
         }
 	}
 
+	if (pSettings->line_exist(section, "snd_grab"))
+	{
+		HUD_SOUND::LoadSound(section, "snd_grab", m_pickUpSound, SOUND_TYPE_PICKING_UP);
+		m_hasPickUpSound = true;
+	}
+
 	// Description
 	if ( pSettings->line_exist(section, "description") )
 		m_Description = CStringTable().translate( pSettings->r_string(section, "description") );
@@ -672,6 +678,11 @@ void CInventoryItem::SetLoadedBeltIndex( u8 pos ) {
   m_eItemPlace = eItemPlaceBelt;
 }
 
+
+bool CInventoryItem::HasPickUpSound()
+{
+	return m_hasPickUpSound;
+}
 
 void CInventoryItem::OnMoveToSlot() {
   if ( smart_cast<CActor*>( object().H_Parent() )/* && !smart_cast<CGrenade*>( this )*/) {

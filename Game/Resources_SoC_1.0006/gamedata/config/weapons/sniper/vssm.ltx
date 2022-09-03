@@ -1,0 +1,204 @@
+[wpn_vssm]:identity_immunities
+GroupControlSection		= spawn_group
+discovery_dependency 		= 
+$spawn 				= "weapons\vintorez"	; option for Level Editor
+$npc 				= off
+$prefetch 			= 8
+scheduled 			= off 		; option for ALife Simulator
+cform 				= skeleton
+class 				= WP_VINT
+min_radius 			= 5
+max_radius 			= 150
+description			= enc_weapons1_wpn-vintorez
+
+ef_main_weapon_type		= 3
+ef_weapon_type			= 8
+
+;--- scope weapons -----------------------------------------------------------------
+holder_range_modifier		= 2.5 		; во сколько раз увеличивается eye_range 
+holder_fov_modifier		= 0.3 		; во сколько раз увеличивается eye_fov
+;-----------------------------------------------------------------------------------
+
+cartridge_bullet    = true
+
+cost				= 12000
+weapon_class			= sniper_rifle
+
+ammo_limit			= 60
+ammo_current			= 60
+ammo_elapsed			= 20
+ammo_mag_size			= 20
+
+ammo_class			= ammo_9x39_pab9, ammo_9x39_sp5, ammo_9x39_ap
+tracers				= off
+
+fire_modes			= 1, -1
+
+hand_dependence			= 1
+single_handed			= 0
+
+slot 				= 1,2		; secondary
+animation_slot			= 2		; type of the animation that will be used
+
+inv_name			= "ВССМ "Винторез""
+inv_name_short		= "ВССМ "Винторез""
+inv_weight			= 3.38
+
+inv_grid_width			= 5
+inv_grid_height			= 2
+inv_grid_x				= 16
+inv_grid_y				= 35
+
+;спавнить автоматически боеприпасы при подъеме оружия
+auto_spawn_ammo			= false
+
+;-----------------------------------------------------------------------------------
+;базовая дисперсия
+dispersion_start		= 0
+fire_dispersion_base		= 0.025		;угол (в градусах) базовой дисперсии оружия (оружия зажатого в тисках)
+control_inertion_factor		= 1.83f
+
+;отдача
+cam_relax_speed 		= 6.75		;скорость возврата в исходное положение
+cam_dispersion 			= 0.21		;увеличения угла (в градусах) с каждым выстрелом
+cam_dispersion_inc		= 0.15		;увеличениe cam_dispersion с каждым выстрелом
+cam_dispertion_frac		= 0.9		;ствол будет подыматься на cam_dispersion*cam_dispertion_frac +- cam_dispersion*(1-cam_dispertion_frac)
+cam_max_angle			= 7.0		;максимальный угол отдачи
+cam_max_angle_horz		= 10.0		;(degree) maximum shot horizontal degree 
+cam_step_angle_horz		= 1.4		;(degree) size of step camera moved in horizontal position while shooting
+
+fire_dispersion_condition_factor = 3		;увеличение дисперсии в процентах при максимальном износе 
+misfire_probability 		= 0.005		;вероятность осечки при максимальном износе 
+misfire_condition_k		= 0.3
+condition_shot_dec 		= 0.00067 	;увеличение износа при каждом выстреле
+;-----------------------------------------------------------------------------------
+
+direction 			= 0, 0, 1
+fire_point 			= 0.0, 0.127, 0.559
+smoke_particles			= weapons\generic_shoot_00
+
+shell_point			= 0.0, 0.127, 0.10
+shell_dir			= 0.0, 1.0, 0.0
+shell_particles	 			= weapons\arsenal_shells1
+
+PDM_disp_base 			= 1.0
+PDM_disp_vel_factor 		= 1.4
+PDM_disp_accel_factor 		= 1.6
+PDM_crouch	 		= 0.8
+PDM_crouch_no_acc 		= 0.6
+
+; ttc
+hit_power 			= 1.800, 1.800, 1.800, 1.800
+hit_impulse			= 64
+hit_type 			= fire_wound
+
+fire_distance 	 		= 300
+bullet_speed			= 295			;начальная скорость пули
+rpm 					= 920
+rpm_empty_click 		= 400
+; end ttc
+
+use_aim_bullet			= true			;Поддерживается ли первая супер пуля
+time_to_aim			= 1.0	
+
+hud 				= wpn_vssm_hud
+normal 				= 0, 1, 0
+position 			= -0.026, -0.084, 0.0
+orientation 			= 0, 0, 0
+
+;--STRAP PARAMETERS-----------------------------------------------------------------
+;на плечо
+strap_position 			= -0.26,-0.11,0.20	; position (offset) and orientation of the weapon when it is strapped
+strap_orientation 		= -15,-9,110		; (3rd person view in degrees)
+strap_bone0			= bip01_spine2
+strap_bone1			= bip01_spine1
+
+visual 				= weapons\vssm\wpn_vssm.ogf
+	
+light_disabled			= true
+
+ph_mass			 	= 3
+
+;addons
+scope_status			= 1
+silencer_status			= 1
+grenade_launcher_status		= 0
+
+zoom_enabled			= true
+scope_zoom_factor	 	= 15		; ПСО-1 x4
+scope_texture			= wpn\wpn_crosshair
+
+;sounds (name of the sound, volume (0.0 - 1.0), delay (sec))
+snd_draw					= weapons\_general\rifle_draw
+snd_holster					= weapons\sig_550\holster
+snd_shoot					= weapons\asm\asm_shoot
+snd_shoot1					= weapons\asm\asm_shoot
+snd_shoot2					= weapons\asm\asm_shoot
+snd_shoot3					= weapons\asm\asm_shoot 
+snd_empty					= weapons\vss\vss_empty, 0.8
+snd_reload					= weapons\vss\vss_reload
+
+;params when silencer is attached 
+;similar to corresponding params without prefix silencer_
+
+;silencer_flame_particles 	= weapons\generic_weapon01
+silencer_smoke_particles 	= weapons\generic_shoot_00
+
+silencer_hit_power 		= 1.800, 1.800, 1.800, 1.800
+silencer_hit_impulse	 	= 64
+silencer_fire_distance 		= 400
+silencer_bullet_speed	 	= 290
+
+silencer_light_color		= 0.6, 0.5, 0.3
+silencer_light_range		= 0.01
+silencer_light_var_color	= 0.05
+silencer_light_var_range	= 0.5
+silencer_light_time 		= 0.2
+
+hit_probability_gd_novice	= 0.80				; точность стрельбы,      
+hit_probability_gd_stalker	= 0.85				; когда оружие в руках НПС
+hit_probability_gd_veteran	= 0.90				; в зависимости от уровня 
+hit_probability_gd_master	= 0.95				; сложности игры          
+
+;-----------------------------------------------------------------------------
+;-- HUD DESCRIPTION
+;-----------------------------------------------------------------------------
+[wpn_vssm_hud]
+allow_inertion			= true
+
+shell_point          		= 0,-0.1,-0.74
+shell_dir			 		= 0.0, 1.0, 0.0
+
+fire_point               	= 0,0,-0.5
+fire_bone                	= wpn_silencer
+orientation              	= 0, 0, 0
+position                	= -0.03, -0.13, 0.15
+
+visual                   	= weapons\vssm\wpn_vssm_hud.ogf
+
+anim_reload_effector = reload
+anim_reload_partly_effector = short_reload
+
+anim_idle			= lancew_val_idle
+anim_reload			= lancew_val_reload
+anim_reload_partly  = lancew_val_reload
+anim_draw			= lancew_val_draw
+anim_holster		= lancew_val_holster
+anim_shoot			= lancew_val_shoot
+anim_idle_aim		= lancew_val_idle_aim
+anim_idle_sprint	= lancew_val_sprint
+
+anim_reload_speed_k 			= 1.2
+anim_reload_partly_speed_k 		= 1.2
+anim_holster_speed_k 			= 1.4
+anim_reload_partly_stop_k 		= 0.57
+
+zoom_hide_crosshair			= true
+
+zoom_offset					= -0.119, 0.027, -0.3
+zoom_rotate_x				= 0.0
+zoom_rotate_y				= 0.0
+
+;время поворота HUD (сек)
+zoom_rotate_time		= 0.3
+rotate_time			= 0.3

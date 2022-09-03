@@ -12,6 +12,7 @@
 #include "hit_immunity.h"
 #include "attachable_item.h"
 #include "ui\UIIconParams.h"
+#include "HudSound.h"
 
 class CUIInventoryCellItem;
 
@@ -145,6 +146,10 @@ public:
 
 	EItemPlace					m_eItemPlace;
 
+	HUD_SOUND                   m_pickUpSound;
+	bool                        m_hasPickUpSound;
+
+	virtual bool                HasPickUpSound();
 
 	virtual void				OnMoveToSlot		();
 	virtual void				OnMoveToBelt		();
