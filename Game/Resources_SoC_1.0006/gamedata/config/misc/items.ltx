@@ -27,6 +27,8 @@ bone_name				= bip01_r_hand
 position_offset			 = 0.0,0.0,0.0
 angle_offset			 = 1.570790,1.570790,3.92699
 
+snd_grab = pickups\grab_food
+
 [bread]:identity_immunities
 GroupControlSection	= spawn_group
 discovery_dependency =
@@ -68,6 +70,7 @@ eat_portions_num = -1
 ;hud item
 hud = wpn_vodka_hud
 
+snd_grab = pickups\grab_food
 
 [kolbasa]:identity_immunities
 GroupControlSection	= spawn_group
@@ -110,6 +113,8 @@ eat_portions_num = -1
 ;hud item
 hud = wpn_vodka_hud
 
+snd_grab = pickups\grab_food
+
 [kolbasa_a]:identity_immunities
 GroupControlSection		= spawn_group
 discovery_dependency	=
@@ -135,6 +140,8 @@ auto_attach				= false
 bone_name				= bip01_r_hand
 position_offset			 = 0.0,0.0,0.0
 angle_offset			 = 1.570790,1.570790,3.92699
+
+snd_grab = pickups\grab_food
 
 [conserva]:identity_immunities
 GroupControlSection	= spawn_group
@@ -176,6 +183,8 @@ auto_attach				= false
 bone_name				= bip01_r_hand
 position_offset			 = 0.0,0.0,0.0
 angle_offset			 = 1.570790,1.570790,3.92699
+
+snd_grab = pickups\grab_food
 
 [vodka_a]:identity_immunities
 GroupControlSection		= spawn_group
@@ -231,6 +240,7 @@ wounds_heal_perc	= 0
 eat_portions_num	= 1
 eat_max_power		= 0
 
+snd_grab = pickups\grab_bottle
 
 [vodka]:identity_immunities
 GroupControlSection	= spawn_group
@@ -279,6 +289,7 @@ hud = wpn_vodka_hud
 break_particles		= explosions\explosion_bottle
 break_sound			= material\bottle\collide\bottle_break_1
 
+snd_grab = pickups\grab_bottle
 
 [guitar_a]:identity_immunities
 GroupControlSection		= spawn_group
@@ -299,6 +310,8 @@ attach_angle_offset		= -1.651084, -1.341824, 1.200789
 attach_position_offset	= 0.077492, -0.030020, 0.090059
 attach_bone_name		= bip01_l_hand
 auto_attach				= false
+
+snd_grab = pickups\grab_guitar
 
 [harmonica_a]:identity_immunities
 GroupControlSection		= spawn_group
@@ -354,6 +367,8 @@ eat_portions_num = 1
 ;hud item
 hud = wpn_vodka_hud
 
+snd_grab = pickups\grab_pills
+
 [rad_shield]:identity_immunities
 GroupControlSection	= spawn_group
 discovery_dependency =
@@ -378,6 +393,7 @@ eat_portions_num	= 1
 eat_boost_radiation_immunity_time  = 10
 eat_boost_radiation_immunity_value = 0.5
 
+snd_grab = pickups\grab_pills
 
 [adrenaline_shot]:identity_immunities
 GroupControlSection	= spawn_group
@@ -403,6 +419,8 @@ eat_portions_num	= 1
 eat_boost_health_time  = 5.0
 eat_boost_health_value = 0.001
 
+snd_grab = pickups\grab_syringe
+
 [fulgurine_pills]:identity_immunities
 GroupControlSection	= spawn_group
 discovery_dependency =
@@ -426,6 +444,8 @@ eat_portions_num	= 1
 
 eat_boost_electric_immunity_time  = 30.0
 eat_boost_electric_immunity_value = 0.5
+
+snd_grab = pickups\grab_pills
 
 [ignisorb_pills]:identity_immunities
 GroupControlSection	= spawn_group
@@ -451,6 +471,8 @@ eat_portions_num	= 1
 eat_boost_thermal_immunity_time  = 30.0
 eat_boost_thermal_immunity_value = 0.5
 
+snd_grab = pickups\grab_pills
+
 [dismurol_pills]:identity_immunities
 GroupControlSection	= spawn_group
 discovery_dependency =
@@ -474,6 +496,8 @@ eat_portions_num	= 1
 
 eat_boost_chemical_immunity_time  = 30.0
 eat_boost_chemical_immunity_value = 0.5
+
+snd_grab = pickups\grab_pills
 
 [psycho_pills]:identity_immunities
 GroupControlSection	= spawn_group
@@ -499,6 +523,8 @@ eat_portions_num	= 1
 eat_boost_psychic_immunity_time  = 30.0
 eat_boost_psychic_immunity_value = 0.5
 
+snd_grab = pickups\grab_pills
+
 [anabiotics]:identity_immunities
 GroupControlSection	= spawn_group
 discovery_dependency =
@@ -522,6 +548,8 @@ eat_portions_num	= 1
 
 eat_boost_radiation_time  = 5.0
 eat_boost_radiation_value = -0.05
+
+snd_grab = pickups\grab_syringe
 
 [hercules]:identity_immunities
 GroupControlSection	= spawn_group
@@ -547,6 +575,7 @@ eat_portions_num	= 1
 eat_boost_max_weight_time  = 5.0
 eat_boost_max_weight_value = 20.0
 
+snd_grab = pickups\grab_bottle
 
 [medkit]:identity_immunities
 GroupControlSection	= spawn_group
@@ -576,9 +605,10 @@ wounds_heal_perc	= 0.3
 eat_portions_num	= 1
 eat_max_power		= 0.1
 
-
 ;hud item
 hud = wpn_vodka_hud
+
+snd_grab = pickups\grab_pills
 
 [medkit_army]:identity_immunities
 GroupControlSection	= spawn_group
@@ -610,6 +640,8 @@ eat_max_power		= 0.1
 
 ;hud item
 hud = wpn_vodka_hud
+
+snd_grab = pickups\grab_pills
 
 [medkit_scientic]:identity_immunities
 GroupControlSection	= spawn_group
@@ -643,6 +675,7 @@ eat_max_power		= 0.1
 ;hud item
 hud = wpn_vodka_hud
 
+snd_grab = pickups\grab_pills
 
 [energy_drink]:vodka
 $spawn 				= "food and drugs\energy_drink"
@@ -673,6 +706,7 @@ attach_position_offset	= 0.087266, -0.078540, 0.052360
 attach_bone_name		= bip01_r_hand
 auto_attach				= false
 
+snd_grab = pickups\grab_soda
 
 [bandage]:identity_immunities
 GroupControlSection	= spawn_group
@@ -705,6 +739,7 @@ eat_portions_num = 1	;100
 ;hud item
 hud = wpn_vodka_hud
 
+snd_grab = pickups\grab_bandage
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;	DEVICES
