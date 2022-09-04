@@ -11,4 +11,5 @@ Materials from these modifications were used:
 
 # IMPORTANT NOTES
 Because of the limit of file size on GitHub next list of files need to be extracted from archives:
-1. Navigate to "Game/Resources_SoC_1.0006/gamedata/levels/pripyat" and extract "level_geom.zip" to this same folder.
+1. Navigate to "Game/Resources_SoC_1.0006/gamedata/levels/pripyat" and extract "level_geom.zip" into this same folder.
+2. Navigate to "bin_x64/" and extract "xrGame.zip" into this same folder
