@@ -128,43 +128,6 @@ inv_grid_height		= 1
 inv_grid_x			= 11
 inv_grid_y			= 12
 
-
-k_dist			= 1
-k_disp			= 3
-k_hit			= 1
-k_impulse		= 1
-k_pierce		= 1
-impair			= 1
-buck_shot		= 1
-tracer			= off
-wm_size         = 0.05
-
-snd_grab = pickups\grab_ammo_9_18
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-[ammo_9x18_pbp]:ammo_base
-GroupControlSection	= spawn_group
-discovery_dependency = 
-$spawn			= "weapons\ammo\ammo_9x18_pbp" ; option for Level Editor
-class			= AMMO
-cform                   = skeleton
-visual                  = weapons\ammo\ammo_9x18_pbp.ogf
-description				= enc_weapons1_ammo_ammo-9x18-pbp
-$prefetch 		= 64
-
-cost					 = 100
-
-box_size		= 20	;50
-
-inv_name		= "9x18 PBP"
-inv_name_short		= "JSP-AP"
-inv_weight		= .2
-
-inv_grid_width		= 1
-inv_grid_height		= 1
-inv_grid_x			= 13
-inv_grid_y			= 12
-
 k_dist			= 1
 k_disp			= 3
 k_hit			= 1.1
@@ -1948,3 +1911,22 @@ telepatic_immunity		= 0.0
 chemical_burn_immunity	= 1.0
 explosion_immunity		= 0.0
 fire_wound_immunity		= 0.0
+
+
+
+;;; UNUSED ;;;
+
+
+[ammo_9x18_pbp]:ammo_base
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\ammo\ammo_9x18_pbp" ; option for Level Editor
+class			= AMMO
+cform                   = skeleton
+visual                  = weapons\ammo\ammo_9x18_fmj.ogf
+description				= enc_weapons1_ammo_ammo-9x18-fmj
+$prefetch 		= 64
+
+cost		= 0
+box_size	= 0
+inv_weight	= 0
