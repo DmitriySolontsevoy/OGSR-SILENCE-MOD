@@ -10,7 +10,7 @@
 			</dist_text>
 		</background>
 		
-		<compass x="112" y="170" width="24" height="33" heading="1" stretch="1">
+		<compass x="112.5" y="169.5" width="24" height="33" heading="1" stretch="1">
 			<texture>ui\ui_hud_map_arrow</texture>
 		</compass>
 		
