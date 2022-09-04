@@ -152,7 +152,13 @@ void	CActor::PickupModeUpdate_COD	()
           if ( m_bPickupMode ) {
             Game().SendPickUpEvent( ID(), pNearestItem->object().ID() );
             PickupModeOff();
-            pNearestItem = nullptr;
+
+			if (pNearestItem->HasPickUpSound() && this == Actor())
+			{
+				HUD_SOUND::PlaySound(pNearestItem->m_pickUpSound, Fvector().set(0, 0, 0), 0, true);
+			}
+
+			pNearestItem = nullptr;
           }
           HUD().GetUI()->UIMainIngameWnd->SetPickUpItem( pNearestItem );
           return;
@@ -220,6 +226,12 @@ void	CActor::PickupModeUpdate_COD	()
             //подбирание объекта
                 Game().SendPickUpEvent(ID(), pNearestItem->object().ID());
                 PickupModeOff();
+
+				if (pNearestItem->HasPickUpSound() && this == Actor())
+				{
+					HUD_SOUND::PlaySound(pNearestItem->m_pickUpSound, Fvector().set(0, 0, 0), 0, true);
+				}
+
                 pNearestItem = nullptr;
           }
         }

@@ -299,11 +299,6 @@ void CInventoryOwner::OnItemTake			(CInventoryItem *inventory_item)
 		inventory().Activate(m_tmp_active_slot_num);
 		m_tmp_active_slot_num	= NO_ACTIVE_SLOT;
 	}
-
-	if (inventory_item->HasPickUpSound() && this == Actor()) 
-	{
-		HUD_SOUND::PlaySound(inventory_item->m_pickUpSound, Fvector().set(0, 0, 0), 0, true);
-	}
 }
 
 //возвращает текуший разброс стрельбы с учетом движения (в радианах)
