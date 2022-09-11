@@ -32,6 +32,9 @@
 #include "agent_member_manager.h"
 #include "player_hud.h"
 
+#include "pointer.h"
+#include "foregrip.h"
+
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////
@@ -277,6 +280,8 @@ TEST_OBJECT_CLASS(CScriptGameObject::IsCustomOutfit, CCustomOutfit)
 TEST_OBJECT_CLASS(CScriptGameObject::IsScope, CScope)
 TEST_OBJECT_CLASS(CScriptGameObject::IsSilencer, CSilencer)
 TEST_OBJECT_CLASS(CScriptGameObject::IsGrenadeLauncher, CGrenadeLauncher)
+TEST_OBJECT_CLASS(CScriptGameObject::IsPointer, CPointer)
+TEST_OBJECT_CLASS(CScriptGameObject::IsForegrip, CSilencer)
 TEST_OBJECT_CLASS(CScriptGameObject::IsWeaponMagazined, CWeaponMagazined)
 TEST_OBJECT_CLASS(CScriptGameObject::IsWeaponShotgun, CWeaponShotgun)
 TEST_OBJECT_CLASS(CScriptGameObject::IsSpaceRestrictor, CSpaceRestrictor)

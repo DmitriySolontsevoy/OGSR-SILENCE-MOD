@@ -377,6 +377,20 @@ void set_grenade_launcher_name(CWeapon *item, LPCSTR text)
     item->m_sGrenadeLauncherName = text;
 }
 
+LPCSTR get_pointer_name(CWeapon* I) { return I->m_sPointerName.c_str(); }
+
+void set_pointer_name(CWeapon* item, LPCSTR text)
+{
+	item->m_sPointerName = text;
+}
+
+LPCSTR get_foregrip_name(CWeapon* I) { return I->m_sForegripName.c_str(); }
+
+void set_foregrip_name(CWeapon* item, LPCSTR text)
+{
+	item->m_sForegripName = text;
+}
+
 void CWeaponScript::script_register(lua_State *L)
 {
 #ifdef NLC_EXTENSIONS
@@ -439,14 +453,22 @@ void CWeaponScript::script_register(lua_State *L)
 			.def_readwrite("scope_y"					,			&CWeapon::m_iScopeY)
 			.def_readwrite("silencer_x"					,			&CWeapon::m_iSilencerX)
 			.def_readwrite("silencer_y"					,			&CWeapon::m_iSilencerY)
+			.def_readwrite("pointer_x", &CWeapon::m_iPointerX)
+			.def_readwrite("pointer_y", &CWeapon::m_iPointerY)
+			.def_readwrite("foregrip_x", &CWeapon::m_iForegripX)
+			.def_readwrite("foregrip_y", &CWeapon::m_iForegripY)
 
             .def_readwrite("scope_status", &CWeapon::m_eScopeStatus)
             .def_readwrite("silencer_status", &CWeapon::m_eSilencerStatus)
             .def_readwrite("grenade_launcher_status", &CWeapon::m_eGrenadeLauncherStatus)
+            .def_readwrite("pointer_status", &CWeapon::m_eLaserPointerStatus)
+            .def_readwrite("foregrip_status", &CWeapon::m_eForegripStatus)
 
             .property("scope_name", &get_scope_name, &set_scope_name)
             .property("silencer_name", &get_silencer_name, &set_silencer_name)
             .property("grenade_launcher_name", &get_grenade_launcher_name, &set_grenade_launcher_name)
+            .property("pointer_name", &get_pointer_name, &set_pointer_name)
+            .property("foregrip_name", &get_foregrip_name, &set_foregrip_name)
 
 			.def_readonly("misfire"						,			&CWeapon::bMisfire)
 			.def_readonly("zoom_mode"					,			&CWeapon::m_bZoomMode)

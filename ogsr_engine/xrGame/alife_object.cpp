@@ -37,6 +37,8 @@ void CSE_ALifeObject::spawn_supplies		(LPCSTR ini_string)
 			bool bScope							= false;
 			bool bSilencer						= false;
 			bool bLauncher						= false;
+			bool bPointer						= false;
+			bool bForegrip                      = false;
 
 			
 			j					= 1;
@@ -50,6 +52,8 @@ void CSE_ALifeObject::spawn_supplies		(LPCSTR ini_string)
 				bScope				= (NULL!=strstr(V,"scope"));
 				bSilencer			= (NULL!=strstr(V,"silencer"));
 				bLauncher			= (NULL!=strstr(V,"launcher"));
+				bPointer			= (NULL!=strstr(V,"pointer"));
+				bForegrip           = (NULL!=strstr(V,"foregrip"));
 				//probability
 				if(NULL!=strstr(V,"prob="))
 					p				= (float)atof(strstr(V,"prob=")+5);
@@ -69,6 +73,10 @@ void CSE_ALifeObject::spawn_supplies		(LPCSTR ini_string)
 							W->m_addon_flags.set(CSE_ALifeItemWeapon::eWeaponAddonSilencer, bSilencer);
 						if (W->m_grenade_launcher_status == CSE_ALifeItemWeapon::eAddonAttachable)
 							W->m_addon_flags.set(CSE_ALifeItemWeapon::eWeaponAddonGrenadeLauncher, bLauncher);
+						if (W->m_laser_pointer_status == CSE_ALifeItemWeapon::eAddonAttachable)
+							W->m_addon_flags.set(CSE_ALifeItemWeapon::eWeaponAddonPointer, bPointer);
+						if (W->m_foregrip_status == CSE_ALifeItemWeapon::eAddonAttachable)
+							W->m_addon_flags.set(CSE_ALifeItemWeapon::eWeaponAddonForegrip, bForegrip);
 					}
 					CSE_ALifeInventoryItem* IItem = smart_cast<CSE_ALifeInventoryItem*>(E);
 					if(IItem)

@@ -30,7 +30,6 @@ bool CUIInventoryCellItem::EqualTo(CUICellItem* itm)
 	CUIInventoryCellItem* ci = smart_cast<CUIInventoryCellItem*>(itm);
 	if(!itm)				return false;
 
-	// Real Wolf: Колбек на группировку и само регулирование группировкой предметов. 12.08.2014.
 	auto item1 = (CInventoryItem*)m_pData;
 	auto item2 = (CInventoryItem*)itm->m_pData;
 
@@ -211,6 +210,8 @@ CUIWeaponCellItem::CUIWeaponCellItem(CWeapon* itm)
 	m_addons[eSilencer]		= NULL;
 	m_addons[eScope]		= NULL;
 	m_addons[eLauncher]		= NULL;
+	m_addons[ePointer]		= NULL;
+	m_addons[eForegrip]		= NULL;
 
 	m_cell_size.set(INV_GRID_WIDTHF, INV_GRID_HEIGHTF);
 
@@ -222,6 +223,12 @@ CUIWeaponCellItem::CUIWeaponCellItem(CWeapon* itm)
 
 	if(itm->GrenadeLauncherAttachable())
 		m_addon_offset[eLauncher].set(object()->GetGrenadeLauncherX(), object()->GetGrenadeLauncherY());
+
+	if (itm->PointerAttachable())
+		m_addon_offset[ePointer].set(object()->GetPointerX(), object()->GetPointerY());
+
+	if (itm->ForegripAttachable())
+		m_addon_offset[eForegrip].set(object()->GetForegripX(), object()->GetForegripY());
 }
 
 #include "../object_broker.h"
@@ -242,6 +249,16 @@ bool CUIWeaponCellItem::is_silencer()
 bool CUIWeaponCellItem::is_launcher()
 {
 	return object()->GrenadeLauncherAttachable()&&object()->IsGrenadeLauncherAttached();
+}
+
+bool CUIWeaponCellItem::is_pointer()
+{
+	return object()->PointerAttachable() && object()->IsPointerAttached();
+}
+
+bool CUIWeaponCellItem::is_foregrip()
+{
+	return object()->ForegripAttachable() && object()->IsForegripAttached();
 }
 
 void CUIWeaponCellItem::CreateIcon(eAddonType t, CIconParams &params)
@@ -304,20 +321,54 @@ void CUIWeaponCellItem::Update()
 		}
 	}
 
-	if (object()->GrenadeLauncherAttachable()){
+	if (object()->GrenadeLauncherAttachable()) {
 		if (object()->IsGrenadeLauncherAttached())
 		{
 			if (!GetIcon(eLauncher) || bForceReInitAddons)
 			{
 				CIconParams params(object()->GetGrenadeLauncherName());
-				CreateIcon	(eLauncher, params);
-				InitAddon	(GetIcon(eLauncher), params, m_addon_offset[eLauncher], Heading());
+				CreateIcon(eLauncher, params);
+				InitAddon(GetIcon(eLauncher), params, m_addon_offset[eLauncher], Heading());
 			}
 		}
 		else
 		{
 			if (m_addons[eLauncher])
 				DestroyIcon(eLauncher);
+		}
+	}
+
+	if (object()->PointerAttachable()){
+		if (object()->IsPointerAttached())
+		{
+			if (!GetIcon(ePointer) || bForceReInitAddons)
+			{
+				CIconParams params(object()->GetPointerName());
+				CreateIcon	(ePointer, params);
+				InitAddon	(GetIcon(ePointer), params, m_addon_offset[ePointer], Heading());
+			}
+		}
+		else
+		{
+			if (m_addons[ePointer])
+				DestroyIcon(ePointer);
+		}
+	}
+
+	if (object()->ForegripAttachable()) {
+		if (object()->IsForegripAttached())
+		{
+			if (!GetIcon(eForegrip) || bForceReInitAddons)
+			{
+				CIconParams params(object()->GetForegripName());
+				CreateIcon(eForegrip, params);
+				InitAddon(GetIcon(eForegrip), params, m_addon_offset[eForegrip], Heading());
+			}
+		}
+		else
+		{
+			if (m_addons[eForegrip])
+				DestroyIcon(eForegrip);
 		}
 	}
 }
@@ -329,11 +380,13 @@ void CUIWeaponCellItem::OnAfterChild(CUIDragDropListEx* parent_list)
 	CUIStatic* s_silencer = is_silencer() ? GetIcon(eSilencer) : NULL;
 	CUIStatic* s_scope = is_scope() ? GetIcon(eScope) : NULL;
 	CUIStatic* s_launcher = is_launcher() ? GetIcon(eLauncher) : NULL;
+	CUIStatic* s_pointer = is_pointer() ? GetIcon(ePointer) : NULL;
+	CUIStatic* s_foregrip = is_foregrip() ? GetIcon(eForegrip) : NULL;
 	
-	InitAllAddons(s_silencer, s_scope, s_launcher, parent_list->GetVerticalPlacement());
+	InitAllAddons(s_silencer, s_scope, s_launcher, s_pointer, s_foregrip, parent_list->GetVerticalPlacement());
 }
 
-void CUIWeaponCellItem::InitAllAddons(CUIStatic* s_silencer, CUIStatic* s_scope, CUIStatic* s_launcher, bool b_vertical)
+void CUIWeaponCellItem::InitAllAddons(CUIStatic* s_silencer, CUIStatic* s_scope, CUIStatic* s_launcher, CUIStatic* s_pointer, CUIStatic* s_foregrip, bool b_vertical)
 {
 	CIconParams params;
 
@@ -348,6 +401,14 @@ void CUIWeaponCellItem::InitAllAddons(CUIStatic* s_silencer, CUIStatic* s_scope,
 	if (s_launcher) {
 		params.Load(*object()->GetGrenadeLauncherName());
 		InitAddon(s_launcher, params, m_addon_offset[eLauncher], b_vertical);
+	}
+	if (s_pointer) {
+		params.Load(*object()->GetPointerName());
+		InitAddon(s_pointer, params, m_addon_offset[ePointer], b_vertical);
+	}
+	if (s_foregrip) {
+		params.Load(*object()->GetForegripName());
+		InitAddon(s_foregrip, params, m_addon_offset[eForegrip], b_vertical);
 	}
 }
 
@@ -455,6 +516,8 @@ CUIDragItem* CUIWeaponCellItem::CreateDragItem()
 	CUIStatic* s_silencer	= nullptr;
 	CUIStatic* s_scope	= nullptr;
 	CUIStatic* s_launcher	= nullptr;
+	CUIStatic* s_pointer	= nullptr;
+	CUIStatic* s_foregrip	= nullptr;
 
     if (GetIcon(eSilencer))
     {
@@ -474,14 +537,20 @@ CUIDragItem* CUIWeaponCellItem::CreateDragItem()
         s_launcher = MakeAddonStatic(i, params);
     }
 
-    /*
-    CUIStatic* s_silencer = GetIcon(eSilencer) ? MakeAddonStatic(i, params) : NULL;
-    CUIStatic* s_scope = GetIcon(eScope) ? MakeAddonStatic(i, params) : NULL;
-    CUIStatic* s_launcher = GetIcon(eLauncher) ? MakeAddonStatic(i, params) : NULL;
-    */
+	if (GetIcon(ePointer))
+	{
+		params.Load(object()->GetPointerName());
+		s_pointer = MakeAddonStatic(i, params);
+	}
+
+	if (GetIcon(eForegrip))
+	{
+		params.Load(object()->GetForegripName());
+		s_foregrip = MakeAddonStatic(i, params);
+	}
 
 	if (Heading()) m_cell_size.set(m_cell_size.y, m_cell_size.x);   // swap before	
-	InitAllAddons(s_silencer, s_scope, s_launcher, false);
+	InitAllAddons(s_silencer, s_scope, s_launcher, s_pointer, s_foregrip, false);
 	if (Heading()) m_cell_size.set(m_cell_size.y, m_cell_size.x);  // swap after
 	
 	return				i;

@@ -390,6 +390,10 @@ void CUICellItem::ColorizeItems( std::initializer_list<CUIDragDropListEx*> args 
 			ColorizeSects.push_back(Wpn->GetScopeName());
 		if (Wpn->GrenadeLauncherAttachable())
 			ColorizeSects.push_back(Wpn->GetGrenadeLauncherName());
+		if (Wpn->PointerAttachable())
+			ColorizeSects.push_back(Wpn->GetPointerName());
+		if (Wpn->ForegripAttachable())
+			ColorizeSects.push_back(Wpn->GetForegripName());
 		std::copy(Wpn->m_highlightAddons.begin(), Wpn->m_highlightAddons.end(), std::back_inserter(ColorizeSects));
 	};
 

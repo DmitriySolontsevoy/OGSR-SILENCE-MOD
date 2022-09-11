@@ -2128,6 +2128,12 @@
     <Filter Include="Core\Client\Objects\Upgrade">
       <UniqueIdentifier>{f747bbd7-4e0d-4735-b695-a2a42e8c8089}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Addons\Pointer">
+      <UniqueIdentifier>{ba6d2788-1338-45e7-8055-8bd45e14b86f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Addons\Foregrip">
+      <UniqueIdentifier>{bf32db8e-da80-43fd-8607-c66912d1f27a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mt_config.h">
@@ -6127,6 +6133,12 @@
     <ClInclude Include="Upgrade.h">
       <Filter>Core\Client\Objects\Upgrade</Filter>
     </ClInclude>
+    <ClInclude Include="Pointer.h">
+      <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Addons\Pointer</Filter>
+    </ClInclude>
+    <ClInclude Include="Foregrip.h">
+      <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Addons\Foregrip</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="damage_manager.cpp">
@@ -8945,6 +8957,12 @@
     </ClCompile>
     <ClCompile Include="Upgrade.cpp">
       <Filter>Core\Client\Objects\Upgrade</Filter>
+    </ClCompile>
+    <ClCompile Include="Pointer.cpp">
+      <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Addons\Pointer</Filter>
+    </ClCompile>
+    <ClCompile Include="Foregrip.cpp">
+      <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Addons\Foregrip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

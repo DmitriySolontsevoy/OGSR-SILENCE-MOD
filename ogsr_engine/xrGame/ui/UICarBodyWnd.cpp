@@ -349,6 +349,18 @@ void CUICarBodyWnd::SendMessage(CUIWindow *pWnd, s16 msg, void *pData)
 					wpn->Detach(wpn->GetGrenadeLauncherName().c_str(), true);
 					PlaySnd(eInvDetachAddon);
 				}break;
+				case INVENTORY_DETACH_POINTER_ADDON:
+				{
+					auto wpn = smart_cast<CWeapon*>(CurrentIItem());
+					wpn->Detach(wpn->GetPointerName().c_str(), true);
+					PlaySnd(eInvDetachAddon);
+				}break;
+				case INVENTORY_DETACH_FOREGRIP_ADDON:
+				{
+					auto wpn = smart_cast<CWeapon*>(CurrentIItem());
+					wpn->Detach(wpn->GetForegripName().c_str(), true);
+					PlaySnd(eInvDetachAddon);
+				}break;
 				case INVENTORY_MOVE_ACTION:
 				{
 					void* d = m_pUIPropertiesBox->GetClickedItem()->GetData();
@@ -375,6 +387,8 @@ void CUICarBodyWnd::SendMessage(CUIWindow *pWnd, s16 msg, void *pData)
 				case INVENTORY_DETACH_SCOPE_ADDON:
 				case INVENTORY_DETACH_SILENCER_ADDON:
 				case INVENTORY_DETACH_GRENADE_LAUNCHER_ADDON:
+				case INVENTORY_DETACH_POINTER_ADDON:
+				case INVENTORY_DETACH_FOREGRIP_ADDON:
 				{
 					if (m_pInventoryBox)
 					{
@@ -700,6 +714,16 @@ void CUICarBodyWnd::ActivatePropertiesBox()
 		if (pWeapon->SilencerAttachable() && pWeapon->IsSilencerAttached())
 		{
 			m_pUIPropertiesBox->AddItem("st_detach_silencer", NULL, INVENTORY_DETACH_SILENCER_ADDON);
+			b_show = true;
+		}
+		if (pWeapon->PointerAttachable() && pWeapon->IsPointerAttached())
+		{
+			m_pUIPropertiesBox->AddItem("st_detach_pointer", NULL, INVENTORY_DETACH_POINTER_ADDON);
+			b_show = true;
+		}
+		if (pWeapon->ForegripAttachable() && pWeapon->IsForegripAttached())
+		{
+			m_pUIPropertiesBox->AddItem("st_detach_foregrip", NULL, INVENTORY_DETACH_FOREGRIP_ADDON);
 			b_show = true;
 		}
 		if (smart_cast<CWeaponMagazined*>(pWeapon))

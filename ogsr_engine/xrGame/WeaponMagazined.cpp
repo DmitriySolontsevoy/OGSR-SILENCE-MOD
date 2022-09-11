@@ -6,6 +6,8 @@
 #include "ParticlesObject.h"
 #include "scope.h"
 #include "silencer.h"
+#include "pointer.h"
+#include "foregrip.h"
 #include "GrenadeLauncher.h"
 #include "inventory.h"
 #include "xrserver_objects_alife_items.h"
@@ -455,13 +457,16 @@ void CWeaponMagazined::OnStateSwitch(u32 S, u32 oldState)
 		break;
 	case eReload:
 		switch2_Reload	();
+		ShowLaser(false, IsLaserOn());
 		// Callbacks added by Cribbledirge.
 		StateSwitchCallback(GameObject::eOnActorWeaponReload, GameObject::eOnNPCWeaponReload);
 		break;
 	case eShowing:
+		ShowLaser(false, false);
 		switch2_Showing	();
 		break;
 	case eHiding:
+		ShowLaser(false, false);
 		switch2_Hiding	();
 		break;
 	case eHidden:
@@ -676,7 +681,9 @@ void CWeaponMagazined::OnAnimationEnd(u32 state)
 		  SwitchState( eIdle );
 		  break;	// End of reload animation
 		case eHiding:	SwitchState(eHidden);   break;	// End of Hide
-		case eShowing:	SwitchState(eIdle);		break;	// End of Show
+		case eShowing:	
+			SwitchState(eIdle);
+			break;	// End of Show
 		case eIdle:		switch2_Idle();			break;  // Keep showing idle
 
 	}
@@ -860,6 +867,8 @@ bool CWeaponMagazined::CanAttach(PIItem pIItem)
 	CScope*				pScope				= smart_cast<CScope*>(pIItem);
 	CSilencer*			pSilencer			= smart_cast<CSilencer*>(pIItem);
 	CGrenadeLauncher*	pGrenadeLauncher	= smart_cast<CGrenadeLauncher*>(pIItem);
+	CPointer*			pPointer			= smart_cast<CPointer*>(pIItem);
+	CForegrip*			pForegrip			= smart_cast<CForegrip*>(pIItem);
 
 	if(			pScope &&
 				 m_eScopeStatus == ALife::eAddonAttachable &&
@@ -875,6 +884,16 @@ bool CWeaponMagazined::CanAttach(PIItem pIItem)
 				m_eGrenadeLauncherStatus == ALife::eAddonAttachable &&
 				(m_flagsAddOnState&CSE_ALifeItemWeapon::eWeaponAddonGrenadeLauncher) == 0 &&
 				(m_sGrenadeLauncherName  == pIItem->object().cNameSect()) )
+		return true;
+	else if (pPointer &&
+		m_eLaserPointerStatus == ALife::eAddonAttachable &&
+		(m_flagsAddOnState & CSE_ALifeItemWeapon::eWeaponAddonPointer) == 0 &&
+		(m_sPointerName == pIItem->object().cNameSect()))
+		return true;
+	else if (pForegrip &&
+		m_eForegripStatus == ALife::eAddonAttachable &&
+		(m_flagsAddOnState & CSE_ALifeItemWeapon::eWeaponAddonForegrip) == 0 &&
+		(m_sForegripName == pIItem->object().cNameSect()))
 		return true;
 	else
 		return inherited::CanAttach(pIItem);
@@ -894,6 +913,14 @@ bool CWeaponMagazined::CanDetach(const char* item_section_name)
 	   0 != (m_flagsAddOnState&CSE_ALifeItemWeapon::eWeaponAddonGrenadeLauncher) &&
 	   (m_sGrenadeLauncherName == item_section_name))
        return true;
+	else if (m_eLaserPointerStatus == CSE_ALifeItemWeapon::eAddonAttachable &&
+		0 != (m_flagsAddOnState & CSE_ALifeItemWeapon::eWeaponAddonPointer) &&
+		(m_sPointerName == item_section_name))
+		return true;
+	else if (m_eForegripStatus == CSE_ALifeItemWeapon::eAddonAttachable &&
+		0 != (m_flagsAddOnState & CSE_ALifeItemWeapon::eWeaponAddonForegrip) &&
+		(m_sForegripName == item_section_name))
+		return true;
 	else
 		return inherited::CanDetach(item_section_name);
 }
@@ -905,6 +932,8 @@ bool CWeaponMagazined::Attach(PIItem pIItem, bool b_send_event)
 	CScope*				pScope					= smart_cast<CScope*>(pIItem);
 	CSilencer*			pSilencer				= smart_cast<CSilencer*>(pIItem);
 	CGrenadeLauncher*	pGrenadeLauncher		= smart_cast<CGrenadeLauncher*>(pIItem);
+	CPointer*			pPointer				= smart_cast<CPointer*>(pIItem);
+	CForegrip*			pForegrip				= smart_cast<CForegrip*>(pIItem);
 
 	if(pScope &&
 	   m_eScopeStatus == CSE_ALifeItemWeapon::eAddonAttachable &&
@@ -928,6 +957,23 @@ bool CWeaponMagazined::Attach(PIItem pIItem, bool b_send_event)
 	   (m_sGrenadeLauncherName == pIItem->object().cNameSect()))
 	{
 		m_flagsAddOnState |= CSE_ALifeItemWeapon::eWeaponAddonGrenadeLauncher;
+		result = true;
+	}
+	else if (pPointer &&
+		m_eLaserPointerStatus == CSE_ALifeItemWeapon::eAddonAttachable &&
+		(m_flagsAddOnState & CSE_ALifeItemWeapon::eWeaponAddonPointer) == 0 &&
+		(m_sPointerName == pIItem->object().cNameSect()))
+	{
+		m_flagsAddOnState |= CSE_ALifeItemWeapon::eWeaponAddonPointer;
+		has_laser = true;
+		result = true;
+	}
+	else if (pForegrip &&
+		m_eForegripStatus == CSE_ALifeItemWeapon::eAddonAttachable &&
+		(m_flagsAddOnState & CSE_ALifeItemWeapon::eWeaponAddonForegrip) == 0 &&
+		(m_sForegripName == pIItem->object().cNameSect()))
+	{
+		m_flagsAddOnState |= CSE_ALifeItemWeapon::eWeaponAddonForegrip;
 		result = true;
 	}
 
@@ -981,6 +1027,29 @@ bool CWeaponMagazined::Detach(const char* item_section_name, bool b_spawn_item)
 			(m_sGrenadeLauncherName == item_section_name))
 	{
 		m_flagsAddOnState &= ~CSE_ALifeItemWeapon::eWeaponAddonGrenadeLauncher;
+
+		UpdateAddonsVisibility();
+		InitAddons();
+		return CInventoryItemObject::Detach(item_section_name, b_spawn_item);
+	}
+	else if (m_eLaserPointerStatus == CSE_ALifeItemWeapon::eAddonAttachable &&
+		0 != (m_flagsAddOnState & CSE_ALifeItemWeapon::eWeaponAddonPointer) &&
+		(m_sPointerName == item_section_name))
+	{
+		m_flagsAddOnState &= ~CSE_ALifeItemWeapon::eWeaponAddonPointer;
+
+		SwitchLaser(false);
+		has_laser = false;
+
+		UpdateAddonsVisibility();
+		InitAddons();
+		return CInventoryItemObject::Detach(item_section_name, b_spawn_item);
+	}
+	else if (m_eForegripStatus == CSE_ALifeItemWeapon::eAddonAttachable &&
+		0 != (m_flagsAddOnState & CSE_ALifeItemWeapon::eWeaponAddonForegrip) &&
+		(m_sForegripName == item_section_name))
+	{
+		m_flagsAddOnState &= ~CSE_ALifeItemWeapon::eWeaponAddonForegrip;
 
 		UpdateAddonsVisibility();
 		InitAddons();

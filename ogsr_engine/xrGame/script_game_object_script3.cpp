@@ -336,6 +336,8 @@ class_<CScriptGameObject> script_register_game_object2(class_<CScriptGameObject>
 		.def("is_scope", &CScriptGameObject::IsScope)
 		.def("is_silencer", &CScriptGameObject::IsSilencer)
 		.def("is_grenade_launcher", &CScriptGameObject::IsGrenadeLauncher)
+		.def("is_pointer", &CScriptGameObject::IsPointer)
+		.def("is_foregrip", &CScriptGameObject::IsForegrip)
 		.def("is_weapon_magazined", &CScriptGameObject::IsWeaponMagazined)
 		.def("is_weapon_shotgun", &CScriptGameObject::IsWeaponShotgun)
 		.def("is_space_restrictor", &CScriptGameObject::IsSpaceRestrictor)

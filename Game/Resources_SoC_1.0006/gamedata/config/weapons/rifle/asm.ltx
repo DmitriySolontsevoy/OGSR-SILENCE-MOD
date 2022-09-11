@@ -127,6 +127,8 @@ ph_mass			 	= 3
 scope_status			= 2
 silencer_status			= 1
 grenade_launcher_status		= 0
+pointer_status = 2
+foregrip_status = 2
 
 zoom_enabled			= true
 scope_zoom_factor		= 60
@@ -148,6 +150,8 @@ snd_empty					= weapons\val\val_empty, 0.7
 snd_reload					= weapons\vss\vss_reload
 snd_close					= weapons\generic_close
 
+snd_grab = pickups\grab_gun
+
 ;params when silencer is attached 
 ;similar to corresponding params without prefix silencer_
 
@@ -164,6 +168,18 @@ silencer_light_range		= 0.01
 silencer_light_var_color	= 0.05
 silencer_light_var_range	= 0.5
 silencer_light_time 		= 0.2
+
+foregrip_bone  = grip
+pointer_bone       = wpn_pointer
+pointer_light_bone = wpn_pointer_focus
+
+pointer_name = wpn_addon_pointer
+pointer_x = 150
+pointer_y = 9
+
+foregrip_name = wpn_addon_foregrip
+foregrip_x = 155
+foregrip_y = 33
 
 ;-----------------------------------------------------------------------------
 ;-- HUD DESCRIPTION

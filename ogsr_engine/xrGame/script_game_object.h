@@ -731,6 +731,8 @@ public:
 			_DECLARE_FUNCTION10(IsScope, bool);
 			_DECLARE_FUNCTION10(IsSilencer, bool);
 			_DECLARE_FUNCTION10(IsGrenadeLauncher, bool);
+			_DECLARE_FUNCTION10(IsPointer, bool);
+			_DECLARE_FUNCTION10(IsForegrip, bool);
 			_DECLARE_FUNCTION10(IsWeaponMagazined, bool);
 			_DECLARE_FUNCTION10(IsWeaponShotgun, bool);
 			_DECLARE_FUNCTION10(IsSpaceRestrictor, bool);

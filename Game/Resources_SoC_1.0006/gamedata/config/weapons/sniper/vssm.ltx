@@ -123,6 +123,8 @@ ph_mass			 	= 3
 scope_status			= 1
 silencer_status			= 1
 grenade_launcher_status		= 0
+pointer_status = 2
+foregrip_status = 2
 
 zoom_enabled			= true
 scope_zoom_factor	 	= 15		; ПСО-1 x4
@@ -137,6 +139,8 @@ snd_shoot2					= weapons\asm\asm_shoot
 snd_shoot3					= weapons\asm\asm_shoot 
 snd_empty					= weapons\vss\vss_empty, 0.8
 snd_reload					= weapons\vss\vss_reload
+
+snd_grab = pickups\grab_gun
 
 ;params when silencer is attached 
 ;similar to corresponding params without prefix silencer_
@@ -159,6 +163,18 @@ hit_probability_gd_novice	= 0.80				; точность стрельбы,
 hit_probability_gd_stalker	= 0.85				; когда оружие в руках НПС
 hit_probability_gd_veteran	= 0.90				; в зависимости от уровня 
 hit_probability_gd_master	= 0.95				; сложности игры          
+
+foregrip_bone  = grip
+pointer_bone       = wpn_pointer
+pointer_light_bone = wpn_pointer_focus
+
+pointer_name = wpn_addon_pointer
+pointer_x = 150
+pointer_y = 16
+
+foregrip_name = wpn_addon_foregrip
+foregrip_x = 155
+foregrip_y = 40
 
 ;-----------------------------------------------------------------------------
 ;-- HUD DESCRIPTION

@@ -241,7 +241,7 @@
       <DisableSpecificWarnings>4100;4456;4457;4458;4459;4091;4589;4995;4577;5037;4315;4267;</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>.\;..\COMMON_AI;..\COMMON_AI\PATH;..\COMMON_AI\GRAPH;..\COMMON_AI\ALGORITHMS;..\xrCore;$(SolutionDir)\3rd_party\Src\ode;..\LuaJIT\src;..\Luabind;$(SolutionDir)\3rd_party\Src\d3dx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -434,6 +434,8 @@
     <ClInclude Include="ai\monsters\monster_aura.h" />
     <ClInclude Include="ai\monsters\states\monster_state_attack_on_run.h" />
     <ClInclude Include="ai\monsters\states\monster_state_attack_on_run_inline.h" />
+    <ClInclude Include="Foregrip.h" />
+    <ClInclude Include="Pointer.h" />
     <ClInclude Include="derived_client_classes.h" />
     <ClInclude Include="EliteDetector.h" />
     <ClInclude Include="IKFoot.h" />
@@ -1670,6 +1672,8 @@
     <ClCompile Include="AdvancedDetector.cpp" />
     <ClCompile Include="ai\monsters\anti_aim_ability.cpp" />
     <ClCompile Include="ai\monsters\monster_aura.cpp" />
+    <ClCompile Include="Foregrip.cpp" />
+    <ClCompile Include="Pointer.cpp" />
     <ClCompile Include="damage_manager.cpp" />
     <ClCompile Include="action_base_script.cpp" />
     <ClCompile Include="derived_client_classes.cpp" />

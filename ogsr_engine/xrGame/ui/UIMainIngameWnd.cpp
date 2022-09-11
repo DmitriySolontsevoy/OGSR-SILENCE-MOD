@@ -838,6 +838,19 @@ void CUIMainIngameWnd::UpdatePickUpItem	()
 			auto launcher = init_addon(cell_item, *wpn->GetGrenadeLauncherName(), scale, UI()->get_current_kx(), eAddonType::eLauncher);
 			UIPickUpItemIcon.AttachChild(launcher);
 		}
+
+		if (wpn->PointerAttachable() && wpn->IsPointerAttached())
+		{
+			auto pointer = init_addon(cell_item, *wpn->GetPointerName(), scale, UI()->get_current_kx(), eAddonType::ePointer);
+			UIPickUpItemIcon.AttachChild(pointer);
+		}
+
+		if (wpn->ForegripAttachable() && wpn->IsForegripAttached())
+		{
+			auto foregrip = init_addon(cell_item, *wpn->GetForegripName(), scale, UI()->get_current_kx(), eAddonType::eForegrip);
+			UIPickUpItemIcon.AttachChild(foregrip);
+		}
+
 		delete_data(cell_item);
 	}
 

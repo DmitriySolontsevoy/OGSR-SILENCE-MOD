@@ -112,6 +112,16 @@ void CUIInventoryWnd::ActivatePropertiesBox()
 			UIPropertiesBox.AddItem("st_detach_silencer",  NULL, INVENTORY_DETACH_SILENCER_ADDON);
 			b_show = true;
 		}
+		if (pWeapon->PointerAttachable() && pWeapon->IsPointerAttached())
+		{
+			UIPropertiesBox.AddItem("st_detach_pointer", NULL, INVENTORY_DETACH_POINTER_ADDON);
+			b_show = true;
+		}
+		if (pWeapon->ForegripAttachable() && pWeapon->IsForegripAttached())
+		{
+			UIPropertiesBox.AddItem("st_detach_foregrip", NULL, INVENTORY_DETACH_FOREGRIP_ADDON);
+			b_show = true;
+		}
 		if(smart_cast<CWeaponMagazined*>(pWeapon))
 		{
 			auto WpnMagazWgl = smart_cast<CWeaponMagazinedWGrenade*>(pWeapon);
@@ -265,6 +275,12 @@ void CUIInventoryWnd::ProcessPropertiesBoxClicked	()
 			break;
 		case INVENTORY_DETACH_GRENADE_LAUNCHER_ADDON:
 			DetachAddon(*(smart_cast<CWeapon*>(CurrentIItem()))->GetGrenadeLauncherName());
+			break;
+		case INVENTORY_DETACH_POINTER_ADDON:
+			DetachAddon(*(smart_cast<CWeapon*>(CurrentIItem()))->GetPointerName());
+			break;
+		case INVENTORY_DETACH_FOREGRIP_ADDON:
+			DetachAddon(*(smart_cast<CWeapon*>(CurrentIItem()))->GetForegripName());
 			break;
 		case INVENTORY_RELOAD_MAGAZINE:
 			(smart_cast<CWeapon*>(CurrentIItem()))->Action(kWPN_RELOAD, CMD_START);
