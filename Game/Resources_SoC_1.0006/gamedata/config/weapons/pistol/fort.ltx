@@ -142,6 +142,7 @@ snd_holster					= weapons\fort\holster
 snd_shoot					= weapons\fort\shot         
 snd_empty					= weapons\fort\empty
 snd_reload					= weapons\fort\reload
+snd_reload_partly			= weapons\fort\reload_partly
 snd_close					= weapons\fort\draw
 
 snd_grab = pickups\grab_gun
@@ -171,32 +172,28 @@ silencer_light_time 		= 0.2
 shell_point			= 0,0,-0.5
 fire_point			= 0,0,-0.62
 	
-fire_bone                	= muzzle
+fire_bone                	= wpn_body
 orientation              	= 0,0,0
-position                 	= 0.18, -0.06, 0.2
+position                 	= 0, -0.14, 0
 visual                   	= weapons\fort\wpn_fort_hud.ogf
 
 anim_reload_effector = short_reload
 anim_reload_empty_effector = short_reload
 
-anim_holster				= holster
-anim_idle					= idle
-anim_empty					= empty
-anim_reload					= reload_full
-anim_reload_empty			= reload
-anim_draw					= draw
-anim_draw_empty				= draw_empty
-anim_shoot					= shoot
-anim_shot_last				= shoot_last
-anim_close					= holster	;close
-anim_idle_aim				= idle_aim
-anim_idle_sprint			= idle_sprint
-anim_idle_sprint_empty		= idle_sprint_empty
-
-anim_shoot_speed_k			= 0.7
-anim_shot_last_speed_k		= 0.7
+anim_holster				= lancew_fort12_holster
+anim_idle					= lancew_fort12_idle
+anim_empty					= lancew_fort12_idle_empty
+anim_reload					= lancew_fort12_reload
+anim_reload_empty			= lancew_fort12_reload_full
+anim_draw					= lancew_fort12_draw
+anim_draw_empty				= lancew_fort12_draw_empty
+anim_shoot					= lancew_fort12_shoot
+anim_shot_last				= lancew_fort12_shoot_empty
+anim_close					= lancew_fort12_holster_empty	;close
+anim_idle_aim				= lancew_fort12_idle_aim
+anim_idle_sprint			= lancew_fort12_sprint
 
 ;смещения HUD для режима приближения
-zoom_offset			= -0.18, 0.056, 0
-zoom_rotate_x		= 0
-zoom_rotate_y		= 0
+zoom_offset			= -0.115, 0.022, -0.05
+zoom_rotate_x		= -0.01
+zoom_rotate_y		= -0.0065
