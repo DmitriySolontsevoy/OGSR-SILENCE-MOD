@@ -144,6 +144,7 @@ snd_shoot2					= weapons\deagle\shot2
 snd_shoot3					= weapons\deagle\shot3     
 snd_empty					= weapons\deagle\empty
 snd_reload					= weapons\deagle\reload
+snd_reload_partly			= weapons\deagle\reload_partly
 snd_close					= weapons\deagle\draw
 
 snd_grab = pickups\grab_gun
@@ -173,39 +174,35 @@ silencer_light_time 		= 0.2
 shell_point			= 0,0,-0.5
 fire_point               	= 0,0,-0.62
 
-fire_bone                	= muzzle
-orientation              	= 0,0,0
-position                 	= 0.18,-0.04,0.15
+fire_bone                	= wpn_body
+position					= 0.033,-0.17,-0.05
+orientation					= 2.407309,2.234722,0.0
 visual                   	= weapons\desert_eagle\wpn_desert_eagle_hud.ogf
 
 anim_reload_effector = short_reload
 anim_reload_empty_effector = short_reload
 
-anim_holster				= holster
-anim_idle					= idle
-anim_empty					= empty
-anim_reload					= reload_full
-anim_reload_empty			= reload
-anim_draw					= draw
-anim_draw_empty				= draw_empty
-anim_shoot					= shoot
-anim_shot_last				= shoot_last
-anim_close					= holster
-anim_idle_aim				= idle_aim
-anim_idle_sprint			= idle_sprint
-anim_idle_sprint_empty		= idle_sprint_empty
-
-anim_shoot_speed_k			= 0.4
-anim_shot_last_speed_k		= 0.4
+anim_holster				= lancew_deagle_holster
+anim_idle					= lancew_deagle_idle
+anim_empty					= lancew_deagle_idle_empty
+anim_reload					= lancew_deagle_reload
+anim_reload_empty			= lancew_deagle_reload_full
+anim_draw					= lancew_deagle_draw
+anim_draw_empty				= lancew_deagle_draw_empty
+anim_shoot					= lancew_deagle_shoot
+anim_shot_last				= lancew_deagle_shoot_empty
+anim_close					= lancew_deagle_holster_empty ;draw
+anim_idle_aim				= lancew_deagle_idle_aim
+anim_idle_sprint			= lancew_deagle_sprint
 
 ;смещения HUD для режима приближения
-zoom_offset			= -0.18,0.04,0
-zoom_rotate_x		= 0
-zoom_rotate_y		= 0
+zoom_offset			= -0.1455,0.0465,-0.06
+zoom_rotate_x		= 0.0291
+zoom_rotate_y		= 0.034
 
 ;;SKINS;;
 
-[wpn_desert_eagle_wireframe]:wpn_desert_eagle
+[wpn_desert_eagle#wireframe]:wpn_desert_eagle
 visual = weapons\desert_eagle\wpn_desert_eagle_wireframe.ogf
 hud = wpn_deagle_eagle_wireframe_hud
 

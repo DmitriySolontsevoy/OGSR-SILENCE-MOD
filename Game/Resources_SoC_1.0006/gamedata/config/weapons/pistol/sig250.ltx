@@ -148,6 +148,7 @@ snd_shoot2					= weapons\p228\shot2
 snd_shoot3					= weapons\p228\shot3
 snd_empty					= weapons\p228\empty
 snd_reload					= weapons\p228\reload
+snd_reload_partly			= weapons\p228\reload_partly
 snd_close					= weapons\p228\draw
 
 snd_grab = pickups\grab_gun
@@ -177,32 +178,28 @@ silencer_light_time 		= 0.2
 [wpn_sig250_hud]
 shell_point			= 0,0,-0.5
 fire_point			= 0,0,-0.62
-fire_bone                	= muzzle
-orientation              	= 0,0,0
-position                 	= 0.181, -0.056, 0.2
+fire_bone                	= wpn_body
+position			= -0.006,-0.16, 0
+orientation			= 2.35,2.75,0.0
 visual                   	= weapons\sig250\wpn_sig250_hud.ogf 
 
 anim_reload_effector = short_reload
 anim_reload_empty_effector = short_reload
 
-anim_holster				= holster
-anim_idle					= idle
-anim_empty					= empty
-anim_reload					= reload_full
-anim_reload_empty			= reload
-anim_draw					= draw
-anim_draw_empty				= draw_empty
-anim_shoot					= shoot
-anim_shot_last				= shoot_last
-anim_close					= holster
-anim_idle_aim				= idle_aim
-anim_idle_sprint			= idle_sprint
-anim_idle_sprint_empty		= idle_sprint_empty
-
-anim_shoot_speed_k			= 0.7
-anim_shot_last_speed_k		= 0.7
+anim_holster				= lancew_p220_holster
+anim_idle					= lancew_p220_idle
+anim_empty					= lancew_p220_idle_empty
+anim_reload					= lancew_p220_reload
+anim_reload_empty			= lancew_p220_reload_full
+anim_draw					= lancew_p220_draw
+anim_draw_empty				= lancew_p220_draw_empty
+anim_shoot					= lancew_p220_shoot
+anim_shot_last				= lancew_p220_shoot_empty
+anim_close					= lancew_p220_holster_empty
+anim_idle_aim				= lancew_p220_idle_aim
+anim_idle_sprint			= lancew_p220_sprint
 
 ;смещения HUD для режима приближения
-zoom_offset			= -0.18, 0.06, 0
-zoom_rotate_x		= 0
-zoom_rotate_y		= 0
+zoom_offset			= -0.1115, 0.0385, -0.04
+zoom_rotate_x		= 0.032
+zoom_rotate_y		= 0.034

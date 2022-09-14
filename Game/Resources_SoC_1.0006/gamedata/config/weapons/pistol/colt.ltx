@@ -141,6 +141,7 @@ snd_holster					= weapons\colt\holster
 snd_shoot					= weapons\colt\shot
 snd_empty					= weapons\colt\empty
 snd_reload					= weapons\colt\reload
+snd_reload_partly			= weapons\colt\reload_partly
 snd_close					= weapons\colt\holster
 
 snd_grab = pickups\grab_gun
@@ -171,9 +172,9 @@ silencer_light_time 		= 0.2
 shell_point			= 0,0,-0.5
 fire_point			= 0,0,-0.62
 
-fire_bone                	= muzzle
-orientation              	= 0,0,0
-position                 	= 0.18, -0.06, 0.2
+fire_bone                	= wpn_body
+position					= -0.006,-0.18,0.01
+orientation					= 2.349998,4.064772,0.0
 visual                   	= weapons\colt1911\wpn_colt1911_hud.ogf
 
 anim_reload_effector = short_reload
@@ -181,24 +182,20 @@ anim_reload_empty_effector = short_reload
 
 anim_holster				= holster
 anim_idle					= idle
-anim_empty					= empty
-anim_reload					= reload_full
-anim_reload_empty			= reload
+anim_empty					= idle_empty
+anim_reload					= reload
+anim_reload_empty			= reload_full
 anim_draw					= draw
 anim_draw_empty				= draw_empty
 anim_shoot					= shoot
-anim_shot_last				= shoot_last
-anim_close					= holster	;draw
+anim_shot_last				= shoot_empty
+anim_close					= holster_empty	;draw
 anim_idle_aim				= idle_aim
-anim_idle_sprint			= idle_sprint
-anim_idle_sprint_empty		= idle_sprint_empty
-
-anim_shoot_speed_k			= 0.6
-anim_shot_last_speed_k		= 0.6
+anim_idle_sprint			= sprint
 
 ;смещения HUD для режима приближения
-zoom_offset			= -0.18, 0.06, 0
-zoom_rotate_x		= 0
-zoom_rotate_y		= 0
+zoom_offset			= -0.1105,0.0665,-0.139
+zoom_rotate_x		= 0.0615
+zoom_rotate_y		= 0.034
 
 zoom_hide_crosshair	= true						;to hide crosshair in zoom 

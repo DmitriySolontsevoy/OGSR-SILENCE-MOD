@@ -140,6 +140,7 @@ snd_holster					= weapons\walther\holster
 snd_shoot					= weapons\walther\shot      
 snd_empty					= weapons\walther\empty
 snd_reload					= weapons\walther\reload
+snd_reload_partly			= weapons\walther\reload_partly
 snd_close					= weapons\walther\draw
 
 snd_grab = pickups\grab_gun
@@ -169,35 +170,36 @@ silencer_light_time 		= 0.2
 [wpn_walther_hud]
 shell_point			= 0,0,-0.5
 fire_point			= 0,0,-0.62
-fire_bone                	= muzzle
-orientation              	= 0,0,0
-position                 	= 0.18,-0.06,0.2
+fire_bone                	= wpn_body
+
+position					= -0.031, -0.16, 0.0025
+orientation					= -0.5, 1.630021, 1.15
+
 visual                   	= weapons\walther_99\wpn_walther_99_hud.ogf
 
 anim_reload_effector = short_reload
 anim_reload_empty_effector = short_reload
 
 anim_holster				= holster
+anim_holster_empty				= holster_empty
 anim_idle					= idle
-anim_empty					= empty
-anim_reload					= reload_full
-anim_reload_empty			= reload
+anim_idle_aim_empty				= idle_empty_aim
+anim_empty					= idle_empty
+anim_reload					= reload
+anim_reload_empty			= reload_full
 anim_draw					= draw
 anim_draw_empty				= draw_empty
 anim_shoot					= shoot
 anim_shot_last				= shoot_last
-anim_close					= holster
+anim_close					= holster_empty	;close
 anim_idle_aim				= idle_aim
 anim_idle_sprint			= idle_sprint
-anim_idle_sprint_empty		= idle_sprint_empty
-
-anim_shoot_speed_k			= 0.75
-anim_shot_last_speed_k		= 0.75
+anim_idle_sprint_empty			= idle_sprint_empty
 
 ;смещения HUD для режима приближения
-zoom_offset			= -0.18, 0.06, 0
-zoom_rotate_x		= 0
-zoom_rotate_y		= 0
+zoom_offset			= -0.086,0.044,-0.1305
+zoom_rotate_x		= 0.016
+zoom_rotate_y		= -0.015
 
 
 zoom_hide_crosshair	= true						;to hide crosshair in zoom 

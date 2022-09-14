@@ -147,6 +147,7 @@ snd_shoot2					= weapons\beretta\shot2
 snd_shoot3					= weapons\beretta\shot3   
 snd_empty					= weapons\beretta\empty
 snd_reload					= weapons\beretta\reload
+snd_reload_partly			= weapons\beretta\reload_partly
 snd_close					= weapons\beretta\holster
 
 snd_grab = pickups\grab_gun
@@ -175,9 +176,10 @@ silencer_light_time 		= 0.2
 [wpn_beretta_hud]
 shell_point			= 0,0,-0.5
 fire_point			= 0,0,-0.62
-fire_bone                	= muzzle
-orientation              	= 0,0,0
-position                 	= 0.19, -0.05, 0.2
+fire_bone                	= wpn_body
+
+position			= -0.021000,-0.160000, 0
+orientation			= -0.500000,1.000000,1.149999
 visual                   	= weapons\beretta92FS\wpn_beretta92fs_hud.ogf 
 
 anim_reload_effector = short_reload
@@ -185,22 +187,18 @@ anim_reload_empty_effector = short_reload
 
 anim_holster				= holster
 anim_idle					= idle
-anim_empty					= empty
+anim_empty					= idle_empty
 anim_reload					= reload_full
 anim_reload_empty			= reload
 anim_draw					= draw
 anim_draw_empty				= draw_empty
 anim_shoot					= shoot
 anim_shot_last				= shoot_last
-anim_close					= holster
+anim_close					= holster_empty
 anim_idle_aim				= idle_aim
-anim_idle_sprint			= idle_sprint
-anim_idle_sprint_empty		= idle_sprint_empty
-
-anim_shoot_speed_k			= 0.6
-anim_shoot_last_speed_k		= 0.6
+anim_idle_sprint			= sprint
 
 ;смещения HUD для режима приближения
-zoom_offset			= -0.19, 0.05, 0
-zoom_rotate_x		= 0
-zoom_rotate_y		= 0
+zoom_offset			= -0.096,0.037,-0.1
+zoom_rotate_x		= 0.0115
+zoom_rotate_y		= -0.0158

@@ -145,6 +145,7 @@ snd_shoot2					= weapons\usp\shot2
 snd_shoot3					= weapons\usp\shot3
 snd_empty					= weapons\usp\empty
 snd_reload					= weapons\usp\reload
+snd_reload_partly			= weapons\usp\reload_partly
 snd_close					= weapons\usp\draw
 
 snd_grab = pickups\grab_gun
@@ -173,32 +174,32 @@ silencer_light_time 		= 0.2
 
 shell_point			= 0,0,-0.5
 fire_point					= 0,0,-0.62
-fire_bone                	= muzzle
-orientation              	= 0,0,0
-position                 	= 0.18, -0.06, 0.2
+fire_bone                	= wpn_body
+
+position			= -0.006,-0.18,0.02
+orientation			= 2.349998,4.064772,0.0
+
 visual                   	= weapons\usp_45\wpn_usp_45_hud.ogf
 
 anim_reload_effector = short_reload
 anim_reload_empty_effector = short_reload
 
-anim_holster				= holster
-anim_idle					= idle
-anim_empty					= empty
-anim_reload					= reload_full
-anim_reload_empty			= reload
-anim_draw					= draw
-anim_draw_empty				= draw_empty
-anim_shoot					= shoot
-anim_shot_last				= shoot_last
-anim_close					= holster 
-anim_idle_aim				= idle_aim
-anim_idle_sprint			= idle_sprint
-anim_idle_sprint_empty		= idle_sprint_empty
-
-anim_shoot_speed_k			= 0.6
-anim_shot_last_speed_k		= 0.6
+anim_holster		= holster
+anim_holster_empty		= holster_empty
+anim_idle			= idle
+anim_empty			= idle_empty
+anim_reload			= reload
+anim_reload_empty	= reload_full
+anim_draw			= draw
+anim_draw_empty		= draw_empty
+anim_shoot			= shoot
+anim_shot_last		= shoot_last
+anim_close			= holster
+anim_idle_aim		= idle_aim
+anim_idle_aim_empty	= idle_aim_empty
+anim_idle_sprint	= idle_sprint
 
 ;смещения HUD для режима приближения
-zoom_offset			= -0.18, 0.065, 0
-zoom_rotate_x		= 0
-zoom_rotate_y		= 0
+zoom_offset			= -0.1103,0.062,-0.139
+zoom_rotate_x		= 0.056
+zoom_rotate_y		= 0.0344
