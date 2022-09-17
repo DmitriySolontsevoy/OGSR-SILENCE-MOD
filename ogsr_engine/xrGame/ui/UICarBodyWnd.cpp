@@ -646,12 +646,15 @@ bool CUICarBodyWnd::OnKeyboard(int dik, EUIMessages keyboard_action)
 	{
 		if (m_pUIPropertiesBox->GetVisible())
 			m_pUIPropertiesBox->OnKeyboard(dik, keyboard_action);
-	}
 
-	if(keyboard_action==WINDOW_KEY_PRESSED && is_binded(kUSE, dik)) 
-	{
-			GetHolder()->StartStopMenu(this,true);
+		if (is_binded(kUSE, dik))
+		{
+			GetHolder()->StartStopMenu(this, true);
 			return true;
+		}
+		
+		if (is_binded(kSPRINT_TOGGLE, dik))
+			TakeAll();
 	}
 
 	if (inherited::OnKeyboard(dik, keyboard_action))return true;
