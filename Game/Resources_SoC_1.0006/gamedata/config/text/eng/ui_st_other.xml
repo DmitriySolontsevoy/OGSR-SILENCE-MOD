@@ -73,7 +73,7 @@
 		<text>Please select at least one map</text>
 	</string>
 	<string id="ui_st_take_all">
-		<text>Take all</text>
+		<text>Take all ($$ACTION_SPRINT_TOGGLE$$)</text>
 	</string>
 	<string id="ui_st_time_remains">
 		<text>Remaining</text>
