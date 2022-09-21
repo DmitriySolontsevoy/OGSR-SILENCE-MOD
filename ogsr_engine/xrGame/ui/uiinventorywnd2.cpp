@@ -229,14 +229,16 @@ bool CUIInventoryWnd::ToSlot(CUICellItem* itm, u8 _slot_id, bool force_place)
 bool CUIInventoryWnd::ToSlot(CUICellItem* itm, bool force_place)
 {
 	CUIDragDropListEx*	old_owner			= itm->OwnerList();
-	PIItem	iitem							= (PIItem)itm->m_pData;
+	PIItem iitem							= (PIItem)itm->m_pData;
 	u8 _slot								= iitem->GetSlot();
 	bool result{};
 
-	if(GetInventory()->CanPutInSlot(iitem)){
+	if (iitem->GetSlot() == GRENADE_SLOT)
+		return false;
+
+	if (GetInventory()->CanPutInSlot(iitem)) 
+	{
 		CUIDragDropListEx* new_owner		= GetSlotList(_slot);
-		
-		if(_slot==GRENADE_SLOT && !new_owner )return true; //fake, sorry (((
 
 		result = GetInventory()->Slot(iitem);
 		VERIFY								(result);
@@ -253,7 +255,8 @@ bool CUIInventoryWnd::ToSlot(CUICellItem* itm, bool force_place)
 		// обновляем статик веса в инвентаре
 		UpdateWeight();
 		/*************************************************** added by Ray Twitty (aka Shadows) END ***************************************************/
-	}else
+	}
+	else
 	{ // in case slot is busy
 		if(!force_place ||  _slot==NO_ACTIVE_SLOT || GetInventory()->m_slots[_slot].m_bPersistent) return false;
 

@@ -331,7 +331,7 @@ bool CUIInventoryWnd::TryUseItem(PIItem itm)
 
 bool CUIInventoryWnd::DropItem(PIItem itm, CUIDragDropListEx* lst)
 {
-	if(lst==m_pUIOutfitList)
+	if (lst==m_pUIOutfitList)
 	{
 		return TryUseItem			(itm);
 /*

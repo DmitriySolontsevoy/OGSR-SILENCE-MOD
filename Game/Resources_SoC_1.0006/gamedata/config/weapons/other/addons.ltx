@@ -19,10 +19,12 @@ inv_name		= wpn-addon-scope
 inv_name_short	= wpn-addon-scope
 inv_weight		= .2
 
+icon_group          = 1
 inv_grid_width		= 2
 inv_grid_height		= 1
-inv_grid_x			= 18
-inv_grid_y			= 2
+inv_grid_x			= 4
+inv_grid_y			= 3
+
 scope_texture		= wpn\wpn_crosshair
 scope_zoom_factor	= 30		;оян-1 2X
 
@@ -45,10 +47,11 @@ inv_name		= 1P86
 inv_name_short	= 1P86
 inv_weight		= .2
 
+icon_group          = 1
 inv_grid_width		= 2
 inv_grid_height		= 1
-inv_grid_x			= 13
-inv_grid_y			= 6
+inv_grid_x			= 7
+inv_grid_y			= 3
 scope_texture		= wpn\wpn_crosshair
 scope_zoom_factor	= 30
 
@@ -74,10 +77,11 @@ inv_name		= wpn-addon-scope-susat
 inv_name_short	= wpn-addon-scope-susat
 inv_weight		= .2
 
+icon_group          = 1
 inv_grid_width		= 1
 inv_grid_height		= 1
-inv_grid_x			= 19
-inv_grid_y			= 1
+inv_grid_x			= 6
+inv_grid_y			= 3
 scope_texture		= wpn\wpn_crosshair_l85
 scope_zoom_factor	= 30		;SUSAT 2X
 
@@ -88,7 +92,7 @@ discovery_dependency =
 $spawn			= "weapons\addons\silencer" ; option for Level Editor
 class			= W_SILENC
 cform           = skeleton
-visual          = weapons\upgrade\wpn_silencer.ogf
+visual          = weapons\upgrade\wpn_silencer_pistol.ogf
 description		= enc_weapons1_wpn-addon-silencer
 $prefetch 		= 32
 
@@ -97,10 +101,89 @@ inv_name		= wpn-addon-silencer
 inv_name_short	= wpn-addon-silencer
 inv_weight		= .1
 
+icon_group          = 1
 inv_grid_width		= 1
 inv_grid_height		= 1
-inv_grid_x			= 18
-inv_grid_y			= 1
+inv_grid_x			= 0
+inv_grid_y			= 3
+
+bullet_hit_power_k	= 0.8
+bullet_speed_k	 	= 0.8
+fire_dispersion_base_k = 1.25;2
+cam_dispersion_k	= 0.8
+
+[wpn_addon_silencer_pistol_2]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\silencer" ; option for Level Editor
+class			= W_SILENC
+cform           = skeleton
+visual          = weapons\upgrade\wpn_silencer_pistol_2.ogf
+description		= enc_weapons1_wpn-addon-silencer
+$prefetch 		= 32
+
+cost					 = 100;150
+inv_name		= wpn-addon-silencer
+inv_name_short	= wpn-addon-silencer
+inv_weight		= .1
+
+icon_group          = 1
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 1
+inv_grid_y			= 3
+
+bullet_hit_power_k	= 0.8
+bullet_speed_k	 	= 0.8
+fire_dispersion_base_k = 1.25;2
+cam_dispersion_k	= 0.8
+
+[wpn_addon_silencer_rifle]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\silencer" ; option for Level Editor
+class			= W_SILENC
+cform           = skeleton
+visual          = weapons\upgrade\wpn_silencer_rifle.ogf
+description		= enc_weapons1_wpn-addon-silencer
+$prefetch 		= 32
+
+cost					 = 100;150
+inv_name		= wpn-addon-silencer
+inv_name_short	= wpn-addon-silencer
+inv_weight		= .1
+
+icon_group          = 1
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 2
+inv_grid_y			= 3
+
+bullet_hit_power_k	= 0.8
+bullet_speed_k	 	= 0.8
+fire_dispersion_base_k = 1.25;2
+cam_dispersion_k	= 0.8
+
+[wpn_addon_silencer_rifle_2]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\silencer" ; option for Level Editor
+class			= W_SILENC
+cform           = skeleton
+visual          = weapons\upgrade\wpn_silencer_rifle_2.ogf
+description		= enc_weapons1_wpn-addon-silencer
+$prefetch 		= 32
+
+cost					 = 100;150
+inv_name		= wpn-addon-silencer
+inv_name_short	= wpn-addon-silencer
+inv_weight		= .1
+
+icon_group          = 1
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 3
+inv_grid_y			= 3
 
 bullet_hit_power_k	= 0.8
 bullet_speed_k	 	= 0.8
@@ -122,10 +205,12 @@ inv_name		= wpn-addon-grenade-launcher
 inv_name_short	= wpn-addon-grenade-launcher
 inv_weight		= 1.3
 
+icon_group          = 1
 inv_grid_width		= 2
 inv_grid_height		= 1
-inv_grid_x			= 18
-inv_grid_y			= 0
+inv_grid_x			= 9
+inv_grid_y			= 3
+
 grenade_vel			= 76
 
 
@@ -144,10 +229,12 @@ inv_name		= wpn-addon-grenade-launcher-m203
 inv_name_short	= wpn-addon-grenade-launcher-m203
 inv_weight		= 1.36
 
+icon_group          = 1
 inv_grid_width		= 2
 inv_grid_height		= 1
-inv_grid_x			= 17
+inv_grid_x			= 11
 inv_grid_y			= 3
+
 grenade_vel			= 71
 
 [wpn_addon_pointer]:identity_immunities
@@ -165,10 +252,11 @@ inv_name		= Pointer
 inv_name_short	= Pointer
 inv_weight		= 0.2
 
+icon_group          = 1
 inv_grid_width		= 2
 inv_grid_height		= 1
-inv_grid_x			= 21
-inv_grid_y			= 6
+inv_grid_x			= 13
+inv_grid_y			= 3
 
 range            = 80									
 range_r2         = 80									
@@ -195,7 +283,8 @@ inv_name		= Foregrip
 inv_name_short	= Foregrip
 inv_weight		= 0.5
 
+icon_group          = 1
 inv_grid_width		= 1
 inv_grid_height		= 1
-inv_grid_x			= 23
-inv_grid_y			= 5
+inv_grid_x			= 15
+inv_grid_y			= 3
