@@ -30,7 +30,7 @@ function main_menu:InitControls()
 
 	local ver = xml:InitStatic("static_version", self)
 	ver:SetText("ver. " .. _G.main_menu.get_main_menu():GetGSVer())
-	ver:SetTextColor(255, 255, 0, 0)
+	ver:SetTextColor(255, 0, 0, 0)
 end
 
 function main_menu:Show(...)
