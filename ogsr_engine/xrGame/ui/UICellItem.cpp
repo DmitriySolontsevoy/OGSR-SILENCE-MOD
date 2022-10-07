@@ -220,13 +220,14 @@ void CUICellItem::UpdateConditionProgressBar()
 {
     if (!m_pData) return;
 
-    if(m_pParentList && m_pParentList->GetConditionProgBarVisibility())
+    if (m_pParentList && m_pParentList->GetConditionProgBarVisibility())
     {
         PIItem itm = (PIItem)m_pData;
+
         CWeapon* pWeapon = smart_cast<CWeapon*>(itm);
         CCustomOutfit* pOutfit = smart_cast<CCustomOutfit*>(itm);
 
-        if(pWeapon || pOutfit || itm->GetInvShowCondition())
+        if (pWeapon || pOutfit || itm->GetInvShowCondition())
         {
             Ivector2 itm_grid_size = GetGridSize();
             if(m_pParentList->GetVerticalPlacement())
