@@ -133,25 +133,25 @@ void CEatableItem::UseBy (CEntityAlive* entity_alive)
 	R_ASSERT		(m_pCurrentInventory == IO->m_inventory);
 	R_ASSERT		(object().H_Parent()->ID() == entity_alive->ID());
 
-	entity_alive->conditions().ChangeHealth		(m_fHealthInfluence);
-	entity_alive->conditions().ChangePower		(m_fPowerInfluence);
-	entity_alive->conditions().ChangeSatiety	(m_fSatietyInfluence);
-	entity_alive->conditions().ChangeRadiation	(m_fRadiationInfluence);
-	entity_alive->conditions().ChangeBleeding	(m_fWoundsHealPerc);
-	entity_alive->conditions().ChangePsyHealth	(m_fPsyHealthInfluence);
-	entity_alive->conditions().ChangeThirst	    (m_fThirstInfluence);
+	entity_alive->conditions().ChangeHealth(m_fHealthInfluence);
+	entity_alive->conditions().ChangePower(m_fPowerInfluence);
+	entity_alive->conditions().ChangeSatiety(m_fSatietyInfluence);
+	entity_alive->conditions().ChangeRadiation(m_fRadiationInfluence);
+	entity_alive->conditions().ChangeBleeding(m_fWoundsHealPerc);
+	entity_alive->conditions().ChangePsyHealth(m_fPsyHealthInfluence);
+	entity_alive->conditions().ChangeThirst(m_fThirstInfluence);
 
-    entity_alive->conditions().ApplyHealthBooster(m_fHealthBoostTime, m_fHealthBoostValue);
-    entity_alive->conditions().ApplyPsyHealthBooster(m_fPsyHealthBoostTime, m_fPsyHealthBoostValue);
-    entity_alive->conditions().ApplyPowerBooster(m_fPowerBoostTime, m_fPowerBoostValue);
-    entity_alive->conditions().ApplyRadiationBooster(m_fRadiationBoostTime, m_fRadiationBoostValue);
-    entity_alive->conditions().ApplyBleedingBooster(m_fBleedingBoostTime, m_fBleedingBoostValue);
-    entity_alive->conditions().ApplyMaxWeightBooster(m_fMaxWeightBoostTime, m_fMaxWeightBoostValue);
-    entity_alive->conditions().ApplyRadiationImmunityBooster(m_fRadiationImmunityBoostTime, m_fRadiationImmunityBoostValue);
-    entity_alive->conditions().ApplyChemicalImmunityBooster(m_fChemicalImmunityBoostTime, m_fChemicalImmunityBoostTime);
-    entity_alive->conditions().ApplyThermalImmunityBooster(m_fThermalImmunityBoostTime, m_fThermalImmunityBoostValue);
-    entity_alive->conditions().ApplyElectricImmunityBooster(m_fElectricImmunityBoostTime, m_fElectricImmunityBoostValue);
-    entity_alive->conditions().ApplyPsychicImmunityBooster(m_fPsychicImmunityBoostTime, m_fPsychicImmunityBoostValue);
+	if (m_fHealthBoostTime) entity_alive->conditions().ApplyHealthBooster(m_fHealthBoostTime, m_fHealthBoostValue);
+	if (m_fPsyHealthBoostTime) entity_alive->conditions().ApplyPsyHealthBooster(m_fPsyHealthBoostTime, m_fPsyHealthBoostValue);
+	if (m_fPowerBoostTime) entity_alive->conditions().ApplyPowerBooster(m_fPowerBoostTime, m_fPowerBoostValue);
+	if (m_fRadiationBoostTime) entity_alive->conditions().ApplyRadiationBooster(m_fRadiationBoostTime, m_fRadiationBoostValue);
+	if (m_fBleedingBoostTime) entity_alive->conditions().ApplyBleedingBooster(m_fBleedingBoostTime, m_fBleedingBoostValue);
+	if (m_fMaxWeightBoostTime) entity_alive->conditions().ApplyMaxWeightBooster(m_fMaxWeightBoostTime, m_fMaxWeightBoostValue);
+	if (m_fRadiationImmunityBoostTime) entity_alive->conditions().ApplyRadiationImmunityBooster(m_fRadiationImmunityBoostTime, m_fRadiationImmunityBoostValue);
+	if (m_fChemicalImmunityBoostTime) entity_alive->conditions().ApplyChemicalImmunityBooster(m_fChemicalImmunityBoostTime, m_fChemicalImmunityBoostTime);
+	if (m_fThermalImmunityBoostTime) entity_alive->conditions().ApplyThermalImmunityBooster(m_fThermalImmunityBoostTime, m_fThermalImmunityBoostValue);
+	if (m_fElectricImmunityBoostTime) entity_alive->conditions().ApplyElectricImmunityBooster(m_fElectricImmunityBoostTime, m_fElectricImmunityBoostValue);
+	if (m_fPsychicImmunityBoostTime) entity_alive->conditions().ApplyPsychicImmunityBooster(m_fPsychicImmunityBoostTime, m_fPsychicImmunityBoostValue);
 
 	entity_alive->conditions().SetMaxPower( entity_alive->conditions().GetMaxPower()+m_fMaxPowerUpInfluence );
 	

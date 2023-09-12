@@ -10,6 +10,8 @@
 #include "../Include/xrRender/Kinematics.h"
 #include "object_broker.h"
 #include "CustomHelmet.h"
+#include "hudmanager.h"
+#include "ui/UIMainIngameWnd.h"
 
 #define MAX_HEALTH 1.0f
 #define MIN_HEALTH -0.01f
@@ -194,77 +196,98 @@ void CEntityCondition::ChangePsyHealth(float value)
 
 void CEntityCondition::ChangeBleeding(float percent)
 {
-	//затянуть раны
-	for(WOUND_VECTOR_IT it = m_WoundVector.begin(); m_WoundVector.end() != it; ++it)
+	for (WOUND_VECTOR_IT it = m_WoundVector.begin(); m_WoundVector.end() != it; ++it)
 	{
-		(*it)->Incarnation			(percent, m_fMinWoundSize);
-		if(0 == (*it)->TotalSize	())
-			(*it)->SetDestroy		(true);
+		(*it)->Incarnation(percent, m_fMinWoundSize);
+		if (0 == (*it)->TotalSize())
+			(*it)->SetDestroy(true);
 	}
 }
 
 void CEntityCondition::ApplyHealthBooster(float time, float value)
 {
+	HUD().GetUI()->UIMainIngameWnd->ShowBooster(CUIMainIngameWnd::ebiHealth);
+
 	m_fHealthBoostTime = time;
 	m_fHealthBoostValue = value;
 }
 
 void CEntityCondition::ApplyPsyHealthBooster(float time, float value)
 {
+	HUD().GetUI()->UIMainIngameWnd->ShowBooster(CUIMainIngameWnd::ebiPsyHealth);
+
 	m_fPsyHealthBoostTime = time;
 	m_fPsyHealthBoostValue = value;
 }
 
 void CEntityCondition::ApplyPowerBooster(float time, float value)
 {
+	HUD().GetUI()->UIMainIngameWnd->ShowBooster(CUIMainIngameWnd::ebiPower);
+
 	m_fPowerBoostTime = time;
 	m_fPowerBoostValue = value;
 }
 
 void CEntityCondition::ApplyRadiationBooster(float time, float value)
 {
+	HUD().GetUI()->UIMainIngameWnd->ShowBooster(CUIMainIngameWnd::ebiRadiation);
+
 	m_fRadiationBoostTime = time;
 	m_fRadiationBoostValue = value;
 }
 
 void CEntityCondition::ApplyBleedingBooster(float time, float value)
 {
+	HUD().GetUI()->UIMainIngameWnd->ShowBooster(CUIMainIngameWnd::ebiBleeding);
+
 	m_fBleedingBoostTime = time;
 	m_fBleedingBoostValue = value;
 }
 
 void CEntityCondition::ApplyMaxWeightBooster(float time, float value)
 {
+	HUD().GetUI()->UIMainIngameWnd->ShowBooster(CUIMainIngameWnd::ebiMaxWeight);
+
 	m_fMaxWeightBoostTime = time;
 	m_fMaxWeightBoostValue = value;
 }
 
 void CEntityCondition::ApplyRadiationImmunityBooster(float time, float value)
 {
+	HUD().GetUI()->UIMainIngameWnd->ShowBooster(CUIMainIngameWnd::ebiImmunityRadiation);
+
 	m_fRadiationImmunityBoostTime = time;
 	m_fRadiationImmunityBoostValue = value;
 }
 
 void CEntityCondition::ApplyChemicalImmunityBooster(float time, float value)
 {
+	HUD().GetUI()->UIMainIngameWnd->ShowBooster(CUIMainIngameWnd::ebiImmunityChemical);
+
 	m_fChemicalImmunityBoostTime = time;
 	m_fChemicalImmunityBoostValue = value;
 }
 
 void CEntityCondition::ApplyThermalImmunityBooster(float time, float value)
 {
+	HUD().GetUI()->UIMainIngameWnd->ShowBooster(CUIMainIngameWnd::ebiImmunityThermal);
+
 	m_fThermalImmunityBoostTime = time;
 	m_fThermalImmunityBoostValue = value;
 }
 
 void CEntityCondition::ApplyElectricImmunityBooster(float time, float value)
 {
+	HUD().GetUI()->UIMainIngameWnd->ShowBooster(CUIMainIngameWnd::ebiImmunityShock);
+
 	m_fElectricImmunityBoostTime = time;
 	m_fElectricImmunityBoostValue = value;
 }
 
 void CEntityCondition::ApplyPsychicImmunityBooster(float time, float value)
 {
+	HUD().GetUI()->UIMainIngameWnd->ShowBooster(CUIMainIngameWnd::ebiImmunityPsy);
+
 	m_fPsychicImmunityBoostTime = time;
 	m_fPsychicImmunityBoostValue = value;
 }

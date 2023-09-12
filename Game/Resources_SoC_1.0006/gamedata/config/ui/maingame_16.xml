@@ -96,6 +96,51 @@
 	</artefact_static>
 
 
+	<booster_health_static x="10" y="415" width="50" height="25" stretch="1" light_anim="ui_slow_blinking_alpha">
+		<texture>ui_booster_health</texture>
+	</booster_health_static>
+
+	<booster_psy_health_static x="10" y="445" width="50" height="25" stretch="1" light_anim="ui_slow_blinking_alpha">
+		<texture>ui_booster_psy_health</texture>
+	</booster_psy_health_static>
+	
+	<booster_power_static x="10" y="475" width="50" height="25" stretch="1" light_anim="ui_slow_blinking_alpha">
+		<texture>ui_booster_power</texture>
+	</booster_power_static>
+	
+	<booster_rad_static x="10" y="505" width="50" height="25" stretch="1" light_anim="ui_slow_blinking_alpha">
+		<texture>ui_booster_rad</texture>
+	</booster_rad_static>
+	
+	<booster_bleeding_static x="10" y="535" width="50" height="25" stretch="1" light_anim="ui_slow_blinking_alpha">
+		<texture>ui_booster_bleeding</texture>
+	</booster_bleeding_static>
+	
+	<booster_max_weight_static x="10" y="565" width="50" height="25" stretch="1" light_anim="ui_slow_blinking_alpha">
+		<texture>ui_booster_max_weight</texture>
+	</booster_max_weight_static>
+	
+	<booster_immunity_rad_static x="10" y="595" width="50" height="25" stretch="1" light_anim="ui_slow_blinking_alpha">
+		<texture>ui_booster_immunity_rad</texture>
+	</booster_immunity_rad_static>
+	
+	<booster_immunity_chemical_static x="10" y="625" width="50" height="25" stretch="1" light_anim="ui_slow_blinking_alpha">
+		<texture>ui_booster_immunity_chemical</texture>
+	</booster_immunity_chemical_static>
+	
+	<booster_immunity_thermal_static x="10" y="655" width="50" height="25" stretch="1" light_anim="ui_slow_blinking_alpha">
+		<texture>ui_booster_immunity_thermal</texture>
+	</booster_immunity_thermal_static>
+	
+	<booster_immunity_shock_static x="10" y="685" width="50" height="25" stretch="1" light_anim="ui_slow_blinking_alpha">
+		<texture>ui_booster_immunity_shock</texture>
+	</booster_immunity_shock_static>
+	
+	<booster_immunity_psy_static x="10" y="715" width="50" height="25" stretch="1" light_anim="ui_slow_blinking_alpha">
+		<texture>ui_booster_immunity_psy</texture>
+	</booster_immunity_psy_static>
+
+
 	<flashing_icons>
 		<flashing_icon x="13" y="210" width="48" height="29" type="pda" light_anim="ui_slow_blinking_alpha">
 			<texture>ui_hud_icon_PDA</texture>

@@ -15,6 +15,8 @@
 #include "object_broker.h"
 #include "weapon.h"
 #include "PDA.h"
+#include "hudmanager.h"
+#include "ui/UIMainIngameWnd.h"
 #include "ai/monsters/BaseMonster/base_monster.h"
 
 #define MAX_SATIETY					1.0f
@@ -363,6 +365,7 @@ void CActorCondition::UpdateBoosters()
 	}
 	else
 	{
+		HUD().GetUI()->UIMainIngameWnd->HideBooster(CUIMainIngameWnd::ebiHealth);
 		m_fHealthBoostTime = 0;
 	}
 
@@ -373,6 +376,7 @@ void CActorCondition::UpdateBoosters()
 	}
 	else
 	{
+		HUD().GetUI()->UIMainIngameWnd->HideBooster(CUIMainIngameWnd::ebiPsyHealth);
 		m_fPsyHealthBoostTime = 0;
 	}
 
@@ -383,6 +387,7 @@ void CActorCondition::UpdateBoosters()
 	}
 	else
 	{
+		HUD().GetUI()->UIMainIngameWnd->HideBooster(CUIMainIngameWnd::ebiPower);
 		m_fPowerBoostTime = 0;
 	}
 
@@ -393,6 +398,7 @@ void CActorCondition::UpdateBoosters()
 	}
 	else
 	{
+		HUD().GetUI()->UIMainIngameWnd->HideBooster(CUIMainIngameWnd::ebiRadiation);
 		m_fRadiationBoostTime = 0;
 	}
 
@@ -403,6 +409,7 @@ void CActorCondition::UpdateBoosters()
 	}
 	else
 	{
+		HUD().GetUI()->UIMainIngameWnd->HideBooster(CUIMainIngameWnd::ebiBleeding);
 		m_fBleedingBoostTime = 0;
 	}
 
@@ -426,6 +433,8 @@ void CActorCondition::UpdateBoosters()
 			m_fMaxWeightBoostTime = 0;
 			m_fMaxWeightBoostActive = false;
 		}
+
+		HUD().GetUI()->UIMainIngameWnd->HideBooster(CUIMainIngameWnd::ebiMaxWeight);
 	}
 
 	if (m_fRadiationImmunityBoostTime > 0)
@@ -434,6 +443,8 @@ void CActorCondition::UpdateBoosters()
 	}
 	else
 	{
+		HUD().GetUI()->UIMainIngameWnd->HideBooster(CUIMainIngameWnd::ebiImmunityRadiation);
+
 		m_fRadiationImmunityBoostValue = 0;
 		m_fRadiationImmunityBoostTime = 0;
 	}
@@ -444,6 +455,8 @@ void CActorCondition::UpdateBoosters()
 	}
 	else
 	{
+		HUD().GetUI()->UIMainIngameWnd->HideBooster(CUIMainIngameWnd::ebiImmunityChemical);
+
 		m_fChemicalImmunityBoostValue = 0;
 		m_fChemicalImmunityBoostTime = 0;
 	}
@@ -454,6 +467,8 @@ void CActorCondition::UpdateBoosters()
 	}
 	else
 	{
+		HUD().GetUI()->UIMainIngameWnd->HideBooster(CUIMainIngameWnd::ebiImmunityThermal);
+
 		m_fThermalImmunityBoostValue = 0;
 		m_fThermalImmunityBoostTime = 0;
 	}
@@ -464,6 +479,8 @@ void CActorCondition::UpdateBoosters()
 	}
 	else
 	{
+		HUD().GetUI()->UIMainIngameWnd->HideBooster(CUIMainIngameWnd::ebiImmunityShock);
+
 		m_fElectricImmunityBoostValue = 0;
 		m_fElectricImmunityBoostTime = 0;
 	}
@@ -474,6 +491,8 @@ void CActorCondition::UpdateBoosters()
 	}
 	else
 	{
+		HUD().GetUI()->UIMainIngameWnd->HideBooster(CUIMainIngameWnd::ebiImmunityPsy);
+
 		m_fPsychicImmunityBoostValue = 0;
 		m_fPsychicImmunityBoostTime = 0;
 	}

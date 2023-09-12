@@ -67,6 +67,7 @@ static CUIMainIngameWnd* GetMainIngameWindow()
 }
 
 static CUIStatic* warn_icon_list[8]{};
+static CUIStatic* booster_icon_list[11]{};
 
 // alpet: для возможности внешнего контроля иконок (используется в NLC6 вместо типичных индикаторов). Никак не влияет на игру для остальных модов.
 static bool external_icon_ctrl = false;
@@ -115,6 +116,18 @@ CUIMainIngameWnd::CUIMainIngameWnd()
 	warn_icon_list[ewiPsyHealth]	= &UIPsyHealthIcon;
 	warn_icon_list[ewiInvincible]	= &UIInvincibleIcon;
 	warn_icon_list[ewiThirst]		= &UIThirstIcon;
+
+	booster_icon_list[ebiHealth] = &UIHealthBooster;
+	booster_icon_list[ebiPsyHealth] = &UIPsyHealthBooster;
+	booster_icon_list[ebiPower] = &UIPowerBooster;
+	booster_icon_list[ebiRadiation] = &UIRadiationBooster;
+	booster_icon_list[ebiBleeding] = &UIBleedingBooster;
+	booster_icon_list[ebiMaxWeight] = &UIMaxWeightBooster;
+	booster_icon_list[ebiImmunityRadiation] = &UIRadiationImmunityBooster;
+	booster_icon_list[ebiImmunityChemical] = &UIChemicalImmunityBooster;
+	booster_icon_list[ebiImmunityThermal] = &UIThermalImmunityBooster;
+	booster_icon_list[ebiImmunityShock] = &UIShockImmunityBooster;
+	booster_icon_list[ebiImmunityPsy] = &UIPsyImmunityBooster;
 }
 
 #include "UIProgressShape.h"
@@ -231,14 +244,48 @@ void CUIMainIngameWnd::Init()
 		UIThirstIcon.Show(false);
 	}
 
+	//Booster statics
+	AttachChild(&UIHealthBooster);
+	xml_init.InitStatic(uiXml, "booster_health_static", 0, &UIHealthBooster);
+
+	AttachChild(&UIPsyHealthBooster);
+	xml_init.InitStatic(uiXml, "booster_psy_health_static", 0, &UIPsyHealthBooster);
+
+	AttachChild(&UIPowerBooster);
+	xml_init.InitStatic(uiXml, "booster_power_static", 0, &UIPowerBooster);
+
+	AttachChild(&UIRadiationBooster);
+	xml_init.InitStatic(uiXml, "booster_rad_static", 0, &UIRadiationBooster);
+
+	AttachChild(&UIBleedingBooster);
+	xml_init.InitStatic(uiXml, "booster_bleeding_static", 0, &UIBleedingBooster);
+
+	AttachChild(&UIMaxWeightBooster);
+	xml_init.InitStatic(uiXml, "booster_max_weight_static", 0, &UIMaxWeightBooster);
+
+	AttachChild(&UIRadiationImmunityBooster);
+	xml_init.InitStatic(uiXml, "booster_immunity_rad_static", 0, &UIRadiationImmunityBooster);
+
+	AttachChild(&UIChemicalImmunityBooster);
+	xml_init.InitStatic(uiXml, "booster_immunity_chemical_static", 0, &UIChemicalImmunityBooster);
+
+	AttachChild(&UIThermalImmunityBooster);
+	xml_init.InitStatic(uiXml, "booster_immunity_thermal_static", 0, &UIThermalImmunityBooster);
+
+	AttachChild(&UIShockImmunityBooster);
+	xml_init.InitStatic(uiXml, "booster_immunity_shock_static", 0, &UIShockImmunityBooster);
+
+	AttachChild(&UIPsyImmunityBooster);
+	xml_init.InitStatic(uiXml, "booster_immunity_psy_static", 0, &UIPsyImmunityBooster);
+
 	constexpr const char* warningStrings[] =
 	{
 		"jammed",
 		"radiation",
 		"wounds",
 		"starvation",
-		"fatigue", // PsyHealth ???
-		"invincible", // Not used
+		"fatigue",
+		"invincible",
 		"thirst",
 	};
 
@@ -624,6 +671,16 @@ void CUIMainIngameWnd::SetWarningIconColor(CUIStatic* s, const u32 cl)
 		m_UIIcons->RemoveWindow	(s);
 		s->Show					(false);
 	}
+}
+
+void CUIMainIngameWnd::ShowBooster(EBoostersIcons icon)
+{
+	booster_icon_list[icon]->Show(true);
+}
+
+void CUIMainIngameWnd::HideBooster(EBoostersIcons icon)
+{
+	booster_icon_list[icon]->Show(false);
 }
 
 void CUIMainIngameWnd::SetWarningIconColor(EWarningIcons icon, const u32 cl)

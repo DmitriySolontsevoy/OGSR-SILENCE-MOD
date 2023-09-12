@@ -92,12 +92,6 @@ void CUIInventoryCellItem::OnFocusLost()
 	}
 
 	inherited::OnFocusLost();
-
-	if (object()->object().m_spawned)
-	{
-		auto script_obj = object()->object().lua_game_object();
-		g_actor->callback(GameObject::eCellItemFocusLost)(script_obj);
-	}
 }
 
 bool CUIInventoryCellItem::OnMouse(float x, float y, EUIMessages action)

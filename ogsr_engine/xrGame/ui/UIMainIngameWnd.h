@@ -83,15 +83,25 @@ protected:
 //	CUIStatic			UIArtefactIcon;
 
 	CUIScrollView* m_UIIcons{};
+
+	CUIStatic UIHealthBooster;
+	CUIStatic UIPsyHealthBooster;
+	CUIStatic UIPowerBooster;
+	CUIStatic UIRadiationBooster;
+	CUIStatic UIBleedingBooster;
+	CUIStatic UIMaxWeightBooster;
+	CUIStatic UIRadiationImmunityBooster;
+	CUIStatic UIChemicalImmunityBooster;
+	CUIStatic UIThermalImmunityBooster;
+	CUIStatic UIShockImmunityBooster;
+	CUIStatic UIPsyImmunityBooster;
 public:	
 	CUIArtefactPanel*    m_artefactPanel;
 	
 public:
-	
-	// Енумы соответсвующие предупреждающим иконкам 
 	enum EWarningIcons
 	{
-		ewiAll				= 0,
+		ewiAll = 0,
 		ewiWeaponJammed,
 		ewiRadiation,
 		ewiWound,
@@ -99,9 +109,25 @@ public:
 		ewiPsyHealth,
 		ewiInvincible,
 		ewiThirst,
-//		ewiSleep,
-//		ewiArtefact,
 	};
+
+	enum EBoostersIcons
+	{
+		ebiHealth = 0,
+		ebiPsyHealth,
+		ebiPower,
+		ebiRadiation,
+		ebiBleeding,
+		ebiMaxWeight,
+		ebiImmunityRadiation,
+		ebiImmunityChemical,
+		ebiImmunityThermal,
+		ebiImmunityShock,
+		ebiImmunityPsy
+	};
+
+	void ShowBooster(EBoostersIcons icon);
+	void HideBooster(EBoostersIcons icon);
 
 	// Задаем цвет соответствующей иконке
 	void				SetWarningIconColor				(EWarningIcons icon, const u32 cl);
