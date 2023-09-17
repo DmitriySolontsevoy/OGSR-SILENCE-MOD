@@ -54,7 +54,7 @@ void CSimpleDetector::UpdateAf()
     float fRelPow = (dist / m_fAfDetectRadius);
     clamp(fRelPow, 0.f, 1.f);
 
-    //определить текущую частоту срабатывания сигнала
+    // определить текущую частоту срабатывания сигнала
     af_info.cur_period = item_type->freq.x + (item_type->freq.y - item_type->freq.x) * (fRelPow * fRelPow);
 
     float min_snd_freq = 0.9f;

@@ -1,51 +1,54 @@
 #pragma once
 #include "weaponcustompistol.h"
 
-class CWeaponPistol :
-	public CWeaponCustomPistol
+class CWeaponPistol : public CWeaponCustomPistol
 {
-	typedef CWeaponCustomPistol inherited;
+    typedef CWeaponCustomPistol inherited;
+
 public:
-	CWeaponPistol	(LPCSTR name);
-	virtual ~CWeaponPistol(void);
+    CWeaponPistol(LPCSTR name);
+    virtual ~CWeaponPistol(void);
 
-	virtual void	Load			(LPCSTR section);
-	virtual bool    Action(s32 cmd, u32 flags);
-	virtual void	switch2_Reload	();
+    virtual void Load(LPCSTR section);
+    virtual bool Action(s32 cmd, u32 flags);
+    virtual void switch2_Reload();
 
-	//virtual void	OnShot			();
-	virtual void	OnAnimationEnd	(u32 state);
-	virtual void	net_Destroy		();
-	virtual void	OnH_B_Chield	();
+    // virtual void	OnShot			();
+    virtual void OnAnimationEnd(u32 state);
+    virtual void net_Destroy();
+    virtual void OnH_B_Chield();
 
-	virtual void	OnDrawUI();
-	virtual void	net_Relcase(CObject *object);
+    virtual void OnDrawUI();
+    virtual void net_Relcase(CObject* object);
 
-	//анимации
-	virtual void	PlayAnimShow	() override;
-	//virtual void	PlayAnimBore	() override;
-	virtual void	PlayAnimIdleSprint() override;
-	virtual void	PlayAnimIdleMoving() override;
-	virtual void	PlayAnimIdleMovingSlow() override;
-	virtual void	PlayAnimIdleMovingCrouch() override;
-	virtual void	PlayAnimIdleMovingCrouchSlow() override;
-	virtual void	PlayAnimIdle	() override;
-	virtual void	PlayAnimAim		() override;
-	virtual void	PlayAnimHide	() override;
-	virtual void	PlayAnimReload	() override;
-	virtual void	PlayAnimShoot	() override;
+    //анимации
+    virtual void PlayAnimShow() override;
+    // virtual void	PlayAnimBore	() override;
+    virtual void PlayAnimIdleSprint() override;
+    virtual void PlayAnimIdleMoving() override;
+    virtual void PlayAnimIdleMovingSlow() override;
+    virtual void PlayAnimIdleMovingCrouch() override;
+    virtual void PlayAnimIdleMovingCrouchSlow() override;
+    virtual void PlayAnimIdle() override;
+    virtual void PlayAnimAim() override;
+    virtual void PlayAnimHide() override;
+    virtual void PlayAnimReload() override;
+    virtual void PlayAnimShoot() override;
 
-	virtual void	PlayReloadSound ();
+    virtual void PlayReloadSound();
 
-	virtual void	UpdateSounds	();
-protected:	
-	virtual bool	AllowFireWhileWorking() {return true;}
+    virtual void UpdateSounds();
 
-	HUD_SOUND			sndClose;
-	HUD_SOUND			sndReloadFull;
-	bool sndReloadFullSet;
-	ESoundTypes			m_eSoundClose;
+protected:
+    virtual bool AllowFireWhileWorking() { return true; }
 
-	bool m_opened;
-	bool m_fullReload;
+    HUD_SOUND sndClose;
+    HUD_SOUND sndReloadFull;
+    bool sndReloadFullSet;
+    ESoundTypes m_eSoundClose;
+
+    bool m_opened;
+    bool m_fullReload;
+
+    virtual size_t GetWeaponTypeForCollision() const override { return Pistol; }
 };

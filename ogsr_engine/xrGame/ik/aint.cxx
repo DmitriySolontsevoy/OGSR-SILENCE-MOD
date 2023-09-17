@@ -143,10 +143,7 @@ float AngleInt::Distance(float v) const
     return (_abs(t1) < _abs(t2)) ? t1 : t2;
 }
 
-int AngleInt::OldIsSupersetOf(const AngleInt& a, float eps) const
-{
-    return InRange(a.Low(), eps) && InRange(a.High(), eps) && InRange(a.Mid(), eps);
-}
+int AngleInt::OldIsSupersetOf(const AngleInt& a, float eps) const { return InRange(a.Low(), eps) && InRange(a.High(), eps) && InRange(a.Mid(), eps); }
 
 int AngleInt::IsSupersetOf(const AngleInt& a, float eps) const
 {
@@ -251,7 +248,7 @@ void AngleIntList::remove(AngleIntListNode* t)
     if (tail == t)
         tail = prev;
 
-    delete t;
+    xr_delete(t);
 }
 
 //
@@ -382,7 +379,7 @@ float AngleIntList::Distance(float a) const
 int AngleIntList::NumIntervals() const
 {
     int count = 0;
-    for (AngleIntListNode *t = head; t; t = t->next, count++)
+    for (AngleIntListNode* t = head; t; t = t->next, count++)
         ;
     return count;
 }

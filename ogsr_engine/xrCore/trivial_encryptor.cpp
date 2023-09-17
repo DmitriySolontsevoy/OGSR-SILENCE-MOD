@@ -5,7 +5,7 @@
 #include "trivial_encryptor.h"
 #include "../COMMON_AI/random32.h"
 #if __has_include("..\build_config_overrides\trivial_encryptor_ovr.h")
-#     include "..\build_config_overrides\trivial_encryptor_ovr.h"
+#include "..\build_config_overrides\trivial_encryptor_ovr.h"
 #define TE_CUSTOM_OVR
 #endif
 
@@ -18,24 +18,18 @@ class random32
 public:
     random32() = delete;
 
-    explicit random32(u32 seed)
-    {
-        generator.seed(seed);
-    }
+    explicit random32(u32 seed) { generator.seed(seed); }
 
-    u32 random(u32 range)
-    {
-        return generator.random(range);
-    }
+    u32 random(u32 range) { return generator.random(range); }
 };
 
 trivial_encryptor::trivial_encryptor()
+    : m_key_russian({2048, 20091958, 20031955}),
 #ifdef TE_CUSTOM_OVR
-    : m_key_russian({ M_TABLE_ITERATIONS, M_TABLE_SEED, M_ENCRYPT_SEED }),
+      m_key_worldwide({M_TABLE_ITERATIONS, M_TABLE_SEED, M_ENCRYPT_SEED})
 #else
-    : m_key_russian({ 2048, 20091958, 20031955 }),
+      m_key_worldwide({1024, 6011979, 24031979})
 #endif
-    m_key_worldwide({ 1024, 6011979, 24031979 })
 {
     initialize(key_flag::worldwide);
 }

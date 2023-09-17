@@ -13,17 +13,14 @@ void CAdvancedDetector::CreateUI()
     ui().construct(this);
 }
 
-CUIArtefactDetectorAdv& CAdvancedDetector::ui()
-{
-    return *((CUIArtefactDetectorAdv*)m_ui);
-}
+CUIArtefactDetectorAdv& CAdvancedDetector::ui() { return *((CUIArtefactDetectorAdv*)m_ui); }
 
 void CAdvancedDetector::UpdateAf()
 {
     ui().SetValue(0.0f, Fvector{});
     if (m_artefacts.m_ItemInfos.empty())
         return;
-        
+
     auto it_b = m_artefacts.m_ItemInfos.begin();
     auto it_e = m_artefacts.m_ItemInfos.end();
     auto it = it_b;
@@ -88,8 +85,6 @@ void CAdvancedDetector::UpdateAf()
     ui().SetValue(_diff, dir_to_artefact);
 }
 
-
-
 void CUIArtefactDetectorAdv::construct(CAdvancedDetector* p)
 {
     m_parent = p;
@@ -99,10 +94,7 @@ void CUIArtefactDetectorAdv::construct(CAdvancedDetector* p)
     m_bid = u16(-1);
 }
 
-void CUIArtefactDetectorAdv::SetValue(const float val1, const Fvector& val2)
-{
-    m_target_dir = val2; 
-}
+void CUIArtefactDetectorAdv::SetValue(const float val1, const Fvector& val2) { m_target_dir = val2; }
 
 void CUIArtefactDetectorAdv::update()
 {

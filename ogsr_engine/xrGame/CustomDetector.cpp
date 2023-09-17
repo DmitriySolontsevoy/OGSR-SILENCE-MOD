@@ -64,26 +64,23 @@ void CCustomDetector::OnStateSwitch(u32 S, u32 oldState)
 
     switch (S)
     {
-    case eShowing:
-    {
+    case eShowing: {
         g_player_hud->attach_item(this);
         HUD_SOUND::PlaySound(sndShow, Fvector{}, this, !!GetHUDmode(), false, false);
-        PlayHUDMotion({ m_bFastAnimMode ? "anim_show_fast" : "anim_show" }, false, GetState());
+        PlayHUDMotion({m_bFastAnimMode ? "anim_show_fast" : "anim_show"}, false, GetState());
         SetPending(TRUE);
     }
     break;
-    case eHiding:
-    {
+    case eHiding: {
         if (oldState != eHiding)
         {
             HUD_SOUND::PlaySound(sndHide, Fvector{}, this, !!GetHUDmode(), false, false);
-            PlayHUDMotion({ m_bFastAnimMode ? "anim_hide_fast" : "anim_hide" }, false, GetState());
+            PlayHUDMotion({m_bFastAnimMode ? "anim_hide_fast" : "anim_hide"}, false, GetState());
             SetPending(TRUE);
         }
     }
     break;
-    case eIdle:
-    {
+    case eIdle: {
         PlayAnimIdle();
         SetPending(FALSE);
     }
@@ -96,15 +93,13 @@ void CCustomDetector::OnAnimationEnd(u32 state)
     inherited::OnAnimationEnd(state);
     switch (state)
     {
-    case eShowing:
-    {
+    case eShowing: {
         SwitchState(eIdle);
         if (m_fDecayRate > 0.f)
             this->SetCondition(-m_fDecayRate);
     }
     break;
-    case eHiding:
-    {
+    case eHiding: {
         SwitchState(eHidden);
         TurnDetectorInternal(false);
         g_player_hud->detach_item(this);
@@ -197,7 +192,8 @@ void CCustomDetector::Load(LPCSTR section)
 
             ++i;
         }
-        else break;
+        else
+            break;
     } while (true);
 
     m_ef_detector_type = pSettings->r_u32(section, "ef_detector_type");
@@ -212,7 +208,7 @@ void CCustomDetector::shedule_Update(u32 dt)
     {
         Position().set(H_Parent()->Position());
 
-        Fvector	P;
+        Fvector P;
         P.set(H_Parent()->Position());
         feel_touch_update(P, m_fRadius);
         UpdateNightVisionMode();
@@ -273,8 +269,7 @@ void CCustomDetector::UpdateCL()
             CCustomZone* pZone = it->first;
             ZONE_INFO_SHOC& zone_info = it->second;
 
-            if (m_ZoneTypeMap.find(pZone->CLS_ID) == m_ZoneTypeMap.end() ||
-                !pZone->VisibleByDetector())
+            if (m_ZoneTypeMap.find(pZone->CLS_ID) == m_ZoneTypeMap.end() || !pZone->VisibleByDetector())
                 continue;
 
             ZONE_TYPE_SHOC& zone_type = m_ZoneTypeMap[pZone->CLS_ID];
@@ -283,13 +278,13 @@ void CCustomDetector::UpdateCL()
             float dist_to_zone = pSR->distance_to(H_Parent()->Position());
             if (dist_to_zone > zone_type.m_fRadius)
                 continue;
-            if (dist_to_zone < 0) dist_to_zone = 0;
+            if (dist_to_zone < 0)
+                dist_to_zone = 0;
 
             float fRelPow = 1.f - dist_to_zone / zone_type.m_fRadius;
             clamp(fRelPow, 0.f, 1.f);
 
-            zone_info.cur_freq = zone_type.min_freq +
-                (zone_type.max_freq - zone_type.min_freq) * fRelPow * fRelPow * fRelPow * fRelPow;
+            zone_info.cur_freq = zone_type.min_freq + (zone_type.max_freq - zone_type.min_freq) * fRelPow * fRelPow * fRelPow * fRelPow;
 
             float current_snd_time = 1000.f * 1.f / zone_info.cur_freq;
 
@@ -311,14 +306,11 @@ void CCustomDetector::UpdateCL()
     UpdateVisibility();
     if (!IsWorking())
         return;
-        
+
     UpdateWork();
 }
 
-void CCustomDetector::OnH_A_Chield()
-{
-    inherited::OnH_A_Chield();
-}
+void CCustomDetector::OnH_A_Chield() { inherited::OnH_A_Chield(); }
 
 void CCustomDetector::OnH_B_Independent(bool just_before_destroy)
 {
@@ -354,10 +346,7 @@ void CCustomDetector::feel_touch_delete(CObject* O)
     }
 }
 
-BOOL CCustomDetector::feel_touch_contact(CObject* O)
-{
-    return (NULL != smart_cast<CCustomZone*>(O));
-}
+BOOL CCustomDetector::feel_touch_contact(CObject* O) { return (NULL != smart_cast<CCustomZone*>(O)); }
 
 void CCustomDetector::OnMoveToRuck(EItemPlace prevPlace)
 {
@@ -381,7 +370,7 @@ void CCustomDetector::OnMoveToRuck(EItemPlace prevPlace)
     Feel::Touch::feel_touch.clear();
 }
 
-void CCustomDetector::OnMoveToSlot() 
+void CCustomDetector::OnMoveToSlot()
 {
     m_pCurrentActor = smart_cast<CActor*>(H_Parent());
     m_pCurrentInvOwner = smart_cast<CInventoryOwner*>(H_Parent());
@@ -421,11 +410,14 @@ void CCustomDetector::TurnDetectorInternal(bool b)
 
 void CCustomDetector::AddRemoveMapSpot(CCustomZone* pZone, bool bAdd)
 {
-    if (m_ZoneTypeMap.find(pZone->CLS_ID) == m_ZoneTypeMap.end()) return;
-    if (bAdd && !pZone->VisibleByDetector()) return;
+    if (m_ZoneTypeMap.find(pZone->CLS_ID) == m_ZoneTypeMap.end())
+        return;
+    if (bAdd && !pZone->VisibleByDetector())
+        return;
 
     ZONE_TYPE_SHOC& zone_type = m_ZoneTypeMap[pZone->CLS_ID];
-    if (xr_strlen(zone_type.zone_map_location)) {
+    if (xr_strlen(zone_type.zone_map_location))
+    {
         if (bAdd)
             Level().MapManager().AddMapLocation(*zone_type.zone_map_location, pZone->ID());
         else
@@ -444,11 +436,7 @@ void CCustomDetector::UpdateNightVisionMode()
 {
     bool bNightVision = Actor()->Cameras().GetPPEffector(EEffectorPPType(effNightvision)) != NULL;
 
-    bool bOn = bNightVision &&
-        m_pCurrentActor &&
-        m_pCurrentActor == Level().CurrentViewEntity() &&
-        m_sndWorking &&
-        m_nightvision_particle.size();
+    bool bOn = bNightVision && m_pCurrentActor && m_pCurrentActor == Level().CurrentViewEntity() && m_sndWorking && m_nightvision_particle.size();
 
     ZONE_INFO_MAP_IT it;
     for (it = m_ZoneInfoMap.begin(); m_ZoneInfoMap.end() != it; ++it)
@@ -456,7 +444,8 @@ void CCustomDetector::UpdateNightVisionMode()
         CCustomZone* pZone = it->first;
         ZONE_INFO_SHOC& zone_info = it->second;
 
-        if (bOn) {
+        if (bOn)
+        {
             Fvector zero_vector;
             zero_vector.set(0.f, 0.f, 0.f);
 
@@ -467,8 +456,10 @@ void CCustomDetector::UpdateNightVisionMode()
             if (!zone_info.pParticle->IsPlaying())
                 zone_info.pParticle->Play();
         }
-        else {
-            if (zone_info.pParticle) {
+        else
+        {
+            if (zone_info.pParticle)
+            {
                 zone_info.pParticle->Stop();
                 CParticlesObject::Destroy(zone_info.pParticle);
             }
@@ -476,23 +467,26 @@ void CCustomDetector::UpdateNightVisionMode()
     }
 }
 
-void CCustomDetector::update_actor_radiation() {
-    if (!m_detect_actor_radiation) return;
-    if (m_ZoneTypeMap.find(CLSID_Z_RADIO) == m_ZoneTypeMap.end()) return;
+void CCustomDetector::update_actor_radiation()
+{
+    if (!m_detect_actor_radiation)
+        return;
+    if (m_ZoneTypeMap.find(CLSID_Z_RADIO) == m_ZoneTypeMap.end())
+        return;
     ZONE_TYPE_SHOC& zone_type = m_ZoneTypeMap[CLSID_Z_RADIO];
 
     float fRelPow = m_pCurrentActor->conditions().GetRadiation();
-    if (fis_zero(fRelPow)) {
+    if (fis_zero(fRelPow))
+    {
         radiation_snd_time = 0;
         return;
     }
 
-    float cur_freq = zone_type.min_freq
-        + (zone_type.max_freq - zone_type.min_freq)
-        * fRelPow * fRelPow * fRelPow * fRelPow;
+    float cur_freq = zone_type.min_freq + (zone_type.max_freq - zone_type.min_freq) * fRelPow * fRelPow * fRelPow * fRelPow;
     float current_snd_time = 1000.f * 1.f / cur_freq;
 
-    if (radiation_snd_time > current_snd_time) {
+    if (radiation_snd_time > current_snd_time)
+    {
         radiation_snd_time = 0;
         HUD_SOUND::PlaySound(zone_type.detect_snds, Fvector().set(0, 0, 0), this, true, false);
     }

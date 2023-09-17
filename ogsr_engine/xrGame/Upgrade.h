@@ -4,14 +4,15 @@
 class CUpgrade
 {
 public:
-	CUpgrade();
-	~CUpgrade() {};
+    CUpgrade();
+    ~CUpgrade(){};
 
-	bool IsUpgradable(PIItem item);
-	PIItem RepairItem(PIItem item);
-	PIItem UpgradeItem(PIItem item, std::string upgrade);
-	char* ComposeNewSectionName(LPCSTR sectionBase, std::string upgradeName);
-	std::vector<std::string> LoadUpgradesForSect(shared_str section);
+    bool IsUpgradable(PIItem item);
+    PIItem RepairItem(PIItem item);
+    PIItem UpgradeItem(PIItem item, std::string upgrade);
+    char* ComposeNewSectionName(LPCSTR sectionBase, std::string upgradeName);
+    std::vector<std::string> LoadUpgradesForSect(shared_str section);
+
 private:
-	std::map<shared_str, std::vector<std::string>> availableUpgrades;
+    std::map<shared_str, std::vector<std::string>> availableUpgrades;
 };

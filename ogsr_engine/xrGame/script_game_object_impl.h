@@ -12,14 +12,15 @@
 #include "ai_space.h"
 #include "script_engine.h"
 
-IC	CGameObject &CScriptGameObject::object	() const
+IC CGameObject& CScriptGameObject::object() const
 {
-	if (m_game_object && m_game_object->lua_game_object() == this)
-		return	(*m_game_object);
+    if (m_game_object && m_game_object->lua_game_object() == this)
+        return (*m_game_object);
 
-	Msg("!! [%s] You are trying to use a destroyed object [%x]", __FUNCTION__, m_game_object);
-	//THROW2	(m_game_object && m_game_object->lua_game_object() == this,"Probably, you are trying to use a destroyed object!");
+    Msg("!! [%s] You are trying to use a destroyed object [%s]", __FUNCTION__, m_game_object->cName().c_str());
+    LogStackTrace("!!stack trace:\n", false);
 
-	return	(*m_game_object);
+    // THROW2	(m_game_object && m_game_object->lua_game_object() == this,"Probably, you are trying to use a destroyed object!");
+
+    return (*m_game_object);
 }
-

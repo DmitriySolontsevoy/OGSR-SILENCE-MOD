@@ -1159,12 +1159,6 @@
     <Filter Include="AI\AScript\ScriptClasses\ScriptIniFile">
       <UniqueIdentifier>{a857a5c7-c1fa-4e77-b884-ca8616ae8408}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AI\AScript\ScriptClasses\ScriptIniFile\ScriptTokenList">
-      <UniqueIdentifier>{e75b072c-56a9-42be-832e-d5c54657ceda}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="AI\AScript\ScriptClasses\ScriptIniFile\ScriptRTokenList">
-      <UniqueIdentifier>{4423dddc-2d2c-4f31-82bf-56bd4db3ebf5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="AI\AScript\ScriptClasses\ScriptMonsterHitInfo">
       <UniqueIdentifier>{857dcf78-8085-4d82-9ecb-595b09883c62}</UniqueIdentifier>
     </Filter>
@@ -1624,9 +1618,6 @@
     <Filter Include="Core\Client\Objects\zones\CustomZone">
       <UniqueIdentifier>{03d13b75-6939-4a29-aaf8-583151a32320}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Client\Objects\zones\FryUpZone">
-      <UniqueIdentifier>{895a5fa9-f93e-453c-9743-a4161d45f1ed}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core\Client\Objects\zones\GraviZone">
       <UniqueIdentifier>{720332d5-5c89-4443-8064-f8022951e0ea}</UniqueIdentifier>
     </Filter>
@@ -1644,9 +1635,6 @@
     </Filter>
     <Filter Include="Core\Client\Objects\zones\ScriptZone">
       <UniqueIdentifier>{d79f70d3-fd7e-47c1-b6bc-9416253ec191}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Client\Objects\zones\TeamBaseZone">
-      <UniqueIdentifier>{5287b2df-d9e1-4d37-a487-20e0f066064a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\Client\Objects\zones\TorridZone">
       <UniqueIdentifier>{1efac8fd-63e6-41d0-bcc9-d206ac3c098c}</UniqueIdentifier>
@@ -1695,9 +1683,6 @@
     </Filter>
     <Filter Include="Core\Client\Particles">
       <UniqueIdentifier>{2c8a7a52-126a-4222-bfe0-fb0cecb7778c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Client\Spectator">
-      <UniqueIdentifier>{0290c1df-dbfc-4ca1-97e4-a7fa48173f7b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\Common">
       <UniqueIdentifier>{3c431256-4aff-4ffb-98f8-b9de32037b7d}</UniqueIdentifier>
@@ -2074,9 +2059,6 @@
     <Filter Include="AI\AScript\ScriptClasses\UI\GameTypes\Single">
       <UniqueIdentifier>{67495a73-3875-48d9-abbc-406d30c4f780}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AI\AScript\ScriptClasses\UI\GameTypes\Game_custom_script">
-      <UniqueIdentifier>{ec75fb56-3830-4c84-9cd7-cbb2cf18637a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="AI\AScript\ScriptClasses\UI\Multiplayer">
       <UniqueIdentifier>{499cf20f-fe69-480c-b83b-fd8741d95f63}</UniqueIdentifier>
     </Filter>
@@ -2124,15 +2106,6 @@
     </Filter>
     <Filter Include="AI\AScript\ScriptClasses\UI\LoadScreen">
       <UniqueIdentifier>{a98119e5-515e-4cbe-844d-ef75fbe162e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Client\Objects\Upgrade">
-      <UniqueIdentifier>{f747bbd7-4e0d-4735-b695-a2a42e8c8089}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Addons\Pointer">
-      <UniqueIdentifier>{ba6d2788-1338-45e7-8055-8bd45e14b86f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Addons\Foregrip">
-      <UniqueIdentifier>{bf32db8e-da80-43fd-8607-c66912d1f27a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -4077,18 +4050,6 @@
     <ClInclude Include="..\COMMON_AI\script_ini_file_inline.h">
       <Filter>AI\AScript\ScriptClasses\ScriptIniFile</Filter>
     </ClInclude>
-    <ClInclude Include="..\COMMON_AI\script_token_list.h">
-      <Filter>AI\AScript\ScriptClasses\ScriptIniFile\ScriptTokenList</Filter>
-    </ClInclude>
-    <ClInclude Include="..\COMMON_AI\script_token_list_inline.h">
-      <Filter>AI\AScript\ScriptClasses\ScriptIniFile\ScriptTokenList</Filter>
-    </ClInclude>
-    <ClInclude Include="..\COMMON_AI\script_rtoken_list.h">
-      <Filter>AI\AScript\ScriptClasses\ScriptIniFile\ScriptRTokenList</Filter>
-    </ClInclude>
-    <ClInclude Include="..\COMMON_AI\script_rtoken_list_inline.h">
-      <Filter>AI\AScript\ScriptClasses\ScriptIniFile\ScriptRTokenList</Filter>
-    </ClInclude>
     <ClInclude Include="script_monster_hit_info.h">
       <Filter>AI\AScript\ScriptClasses\ScriptMonsterHitInfo</Filter>
     </ClInclude>
@@ -4219,9 +4180,6 @@
       <Filter>Core\Client\Game Persistent</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
-      <Filter>Core\Client\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Level_network_Demo.h">
       <Filter>Core\Client\Level</Filter>
     </ClInclude>
     <ClInclude Include="Level_Bullet_Manager.h">
@@ -4728,9 +4686,6 @@
     <ClInclude Include="FoodItem.h">
       <Filter>Core\Client\Objects\items &amp; weapons\Food &amp; Drugs</Filter>
     </ClInclude>
-    <ClInclude Include="ItemHealth.h">
-      <Filter>Core\Client\Objects\items &amp; weapons\Food &amp; Drugs</Filter>
-    </ClInclude>
     <ClInclude Include="medkit.h">
       <Filter>Core\Client\Objects\items &amp; weapons\Food &amp; Drugs</Filter>
     </ClInclude>
@@ -4779,9 +4734,6 @@
     <ClInclude Include="CustomZone.h">
       <Filter>Core\Client\Objects\zones\CustomZone</Filter>
     </ClInclude>
-    <ClInclude Include="FryupZone.h">
-      <Filter>Core\Client\Objects\zones\FryUpZone</Filter>
-    </ClInclude>
     <ClInclude Include="GraviZone.h">
       <Filter>Core\Client\Objects\zones\GraviZone</Filter>
     </ClInclude>
@@ -4799,9 +4751,6 @@
     </ClInclude>
     <ClInclude Include="script_zone.h">
       <Filter>Core\Client\Objects\zones\ScriptZone</Filter>
-    </ClInclude>
-    <ClInclude Include="team_base_zone.h">
-      <Filter>Core\Client\Objects\zones\TeamBaseZone</Filter>
     </ClInclude>
     <ClInclude Include="TorridZone.h">
       <Filter>Core\Client\Objects\zones\TorridZone</Filter>
@@ -4862,9 +4811,6 @@
     </ClInclude>
     <ClInclude Include="ParticlesObject.h">
       <Filter>Core\Client\Particles</Filter>
-    </ClInclude>
-    <ClInclude Include="Spectator.h">
-      <Filter>Core\Client\Spectator</Filter>
     </ClInclude>
     <ClInclude Include="date_time.h">
       <Filter>Core\Common\DateTime</Filter>
@@ -4984,9 +4930,6 @@
       <Filter>Core\Server\Games\client\single</Filter>
     </ClInclude>
     <ClInclude Include="game_cl_base.h">
-      <Filter>Core\Server\Games\client\base</Filter>
-    </ClInclude>
-    <ClInclude Include="game_cl_base_weapon_usage_statistic.h">
       <Filter>Core\Server\Games\client\base</Filter>
     </ClInclude>
     <ClInclude Include="game_sv_base.h">
@@ -5676,9 +5619,6 @@
     <ClInclude Include="UIGameSP.h">
       <Filter>AI\AScript\ScriptClasses\UI\GameTypes\Single</Filter>
     </ClInclude>
-    <ClInclude Include="UIGame_custom_script.h">
-      <Filter>AI\AScript\ScriptClasses\UI\GameTypes\Game_custom_script</Filter>
-    </ClInclude>
     <ClInclude Include="ui\UIGameLog.h">
       <Filter>AI\AScript\ScriptClasses\UI\Multiplayer\HUD\GameLog</Filter>
     </ClInclude>
@@ -6125,20 +6065,12 @@
     <ClInclude Include="SimpleDetectorSHOC.h">
       <Filter>Core\Client\Objects\items &amp; weapons\Devices\Detectors</Filter>
     </ClInclude>
+    <ClInclude Include="ui\UIUpgradeWnd.h" />
     <ClInclude Include="CustomHelmet.h" />
+    <ClInclude Include="Foregrip.h" />
+    <ClInclude Include="Pointer.h" />
     <ClInclude Include="StalkerHelmet.h" />
-    <ClInclude Include="ui\UIUpgradeWnd.h">
-      <Filter>AI\AScript\ScriptClasses\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Upgrade.h">
-      <Filter>Core\Client\Objects\Upgrade</Filter>
-    </ClInclude>
-    <ClInclude Include="Pointer.h">
-      <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Addons\Pointer</Filter>
-    </ClInclude>
-    <ClInclude Include="Foregrip.h">
-      <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Addons\Foregrip</Filter>
-    </ClInclude>
+    <ClInclude Include="Upgrade.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="damage_manager.cpp">
@@ -7227,15 +7159,6 @@
     <ClCompile Include="..\COMMON_AI\script_ini_file_script.cpp">
       <Filter>AI\AScript\ScriptClasses\ScriptIniFile</Filter>
     </ClCompile>
-    <ClCompile Include="..\COMMON_AI\script_token_list.cpp">
-      <Filter>AI\AScript\ScriptClasses\ScriptIniFile\ScriptTokenList</Filter>
-    </ClCompile>
-    <ClCompile Include="..\COMMON_AI\script_token_list_script.cpp">
-      <Filter>AI\AScript\ScriptClasses\ScriptIniFile\ScriptTokenList</Filter>
-    </ClCompile>
-    <ClCompile Include="..\COMMON_AI\script_rtoken_list_script.cpp">
-      <Filter>AI\AScript\ScriptClasses\ScriptIniFile\ScriptRTokenList</Filter>
-    </ClCompile>
     <ClCompile Include="script_monster_hit_info_script.cpp">
       <Filter>AI\AScript\ScriptClasses\ScriptMonsterHitInfo</Filter>
     </ClCompile>
@@ -7372,9 +7295,6 @@
       <Filter>Core\Client\Level</Filter>
     </ClCompile>
     <ClCompile Include="Level_network.cpp">
-      <Filter>Core\Client\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Level_network_Demo.cpp">
       <Filter>Core\Client\Level</Filter>
     </ClCompile>
     <ClCompile Include="Level_network_messages.cpp">
@@ -7875,9 +7795,6 @@
     <ClCompile Include="FoodItem.cpp">
       <Filter>Core\Client\Objects\items &amp; weapons\Food &amp; Drugs</Filter>
     </ClCompile>
-    <ClCompile Include="ItemHealth.cpp">
-      <Filter>Core\Client\Objects\items &amp; weapons\Food &amp; Drugs</Filter>
-    </ClCompile>
     <ClCompile Include="medkit.cpp">
       <Filter>Core\Client\Objects\items &amp; weapons\Food &amp; Drugs</Filter>
     </ClCompile>
@@ -7935,9 +7852,6 @@
     <ClCompile Include="CustomZone.cpp">
       <Filter>Core\Client\Objects\zones\CustomZone</Filter>
     </ClCompile>
-    <ClCompile Include="FryupZone.cpp">
-      <Filter>Core\Client\Objects\zones\FryUpZone</Filter>
-    </ClCompile>
     <ClCompile Include="GraviZone.cpp">
       <Filter>Core\Client\Objects\zones\GraviZone</Filter>
     </ClCompile>
@@ -7964,9 +7878,6 @@
     </ClCompile>
     <ClCompile Include="script_zone_script.cpp">
       <Filter>Core\Client\Objects\zones\ScriptZone</Filter>
-    </ClCompile>
-    <ClCompile Include="team_base_zone.cpp">
-      <Filter>Core\Client\Objects\zones\TeamBaseZone</Filter>
     </ClCompile>
     <ClCompile Include="TorridZone.cpp">
       <Filter>Core\Client\Objects\zones\TorridZone</Filter>
@@ -8058,9 +7969,6 @@
     <ClCompile Include="ParticlesObject.cpp">
       <Filter>Core\Client\Particles</Filter>
     </ClCompile>
-    <ClCompile Include="Spectator.cpp">
-      <Filter>Core\Client\Spectator</Filter>
-    </ClCompile>
     <ClCompile Include="xrGame.cpp">
       <Filter>Core\Common</Filter>
     </ClCompile>
@@ -8104,9 +8012,6 @@
       <Filter>Core\Server\Games\client\single</Filter>
     </ClCompile>
     <ClCompile Include="game_cl_base.cpp">
-      <Filter>Core\Server\Games\client\base</Filter>
-    </ClCompile>
-    <ClCompile Include="game_cl_base_weapon_usage_statistic.cpp">
       <Filter>Core\Server\Games\client\base</Filter>
     </ClCompile>
     <ClCompile Include="game_sv_base.cpp">
@@ -8823,9 +8728,6 @@
     <ClCompile Include="UIGameSP.cpp">
       <Filter>AI\AScript\ScriptClasses\UI\GameTypes\Single</Filter>
     </ClCompile>
-    <ClCompile Include="UIGame_custom_script.cpp">
-      <Filter>AI\AScript\ScriptClasses\UI\GameTypes\Game_custom_script</Filter>
-    </ClCompile>
     <ClCompile Include="ui\UIGameLog.cpp">
       <Filter>AI\AScript\ScriptClasses\UI\Multiplayer\HUD\GameLog</Filter>
     </ClCompile>
@@ -8950,20 +8852,12 @@
     <ClCompile Include="SimpleDetectorSHOC.cpp">
       <Filter>Core\Client\Objects\items &amp; weapons\Devices\Detectors</Filter>
     </ClCompile>
+    <ClCompile Include="ui\UIUpgradeWnd.cpp" />
     <ClCompile Include="CustomHelmet.cpp" />
+    <ClCompile Include="Foregrip.cpp" />
+    <ClCompile Include="Pointer.cpp" />
     <ClCompile Include="StalkerHelmet.cpp" />
-    <ClCompile Include="ui\UIUpgradeWnd.cpp">
-      <Filter>AI\AScript\ScriptClasses\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="Upgrade.cpp">
-      <Filter>Core\Client\Objects\Upgrade</Filter>
-    </ClCompile>
-    <ClCompile Include="Pointer.cpp">
-      <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Addons\Pointer</Filter>
-    </ClCompile>
-    <ClCompile Include="Foregrip.cpp">
-      <Filter>Core\Client\Objects\items &amp; weapons\Weapons\Custom Weapon\Addons\Foregrip</Filter>
-    </ClCompile>
+    <ClCompile Include="Upgrade.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuildStep Include="Explosive.h">
@@ -8972,8 +8866,5 @@
     <CustomBuildStep Include="dRayMotions.h">
       <Filter>Core\Client\Objects\physics\Colliders\RayMotions-Collider</Filter>
     </CustomBuildStep>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>

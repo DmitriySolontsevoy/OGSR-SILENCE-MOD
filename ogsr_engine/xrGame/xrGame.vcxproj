@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -21,35 +21,33 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{200652A6-043E-4634-8837-87983B3BD5E0}</ProjectGuid>
     <RootNamespace>xrGame</RootNamespace>
-    <WindowsTargetPlatformVersion>$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <Import Project="..\Engine_properties.props" />
+  <Import Project="..\Engine_lib_properties.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>false</WholeProgramOptimization>
-    <PlatformToolset>v142</PlatformToolset>
+    <UseDebugLibraries>true</UseDebugLibraries>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -90,7 +88,7 @@
       <OmitFramePointers>false</OmitFramePointers>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;XRGAME_EXPORTS;dSINGLE;MSVC;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>XRGAME_STATIC;XRENGINE_STATIC;XRCORE_STATIC;XRCDB_STATIC;XRSOUND_STATIC;XR_PARTICLES_STATIC;LUABIND_STATIC;WIN32;NDEBUG;_WINDOWS;_USRDLL;XRGAME_EXPORTS;dSINGLE;MSVC;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>
       </ExceptionHandling>
@@ -153,7 +151,7 @@
       <OmitFramePointers>false</OmitFramePointers>
       <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_USRDLL;XRGAME_EXPORTS;dSINGLE;MSVC;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>XRGAME_STATIC;XRENGINE_STATIC;XRCORE_STATIC;XRCDB_STATIC;XRSOUND_STATIC;XR_PARTICLES_STATIC;LUABIND_STATIC;WIN32;_WINDOWS;_USRDLL;XRGAME_EXPORTS;dSINGLE;MSVC;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>false</StringPooling>
       <ExceptionHandling>
       </ExceptionHandling>
@@ -217,15 +215,15 @@
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
       <OmitFramePointers>false</OmitFramePointers>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <WholeProgramOptimization>false</WholeProgramOptimization>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;XRGAME_EXPORTS;dSINGLE;MSVC;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WholeProgramOptimization>true</WholeProgramOptimization>
+      <PreprocessorDefinitions>XRGAME_STATIC;XRENGINE_STATIC;XRCORE_STATIC;XRCDB_STATIC;XRSOUND_STATIC;XR_PARTICLES_STATIC;LUABIND_STATIC;NDEBUG;_WINDOWS;_USRDLL;XRGAME_EXPORTS;dSINGLE;MSVC;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <ExceptionHandling>
       </ExceptionHandling>
       <SmallerTypeCheck>false</SmallerTypeCheck>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <BufferSecurityCheck>false</BufferSecurityCheck>
-      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
       <FloatingPointModel>Fast</FloatingPointModel>
       <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
@@ -242,7 +240,6 @@
       <DisableSpecificWarnings>4100;4456;4457;4458;4459;4091;4589;4995;4577;5037;4315;4267;</DisableSpecificWarnings>
       <AdditionalIncludeDirectories>.\;..\COMMON_AI;..\COMMON_AI\PATH;..\COMMON_AI\GRAPH;..\COMMON_AI\ALGORITHMS;..\xrCore;$(SolutionDir)\3rd_party\Src\ode;..\LuaJIT\src;..\Luabind;$(SolutionDir)\3rd_party\Src\d3dx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -278,7 +275,7 @@
       <OmitFramePointers>false</OmitFramePointers>
       <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
       <WholeProgramOptimization>false</WholeProgramOptimization>
-      <PreprocessorDefinitions>_WINDOWS;_USRDLL;XRGAME_EXPORTS;dSINGLE;MSVC;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>XRGAME_STATIC;XRENGINE_STATIC;XRCORE_STATIC;XRCDB_STATIC;XRSOUND_STATIC;XR_PARTICLES_STATIC;LUABIND_STATIC;_WINDOWS;_USRDLL;XRGAME_EXPORTS;dSINGLE;MSVC;_SECURE_SCL=0;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>false</StringPooling>
       <ExceptionHandling>
       </ExceptionHandling>
@@ -303,8 +300,6 @@
       <AdditionalIncludeDirectories>.\;..\COMMON_AI;..\COMMON_AI\PATH;..\COMMON_AI\GRAPH;..\COMMON_AI\ALGORITHMS;..\xrCore;$(SolutionDir)\3rd_party\Src\ode;..\LuaJIT\src;..\Luabind;$(SolutionDir)\3rd_party\Src\d3dx\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <LanguageStandard>stdcpp17</LanguageStandard>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -437,10 +432,10 @@
     <ClInclude Include="ai\monsters\monster_aura.h" />
     <ClInclude Include="ai\monsters\states\monster_state_attack_on_run.h" />
     <ClInclude Include="ai\monsters\states\monster_state_attack_on_run_inline.h" />
-    <ClInclude Include="Foregrip.h" />
-    <ClInclude Include="Pointer.h" />
+    <ClInclude Include="CustomHelmet.h" />
     <ClInclude Include="derived_client_classes.h" />
     <ClInclude Include="EliteDetector.h" />
+    <ClInclude Include="Foregrip.h" />
     <ClInclude Include="IKFoot.h" />
     <ClInclude Include="IKFoot_inl.h" />
     <ClInclude Include="ik_calculate_data.h" />
@@ -457,12 +452,14 @@
     <ClInclude Include="damage_manager.h" />
     <ClInclude Include="DamageSource.h" />
     <ClInclude Include="player_hud.h" />
+    <ClInclude Include="Pointer.h" />
     <ClInclude Include="pose_extrapolation.h" />
     <ClInclude Include="script_actor.h" />
     <ClInclude Include="script_game_object_impl.h" />
     <ClInclude Include="script_rq_result.h" />
     <ClInclude Include="script_vars_storage.h" />
     <ClInclude Include="SimpleDetectorSHOC.h" />
+    <ClInclude Include="StalkerHelmet.h" />
     <ClInclude Include="steering_behaviour.h" />
     <ClInclude Include="steering_behaviour_alignment.h" />
     <ClInclude Include="steering_behaviour_base.h" />
@@ -1123,10 +1120,6 @@
     <ClInclude Include="script_hit_inline.h" />
     <ClInclude Include="..\COMMON_AI\script_ini_file.h" />
     <ClInclude Include="..\COMMON_AI\script_ini_file_inline.h" />
-    <ClInclude Include="..\COMMON_AI\script_token_list.h" />
-    <ClInclude Include="..\COMMON_AI\script_token_list_inline.h" />
-    <ClInclude Include="..\COMMON_AI\script_rtoken_list.h" />
-    <ClInclude Include="..\COMMON_AI\script_rtoken_list_inline.h" />
     <ClInclude Include="script_monster_hit_info.h" />
     <ClInclude Include="..\COMMON_AI\script_net_packet.h" />
     <ClInclude Include="script_render_device.h" />
@@ -1171,7 +1164,6 @@
     <ClInclude Include="EffectorZoomInertion.h" />
     <ClInclude Include="GamePersistent.h" />
     <ClInclude Include="Level.h" />
-    <ClInclude Include="Level_network_Demo.h" />
     <ClInclude Include="Level_Bullet_Manager.h" />
     <ClInclude Include="Tracer.h" />
     <ClInclude Include="seniority_hierarchy_holder.h" />
@@ -1341,16 +1333,13 @@
     <ClInclude Include="antirad.h" />
     <ClInclude Include="BottleItem.h" />
     <ClInclude Include="FoodItem.h" />
-    <ClInclude Include="ItemHealth.h" />
     <ClInclude Include="medkit.h" />
     <ClInclude Include="BoneProtections.h" />
     <ClInclude Include="CustomOutfit.h" />
-    <ClInclude Include="CustomHelmet.h" />
     <ClInclude Include="ExoOutfit.h" />
     <ClInclude Include="MilitaryOutfit.h" />
     <ClInclude Include="ScientificOutfit.h" />
     <ClInclude Include="StalkerOutfit.h" />
-    <ClInclude Include="StalkerHelmet.h" />
     <ClInclude Include="InfoDocument.h" />
     <ClInclude Include="hud_item_object.h" />
     <ClInclude Include="HudItem.h" />
@@ -1363,14 +1352,12 @@
     <ClInclude Include="searchlight.h" />
     <ClInclude Include="trade.h" />
     <ClInclude Include="CustomZone.h" />
-    <ClInclude Include="FryupZone.h" />
     <ClInclude Include="GraviZone.h" />
     <ClInclude Include="level_changer.h" />
     <ClInclude Include="Mincer.h" />
     <ClInclude Include="MosquitoBald.h" />
     <ClInclude Include="RadioactiveZone.h" />
     <ClInclude Include="script_zone.h" />
-    <ClInclude Include="team_base_zone.h" />
     <ClInclude Include="TorridZone.h" />
     <ClInclude Include="ZoneVisual.h" />
     <ClInclude Include="space_restrictor.h" />
@@ -1391,7 +1378,6 @@
     <ClInclude Include="DelayedActionFuse.h" />
     <ClInclude Include="InventoryBox.h" />
     <ClInclude Include="ParticlesObject.h" />
-    <ClInclude Include="Spectator.h" />
     <ClInclude Include="date_time.h" />
     <ClInclude Include="NET_Queue.h" />
     <ClInclude Include="..\COMMON_AI\xrMessages.h" />
@@ -1432,7 +1418,6 @@
     <ClInclude Include="..\COMMON_AI\game_base_space.h" />
     <ClInclude Include="game_cl_single.h" />
     <ClInclude Include="game_cl_base.h" />
-    <ClInclude Include="game_cl_base_weapon_usage_statistic.h" />
     <ClInclude Include="game_sv_base.h" />
     <ClInclude Include="game_sv_event_queue.h" />
     <ClInclude Include="xr_time.h" />
@@ -1663,7 +1648,6 @@
     <ClInclude Include="HUDManager.h" />
     <ClInclude Include="UIGameCustom.h" />
     <ClInclude Include="UIGameSP.h" />
-    <ClInclude Include="UIGame_custom_script.h" />
     <ClInclude Include="ui\UIGameLog.h" />
     <ClInclude Include="HUDCrosshair.h" />
     <ClInclude Include="HUDTarget.h" />
@@ -1675,12 +1659,12 @@
     <ClCompile Include="AdvancedDetector.cpp" />
     <ClCompile Include="ai\monsters\anti_aim_ability.cpp" />
     <ClCompile Include="ai\monsters\monster_aura.cpp" />
-    <ClCompile Include="Foregrip.cpp" />
-    <ClCompile Include="Pointer.cpp" />
+    <ClCompile Include="CustomHelmet.cpp" />
     <ClCompile Include="damage_manager.cpp" />
     <ClCompile Include="action_base_script.cpp" />
     <ClCompile Include="derived_client_classes.cpp" />
     <ClCompile Include="EliteDetector.cpp" />
+    <ClCompile Include="Foregrip.cpp" />
     <ClCompile Include="IKFoot.cpp" />
     <ClCompile Include="ik_calculate_data.cpp" />
     <ClCompile Include="ik_dbg_matrix.cpp" />
@@ -1690,6 +1674,7 @@
     <ClCompile Include="InventoryContainer.cpp" />
     <ClCompile Include="player_hud.cpp" />
     <ClCompile Include="player_hud_tune.cpp" />
+    <ClCompile Include="Pointer.cpp" />
     <ClCompile Include="pose_extrapolation.cpp" />
     <ClCompile Include="script_action_wrapper.cpp" />
     <ClCompile Include="action_planner_script.cpp" />
@@ -1713,7 +1698,7 @@
     <ClCompile Include="script_vars_storage.cpp" />
     <ClCompile Include="SimpleDetectorSHOC.cpp" />
     <ClCompile Include="sound_memory_manager.cpp" />
-    <ClCompile Include="Upgrade.cpp" />
+    <ClCompile Include="StalkerHelmet.cpp" />
     <ClCompile Include="steering_behaviour.cpp" />
     <ClCompile Include="trajectories.cpp" />
     <ClCompile Include="ui\ArtefactDetectorUI.cpp" />
@@ -1722,6 +1707,7 @@
     <ClCompile Include="ui\UILoadingScreen.cpp" />
     <ClCompile Include="ui\UIPdaSpot.cpp" />
     <ClCompile Include="ui\UIUpgradeWnd.cpp" />
+    <ClCompile Include="Upgrade.cpp" />
     <ClCompile Include="visual_memory_manager.cpp" />
     <ClCompile Include="visual_memory_params.cpp" />
     <ClCompile Include="vision_client.cpp" />
@@ -2071,9 +2057,6 @@
     <ClCompile Include="script_hit_script.cpp" />
     <ClCompile Include="..\COMMON_AI\script_ini_file.cpp" />
     <ClCompile Include="..\COMMON_AI\script_ini_file_script.cpp" />
-    <ClCompile Include="..\COMMON_AI\script_token_list.cpp" />
-    <ClCompile Include="..\COMMON_AI\script_token_list_script.cpp" />
-    <ClCompile Include="..\COMMON_AI\script_rtoken_list_script.cpp" />
     <ClCompile Include="script_monster_hit_info_script.cpp" />
     <ClCompile Include="..\COMMON_AI\script_net_packet_script.cpp" />
     <ClCompile Include="script_render_device_script.cpp" />
@@ -2125,7 +2108,6 @@
     <ClCompile Include="Level_input.cpp" />
     <ClCompile Include="Level_load.cpp" />
     <ClCompile Include="Level_network.cpp" />
-    <ClCompile Include="Level_network_Demo.cpp" />
     <ClCompile Include="Level_network_messages.cpp" />
     <ClCompile Include="Level_network_spawn.cpp" />
     <ClCompile Include="Level_network_start_client.cpp" />
@@ -2293,16 +2275,13 @@
     <ClCompile Include="antirad.cpp" />
     <ClCompile Include="BottleItem.cpp" />
     <ClCompile Include="FoodItem.cpp" />
-    <ClCompile Include="ItemHealth.cpp" />
     <ClCompile Include="medkit.cpp" />
     <ClCompile Include="BoneProtections.cpp" />
     <ClCompile Include="CustomOutfit.cpp" />
-    <ClCompile Include="CustomHelmet.cpp" />
     <ClCompile Include="ExoOutfit.cpp" />
     <ClCompile Include="MilitaryOutfit.cpp" />
     <ClCompile Include="ScientificOutfit.cpp" />
     <ClCompile Include="StalkerOutfit.cpp" />
-    <ClCompile Include="StalkerHelmet.cpp" />
     <ClCompile Include="InfoDocument.cpp" />
     <ClCompile Include="hud_item_object.cpp" />
     <ClCompile Include="HudItem.cpp" />
@@ -2315,7 +2294,6 @@
     <ClCompile Include="trade.cpp" />
     <ClCompile Include="trade2.cpp" />
     <ClCompile Include="CustomZone.cpp" />
-    <ClCompile Include="FryupZone.cpp" />
     <ClCompile Include="GraviZone.cpp" />
     <ClCompile Include="level_changer.cpp" />
     <ClCompile Include="Mincer.cpp" />
@@ -2325,7 +2303,6 @@
     <ClCompile Include="RadioactiveZone.cpp" />
     <ClCompile Include="script_zone.cpp" />
     <ClCompile Include="script_zone_script.cpp" />
-    <ClCompile Include="team_base_zone.cpp" />
     <ClCompile Include="TorridZone.cpp" />
     <ClCompile Include="ZoneVisual.cpp" />
     <ClCompile Include="space_restrictor.cpp" />
@@ -2356,7 +2333,6 @@
     <ClCompile Include="DelayedActionFuse.cpp" />
     <ClCompile Include="InventoryBox.cpp" />
     <ClCompile Include="ParticlesObject.cpp" />
-    <ClCompile Include="Spectator.cpp" />
     <ClCompile Include="xrGame.cpp" />
     <ClCompile Include="console_commands.cpp" />
     <ClCompile Include="date_time.cpp" />
@@ -2372,7 +2348,6 @@
     <ClCompile Include="game_base.cpp" />
     <ClCompile Include="game_cl_single.cpp" />
     <ClCompile Include="game_cl_base.cpp" />
-    <ClCompile Include="game_cl_base_weapon_usage_statistic.cpp" />
     <ClCompile Include="game_sv_base.cpp" />
     <ClCompile Include="game_sv_base_script.cpp" />
     <ClCompile Include="game_sv_event_queue.cpp" />
@@ -2613,7 +2588,6 @@
     <ClCompile Include="UIGameCustom.cpp" />
     <ClCompile Include="UIGameCustom_script.cpp" />
     <ClCompile Include="UIGameSP.cpp" />
-    <ClCompile Include="UIGame_custom_script.cpp" />
     <ClCompile Include="ui\UIGameLog.cpp" />
     <ClCompile Include="HUDCrosshair.cpp" />
     <ClCompile Include="HUDTarget.cpp" />
@@ -2639,13 +2613,6 @@
       <Project>{ccca7859-eb86-493e-9b53-c4235f45b3c5}</Project>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
-    <ProjectReference Include="..\xr_3da\XR_3DA.vcxproj">
-      <Project>{2578c6d8-660d-48ae-9322-7422f8664f06}</Project>
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="cpp.hint" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

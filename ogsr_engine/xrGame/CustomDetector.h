@@ -19,12 +19,12 @@ struct ITEM_TYPE
     shared_str nightvision_particle;
 };
 
-//описание зоны, обнаруженной детектором
+// описание зоны, обнаруженной детектором
 struct ITEM_INFO
 {
     ITEM_TYPE* curr_ref{};
     float snd_time{};
-    //текущая частота работы датчика
+    // текущая частота работы датчика
     float cur_period{};
     // particle for night-vision mode
     CParticlesObject* pParticle{};
@@ -130,9 +130,7 @@ public:
 
 class CUIArtefactDetectorBase;
 
-class CCustomDetector :
-    public CHudItemObject,
-    public Feel::Touch
+class CCustomDetector : public CHudItemObject, public Feel::Touch
 {
     typedef CHudItemObject inherited;
 
@@ -180,10 +178,11 @@ public:
     void ShowDetector(bool bFastMode);
     float m_fAfDetectRadius;
 
-    virtual u32 ef_detector_type() const  override { return 1; }
+    virtual u32 ef_detector_type() const override { return 1; }
+
 protected:
     void TurnDetectorInternal(bool b);
-    //void UpdateNightVisionMode(bool b_off);
+    // void UpdateNightVisionMode(bool b_off);
     void UpdateVisibility();
     virtual void UpdateWork();
     virtual void UpdateAf() {}
@@ -205,25 +204,25 @@ protected:
 
     float m_fRadius;
 
-    //если хозяин текущий актер
+    // если хозяин текущий актер
     CActor* m_pCurrentActor;
     CInventoryOwner* m_pCurrentInvOwner;
 
-    //информация об онаруживаемых зонах
+    // информация об онаруживаемых зонах
     DEFINE_MAP(CLASS_ID, ZONE_TYPE_SHOC, ZONE_TYPE_MAP, ZONE_TYPE_MAP_IT);
     ZONE_TYPE_MAP m_ZoneTypeMap;
 
-    //список обнаруженных зон и информация о них
+    // список обнаруженных зон и информация о них
     DEFINE_MAP(CCustomZone*, ZONE_INFO_SHOC, ZONE_INFO_MAP, ZONE_INFO_MAP_IT);
     ZONE_INFO_MAP m_ZoneInfoMap;
 
-    shared_str						m_nightvision_particle;
+    shared_str m_nightvision_particle;
 
     bool m_detect_actor_radiation;
-    u32  radiation_snd_time;
+    u32 radiation_snd_time;
     void update_actor_radiation();
 
-    u32					m_ef_detector_type;
+    u32 m_ef_detector_type;
 };
 
 class CZoneList : public CDetectList<CCustomZone>

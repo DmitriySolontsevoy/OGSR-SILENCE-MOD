@@ -123,7 +123,4 @@ PIItem CUpgrade::UpgradeItem(PIItem item, std::string upgrade)
     return pWeapon;
 }
 
-std::vector<std::string> CUpgrade::LoadUpgradesForSect(shared_str section)
-{
-    return availableUpgrades[section];
-}
+std::vector<std::string> CUpgrade::LoadUpgradesForSect(shared_str section) { return availableUpgrades[section]; }
