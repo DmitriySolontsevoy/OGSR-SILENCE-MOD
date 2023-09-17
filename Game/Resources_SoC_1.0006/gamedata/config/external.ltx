@@ -43,9 +43,6 @@ remove_alt_keybinding = false
 ; и при прицеливании оно будет обладать свойствами бинокля. Еще нужно не забыть добавить в секцию этого оружия настройки для бинокля.
 binoc_firing = false
 
-; Отключает возможность переключаться между слотами колесиком мыши.
-no_mouse_wheel_switch_slot = false
-
 ; Выключает использование анимации рассматривания болта, подкидывания гранат и кручения ножа, т.е. anim_playing.
 stop_anim_playing = false
 
@@ -150,9 +147,6 @@ default_allow_zoom_inertion = true
 ; Инерция при прицеливании в присоединяемые нетекстурные прицелы (3д прицелы и тп)
 default_allow_scope_zoom_inertion = true
 
-; Наклоны оружия при стрейфах.
-default_strafe_enabled = true
-
 ; Изменение HUD FOV когда игрок стоит вплотную к стене.
 default_nearwall_on = true
 ;-------------------------------------------------------------------------------------
@@ -170,9 +164,12 @@ actor_thirst = true
 ; Запрет на закрытие окна диалога, если диалог не завершен.
 ;disable_dialog_break = true
 
-; Использовать ЗП-формат thm файлов. В ТЧ и ЗП они отличаются и из-за этого могут работать по-разному. Если ставить текстуры от модов на базе ЗП - лучше это включить.
-use_cop_thm_format = false
+;Игнорировать ошибки парсинга xml (в ТЧ они встречаются даже в оригинальной игре)	
+skip_shoc_xml_errors = true	
 
+;Включить оригинальный псевдо-респавн артефактов аномалиями.	
+;Может кому-то он нужен, но на мой взгляд очень странная штука.	
+enable_spawn_artefacts = false
 
 [dragdrop]
 ; ЗП-стайл подсветки ячеек инвентаря зависят от текстуры ui\ui_grid.dds. В ней нарисованы 7 клеток, по порядку слева направо:
@@ -212,10 +209,10 @@ spot_type = yellow_flag_location
 [wpn_bobbing_effector]
 limp_amplitude = 0.011
 limp_speed     = 4.6
-run_amplitude  = 0.0075
-run_speed      = 6.74
-walk_amplitude = 0.005
-walk_speed     = 6.26
+run_amplitude  = 0.005
+run_speed      = 6.5
+walk_amplitude = 0.0025
+walk_speed     = 6
 crouch_k = 0.75
 ;zoom_k   = 0.1
 scope_zoom_k = 0.1
