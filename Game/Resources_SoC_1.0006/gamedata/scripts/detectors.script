@@ -1,5 +1,5 @@
-local MAX_ARTEFACTS = 50
-local MAX_ANOMALIES = 50
+local MAX_ARTEFACTS = 24
+local MAX_ANOMALIES = 24
 local map_radius = 30
 
 function on_update()
