@@ -136,13 +136,13 @@ zoom_enabled				= true
 scope_zoom_factor	    	= 55
 
 ;звуки
-snd_draw					= weapons\walther\draw
-snd_holster					= weapons\walther\holster
-snd_shoot					= weapons\walther\shot      
-snd_empty					= weapons\walther\empty
-snd_reload					= weapons\walther\reload
-snd_reload_partly			= weapons\walther\reload_partly
-snd_close					= weapons\walther\draw
+snd_draw					= weapons\fort\draw
+snd_holster					= weapons\fort\holster
+snd_shoot					= weapons\fort\shot         
+snd_empty					= weapons\fort\empty
+snd_reload					= weapons\fort\reload
+snd_reload_partly			= weapons\fort\reload_partly
+snd_close					= weapons\fort\draw
 
 snd_grab = pickups\grab_gun
 
@@ -169,38 +169,34 @@ silencer_light_time 		= 0.2
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 [wpn_walther_hud]
-shell_point			= 0.025000,0.028000,-0.219000
-fire_point			= 0.004000,0.031485,-0.249970
+shell_point			        = 0.020000,0.040000,-0.300000
+fire_point			= 0.000600,0.040600,-0.239000
+	
 fire_bone                	= wpn_body
-
-position					= -0.031, -0.16, 0.0025
-orientation					= -0.5, 1.630021, 1.15
-
+orientation              	= 0,0,0
+position                 	= 0, -0.16, -0.05
 visual                   	= weapons\walther_99\wpn_walther_99_hud.ogf
 
 anim_reload_effector = short_reload
 anim_reload_empty_effector = short_reload
 
-anim_holster				= holster
-anim_holster_empty			= holster_empty
-anim_idle					= idle
-anim_idle_aim_empty			= idle_empty_aim
-anim_empty					= idle_empty
-anim_reload					= reload
-anim_reload_empty			= reload_full
-anim_draw					= draw
-anim_draw_empty				= draw_empty
-anim_shoot					= shoot
-anim_shot_last				= shoot_last
-anim_close					= holster_empty	;close
-anim_idle_aim				= idle_aim
-anim_idle_sprint			= idle_sprint
-anim_idle_sprint_empty		= idle_sprint_empty
+anim_holster				= lancew_fort12_holster
+anim_idle					= lancew_fort12_idle
+anim_empty					= lancew_fort12_idle_empty
+anim_reload					= lancew_fort12_reload
+anim_reload_empty			= lancew_fort12_reload_full
+anim_draw					= lancew_fort12_draw
+anim_draw_empty				= lancew_fort12_draw_empty
+anim_shoot					= lancew_fort12_shoot
+anim_shot_last				= lancew_fort12_shoot_empty
+anim_close					= lancew_fort12_holster_empty	;close
+anim_idle_aim				= lancew_fort12_idle_aim
+anim_idle_sprint			= lancew_fort12_sprint
+anim_idle_sprint_empty      = lancew_fort12_sprint_empty
 
 ;смещения HUD для режима приближения
-zoom_offset			= -0.086,0.044,-0.1305
-zoom_rotate_x		= 0.016
-zoom_rotate_y		= -0.015
-
+zoom_offset			= -0.11458, 0.043, -0.05
+zoom_rotate_x		= -0.01
+zoom_rotate_y		= -0.0065
 
 zoom_hide_crosshair	= true						;to hide crosshair in zoom 
