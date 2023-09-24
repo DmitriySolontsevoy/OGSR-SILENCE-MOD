@@ -145,10 +145,10 @@ snd_holster					= weapons\beretta\holster
 snd_shoot					= weapons\beretta\shot
 snd_shoot1					= weapons\beretta\shot1
 snd_shoot2					= weapons\beretta\shot2
-snd_shoot3					= weapons\beretta\shot3   
+snd_shoot3					= weapons\beretta\shot3    
 snd_empty					= weapons\beretta\empty
-snd_reload					= weapons\beretta\reload
-snd_reload_partly			= weapons\beretta\reload_partly
+snd_reload					= weapons\fort\reload
+snd_reload_partly			= weapons\fort\reload_partly
 snd_close					= weapons\beretta\holster
 
 snd_grab = pickups\grab_gun
@@ -175,32 +175,32 @@ silencer_light_time 		= 0.2
 
  
 [wpn_beretta_hud]
-shell_point			= 0.001000,0.048000,-0.215999
-fire_point			= 0.001000,0.048000,-0.204999
+shell_point			        = 0.020000,0.040000,-0.300000
+fire_point			= 0.000600,0.040600,-0.239000
+	
 fire_bone                	= wpn_body
-
-position			= -0.021000,-0.160000, 0
-orientation			= -0.500000,1.000000,1.149999
+orientation              	= 0,0,0
+position                 	= 0, -0.16, -0.05
 visual                   	= weapons\beretta92FS\wpn_beretta92fs_hud.ogf 
 
 anim_reload_effector = short_reload
 anim_reload_empty_effector = short_reload
 
-anim_holster				= holster
-anim_idle					= idle
-anim_empty					= idle_empty
-anim_reload					= reload_full
-anim_reload_empty			= reload
-anim_draw					= draw
-anim_draw_empty				= draw_empty
-anim_shoot					= shoot
-anim_shot_last				= shoot_last
-anim_close					= holster_empty
-anim_idle_aim				= idle_aim
-anim_idle_sprint			= sprint
-anim_idle_sprint_empty      = sprint_empty
+anim_holster				= lancew_fort12_holster
+anim_idle					= lancew_fort12_idle
+anim_empty					= lancew_fort12_idle_empty
+anim_reload					= lancew_fort12_reload
+anim_reload_empty			= lancew_fort12_reload_full
+anim_draw					= lancew_fort12_draw
+anim_draw_empty				= lancew_fort12_draw_empty
+anim_shoot					= lancew_fort12_shoot
+anim_shot_last				= lancew_fort12_shoot_empty
+anim_close					= lancew_fort12_holster_empty	;close
+anim_idle_aim				= lancew_fort12_idle_aim
+anim_idle_sprint			= lancew_fort12_sprint
+anim_idle_sprint_empty      = lancew_fort12_sprint_empty
 
 ;смещения HUD для режима приближения
-zoom_offset			= -0.096,0.037,-0.1
-zoom_rotate_x		= 0.0115
-zoom_rotate_y		= -0.0158
+zoom_offset			= -0.11458, 0.035, -0.05
+zoom_rotate_x		= -0.01
+zoom_rotate_y		= -0.0065
