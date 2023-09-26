@@ -1085,7 +1085,7 @@ bool CWeapon::Action(s32 cmd, u32 flags)
     case kL_LOOKOUT:
     case kR_LOOKOUT:
     case kSPRINT_TOGGLE: {
-        if (GetHUDmode())
+        if (GetHUDmode() && GetState() == eInspect)
         {
             SetState(eIdle);
             GamePersistent().SetPickableEffectorDOF(false);
