@@ -578,8 +578,8 @@ void CWeapon::Load(LPCSTR section)
 
     hud_recalc_koef = READ_IF_EXISTS(pSettings, r_float, hud_sect, "hud_recalc_koef", 1.35f);
 
-    dof_transition_time = READ_IF_EXISTS(pSettings, r_float, section, "dof_transition_time", 0.6f);
-    dof_params_zoom = (READ_IF_EXISTS(pSettings, r_fvector4, section, "dof_zoom_params", (Fvector4{0, 0, 0, 1.6}))); //(Fvector4{0.1, 0.4, 0, 1.6})
+    dof_transition_time = READ_IF_EXISTS(pSettings, r_float, section, "dof_transition_time", 0.2f);
+    dof_params_zoom = (READ_IF_EXISTS(pSettings, r_fvector4, section, "dof_zoom_params", (Fvector4{0, 0, 0, 1.6})));
     dof_params_reload = (READ_IF_EXISTS(pSettings, r_fvector4, section, "dof_reload_params", (Fvector4{0, 0, 1, 0})));
 }
 
@@ -876,7 +876,7 @@ void CWeapon::UpdateCL()
                 UpdateDof(dof_reload_effect, dof_params_reload, true);
         }
     }
-    else if (GetState() == eReload)
+    else if (GetState() == eReload || GetState() == eInspect)
     {
         if (pActor && psActorFlags.test(AF_DOF_RELOAD) && dof_reload_effect < 1.f)
             UpdateDof(dof_reload_effect, dof_params_reload, false);
@@ -1014,11 +1014,16 @@ bool CWeapon::Action(s32 cmd, u32 flags)
     case kWPN_INSPECT: {
         if (pSettings->line_exist(this->hud_sect, "anim_inspect") && GetState() == eIdle)
         {
-            if (GetHUDmode())
-                GamePersistent().SetPickableEffectorDOF(true);
+            if (GetState() != eInspect)
+            {
+                SetState(eInspect);
 
-            PlayHUDMotion("anim_inspect", true, GetState());
-            return false;
+                if (GetHUDmode())
+                    GamePersistent().SetPickableEffectorDOF(true);
+
+                PlayHUDMotion("anim_inspect", true, GetState());
+                return false;
+            }
         }
         return true;
     }
@@ -1065,11 +1070,36 @@ bool CWeapon::Action(s32 cmd, u32 flags)
         }
     }
         return true;
-
+    case kLEFT:
+    case kRIGHT:
+    case kUP:
+    case kDOWN:
+    case kJUMP:
+    case kCROUCH:
+    case kCROUCH_TOGGLE:
+    case kACCEL:
+    case kFWD:
+    case kBACK:
+    case kL_STRAFE:
+    case kR_STRAFE:
+    case kL_LOOKOUT:
+    case kR_LOOKOUT:
+    case kSPRINT_TOGGLE: {
+        if (GetHUDmode())
+        {
+            SetState(eIdle);
+            GamePersistent().SetPickableEffectorDOF(false);
+        }
+        
+        return false;
+    }
     case kWPN_ZOOM: {
         if (GetHUDmode())
+        {
+            SetState(eIdle);
             GamePersistent().SetPickableEffectorDOF(false);
-
+        }
+            
         if (IsZoomEnabled())
         {
             if (flags & CMD_START && !IsPending())

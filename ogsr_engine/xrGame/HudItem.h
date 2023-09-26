@@ -25,6 +25,7 @@ public:
         eFire,
         eFire2,
         eReload,
+        eInspect,
         eShowing,
         eHiding,
         eHidden,

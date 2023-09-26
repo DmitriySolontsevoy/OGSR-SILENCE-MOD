@@ -141,10 +141,14 @@ void CWeaponMagazined::Load(LPCSTR section)
     if (pSettings->line_exist(section, "snd_reload_jammed_last"))
         HUD_SOUND::LoadSound(section, "snd_reload_jammed_last", sndReloadJammedLast, m_eSoundReload);
 
-    if (pSettings->line_exist(section, "snd_reload_empty")) // OpenXRay-style неполная перезарядка
+    if (pSettings->line_exist(section, "snd_reload_empty"))
         HUD_SOUND::LoadSound(section, "snd_reload", sndReloadPartly, m_eSoundReload);
-    else if (pSettings->line_exist(section, "snd_reload_partly")) // OGSR-style неполная перезарядка
+    else if (pSettings->line_exist(section, "snd_reload_partly"))
+    {
         HUD_SOUND::LoadSound(section, "snd_reload_partly", sndReloadPartly, m_eSoundReload);
+        sndReloadPartlyExist = true;
+    }
+        
 
     if (pSettings->line_exist(section, "snd_fire_modes"))
         HUD_SOUND::LoadSound(section, "snd_fire_modes", sndFireModes, m_eSoundEmptyClick);
@@ -279,7 +283,7 @@ bool CWeaponMagazined::TryReload()
                 m_pAmmo = smart_cast<CWeaponAmmo*>(m_pCurrentInventory->GetAmmo(*m_ammoTypes[i], forActor));
                 if (m_pAmmo)
                 {
-                    m_set_next_ammoType_on_reload = i; // https://github.com/revolucas/CoC-Xray/pull/5/commits/3c45cad1edb388664efbe3bb20a29f92e2d827ca
+                    m_set_next_ammoType_on_reload = i;
                     SetPending(TRUE);
                     SwitchState(eReload);
                     return true;
