@@ -1094,7 +1094,7 @@ bool CWeapon::Action(s32 cmd, u32 flags)
         return false;
     }
     case kWPN_ZOOM: {
-        if (GetHUDmode())
+        if (GetHUDmode() && GetState() != eReload)
         {
             SetState(eIdle);
             GamePersistent().SetPickableEffectorDOF(false);
