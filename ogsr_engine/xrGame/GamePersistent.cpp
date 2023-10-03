@@ -749,13 +749,6 @@ bool CGamePersistent::OnKeyboardPress(int dik)
     return false;
 }
 
-void CGamePersistent::SetPickableEffectorDOF(bool bSet)
-{
-    m_bPickableDOF = bSet;
-    if (!bSet)
-        RestoreEffectorDOF();
-}
-
 void CGamePersistent::GetCurrentDof(Fvector3& dof) { dof = m_dof[1]; }
 
 void CGamePersistent::SetBaseDof(const Fvector3& dof) { m_dof[0] = m_dof[1] = m_dof[2] = m_dof[3] = dof; }

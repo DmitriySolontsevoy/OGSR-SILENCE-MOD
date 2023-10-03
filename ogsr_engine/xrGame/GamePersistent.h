@@ -85,7 +85,6 @@ public:
     virtual bool CanBePaused();
     bool OnKeyboardPress(int dik);
 
-    void SetPickableEffectorDOF(bool bSet);
     void SetEffectorDOF(const Fvector& needed_dof);
     void RestoreEffectorDOF();
 

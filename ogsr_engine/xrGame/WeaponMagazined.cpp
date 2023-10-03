@@ -761,6 +761,7 @@ void CWeaponMagazined::OnAnimationEnd(u32 state)
 {
     switch (state)
     {
+        Msg("Animation of state %s ended", state);
     case eReload:
         ReloadMagazine();
         HUD_SOUND::StopSound(sndReload);
@@ -768,12 +769,12 @@ void CWeaponMagazined::OnAnimationEnd(u32 state)
         HUD_SOUND::StopSound(sndReloadJammed);
         HUD_SOUND::StopSound(sndReloadJammedLast);
         SwitchState(eIdle);
-        break; // End of reload animation
-    case eHiding: SwitchState(eHidden); break; // End of Hide
-    case eShowing: SwitchState(eIdle); break; // End of Show
-    case eIdle: switch2_Idle(); break; // Keep showing idle
-    case eMisfire: SwitchState(eIdle); break; // End of misfire animation
-    case eDeviceSwitch: SwitchState(eIdle); break; // End of device switch animation
+        break;
+    case eHiding: SwitchState(eHidden); break;
+    case eShowing: SwitchState(eIdle); break;
+    case eIdle: switch2_Idle(); break;
+    case eMisfire: SwitchState(eIdle); break;
+    case eDeviceSwitch: SwitchState(eIdle); break;
     default: inherited::OnAnimationEnd(state);
     }
 }

@@ -1016,10 +1016,7 @@ bool CWeapon::Action(s32 cmd, u32 flags)
         {
             if (GetState() != eInspect)
             {
-                SetState(eInspect);
-
-                if (GetHUDmode())
-                    GamePersistent().SetPickableEffectorDOF(true);
+                SwitchState(eInspect);
 
                 PlayHUDMotion("anim_inspect", true, GetState());
                 return false;
@@ -1028,18 +1025,14 @@ bool CWeapon::Action(s32 cmd, u32 flags)
         return true;
     }
     case kWPN_FIRE: {
-        if (GetHUDmode())
-            GamePersistent().SetPickableEffectorDOF(false);
+        if (flags & CMD_START)
         {
-            if (flags & CMD_START)
-            {
-                if (IsPending())
-                    return false;
-                FireStart();
-            }
-            else
-                FireEnd();
-        };
+            if (IsPending())
+                return false;
+            FireStart();
+        }
+        else
+            FireEnd();
     }
         return true;
     case kWPN_NEXT: {
@@ -1070,36 +1063,12 @@ bool CWeapon::Action(s32 cmd, u32 flags)
         }
     }
         return true;
-    case kLEFT:
-    case kRIGHT:
-    case kUP:
-    case kDOWN:
-    case kJUMP:
-    case kCROUCH:
-    case kCROUCH_TOGGLE:
-    case kACCEL:
-    case kFWD:
-    case kBACK:
-    case kL_STRAFE:
-    case kR_STRAFE:
-    case kL_LOOKOUT:
-    case kR_LOOKOUT:
-    case kSPRINT_TOGGLE: {
-        if (GetHUDmode() && GetState() == eInspect)
-        {
-            SetState(eIdle);
-            GamePersistent().SetPickableEffectorDOF(false);
-        }
-        
-        return false;
-    }
     case kWPN_ZOOM: {
-        if (GetHUDmode() && GetState() != eReload)
+        if (GetState() == eInspect)
         {
-            SetState(eIdle);
-            GamePersistent().SetPickableEffectorDOF(false);
+            SwitchState(eIdle);
         }
-            
+
         if (IsZoomEnabled())
         {
             if (flags & CMD_START && !IsPending())
@@ -1136,6 +1105,11 @@ bool CWeapon::Action(s32 cmd, u32 flags)
         else
             return false;
     }
+    default:
+        if (GetState() == eInspect)
+        {
+            SwitchState(eIdle);
+        }
     }
     return false;
 }
@@ -1572,9 +1546,6 @@ void CWeapon::OnZoomIn()
     else if (!m_bZoomInertionAllow)
         AllowHudInertion(FALSE);
 
-    if (GetHUDmode())
-        GamePersistent().SetPickableEffectorDOF(true);
-
     if (smart_cast<CActor*>(H_Parent()))
         g_actor->callback(GameObject::eOnActorWeaponZoomIn)(lua_game_object());
 
@@ -1597,9 +1568,6 @@ void CWeapon::OnZoomOut()
     }
 
     AllowHudInertion(TRUE);
-
-    if (GetHUDmode())
-        GamePersistent().SetPickableEffectorDOF(false);
 
     ResetSubStateTime();
 
