@@ -1760,6 +1760,8 @@ u8 CWeapon::GetCurrentHudOffsetIdx() const
         {
             if (m_bUseScopeZoom && has_scope)
                 return hud_item_measures::m_hands_offset_type_gl_normal_scope;
+            else if (has_scope)
+                return hud_item_measures::m_hands_offset_type_scope;
             else
                 return hud_item_measures::m_hands_offset_type_aim_gl_normal;
         }
