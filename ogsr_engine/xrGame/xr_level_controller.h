@@ -53,7 +53,6 @@ enum EGameActions
     kDROP,
     kUSE,
     kSCORES,
-    kFLASHLIGHT,
     kCHAT_TEAM,
     kSCREENSHOT,
     kQUIT,

@@ -28,7 +28,7 @@ xr_vector<_action> actions = {
                                                     DEF_ACTION("wpn_firemode_next", kWPN_FIREMODE_NEXT) DEF_ACTION("wpn_inspect", kWPN_INSPECT)
 
                                                 DEF_ACTION("pause", kPAUSE) DEF_ACTION("drop", kDROP) DEF_ACTION("use", kUSE) DEF_ACTION("scores", kSCORES)
-                                                    DEF_ACTION("flashlight", kFLASHLIGHT) DEF_ACTION("chat_team", kCHAT_TEAM) DEF_ACTION("screenshot", kSCREENSHOT)
+                                                    DEF_ACTION("chat_team", kCHAT_TEAM) DEF_ACTION("screenshot", kSCREENSHOT)
                                                         DEF_ACTION("quit", kQUIT) DEF_ACTION("console", kCONSOLE) DEF_ACTION("inventory", kINVENTORY) DEF_ACTION("buy_menu", kBUY)
                                                             DEF_ACTION("skin_menu", kSKIN) DEF_ACTION("team_menu", kTEAM) DEF_ACTION("active_jobs", kACTIVE_JOBS)
                                                                 DEF_ACTION("map", kMAP) DEF_ACTION("contacts", kCONTACTS) DEF_ACTION("ext_1", kEXT_1)

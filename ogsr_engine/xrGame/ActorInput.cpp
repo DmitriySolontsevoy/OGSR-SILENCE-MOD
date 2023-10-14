@@ -113,17 +113,13 @@ void CActor::IR_OnKeyboardPress(int cmd)
     case kCAM_2: cam_Set(eacLookAt); break;
     case kCAM_3: cam_Set(eacFreeLook); break;
     case kNIGHT_VISION: {
-        auto act_it = inventory().ActiveItem();
         auto pTorch = smart_cast<CTorch*>(inventory().ItemFromSlot(TORCH_SLOT));
-        if (pTorch && !smart_cast<CWeaponMagazined*>(act_it) && !smart_cast<CWeaponKnife*>(act_it) && !smart_cast<CMissile*>(act_it))
-            pTorch->SwitchNightVision();
+        pTorch->SwitchNightVision();
     }
     break;
     case kTORCH: {
-        auto act_it = inventory().ActiveItem();
         auto pTorch = smart_cast<CTorch*>(inventory().ItemFromSlot(TORCH_SLOT));
-        if (pTorch && !smart_cast<CWeaponMagazined*>(act_it) && !smart_cast<CWeaponKnife*>(act_it) && !smart_cast<CMissile*>(act_it))
-            pTorch->Switch();
+        pTorch->Switch();
     }
     break;
     case kUSE: ActorUse(); break;

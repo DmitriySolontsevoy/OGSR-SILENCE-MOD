@@ -594,7 +594,7 @@ void CUIUpgradeWnd::SendMessage(CUIWindow* pWnd, s16 msg, void* pData)
             m_uidata->UIRepairBox.SetItem(cellItem);
         }
     }
-    else if (pWnd == &m_uidata->UIUpgrade1 && msg == BUTTON_CLICKED)
+    else if (pWnd == &m_uidata->UIUpgrade1 && msg == BUTTON_CLICKED && !upgradeBySlot[0].empty())
     {
         PIItem item = (PIItem)m_uidata->UIRepairBox.GetItemIdx(0)->m_pData;
         PIItem upgradedItem = upgrader.UpgradeItem(item, upgradeBySlot[0]);
@@ -604,7 +604,7 @@ void CUIUpgradeWnd::SendMessage(CUIWindow* pWnd, s16 msg, void* pData)
         m_uidata->UIRepairBox.ClearAll(true);
         m_uidata->UIRepairBox.SetItem(cellItem);
     }
-    else if (pWnd == &m_uidata->UIUpgrade2 && msg == BUTTON_CLICKED)
+    else if (pWnd == &m_uidata->UIUpgrade2 && msg == BUTTON_CLICKED && !upgradeBySlot[1].empty())
     {
         PIItem item = (PIItem)m_uidata->UIRepairBox.GetItemIdx(0)->m_pData;
         PIItem upgradedItem = upgrader.UpgradeItem(item, upgradeBySlot[1]);
@@ -614,7 +614,7 @@ void CUIUpgradeWnd::SendMessage(CUIWindow* pWnd, s16 msg, void* pData)
         m_uidata->UIRepairBox.ClearAll(true);
         m_uidata->UIRepairBox.SetItem(cellItem);
     }
-    else if (pWnd == &m_uidata->UIUpgrade3 && msg == BUTTON_CLICKED)
+    else if (pWnd == &m_uidata->UIUpgrade3 && msg == BUTTON_CLICKED && !upgradeBySlot[2].empty())
     {
         PIItem item = (PIItem)m_uidata->UIRepairBox.GetItemIdx(0)->m_pData;
         PIItem upgradedItem = upgrader.UpgradeItem(item, upgradeBySlot[2]);
@@ -624,7 +624,7 @@ void CUIUpgradeWnd::SendMessage(CUIWindow* pWnd, s16 msg, void* pData)
         m_uidata->UIRepairBox.ClearAll(true);
         m_uidata->UIRepairBox.SetItem(cellItem);
     }
-    else if (pWnd == &m_uidata->UIUpgrade4 && msg == BUTTON_CLICKED)
+    else if (pWnd == &m_uidata->UIUpgrade4 && msg == BUTTON_CLICKED && !upgradeBySlot[3].empty())
     {
         PIItem item = (PIItem)m_uidata->UIRepairBox.GetItemIdx(0)->m_pData;
         PIItem upgradedItem = upgrader.UpgradeItem(item, upgradeBySlot[3]);
@@ -634,7 +634,7 @@ void CUIUpgradeWnd::SendMessage(CUIWindow* pWnd, s16 msg, void* pData)
         m_uidata->UIRepairBox.ClearAll(true);
         m_uidata->UIRepairBox.SetItem(cellItem);
     }
-    else if (pWnd == &m_uidata->UIUpgrade5 && msg == BUTTON_CLICKED)
+    else if (pWnd == &m_uidata->UIUpgrade5 && msg == BUTTON_CLICKED && !upgradeBySlot[4].empty())
     {
         PIItem item = (PIItem)m_uidata->UIRepairBox.GetItemIdx(0)->m_pData;
         PIItem upgradedItem = upgrader.UpgradeItem(item, upgradeBySlot[4]);
@@ -644,7 +644,7 @@ void CUIUpgradeWnd::SendMessage(CUIWindow* pWnd, s16 msg, void* pData)
         m_uidata->UIRepairBox.ClearAll(true);
         m_uidata->UIRepairBox.SetItem(cellItem);
     }
-    else if (pWnd == &m_uidata->UIUpgrade6 && msg == BUTTON_CLICKED)
+    else if (pWnd == &m_uidata->UIUpgrade6 && msg == BUTTON_CLICKED && !upgradeBySlot[5].empty())
     {
         PIItem item = (PIItem)m_uidata->UIRepairBox.GetItemIdx(0)->m_pData;
         PIItem upgradedItem = upgrader.UpgradeItem(item, upgradeBySlot[5]);
@@ -654,7 +654,7 @@ void CUIUpgradeWnd::SendMessage(CUIWindow* pWnd, s16 msg, void* pData)
         m_uidata->UIRepairBox.ClearAll(true);
         m_uidata->UIRepairBox.SetItem(cellItem);
     }
-    else if (pWnd == &m_uidata->UIUpgrade7 && msg == BUTTON_CLICKED)
+    else if (pWnd == &m_uidata->UIUpgrade7 && msg == BUTTON_CLICKED && !upgradeBySlot[6].empty())
     {
         PIItem item = (PIItem)m_uidata->UIRepairBox.GetItemIdx(0)->m_pData;
         PIItem upgradedItem = upgrader.UpgradeItem(item, upgradeBySlot[6]);
@@ -664,7 +664,7 @@ void CUIUpgradeWnd::SendMessage(CUIWindow* pWnd, s16 msg, void* pData)
         m_uidata->UIRepairBox.ClearAll(true);
         m_uidata->UIRepairBox.SetItem(cellItem);
     }
-    else if (pWnd == &m_uidata->UIUpgrade8 && msg == BUTTON_CLICKED)
+    else if (pWnd == &m_uidata->UIUpgrade8 && msg == BUTTON_CLICKED && !upgradeBySlot[7].empty())
     {
         PIItem item = (PIItem)m_uidata->UIRepairBox.GetItemIdx(0)->m_pData;
         PIItem upgradedItem = upgrader.UpgradeItem(item, upgradeBySlot[7]);
@@ -674,7 +674,7 @@ void CUIUpgradeWnd::SendMessage(CUIWindow* pWnd, s16 msg, void* pData)
         m_uidata->UIRepairBox.ClearAll(true);
         m_uidata->UIRepairBox.SetItem(cellItem);
     }
-    else if (pWnd == &m_uidata->UIUpgrade9 && msg == BUTTON_CLICKED)
+    else if (pWnd == &m_uidata->UIUpgrade9 && msg == BUTTON_CLICKED && !upgradeBySlot[8].empty())
     {
         PIItem item = (PIItem)m_uidata->UIRepairBox.GetItemIdx(0)->m_pData;
         PIItem upgradedItem = upgrader.UpgradeItem(item, upgradeBySlot[8]);
@@ -684,7 +684,7 @@ void CUIUpgradeWnd::SendMessage(CUIWindow* pWnd, s16 msg, void* pData)
         m_uidata->UIRepairBox.ClearAll(true);
         m_uidata->UIRepairBox.SetItem(cellItem);
     }
-    else if (pWnd == &m_uidata->UIUpgrade10 && msg == BUTTON_CLICKED)
+    else if (pWnd == &m_uidata->UIUpgrade10 && msg == BUTTON_CLICKED && !upgradeBySlot[9].empty())
     {
         PIItem item = (PIItem)m_uidata->UIRepairBox.GetItemIdx(0)->m_pData;
         PIItem upgradedItem = upgrader.UpgradeItem(item, upgradeBySlot[9]);

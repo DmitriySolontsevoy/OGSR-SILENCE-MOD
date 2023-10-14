@@ -958,35 +958,6 @@ bool CWeaponMagazined::Action(s32 cmd, u32 flags)
         }
     }
     break;
-    case kFLASHLIGHT: {
-        if ((flags & CMD_START) && has_flashlight && GetState() == eIdle)
-        {
-            TorchSwitch = true;
-            DeviceSwitch();
-            return true;
-        }
-    }
-    break;
-    case kTORCH: {
-        auto pActorTorch = smart_cast<CActor*>(H_Parent())->inventory().ItemFromSlot(TORCH_SLOT);
-        if ((flags & CMD_START) && pActorTorch && GetState() == eIdle)
-        {
-            HeadLampSwitch = true;
-            DeviceSwitch();
-            return true;
-        }
-    }
-    break;
-    case kNIGHT_VISION: {
-        auto pActorNv = smart_cast<CActor*>(H_Parent())->inventory().ItemFromSlot(IS_OGSR_GA ? NIGHT_VISION_SLOT : TORCH_SLOT);
-        if ((flags & CMD_START) && pActorNv && GetState() == eIdle)
-        {
-            NightVisionSwitch = true;
-            DeviceSwitch();
-            return true;
-        }
-    }
-    break;
     }
     return false;
 }
