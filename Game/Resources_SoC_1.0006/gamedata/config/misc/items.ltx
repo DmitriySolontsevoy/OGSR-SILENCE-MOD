@@ -60,12 +60,15 @@ position_offset			 = 0.0,0.0,0.0
 angle_offset			 = 1.570790,1.570790,3.92699
 
 ; eatable item
-eat_health = 0.05
+eat_health = 0.00
 eat_satiety = 0.2
 eat_power = 0
 eat_radiation = 0
 wounds_heal_perc = 0
 eat_portions_num = -1
+
+eat_boost_health_time  = 1.0
+eat_boost_health_value = 0.0005
 
 ;hud item
 hud = wpn_vodka_hud
@@ -103,12 +106,15 @@ position_offset			 = 0.0,0.0,0.0
 angle_offset			 = 1.570790,1.570790,3.92699
 
 ; eatable item
-eat_health = 0.1
+eat_health = 0.0
 eat_satiety = 0.3
 eat_power = 0
 eat_radiation = 0
 wounds_heal_perc = 0
 eat_portions_num = -1
+
+eat_boost_health_time  = 2.0
+eat_boost_health_value = 0.0005
 
 ;hud item
 hud = wpn_vodka_hud
@@ -164,12 +170,15 @@ inv_grid_y			= 30
 cost				= 100
 
 ; eatable item
-eat_health = 0.15
+eat_health = 0.0
 eat_satiety = 0.4
 eat_power = 0
 eat_radiation = 0
 wounds_heal_perc = 0
 eat_portions_num = -1
+
+eat_boost_health_time  = 3.0
+eat_boost_health_value = 0.0005
 
 ;hud item
 hud = wpn_vodka_hud
@@ -239,6 +248,12 @@ eat_radiation		= 0
 wounds_heal_perc	= 0
 eat_portions_num	= 1
 eat_max_power		= 0
+
+eat_boost_health_time  = 5.0
+eat_boost_health_value = 0.0005
+eat_boost_power_time = 5
+eat_boost_power_value = 0.0005
+
 
 snd_grab = pickups\grab_bottle
 
@@ -360,9 +375,12 @@ cost				= 300
 eat_health = 0
 eat_satiety = 0
 eat_power = 0
-eat_radiation = -1.0
+eat_radiation = 0
 wounds_heal_perc = 0
 eat_portions_num = 1
+
+eat_boost_radiation_time = 10.0
+eat_boost_radiation_value = -0.001
 
 ;hud item
 hud = wpn_vodka_hud
@@ -416,8 +434,10 @@ cost				= 500
 
 eat_portions_num	= 1
 
-eat_boost_health_time  = 5.0
-eat_boost_health_value = 0.001
+eat_boost_health_time  = 2.0
+eat_boost_health_value = 0.002
+eat_boost_power_time = 2.0
+eat_boost_power_value = 0.002
 
 snd_grab = pickups\grab_syringe
 
@@ -597,13 +617,17 @@ inv_grid_y			= 34
 cost				= 150
 
 ; eatable item
-eat_health			= 0.5
+eat_health			= 0.0
 eat_satiety			= 0
 eat_power			= 0.0
-eat_radiation		= -0.1
-wounds_heal_perc	= 0.3
+eat_radiation		= 0
+wounds_heal_perc	= 0
 eat_portions_num	= 1
-eat_max_power		= 0.1
+
+eat_boost_health_time  = 3.0
+eat_boost_health_value = 0.002
+eat_boost_radiation_time  = 2.0
+eat_boost_radiation_value = -0.001
 
 ;hud item
 hud = wpn_vodka_hud
@@ -630,13 +654,17 @@ inv_grid_y			= 34
 cost				= 220
 
 ; eatable item
-eat_health			= 0.75
+eat_health			= 0
 eat_satiety			= 0
 eat_power			= 0.0
-eat_radiation		= -0.2
-wounds_heal_perc	= 1.0
+eat_radiation		= 0
+wounds_heal_perc	= 0
 eat_portions_num	= 1
-eat_max_power		= 0.1
+
+eat_boost_health_time  = 5.0
+eat_boost_health_value = 0.002
+eat_boost_radiation_time  = 3.0
+eat_boost_radiation_value = -0.001
 
 ;hud item
 hud = wpn_vodka_hud
@@ -663,14 +691,19 @@ inv_grid_y			= 34
 cost				= 200
 
 ; eatable item
-eat_health			= 1.0
+eat_health			= 0
 eat_satiety			= 0
 eat_power			= 0.0
-eat_radiation		= -1.0
-wounds_heal_perc	= 0.3
+eat_radiation		= 0
+wounds_heal_perc	= 0
 eat_portions_num	= 1
-eat_max_power		= 0.1
 
+eat_boost_health_time  = 7.0
+eat_boost_health_value = 0.002
+eat_boost_radiation_time  = 5.0
+eat_boost_radiation_value = -0.001
+eat_boost_psy_health_time = 5.0
+eat_boost_psy_health_value = 0.001
 
 ;hud item
 hud = wpn_vodka_hud
@@ -694,12 +727,14 @@ inv_weight			= 0.3
 eat_thirst			= 0.3
 eat_health			= 0
 eat_satiety			= 0
-eat_power			= 1.0
+eat_power			= 0
 eat_alcohol			= 0
 eat_radiation		= 0
 wounds_heal_perc	= 0
 eat_portions_num	= 1
-eat_max_power		= 0.2
+
+eat_boost_power_time = 30
+eat_boost_power_value = 0.001
 
 attach_angle_offset		= 0.000000, 0.000000, 0.000000
 attach_position_offset	= 0.087266, -0.078540, 0.052360
@@ -733,8 +768,11 @@ eat_health = 	0
 eat_satiety = 	0
 eat_power = 	0.0
 eat_radiation = 0.0
-wounds_heal_perc = 1.0
+wounds_heal_perc = 0
 eat_portions_num = 1	;100
+
+eat_boost_bleeding_time  = 3.0
+eat_boost_bleeding_value = 0.002
 
 ;hud item
 hud = wpn_vodka_hud
