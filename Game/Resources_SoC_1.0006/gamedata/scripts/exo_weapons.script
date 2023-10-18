@@ -118,28 +118,6 @@ function update()
 		end
 	end
 	
-	arms = texture_find("act\\act_arm_exo_bump#")
-	arms = concat(arms, texture_find("act\\act_arm_0_bump#"))
-	arms = concat(arms, texture_find("act\\act_arm_1_bump#"))
-	arms = concat(arms, texture_find("act\\act_arm_2_bump#"))
-	arms = concat(arms, texture_find("act\\act_arm_3_bump#"))
-	arms = concat(arms, texture_find("act\\act_arm_4_bump#"))
-	arms = concat(arms, texture_find("act\\act_arm_5_bump#"))
-	arms = concat(arms, texture_find("act\\act_arm_6_bump#"))
-	arms = concat(arms, texture_find("act\\act_arm_7_bump#"))
-	arms = concat(arms, texture_find("act\\act_arm_8_bump#"))
-	arms = concat(arms, texture_find("act\\act_arm_9_bump#"))
-	arms = concat(arms, texture_find("act\\act_arm_10_bump#"))
-	arms = concat(arms, texture_find("act\\act_arm_11_bump#"))
-	arms = concat(arms, texture_find("act\\act_arm_12_bump#"))
-	arms = concat(arms, texture_find("act\\act_arm_13_bump#"))
-	if arms then
-		for n, t in pairs(arms) do
-			local name = "act\\act_arm_" .. suit_texture_table[suit_sect] .. "_bump#"
-			t:load(name)
-		end
-	end
-	
 	local exo = texture_find("act\\act_exo_shlangi")
 	if exo then
 		for n, t in pairs(exo) do
