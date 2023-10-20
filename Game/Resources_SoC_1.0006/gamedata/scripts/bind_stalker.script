@@ -229,9 +229,6 @@ function actor_binder:update(delta)
 	-- Обновление визуала костюма
 	exo_weapons.update()
 
-	--Спавн переходов
-	custom_level_changers.spawn_changers()
-
 	-- Апдейт погоды
 	self.weather_manager:update()
 	
@@ -315,22 +312,8 @@ function actor_binder:update(delta)
 		end
 	end
 
-
-
  	if self.bCheckStart then
 		printf("SET DEFAULT INFOS")		
-
-		if not has_alife_info("storyline_actor_start") and
-		   (level.name() == "l01_escape")
-		then
-			self.object:give_info_portion("storyline_actor_start")
-			_G.g_start_avi = true
-			printf("*AVI* RUN START AVI")			
-		end
-
---		if not has_alife_info("encyclopedy") then
---			self.object:give_info_portion("encyclopedy")
---		end
 
 		if not has_alife_info("global_dialogs") then
 			self.object:give_info_portion("global_dialogs")
@@ -480,15 +463,6 @@ end
 --if string.find(command_line(), "-noprefetch") == nil then
 --	sound_prefetch.prefetch_sounds()
 --end
-
-
--- Weapon functions
-function hide_weapon()
-	weapon_hide = true
-end
-function restore_weapon()
-	weapon_hide = false
-end
 
 // this is test for section iteration
 /**
