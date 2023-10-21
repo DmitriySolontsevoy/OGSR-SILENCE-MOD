@@ -101,7 +101,6 @@ void CUITalkDialogWnd::Init(float x, float y, float width, float height)
 
 void CUITalkDialogWnd::Show()
 {
-    InventoryUtilities::SendInfoToActor("ui_talk");
     inherited::Show(true);
     inherited::Enable(true);
 
@@ -110,7 +109,6 @@ void CUITalkDialogWnd::Show()
 
 void CUITalkDialogWnd::Hide()
 {
-    InventoryUtilities::SendInfoToActor("ui_talk_hide");
     inherited::Show(false);
     inherited::Enable(false);
 }

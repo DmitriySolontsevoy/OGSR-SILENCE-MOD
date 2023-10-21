@@ -266,7 +266,6 @@ void CUIMapWnd::Show(bool status)
             OnToolActorClicked(NULL, NULL);
             m_flags.set(lmFirst, FALSE);
         }
-        InventoryUtilities::SendInfoToActor("ui_pda_map_local");
     }
     else
     {

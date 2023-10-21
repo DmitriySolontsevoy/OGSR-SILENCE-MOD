@@ -315,14 +315,6 @@ function actor_binder:update(delta)
  	if self.bCheckStart then
 		printf("SET DEFAULT INFOS")		
 
-		if not has_alife_info("global_dialogs") then
-			self.object:give_info_portion("global_dialogs")
-		end
-
-		if not has_alife_info("level_changer_icons") then
-			self.object:give_info_portion("level_changer_icons")
-		end
-
 		level_tasks.add_lchanger_location()
 
 		self.bCheckStart = false		

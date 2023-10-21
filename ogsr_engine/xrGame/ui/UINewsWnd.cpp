@@ -109,10 +109,6 @@ void CUINewsWnd::Show(bool status)
         if (m_flags.test(eNeedAdd))
             LoadNews();
     }
-    else
-    {
-        InventoryUtilities::SendInfoToActor("ui_pda_news_hide");
-    }
 
     inherited::Show(status);
 }

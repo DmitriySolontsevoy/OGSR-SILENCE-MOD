@@ -270,7 +270,6 @@ void CUITalkWnd::Show()
 
 void CUITalkWnd::Hide()
 {
-    InventoryUtilities::SendInfoToActor("ui_talk_hide");
     StopSnd();
 
     inherited::Hide();

@@ -285,7 +285,6 @@ void CUITradeWnd::Update()
 #include "UIInventoryUtilities.h"
 void CUITradeWnd::Show()
 {
-    InventoryUtilities::SendInfoToActor("ui_trade");
     inherited::Show(true);
     inherited::Enable(true);
 
@@ -296,7 +295,6 @@ void CUITradeWnd::Show()
 
 void CUITradeWnd::Hide()
 {
-    InventoryUtilities::SendInfoToActor("ui_trade_hide");
     inherited::Show(false);
     inherited::Enable(false);
     if (bStarted)

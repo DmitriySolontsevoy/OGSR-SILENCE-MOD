@@ -235,8 +235,6 @@ void CUIPdaWnd::Show()
     if (Core.Features.test(xrCore::Feature::more_hide_weapon))
         Actor()->SetWeaponHideState(INV_STATE_BLOCK_ALL, true);
 
-    InventoryUtilities::SendInfoToActor("ui_pda");
-
     inherited::Show();
 }
 
@@ -244,7 +242,6 @@ void CUIPdaWnd::Hide()
 {
     inherited::Hide();
 
-    InventoryUtilities::SendInfoToActor("ui_pda_hide");
     HUD().GetUI()->UIMainIngameWnd->SetFlashIconState_(CUIMainIngameWnd::efiPdaTask, false);
 
     if (Core.Features.test(xrCore::Feature::more_hide_weapon))
@@ -286,12 +283,10 @@ void CUIPdaWnd::SetActiveSubdialog(EPdaTabs section)
     {
     case eptDiary:
         m_pActiveDialog = smart_cast<CUIWindow*>(UIDiaryWnd);
-        InventoryUtilities::SendInfoToActor("ui_pda_events");
         g_pda_info_state &= ~pda_section::diary;
         break;
     case eptContacts:
         m_pActiveDialog = smart_cast<CUIWindow*>(UIPdaContactsWnd);
-        InventoryUtilities::SendInfoToActor("ui_pda_contacts");
         g_pda_info_state &= ~pda_section::contacts;
         break;
     case eptMap:
@@ -300,18 +295,15 @@ void CUIPdaWnd::SetActiveSubdialog(EPdaTabs section)
         break;
     case eptEncyclopedia:
         m_pActiveDialog = smart_cast<CUIWindow*>(UIEncyclopediaWnd);
-        InventoryUtilities::SendInfoToActor("ui_pda_encyclopedia");
         g_pda_info_state &= ~pda_section::encyclopedia;
         break;
     case eptActorStatistic:
         m_pActiveDialog = smart_cast<CUIWindow*>(UIActorInfo);
-        InventoryUtilities::SendInfoToActor("ui_pda_actor_info");
         g_pda_info_state &= ~pda_section::statistics;
         break;
     case eptRanking:
         m_pActiveDialog = smart_cast<CUIWindow*>(UIStalkersRanking);
         g_pda_info_state &= ~pda_section::ranking;
-        InventoryUtilities::SendInfoToActor("ui_pda_ranking");
         break;
     case eptQuests:
         m_pActiveDialog = smart_cast<CUIWindow*>(UIEventsWnd);

@@ -335,8 +335,6 @@ void CUIInventoryWnd::Show()
     if (Core.Features.test(xrCore::Feature::more_hide_weapon))
         Actor()->SetWeaponHideState(INV_STATE_INV_WND, true);
 
-    SendInfoToActor("ui_inventory");
-
     Update();
     PlaySnd(eInvSndOpen);
 
@@ -348,7 +346,6 @@ void CUIInventoryWnd::Hide()
     PlaySnd(eInvSndClose);
     inherited::Hide();
 
-    SendInfoToActor("ui_inventory_hide");
     ClearAllLists();
 
     //достать вещь в активный слот
