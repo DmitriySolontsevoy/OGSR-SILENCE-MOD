@@ -20,16 +20,6 @@ local suit_texture_table = {
 	dolg_scientific_outfit = "5",
 	ecolog_outfit = "2",
 	protection_outfit = "3",
-	outfit_novice_m1 = "8",
-	outfit_stalker_m1 = "1",
-	outfit_stalker_m2 = "1",
-	outfit_exo_m1 = "exo",
-	outfit_bandit_m1 = "6",
-	outfit_killer_m1 = "10",
-	outfit_specnaz_m1 = "12",
-	outfit_svoboda_m1 = "11",
-	outfit_dolg_m1 = "6",
-	mp_exo_outfit = "exo"
 }
 
 local exo_shlangi_table = {
@@ -51,16 +41,6 @@ local exo_shlangi_table = {
 	dolg_scientific_outfit = "act_exo_missing",
 	ecolog_outfit = "act_exo_missing",
 	protection_outfit = "act_exo_missing",
-	outfit_novice_m1 = "act_exo_missing",
-	outfit_stalker_m1 = "act_exo_missing",
-	outfit_stalker_m2 = "act_exo_missing",
-	outfit_exo_m1 = "act_exo_shlangi",
-	outfit_bandit_m1 = "act_exo_missing",
-	outfit_killer_m1 = "act_exo_missing",
-	outfit_specnaz_m1 = "act_exo_missing",
-	outfit_svoboda_m1 = "act_exo_missing",
-	outfit_dolg_m1 = "act_exo_missing",
-	mp_exo_outfit = "act_exo_shlangi"
 }
 
 function concat(table1, table2)
