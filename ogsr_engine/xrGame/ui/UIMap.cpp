@@ -5,7 +5,15 @@
 #include "../map_spot.h"
 #include "UIMap.h"
 #include "UIMapWnd.h"
-#include "..\..\xr_3da\xr_input.h" //remove me !!!
+#include "..\..\xr_3da\xr_input.h"
+#include "../game_object_space.h"
+#include "../script_callback_ex.h"
+#include "../script_game_object.h"
+#include "../Actor.h"
+#include "../UICursor.h"
+#include "../UIGameSP.h"
+#include "../HUDManager.h"
+#include "UiPdaWnd.h"
 
 const u32 activeLocalMapColor = 0xffffffff; // 0xffc80000;
 const u32 inactiveLocalMapColor = 0xffffffff; // 0xff438cd1;
@@ -468,15 +476,6 @@ void CUILevelMap::Update()
         }
     }
 }
-
-#include "../game_object_space.h"
-#include "../script_callback_ex.h"
-#include "../script_game_object.h"
-#include "../Actor.h"
-#include "../UICursor.h"
-#include "../UIGameSP.h"
-#include "../HUDManager.h"
-#include "UiPdaWnd.h"
 
 bool CUILevelMap::OnMouse(float x, float y, EUIMessages mouse_action)
 {

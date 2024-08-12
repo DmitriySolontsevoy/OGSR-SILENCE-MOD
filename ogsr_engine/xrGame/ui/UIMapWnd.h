@@ -30,6 +30,7 @@ class CUIMapWnd : public CUIWindow, public CUIWndCallback
         eZoomIn,
         eZoomOut,
         eActor,
+        eSwitch,
         eMaxBtn
     };
 
@@ -43,9 +44,12 @@ public:
     Flags32 m_flags;
 
 private:
+    bool m_UndergroundViewSwitched = false;
     float m_currentZoom;
     CUIGlobalMap* m_GlobalMap;
+    CUIGlobalMap* m_GlobalUndergroundMap;
     GameMaps m_GameMaps;
+    GameMaps m_GameUndergroundMaps;
 
     CUIFrameWindow* m_UIMainFrame;
     CUIScrollBar* m_UIMainScrollV;
@@ -61,6 +65,7 @@ private:
     void OnScrollH(CUIWindow*, void*);
     void OnToolGlobalMapClicked(CUIWindow*, void*);
     void OnToolActorClicked(CUIWindow*, void*);
+    void OnToolSwitchViewClicked(CUIWindow*, void*);
     void OnToolZoomInClicked(CUIWindow*, void*);
     void OnToolZoomOutClicked(CUIWindow*, void*);
     void ValidateToolBar();
@@ -114,11 +119,14 @@ public:
         return r;
     };
     void AddMapToRender(CUICustomMap*);
-    void RemoveMapToRender(CUICustomMap*);
+    void RemoveMapFromRender(CUICustomMap*);
     CUIGlobalMap* GlobalMap() { return m_GlobalMap; };
-    const GameMaps& GameMaps() { return m_GameMaps; };
+    CUIGlobalMap* GlobalUndergroundMap() { return m_GlobalUndergroundMap; };
+    u32 UndergroundViewSwitched() { return m_UndergroundViewSwitched; };
     CUICustomMap* GetMapByIdx(u16 idx);
     u16 GetIdxByName(const shared_str& map_name);
+    CUICustomMap* GetUndergroundMapByIdx(u16 idx);
+    u16 GetUndergroundIdxByName(const shared_str& map_name);
     void UpdateScroll();
     shared_str cName() const { return "ui_map_wnd"; };
 };

@@ -41,6 +41,7 @@ CUIMapWnd::CUIMapWnd()
 {
     m_tgtMap = NULL;
     m_GlobalMap = NULL;
+    m_GlobalUndergroundMap = NULL;
     m_flags.zero();
     m_currentZoom = 1.0f;
     m_hint = NULL;
@@ -54,6 +55,7 @@ CUIMapWnd::~CUIMapWnd()
 {
     delete_data(m_ActionPlanner);
     delete_data(m_GameMaps);
+    delete_data(m_GameUndergroundMaps);
     delete_data(m_hint);
     delete_data(m_text_hint);
 }
@@ -139,6 +141,19 @@ void CUIMapWnd::Init(LPCSTR xml_name, LPCSTR start_from)
         AddCallback(*m_ToolBar[btnIndex]->WindowName(), BUTTON_CLICKED, fastdelegate::MakeDelegate(this, &CUIMapWnd::OnToolActorClicked));
     }
 
+    btnIndex = eSwitch;
+    strconcat(sizeof(pth), pth, sToolbar.c_str(), ":switch_view_btn");
+    if (uiXml.NavigateToNode(pth, 0))
+    {
+        m_ToolBar[btnIndex] = xr_new<CUI3tButton>();
+        m_ToolBar[btnIndex]->SetAutoDelete(true);
+        xml_init.Init3tButton(uiXml, pth, 0, m_ToolBar[btnIndex]);
+        UIMainMapHeader->AttachChild(m_ToolBar[btnIndex]);
+        Register(m_ToolBar[btnIndex]);
+        AddCallback(*m_ToolBar[btnIndex]->WindowName(), BUTTON_CLICKED, fastdelegate::MakeDelegate(this, &CUIMapWnd::OnToolSwitchViewClicked));
+        m_ToolBar[btnIndex]->Show(true);
+    }
+
     btnIndex = eZoomIn;
     strconcat(sizeof(pth), pth, sToolbar.c_str(), ":zoom_in_btn");
     if (uiXml.NavigateToNode(pth, 0))
@@ -174,13 +189,22 @@ void CUIMapWnd::Init(LPCSTR xml_name, LPCSTR start_from)
 
     CInifile& gameLtx = *pGameIni;
 
+    m_GlobalUndergroundMap = xr_new<CUIGlobalMap>(this);
+    m_GlobalUndergroundMap->SetAutoDelete(true);
+    m_GlobalUndergroundMap->Init("global_underground_map", gameLtx, "hud\\default");
+
     m_GlobalMap = xr_new<CUIGlobalMap>(this);
     m_GlobalMap->SetAutoDelete(true);
     m_GlobalMap->Init("global_map", gameLtx, "hud\\default");
 
+    m_UILevelFrame->AttachChild(m_GlobalUndergroundMap);
+    m_GlobalUndergroundMap->OptimalFit(m_UILevelFrame->GetWndRect());
+    m_GlobalUndergroundMap->SetMinZoom(m_GlobalUndergroundMap->GetCurrentZoom());
+
     m_UILevelFrame->AttachChild(m_GlobalMap);
     m_GlobalMap->OptimalFit(m_UILevelFrame->GetWndRect());
     m_GlobalMap->SetMinZoom(m_GlobalMap->GetCurrentZoom());
+
     m_currentZoom = m_GlobalMap->GetCurrentZoom();
 
     // initialize local maps
@@ -193,42 +217,22 @@ void CUIMapWnd::Init(LPCSTR xml_name, LPCSTR start_from)
             shared_str map_name = it.first;
             xr_strlwr(map_name);
             R_ASSERT2(m_GameMaps.end() == m_GameMaps.find(map_name), "Duplicate level name not allowed");
+            R_ASSERT2(m_GameUndergroundMaps.end() == m_GameUndergroundMaps.find(map_name), "Duplicate level name not allowed");
 
-            CUICustomMap*& l = m_GameMaps[map_name];
+            u32 isUnderground = gameLtx.r_section(map_name).r_u32("underground");
+
+            CUICustomMap*& l = (isUnderground)
+                ? m_GameUndergroundMaps[map_name]
+                : m_GameMaps[map_name];
 
             l = xr_new<CUILevelMap>(this);
-
             l->Init(map_name, gameLtx, "hud\\default");
-
             l->OptimalFit(m_UILevelFrame->GetWndRect());
         }
     }
-#ifdef DEBUG
-    GameMaps::iterator it = m_GameMaps.begin();
-    GameMaps::iterator it2;
-    for (; it != m_GameMaps.end(); ++it)
-    {
-        CUILevelMap* l = smart_cast<CUILevelMap*>(it->second);
-        VERIFY(l);
-        for (it2 = it; it2 != m_GameMaps.end(); ++it2)
-        {
-            if (it == it2)
-                continue;
-            CUILevelMap* l2 = smart_cast<CUILevelMap*>(it2->second);
-            VERIFY(l2);
-            if (l->GlobalRect().intersected(l2->GlobalRect()))
-            {
-                Msg(" --error-incorrect map definition global rect of map [%s] intersects with [%s]", *l->MapName(), *l2->MapName());
-            }
-        }
-        if (FALSE == l->GlobalRect().intersected(GlobalMap()->BoundRect()))
-        {
-            Msg(" --error-incorrect map definition map [%s] places outside global map", *l->MapName());
-        }
-    }
-#endif
 
     Register(m_GlobalMap);
+    Register(m_GlobalUndergroundMap);
     m_ActionPlanner = xr_new<CMapActionPlanner>();
     m_ActionPlanner->setup(this);
     m_flags.set(lmFirst, TRUE);
@@ -250,9 +254,19 @@ void CUIMapWnd::Show(bool status)
     inherited::Show(status);
     if (status)
     {
+        m_GlobalUndergroundMap->Show(true);
+        m_GlobalUndergroundMap->SetClipRect(ActiveMapRect());
+        GameMaps::iterator it = m_GameUndergroundMaps.begin();
+        for (; it != m_GameUndergroundMaps.end(); ++it)
+        {
+            m_GlobalUndergroundMap->AttachChild(it->second);
+            it->second->Show(true);
+            it->second->SetClipRect(ActiveMapRect());
+        }
+
         m_GlobalMap->Show(true);
         m_GlobalMap->SetClipRect(ActiveMapRect());
-        GameMaps::iterator it = m_GameMaps.begin();
+        it = m_GameMaps.begin();
         for (; it != m_GameMaps.end(); ++it)
         {
             m_GlobalMap->AttachChild(it->second);
@@ -262,7 +276,7 @@ void CUIMapWnd::Show(bool status)
 
         if (m_flags.test(lmFirst))
         {
-            inherited::Update(); // only maps, not action planner
+            inherited::Update();
             OnToolActorClicked(NULL, NULL);
             m_flags.set(lmFirst, FALSE);
         }
@@ -274,8 +288,16 @@ void CUIMapWnd::Show(bool status)
             GlobalMap()->DetachAll();
             GlobalMap()->Show(false);
         }
+        if (GlobalUndergroundMap())
+        {
+            GlobalUndergroundMap()->DetachAll();
+            GlobalUndergroundMap()->Show(false);
+        }
         GameMaps::iterator it = m_GameMaps.begin();
         for (; it != m_GameMaps.end(); ++it)
+            it->second->DetachAll();
+        it = m_GameUndergroundMaps.begin();
+        for (; it != m_GameUndergroundMaps.end(); ++it)
             it->second->DetachAll();
     }
 
@@ -293,28 +315,38 @@ void CUIMapWnd::AddMapToRender(CUICustomMap* m)
     m->SetClipRect(ActiveMapRect());
 }
 
-void CUIMapWnd::RemoveMapToRender(CUICustomMap* m)
+void CUIMapWnd::RemoveMapFromRender(CUICustomMap* m)
 {
-    if (m != GlobalMap())
+    if (m != GlobalMap() && m != GlobalUndergroundMap())
         m_UILevelFrame->DetachChild(smart_cast<CUIWindow*>(m));
 }
 
 void CUIMapWnd::SetTargetMap(const shared_str& name, const Fvector2& pos, bool bZoomIn)
 {
-    u16 idx = GetIdxByName(name);
+    u16 idx = -1;
+    idx = m_UndergroundViewSwitched
+        ? GetIdxByName(name)
+        : GetUndergroundIdxByName(name);
     if (idx != u16(-1))
     {
-        CUICustomMap* lm = GetMapByIdx(idx);
+        CUICustomMap* lm = m_UndergroundViewSwitched
+            ? GetMapByIdx(idx)
+            : GetUndergroundMapByIdx(idx);
         SetTargetMap(lm, pos, bZoomIn);
     }
 }
 
 void CUIMapWnd::SetTargetMap(const shared_str& name, bool bZoomIn)
 {
-    u16 idx = GetIdxByName(name);
+    u16 idx = -1;
+    idx = m_UndergroundViewSwitched
+        ? GetIdxByName(name)
+        : GetUndergroundIdxByName(name);
     if (idx != u16(-1))
     {
-        CUICustomMap* lm = GetMapByIdx(idx);
+        CUICustomMap* lm = m_UndergroundViewSwitched
+            ? GetMapByIdx(idx)
+            : GetUndergroundMapByIdx(idx);
         SetTargetMap(lm, bZoomIn);
     }
 }
@@ -331,6 +363,10 @@ void CUIMapWnd::SetTargetMap(CUICustomMap* m, bool bZoomIn)
 void CUIMapWnd::SetTargetMap(CUICustomMap* m, const Fvector2& pos, bool bZoomIn)
 {
     m_tgtMap = m;
+    if (m == NULL) 
+    {
+        m = GlobalMap();
+    }
 
     if (m == GlobalMap())
     {
@@ -385,6 +421,7 @@ bool CUIMapWnd::OnKeyboardHold(int dik)
         if (dik == DIK_RIGHT)
             pos_delta.x -= 1.0f;
         GlobalMap()->MoveWndDelta(pos_delta);
+        GlobalUndergroundMap()->MoveWndDelta(pos_delta);
         UpdateScroll();
         m_hint->SetOwner(NULL);
         return true;
@@ -412,6 +449,24 @@ bool CUIMapWnd::OnKeyboard(int dik, EUIMessages keyboard_action)
         ResetActionPlanner();
         return true;
     }
+    case DIK_TAB: {
+        if (keyboard_action == WINDOW_KEY_PRESSED)
+        {
+            m_hint->SetOwner(NULL);
+            m_UndergroundViewSwitched = !m_UndergroundViewSwitched;
+            if (m_UndergroundViewSwitched)
+            {
+                m_GlobalMap->Show(false);
+                m_GlobalUndergroundMap->Show(true);
+            }
+            else
+            {
+                m_GlobalMap->Show(true);
+                m_GlobalUndergroundMap->Show(false);
+            }
+        }
+        return true;
+    }
     break;
     }
     return false;
@@ -431,6 +486,7 @@ bool CUIMapWnd::OnMouse(float x, float y, EUIMessages mouse_action)
             if (pInput->iGetAsyncBtnState(0))
             {
                 GlobalMap()->MoveWndDelta(GetUICursor()->GetCursorPositionDelta());
+                GlobalUndergroundMap()->MoveWndDelta(GetUICursor()->GetCursorPositionDelta());
                 UpdateScroll();
                 m_hint->SetOwner(NULL);
                 return true;
@@ -438,48 +494,19 @@ bool CUIMapWnd::OnMouse(float x, float y, EUIMessages mouse_action)
             break;
 
         case WINDOW_RBUTTON_DOWN:
-            for (auto& level : m_GameMaps)
+            if (!m_UndergroundViewSwitched)
             {
-                if (level.second->m_bCursorOverWindow)
+                for (auto& level : m_GameMaps)
                 {
-                    m_UIPropertiesBox->AddItem("TP!");
-                    ActivatePropertiesBox(level.second);
-                    return true;
+                    if (level.second->m_bCursorOverWindow)
+                    {
+                        m_UIPropertiesBox->AddItem("TP!");
+                        ActivatePropertiesBox(level.second);
+                        return true;
+                    }
                 }
-            }
-            break;
-            /*
-                    case WINDOW_LBUTTON_DOWN:
-                        if (	((mouse_action==WINDOW_LBUTTON_DOWN)&&(m_flags.is_any(lmZoomIn+lmZoomOut))) ||
-                                (mouse_action==WINDOW_MOUSE_WHEEL_DOWN) ||
-                                (mouse_action==WINDOW_MOUSE_WHEEL_UP)
-                            )
-                        {
-                            CUIGlobalMap* gm				= GlobalMap();
-                            if(m_flags.test(lmZoomIn))		SetZoom(GetZoom()*1.5f);
-                            else							SetZoom(GetZoom()/1.5f);
-                            m_tgtCenter						= cursor_pos;
-                            Fvector2 _p;					gm->GetAbsolutePos(_p);
-                            m_tgtCenter.sub					(_p);
-                            m_tgtCenter.div					(gm->GetCurrentZoom());
-                            ResetActionPlanner				();
-                            m_hint->SetOwner				(NULL);
-                            return							true;
-                        }
-                    break;
-
-                    case WINDOW_MOUSE_WHEEL_UP:
-                        m_UIMainScrollV->TryScrollDec		();
-                        m_hint->SetOwner					(NULL);
-                        return								true;
-                    break;
-
-                    case WINDOW_MOUSE_WHEEL_DOWN:
-                        m_UIMainScrollV->TryScrollInc		();
-                        m_hint->SetOwner					(NULL);
-                        return								true;
-                    break;
-            */
+                break;
+            } 
         }
     };
 
@@ -487,14 +514,6 @@ bool CUIMapWnd::OnMouse(float x, float y, EUIMessages mouse_action)
     {
         bool b_zoom_in = (mouse_action == WINDOW_LBUTTON_DOWN && m_flags.test(lmZoomIn)) || (mouse_action == WINDOW_MOUSE_WHEEL_DOWN);
 
-        if (mouse_action == WINDOW_MOUSE_WHEEL_UP)
-        {
-            //.				Msg("up");
-        }
-        if (mouse_action == WINDOW_MOUSE_WHEEL_DOWN)
-        {
-            //.				Msg("down");
-        }
         CUIGlobalMap* gm = GlobalMap();
         float _prev_zoom = GetZoom();
         if (b_zoom_in)
@@ -571,6 +590,25 @@ u16 CUIMapWnd::GetIdxByName(const shared_str& map_name)
     return (u16)std::distance(m_GameMaps.begin(), it);
 }
 
+CUICustomMap* CUIMapWnd::GetUndergroundMapByIdx(u16 idx)
+{
+    VERIFY(idx != u16(-1));
+    GameMapsPairIt it = m_GameUndergroundMaps.begin();
+    std::advance(it, idx);
+    return it->second;
+}
+
+u16 CUIMapWnd::GetUndergroundIdxByName(const shared_str& map_name)
+{
+    GameMapsPairIt it = m_GameUndergroundMaps.find(map_name);
+    if (it == m_GameMaps.end())
+    {
+        MsgDbg("~ Level Map '%s' not registered", map_name.c_str());
+        return u16(-1);
+    }
+    return (u16)std::distance(m_GameUndergroundMaps.begin(), it);
+}
+
 void CUIMapWnd::UpdateScroll()
 {
     Fvector2 w_pos = GlobalMap()->GetWndPos();
@@ -588,6 +626,7 @@ void CUIMapWnd::OnScrollV(CUIWindow*, void*)
         int s_pos = m_UIMainScrollV->GetScrollPos();
         Fvector2 w_pos = GlobalMap()->GetWndPos();
         GlobalMap()->SetWndPos(w_pos.x, float(-s_pos));
+        GlobalUndergroundMap()->SetWndPos(w_pos.x, float(-s_pos));
     }
 }
 
@@ -598,6 +637,7 @@ void CUIMapWnd::OnScrollH(CUIWindow*, void*)
         int s_pos = m_UIMainScrollH->GetScrollPos();
         Fvector2 w_pos = GlobalMap()->GetWndPos();
         GlobalMap()->SetWndPos(float(-s_pos), w_pos.y);
+        GlobalUndergroundMap()->SetWndPos(float(-s_pos), w_pos.y);
     }
 }
 
@@ -605,13 +645,14 @@ void CUIMapWnd::Update()
 {
     if (m_GlobalMap)
         m_GlobalMap->SetClipRect(ActiveMapRect());
+    if (m_GlobalUndergroundMap)
+        m_GlobalUndergroundMap->SetClipRect(ActiveMapRect());
     inherited::Update();
     m_ActionPlanner->update();
 }
 
 void CUIMapWnd::SetZoom(float value)
 {
-    //	float _prev_zoom = m_currentZoom;
     m_currentZoom = value;
     clamp(m_currentZoom, GlobalMap()->GetMinZoom(), GlobalMap()->GetMaxZoom());
 }
@@ -636,6 +677,8 @@ void CUIMapWnd::ResetActionPlanner()
         Frect m_desiredMapRect;
         GlobalMap()->CalcOpenRect(m_tgtCenter, m_desiredMapRect, GetZoom());
         GlobalMap()->SetWndRect(m_desiredMapRect);
+        GlobalUndergroundMap()->CalcOpenRect(m_tgtCenter, m_desiredMapRect, GetZoom());
+        GlobalUndergroundMap()->SetWndRect(m_desiredMapRect);
         UpdateScroll();
     }
 }
@@ -688,15 +731,45 @@ void CUIMapWnd::OnToolActorClicked(CUIWindow*, void*)
     v2.set(v.x, v.z);
 
     CUICustomMap* lm = NULL;
-    u16 idx = GetIdxByName(Level().name());
-    if (idx != u16(-1))
+
+    if (m_UndergroundViewSwitched)
     {
-        lm = GetMapByIdx(idx);
+        u16 idx = GetUndergroundIdxByName(Level().name());
+        if (idx != u16(-1))
+        {
+            lm = GetUndergroundMapByIdx(idx);
+        }
     }
     else
-        lm = GlobalMap();
+    {
+        u16 idx = GetIdxByName(Level().name());
+        if (idx != u16(-1))
+        {
+            lm = GetMapByIdx(idx);
+        }
+        else
+        {
+            return;
+        }
+    }
 
     SetTargetMap(lm, v2, true);
+}
+
+void CUIMapWnd::OnToolSwitchViewClicked(CUIWindow*, void*)
+{
+    m_hint->SetOwner(NULL);
+    m_UndergroundViewSwitched = !m_UndergroundViewSwitched;
+    if (m_UndergroundViewSwitched)
+    {
+        m_GlobalMap->Show(false);
+        m_GlobalUndergroundMap->Show(true);
+    }
+    else
+    {
+        m_GlobalMap->Show(true);
+        m_GlobalUndergroundMap->Show(false);
+    }
 }
 
 bool is_in(const Frect& b1, const Frect& b2) { return (b1.x1 < b2.x1) && (b1.x2 > b2.x2) && (b1.y1 < b2.y1) && (b1.y2 > b2.y2); }
@@ -746,8 +819,6 @@ void CUIMapWnd::Reset()
     ResetActionPlanner();
 }
 
-// qweasdd: Following functions from Lost Alpha
-// Alun: Correct now. All you need is relative mouse position to absolute pos of uilevelmap, then remove widescreen scale on X before local-to-world convert
 bool CUIMapWnd::ConvertCursorPosToMap(Fvector* return_position, CUICustomMap* curr_map)
 {
     Fvector2 cursor_pos = GetUICursor()->GetCursorPosition();

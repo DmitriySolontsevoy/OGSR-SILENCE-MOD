@@ -10,7 +10,7 @@
 			<auto_static x="0" y="0" width="1024" height="768">
 				<texture x="0" y="0" width="1024" height="768">ui\ui_static_mm_back_06</texture>
 			</auto_static>
-			<auto_static x="100000" y="1000000" width="256" height="128">
+			<auto_static x="524" y="641" width="256" height="128">
 				<texture>ui\ui_mm_coal</texture>
 			</auto_static>
 

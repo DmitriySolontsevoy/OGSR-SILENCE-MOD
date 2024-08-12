@@ -9,12 +9,13 @@ l05_bar
 l06_rostok
 l07_military
 l08_yantar
+l08u_brainlab
 l10_radar
+l10u_bunker
 l12_stancia
 l12_stancia_2
 l12u_control_monolith
 l12u_sarcofag
-l08u_brainlab
 atp_for_test22
 puzir
 aver
@@ -44,249 +45,297 @@ music\amb07		= 12,24, 1.0, 5, 25
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [global_map]
 texture			= ui\ui_global_map
-bound_rect		= 0, 0, 4608, 5272
+bound_rect		= 0, 0, 8258, 8726
+max_zoom		= 6.0
+
+[global_underground_map]
+texture			= ui\ui_global_underground_map
+bound_rect		= 0, 0, 8258, 8726
 max_zoom		= 6.0
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [l01_escape]
+underground 	= 0
 texture         = map\map_escape
 bound_rect      = -317.164, -633.718, 404.880, 811.627
-global_rect		= 1862, 3868, 2236, 4618
+global_rect		= 3207, 6512, 3710, 7520
 weathers		= default
 music_tracks    = l01_escape_musics
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [l02_garbage]
+underground 	= 0
 texture         = map\map_garbage
-bound_rect      = -322.334, -347.225, 321.685, 318.000
-global_rect		= 1664, 3366, 2062, 3764
+bound_rect      = -322.334, -347.225, 321.685, 318
+global_rect		= 3359, 5668, 3928, 6236
 weathers		= default
 music_tracks    = l02_garbage_musics
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [l03_agroprom]
+underground 	= 0
 texture			= map\map_agroprom
 bound_rect		= -266.505, -355.611, 331.388, 213.838
-global_rect		= 626, 3436, 984, 3794
+global_rect		= 2490, 5891, 3048, 6419
 weathers		= default
 music_tracks    = l01_escape_musics
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [l03u_agr_underground]
+underground 	= 1
 texture			= map\map_agr_underground
-bound_rect		= -137.000, -147.000, -35.302, 50.254
-global_rect		= 0, 0, 0, 0
+bound_rect		= -137, -147, -35.302, 50.254
+global_rect		= 2614, 6078, 2676, 6227
 weathers		= indoor
 music_tracks    = l03u_agr_underground_musics
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [l04_darkvalley]
+underground 	= 0
 texture			= map\map_darkvalley
 bound_rect		= -445.320, -663.867, 449.864, 231.317
-global_rect		= 2148, 3156, 2802, 3810
+global_rect		= 4226, 5590, 5054, 6419
 weathers		= default
 music_tracks    = l04_darkvalley_musics
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [l04u_labX18]
+underground 	= 1
 texture			= map\map_labx18_map
-bound_rect		= -51.236, -37.911, 47.999, 81.159
-global_rect		= 0, 0, 0, 0
+bound_rect		= -51.236, -37.911, 48, 81.159
+global_rect		= 4715, 5980, 4796, 6061
 weathers		= indoor_x18
 ;music_tracks	= l04_labx18_musics
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [l05_bar]
+underground 	= 0
 texture         = map\map_bar
-bound_rect      = 0.000, -512.030, 512.000, 512.001
-global_rect		= 1698, 2842, 1944, 3328
+bound_rect      = 0, -512, 512, 512
+global_rect		= 3623, 4577, 4005, 5341
 weathers		= default
 ;music_tracks   = l05_bar_musics
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [l06_rostok]
+underground 	= 0
 texture         = map\map_rostok
-bound_rect      = -512.000, -512.030, 88.000, 512.001
-global_rect		= 1456, 2842, 1740, 3328
+bound_rect      = -512, -512, 88, 512
+global_rect		= 3240, 4576, 3685, 5342
 weathers		= default
 music_tracks    = l06_rostok_musics
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [l07_military]
+underground 	= 0
 texture         = map\map_military
 bound_rect      = -443.567, -130.466, 196.434, 509.534
-global_rect		= 1632, 2408, 1980, 2756
+global_rect		= 3584, 3756, 4076, 4248
 weathers		= default
 music_tracks    = l07_military_musics
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [l08_yantar]
+underground 	= 0
 texture         = map\map_yantar
 bound_rect      = -282.869, -432.963, 287.342, 138.271
-global_rect		= 742, 2962, 1112, 3344
+global_rect		= 2297, 4995, 2891, 5590
 weathers		= default
 music_tracks	= l08_yantar_musics
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [l08u_brainlab]
+underground 	= 1
 texture         = map\map_mind
 bound_rect      = -146.670, -41.626, 153.227, 21.611
-global_rect		= 0, 0, 0, 0
+global_rect		= 2329, 5145, 2599, 5204
 weathers		= indoor
 music_tracks    = l08u_brainlab_musics
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [l10_radar]
+underground 	= 0
 texture         = map\map_radar
 bound_rect      = -136.256, -503.108, 714.384, 353.524
-global_rect		= 1612, 1968, 2032, 2384
+global_rect		= 3643, 2877, 4275, 3509
 weathers		= default
 music_tracks    = l10_radar_musics
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [l10u_bunker]
-global_rect		= 0, 0, 0, 0
+underground 	= 1
+texture         = map\map_bunker
+bound_rect		= -75,-100,27,67
+global_rect		= 3756, 2997, 3879, 3173
 weathers		= indoor
 music_tracks    = l10u_bunker_musics
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [l12_stancia]
+underground 	= 0
 texture			= map\map_aes_1
-bound_rect		= -256.776, -747.782, 1398.440, 850.523
-global_rect		= 1994, 1108, 2602, 1708
-weathers		= stancia
+bound_rect		= -256.776, -747.782, 1398.440, 850.52333
+global_rect		= 3280, 1520, 4407, 2605
+weathers		= default
 music_tracks    = l12_stancia_musics
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [l12u_sarcofag]
-global_rect		= 0, 0, 0, 0
-weathers		= sarkofag
+underground 	= 1
+texture         = map\map_sarcofag
+bound_rect      = -25, -79, 53, 35
+global_rect		= 3523, 1985, 3582, 2079
+weathers		= default
 music_tracks    = l12u_sarcofag_musics
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [l12u_control_monolith]
-global_rect		= 0, 0, 0, 0
+underground 	= 1
+texture         = map\map_control_monolith
+bound_rect		= -43.996280,-44.347900,43.946928,40.701820
+global_rect		= 3392, 2056, 3476, 2140
 weathers		= indoor
 music_tracks    = l12u_control_musics
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [l12_stancia_2]
+underground 	= 0
 texture			= map\map_aes_2
 bound_rect		= -256.776, -747.782, 1398.440, 850.523
-global_rect		= 1994, 1108, 2602, 1708
-weathers		= stancia2
+global_rect		= 3280, 1520, 4407, 2605
+weathers		= default
 music_tracks    = l12_stancia_2_musics
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [atp_for_test22]
+underground 	= 0
 texture         = map\map_atp_for_test22                 
 bound_rect      = -263.555, -391.829, 472.498, 354.993  
-global_rect     = 2958, 4702, 3392, 5136
+global_rect     = 4575, 7611, 5195, 8231
 weathers		= default
 
 [puzir]
+underground 	= 0
 texture         = map\map_puzir
 bound_rect		= -255.346, -255.890, 255.286, 251.884
-global_rect		= 1162, 2034, 1454, 2326
+global_rect		= 7198, 501, 7665, 968
 weathers		= default
 
 [aver]
+underground 	= 0
 texture         = map\map_aver
-bound_rect		= -500.000, -500.000, 500.000, 500.000
-global_rect		= 4104, 416, 4572, 884 
+bound_rect		= -500, -500, 500, 500
+global_rect		= 2526, 2809, 3152, 3435
 weathers		= default
 
 [limansk]
+underground 	= 0
 texture         = map\map_limansk
-bound_rect      = -210.000000,-415.000000,210.000000,425.000000
-global_rect		= 144, 1618, 528, 2384
+bound_rect      = -210,-415,210,425
+global_rect		= 1208, 2497, 1589, 3258
 weathers		= default
 
 [hospital]
+underground 	= 0
 texture         = map\map_hospital
-bound_rect      = -180.000000,537.000000,10.000000,917.000000
-global_rect		= 580, 1522, 730, 1826
+bound_rect      = -180,537,10,917
+global_rect		= 2058, 2352, 2204, 2642
 weathers		= default
 
 [generators]
+underground 	= 0
 texture         = map\map_generators
 bound_rect      = -385.577, -639.389, 352.818, 65.245
-global_rect		= 1896, 368, 2310, 782
+global_rect		= 3685, 616, 4285, 1196
 weathers		= stancia
 
 [warlab]
+underground 	= 1
+texture         = map\map_warlab
 bound_rect      = -317.164, -633.718, 404.880, 811.627
-global_rect		= 0, 0, 0, 0
+global_rect		= 4082, 1067, 4212, 1214
 weathers		= indoor
 
 [red_forest]
+underground 	= 0
 texture         = map\map_red_forest
-bound_rect      = -285.000000,-485.000000,375.000000,175.000000   
-global_rect     = 588, 2152, 964, 2528
+bound_rect      = -285,-485,375,175   
+global_rect     = 1657, 3041, 2298, 3680
 weathers		= default
 
 [marsh]
+underground 	= 0
 texture         = map\map_marsh         
-bound_rect      = -445.000000,-445.000000,755.000000,755.000000  
-global_rect     = 466, 3894, 1086, 4514
+bound_rect      = -445,-445,755,755  
+global_rect     = 1702, 6611, 2668, 7577
 weathers		= default
 
 [dead_city]
+underground 	= 0
 texture         = map\map_dead_city         
 bound_rect  	= -509.583, -378.084, 396.726, 530.434
-global_rect  	= 774, 2562, 1086, 2872 
+global_rect  	= 2102, 3916, 2593, 4407
 weathers		= default
 
 [zaton]
+underground 	= 0
 texture         = map\map_zaton
-bound_rect      = -627.400000, -600.000000, 802.600000, 830.000000
-global_rect     = 894, 1468, 1358, 1932
+bound_rect      = -951.128448,-828.941376,992.855488,1115.042432
+global_rect     = 1931, 1149, 3039, 2257
 weathers		= default
 
 [jupiter]
+underground 	= 0
 texture         = map\map_jupiter
-bound_rect      = -600.000000,-600.000000,600.000000,600.000000
-global_rect		= 182, 454, 660, 932
+bound_rect      = -916.354240,-944.023296,952.566400,934.393728
+global_rect		= 180, 594, 1363, 1777
 weathers		= default
 
 [pripyat]
+underground 	= 0
 texture         = map\map_pripyat_2
-bound_rect      = -550.000000,-550.000000,550.000000,550.000000
-global_rect		= 696, 454, 1236, 994
+bound_rect      = -973.686080,-973.686080,973.686080,973.686080
+global_rect		= 1257, 216, 2574, 1533
 weathers		= default
 
 [jupiter_underground]
+underground 	= 1
 texture         = map\map_jupiter_underground
-bound_rect 		= -390.807584,-265.132240,349.192416,474.867776
-global_rect		= 0, 0, 0, 0
-weathers		= indoor
+bound_rect 		= -470,-133.284152,265,570
+global_rect		= 1020, 122, 2187, 1298
+weathers		= default
 
 [labx8]
+underground 	= 1
 texture         = map\map_labx8
 bound_rect 		= -122.440560,44.614076,-40.440560,126.614072
-global_rect		= 0, 0, 0, 0
+global_rect		= 1769, 808, 1893, 932
 weathers		= indoor
 
 [predbannik]
+underground 	= 0
 texture         = map\map_predbannik
 bound_rect		= -729.635,-422.952,270.365,577.048       
-global_rect		= 1912, 4834, 2320, 5232
+global_rect		= 3294, 7764, 3950, 8420
 weathers		= default
 
 [garbage_old]
+underground 	= 0
 texture         = map\map_garbage_old
 bound_rect 		= -293.530,-721.041,323.154,692.701
-global_rect		= 2476, 3928, 2912, 4916
+global_rect		= 4267, 6573, 4788, 7768
 weathers		= default
 
 [yantar_old]
+underground 	= 0
 texture         = map\map_yantar_old
 bound_rect 		= -315.037,-304.013,319.936,309.553
-global_rect		= 3174, 78, 3850, 754
+global_rect		= 5474, 173, 6036, 735
 weathers		= default
 
 [swamp_old]
+underground 	= 0
 texture         = map\map_swamp_old
 bound_rect      = -522.290,-492.025,512.046,542.064
-global_rect     = 3430, 4514, 3920, 5004
+global_rect     = 5628, 7373, 6346, 8091
 weathers		= default

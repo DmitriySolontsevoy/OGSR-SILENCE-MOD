@@ -212,6 +212,7 @@ void CMapActionZoomControl::execute()
     update_target_state();
     inherited::execute();
     CUIGlobalMap* gm = m_object->GlobalMap();
+    CUIGlobalMap* gum = m_object->GlobalUndergroundMap();
     float gt = Device.fTimeGlobal;
     float time_to = m_endMovingTime - gt;
     float dt = _min(Device.fTimeDelta, time_to);
@@ -224,14 +225,17 @@ void CMapActionZoomControl::execute()
         current_rect.x2 += ((m_desiredMapRect.x2 - current_rect.x2) / time_to) * dt;
         current_rect.y2 += ((m_desiredMapRect.y2 - current_rect.y2) / time_to) * dt;
         gm->SetWndRect(current_rect);
+        gum->SetWndRect(current_rect);
     }
     else
     {
         gm->SetWndRect(m_desiredMapRect);
+        gum->SetWndRect(m_desiredMapRect);
         m_storage->set_property(3, true);
     }
 
     gm->Update();
+    gum->Update();
     m_object->UpdateScroll();
 }
 

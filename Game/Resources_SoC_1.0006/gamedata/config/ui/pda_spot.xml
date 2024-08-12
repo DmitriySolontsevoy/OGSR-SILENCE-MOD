@@ -1,8 +1,5 @@
 <w>
 	<background x="20" y="55" width="780" height="150">
-		<!--auto_static x="-5" y="0" width="240" height="85" stretch="1">
-			<texture>ui_frame_mainDes</texture>
-		</auto_static-->
 	</background>
 
 	<spot_name_edit x="20" y="55" width="700" height="180">

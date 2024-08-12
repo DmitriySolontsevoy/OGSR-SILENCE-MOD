@@ -91,10 +91,8 @@ void CSoundRender_Source::LoadWave(LPCSTR pName)
         IReader F(ovm->user_comments[0], ovm->comment_lengths[0]);
 
         u32 vers{};
-        if (F.elapsed() <= static_cast<int>(sizeof vers))
-            Msg("! Invalid ogg-comment, file: [%s]", pName);
-        else
-            vers = F.r_u32();
+        if (F.elapsed() > static_cast<int>(sizeof vers))
+             vers = F.r_u32();
 
         if (vers == 0x0001)
         {
@@ -122,12 +120,12 @@ void CSoundRender_Source::LoadWave(LPCSTR pName)
         }
         else
         {
-            Msg("! Invalid ogg-comment version, file: [%s]", pName);
+            //Msg("! Invalid ogg-comment version, file: [%s]", pName);
         }
     }
     else
     {
-        Msg("! Missing ogg-comment, file: [%s]", pName);
+        //Msg("! Missing ogg-comment, file: [%s]", pName);
     }
     R_ASSERT3((m_fMaxAIDist >= 0.1f) && (m_fMaxDist >= 0.1f), "Invalid max distance.", pName);
 

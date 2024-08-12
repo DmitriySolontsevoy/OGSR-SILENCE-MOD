@@ -319,53 +319,6 @@ function actor_binder:update(delta)
 
 		self.bCheckStart = false		
 	end		
- local sim = alife()
-	if sim then
-		local obj = sim:story_object(19854)
-		if obj then
-			level.map_add_object_spot(obj.id, "level_changer", "переход на припять")
-		end
-		local obj = sim:story_object(19853)
-		if obj then
-			level.map_add_object_spot(obj.id, "level_changer", "переход на юпитер")
-		end
-		local obj = sim:story_object(19852)
-		if obj then
-			level.map_add_object_spot(obj.id, "level_changer", "переход на затон")
-		end
-		local obj = sim:story_object(19851)
-		if obj then
-			level.map_add_object_spot(obj.id, "level_changer", "переход в путепровод")
-		end
-		local obj = sim:story_object(19850)
-		if obj then
-			level.map_add_object_spot(obj.id, "level_changer", "переход в лабу x8")
-		end
-		local obj = sim:story_object(19849)
-		if obj then
-			level.map_add_object_spot(obj.id, "level_changer", "переход в мертвый город")
-		end
-		local obj = sim:story_object(19900)
-		if obj then
-			level.map_add_object_spot(obj.id, "level_changer", "переход в подземку агропрома ЧН")
-		end
-		local obj = sim:story_object(19901)
-		if obj then
-			level.map_add_object_spot(obj.id, "level_changer", "переход в предбанник")
-		end
-		local obj = sim:story_object(19902)
-		if obj then
-			level.map_add_object_spot(obj.id, "level_changer", "переход на старую свалку")
-		end
-		local obj = sim:story_object(19903)
-		if obj then
-			level.map_add_object_spot(obj.id, "level_changer", "переход на старый янтарь")
-		end
-		local obj = sim:story_object(19904)
-		if obj then
-			level.map_add_object_spot(obj.id, "level_changer", "переход на старые болота")
-		end
-	end	
 end
 ----------------------------------------------------------------------------------------------------------------------
 function actor_binder:save(packet)

@@ -9,8 +9,8 @@
 		<texture>ui\ui_vid_back_02</texture>
 	</_back_video>
 	
-	<background x="0" y="0" width="1024" height="768">
-		<texture>ui\ui_static_mm_back_04</texture>
+	<background x="0" y="0" width="1024" height="768" stretch="1">
+		<texture x="0" y="0" width="2048" height="1536">ui\ui_static_mm_back_04</texture>
 	</background>
 
 	<newspaper_video x="10000" y="10000" width="256" height="256">

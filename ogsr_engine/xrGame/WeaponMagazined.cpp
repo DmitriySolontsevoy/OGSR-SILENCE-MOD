@@ -1362,12 +1362,13 @@ void CWeaponMagazined::PlayAnimAim()
 {
     if (IsRotatingToZoom() && !IsRotatingFromZoom())
     {
+        PlaySound(sndAimStart, get_LastFP());
+
         string128 guns_aim_start_anm;
         xr_strconcat(guns_aim_start_anm, "anm_idle_aim_start", IsMisfire() ? "_jammed" : (iAmmoElapsed == 0 ? "_empty" : ""));
         if (AnimationExist(guns_aim_start_anm))
         {
             PlayHUDMotion(guns_aim_start_anm, true, GetState());
-            PlaySound(sndAimStart, get_LastFP());
             return;
         }
     }
@@ -1395,12 +1396,13 @@ void CWeaponMagazined::PlayAnimIdle()
     {
         if (IsRotatingFromZoom() && !IsRotatingToZoom())
         {
+            PlaySound(sndAimEnd, get_LastFP());
+
             string128 guns_aim_end_anm;
             xr_strconcat(guns_aim_end_anm, "anm_idle_aim_end", IsMisfire() ? "_jammed" : (iAmmoElapsed == 0 ? "_empty" : ""));
             if (AnimationExist(guns_aim_end_anm))
             {
                 PlayHUDMotion(guns_aim_end_anm, true, GetState());
-                PlaySound(sndAimEnd, get_LastFP());
                 return;
             }
         }
