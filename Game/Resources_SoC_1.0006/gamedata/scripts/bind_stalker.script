@@ -316,6 +316,7 @@ function actor_binder:update(delta)
 		printf("SET DEFAULT INFOS")		
 
 		level_tasks.add_lchanger_location()
+		level_tasks.add_map_location()
 
 		self.bCheckStart = false		
 	end		

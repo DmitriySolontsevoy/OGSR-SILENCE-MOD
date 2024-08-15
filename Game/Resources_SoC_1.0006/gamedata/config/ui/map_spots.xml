@@ -20,6 +20,13 @@
 		<texture x="607" y="65" width="11" height="24" r="250" g="0" b="0">ui\ui_hud</texture>
 	</combat_pointer>
 	
+	<crcl_map_location_medium>
+		<level_map spot="crcl_map_location_medium_spot" pointer="quest_pointer"/>
+	</crcl_map_location_medium>
+	<crcl_map_location_medium_spot x="0" y="0" width="60" height="60" alignment="c" scale="1" stretch="1">
+		<texture x="779" y="759" width="205" height="205">ui\ui_common</texture>
+	</crcl_map_location_medium_spot>
+	
 	<crlc_big>
 		<level_map spot="crlc_big_spot"		pointer="quest_pointer"/>
 	</crlc_big>
