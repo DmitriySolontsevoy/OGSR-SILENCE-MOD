@@ -251,6 +251,12 @@ function add_map_location()
 	local sim = alife()
 	
 	--Предбанник
+	add_map_spot(sim, 13370112, "crcl_map_location_medium", "Военный Блокпост")
+	add_map_spot(sim, 13370113, "crcl_map_location_medium", "Северный Хутор")
+	add_map_spot(sim, 13370114, "crcl_map_location_medium", "Деревня")
+	add_map_spot(sim, 13370115, "crcl_map_location_medium", "Военный Городок")
+	add_map_spot(sim, 13370116, "crcl_map_location_medium", "Армейская База")
+	add_map_spot(sim, 13370117, "crcl_map_location_medium", "Старая Фабрика")
 	
 	--Кордон
 	add_map_spot(sim, 13370090, "crcl_map_location_medium", "Элеватор")
@@ -262,52 +268,154 @@ function add_map_location()
 	add_map_spot(sim, 13370096, "crcl_map_location_medium", "Северный КПП")
 	
 	--Свалка
+	add_map_spot(sim, 13370118, "crcl_map_location_medium", "Блокпост")
+	add_map_spot(sim, 13370119, "crcl_map_location_medium", "Барахолка")
+	add_map_spot(sim, 13370120, "crcl_map_location_medium", "Депо")
+	add_map_spot(sim, 13370121, "crcl_map_location_medium", "Кладбище Техники")
 	
 	--Агропром
+	add_map_spot(sim, 13370122, "crcl_map_location_medium", "Территория Завода")
+	add_map_spot(sim, 13370123, "crcl_map_location_medium", "Территория Института")
+	add_map_spot(sim, 13370124, "crcl_map_location_medium", "Болото")
 	
 	--Тёмная Долина
-	
-	--Бар
+	add_map_spot(sim, 13370125, "crcl_map_location_medium", "Предприятие")
+	add_map_spot(sim, 13370126, "crcl_map_location_medium", "Заправка")
+	add_map_spot(sim, 13370127, "crcl_map_location_medium", "Старая Фабрика")
+	add_map_spot(sim, 13370128, "crcl_map_location_medium", "Свиноферма")
 
 	--Росток
+	add_map_spot(sim, 13370129, "crcl_map_location_medium", "Стройплощадка")
+	add_map_spot(sim, 13370130, "crcl_map_location_medium", "Упавший Вертолёт")
+	add_map_spot(sim, 13370131, "crcl_map_location_medium", "Обгоревший туннель")
 
 	--Склады
+	add_map_spot(sim, 13370132, "crcl_map_location_medium", "Брошенный Хутор")
+	add_map_spot(sim, 13370133, "crcl_map_location_medium", "Армейская База")
+	add_map_spot(sim, 13370134, "crcl_map_location_medium", "Барьер")
+	add_map_spot(sim, 13370135, "crcl_map_location_medium", "Деревня Кровососов")
+	add_map_spot(sim, 13370136, "crcl_map_location_medium", "Дальний Хутор")
+	add_map_spot(sim, 13370137, "crcl_map_location_medium", "Болото")
+	add_map_spot(sim, 13370138, "crcl_map_location_medium", "Западный Блокпост")
 
 	--Янтарь
+	add_map_spot(sim, 13370139, "crcl_map_location_medium", "Мобильная Лаборатория")
+	add_map_spot(sim, 13370140, "crcl_map_location_medium", "Производственный Комплекс")
 	
 	--Радар
-
-	--ЧАЭС
-
-	--ЧАЭС-2
-
-	--АТП
+	add_map_spot(sim, 13370141, "crcl_map_location_medium", "Антенны")
+	add_map_spot(sim, 13370142, "crcl_map_location_medium", "Северо-восточная База")
+	add_map_spot(sim, 13370143, "crcl_map_location_medium", "Южный Блокпост")
+	add_map_spot(sim, 13370144, "crcl_map_location_medium", "Северный Блокпост")
+	add_map_spot(sim, 13370145, "crcl_map_location_medium", "Упавший Вертолёт")
 
 	--Мёртвые Топи
+	add_map_spot(sim, 13370106, "crcl_map_location_medium", "Рыбацкий Хутор")
+	add_map_spot(sim, 13370107, "crcl_map_location_medium", "Мост через Реку")
+	add_map_spot(sim, 13370108, "crcl_map_location_medium", "Рыбацкие Сараи")
+	add_map_spot(sim, 13370109, "crcl_map_location_medium", "Заброшенный Дом")
+	add_map_spot(sim, 13370110, "crcl_map_location_medium", "Разрушенный Мост")
+	add_map_spot(sim, 13370111, "crcl_map_location_medium", "Лагерь")
 
 	--Кладбище Техники
+	add_map_spot(sim, 13370146, "crcl_map_location_medium", "Брошенная Стройка")
+	add_map_spot(sim, 13370147, "crcl_map_location_medium", "Деревенька")
+	add_map_spot(sim, 13370148, "crcl_map_location_medium", "Ангар")
+	add_map_spot(sim, 13370149, "crcl_map_location_medium", "Заводоуправление")
 
 	--Лесная Чаща
-
-	--Мёртвый Город
+	add_map_spot(sim, 13370150, "crcl_map_location_medium", "Озеро на Развилке")
+	add_map_spot(sim, 13370151, "crcl_map_location_medium", "Одинокая Изба")
 
 	--Рыжий Лес
+	add_map_spot(sim, 13370152, "crcl_map_location_medium", "Мост в Лиманск")
+	add_map_spot(sim, 13370153, "crcl_map_location_medium", "Вход в Лиманский Заповедник")
+	add_map_spot(sim, 13370154, "crcl_map_location_medium", "Шахтёрский Комплекс")
+	add_map_spot(sim, 13370155, "crcl_map_location_medium", "Аномалия 'Симбионт'")
 
 	--Лиманск
-
-	--Госпиталь
+	add_map_spot(sim, 13370156, "crcl_map_location_medium", "Стройка")
+	add_map_spot(sim, 13370157, "crcl_map_location_medium", "Перекрёсток")
+	add_map_spot(sim, 13370158, "crcl_map_location_medium", "Мост через Реку")
+	add_map_spot(sim, 13370159, "crcl_map_location_medium", "Двор")
 	
 	--Болота
+	add_map_spot(sim, 13370097, "crcl_map_location_medium", "Руины Деревни")
+	add_map_spot(sim, 13370098, "crcl_map_location_medium", "Северный Хутор")
+	add_map_spot(sim, 13370099, "crcl_map_location_medium", "Механизаторский Двор")
+	add_map_spot(sim, 13370100, "crcl_map_location_medium", "Сгоревший Хутор")
+	add_map_spot(sim, 13370101, "crcl_map_location_medium", "Насосная Станция")
+	add_map_spot(sim, 13370102, "crcl_map_location_medium", "Брошенная База")
+	add_map_spot(sim, 13370103, "crcl_map_location_medium", "Рыбацкий Хутор")
+	add_map_spot(sim, 13370104, "crcl_map_location_medium", "Старая Церковь")
+	add_map_spot(sim, 13370105, "crcl_map_location_medium", "Южный Хутор")
 
 	--Затон
+	add_map_spot(sim, 13370160, "crcl_map_location_medium", "Аномальное Болото")
+	add_map_spot(sim, 13370161, "crcl_map_location_medium", "Аномалия 'Котёл'")
+	add_map_spot(sim, 13370162, "crcl_map_location_medium", "Сгоревший Хутор")
+	add_map_spot(sim, 13370163, "crcl_map_location_medium", "Аномалия 'Цирк'")
+	add_map_spot(sim, 13370164, "crcl_map_location_medium", "Аномалия 'Коготь'")
+	add_map_spot(sim, 13370165, "crcl_map_location_medium", "Портовые Краны")
+	add_map_spot(sim, 13370166, "crcl_map_location_medium", "Земснаряд")
+	add_map_spot(sim, 13370167, "crcl_map_location_medium", "Заправка")
+	add_map_spot(sim, 13370168, "crcl_map_location_medium", "Аномалия 'Железный Лес'")
+	add_map_spot(sim, 13370169, "crcl_map_location_medium", "Пионерский Лагерь 'Изумрудное'")
+	add_map_spot(sim, 13370170, "crcl_map_location_medium", "ВНЗ 'Круг'")
+	add_map_spot(sim, 13370171, "crcl_map_location_medium", "Аномалия 'Соснодуб'")
+	add_map_spot(sim, 13370172, "crcl_map_location_medium", "Старая Баржа")
+	add_map_spot(sim, 13370173, "crcl_map_location_medium", "Лесничество")
+	add_map_spot(sim, 13370174, "crcl_map_location_medium", "Лесопилка")
+	add_map_spot(sim, 13370175, "crcl_map_location_medium", "Аномалия 'Рубец'")
+	add_map_spot(sim, 13370176, "crcl_map_location_medium", "Шевченко")
+	add_map_spot(sim, 13370177, "crcl_map_location_medium", "Скадовск")
+	add_map_spot(sim, 13370178, "crcl_map_location_medium", "Цеха Подстанции")
+	add_map_spot(sim, 13370179, "crcl_map_location_medium", "Станция Переработки Отходов")
 	
 	--Припять
-	
+	add_map_spot(sim, 13370180, "crcl_map_location_medium", "Жилой Комплекс")
+	add_map_spot(sim, 13370181, "crcl_map_location_medium", "Магазин 'Книги'")
+	add_map_spot(sim, 13370182, "crcl_map_location_medium", "Детский Сад")
+	add_map_spot(sim, 13370183, "crcl_map_location_medium", "Прачечная")
+	add_map_spot(sim, 13370184, "crcl_map_location_medium", "Кинотеатр 'Прометей'")
+	add_map_spot(sim, 13370185, "crcl_map_location_medium", "Мутировавшая Лоза")
+	add_map_spot(sim, 13370186, "crcl_map_location_medium", "Речной Порт")
+	add_map_spot(sim, 13370187, "crcl_map_location_medium", "Школа")
+	add_map_spot(sim, 13370188, "crcl_map_location_medium", "КБО 'Юбилейный'")
+	add_map_spot(sim, 13370189, "crcl_map_location_medium", "Старый КБО")
+	add_map_spot(sim, 13370190, "crcl_map_location_medium", "Универмаг")
+	add_map_spot(sim, 13370191, "crcl_map_location_medium", "Гастроном")
+	add_map_spot(sim, 13370192, "crcl_map_location_medium", "Аномалия 'Вулкан'")
+
 	--Окрестности Юпитера
-	
+	add_map_spot(sim, 13370193, "crcl_map_location_medium", "Аномалия 'Битум'")
+	add_map_spot(sim, 13370194, "crcl_map_location_medium", "Цементный Завод")
+	add_map_spot(sim, 13370195, "crcl_map_location_medium", "КПП")
+	add_map_spot(sim, 13370196, "crcl_map_location_medium", "Склад Контейнеров")
+	add_map_spot(sim, 13370197, "crcl_map_location_medium", "Градирня")
+	add_map_spot(sim, 13370198, "crcl_map_location_medium", "Территория Завода")
+	add_map_spot(sim, 13370199, "crcl_map_location_medium", "Вертолётная Площадка")
+	add_map_spot(sim, 13370200, "crcl_map_location_medium", "Копачи")
+	add_map_spot(sim, 13370201, "crcl_map_location_medium", "Мобильная Лаборатория")
+	add_map_spot(sim, 13370202, "crcl_map_location_medium", "Карьер")
+	add_map_spot(sim, 13370203, "crcl_map_location_medium", "Полустанок")
+	add_map_spot(sim, 13370204, "crcl_map_location_medium", "Вентиляционный Комплекс")
+	add_map_spot(sim, 13370205, "crcl_map_location_medium", "ЗРК 'Волхов'")
+	add_map_spot(sim, 13370206, "crcl_map_location_medium", "Станция 'Янов'")
+
 	--Научная Станция
-	
+	add_map_spot(sim, 13370207, "crcl_map_location_medium", "Брошенная Деревня")
+	add_map_spot(sim, 13370208, "crcl_map_location_medium", "Погрузочно-разгрузочный Узел")
+	add_map_spot(sim, 13370209, "crcl_map_location_medium", "Военный Комплекс")
+	add_map_spot(sim, 13370210, "crcl_map_location_medium", "Нефтеочистительное Предприятие")
+	add_map_spot(sim, 13370211, "crcl_map_location_medium", "Лагерь Учёных")
+	add_map_spot(sim, 13370212, "crcl_map_location_medium", "Промпосёлок")
+
 	--Генераторы
+	add_map_spot(sim, 13370213, "crcl_map_location_medium", "Установка")
+	add_map_spot(sim, 13370214, "crcl_map_location_medium", "Военная База")
+	add_map_spot(sim, 13370215, "crcl_map_location_medium", "Подстанция")
+	add_map_spot(sim, 13370216, "crcl_map_location_medium", "Руины Деревни")
 
 end
 
