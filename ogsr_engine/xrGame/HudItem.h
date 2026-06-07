@@ -230,7 +230,6 @@ public:
 
         void Update(Fmatrix& m, Fmatrix& m2);
         void CheckState();
-
     private:
         CHudItem* parent_hud_item;
         float fTime;
@@ -291,6 +290,8 @@ protected:
     virtual Fvector GetDirectionForCollision() { return Device.vCameraDirection; }
     float m_fZoomRotationFactor{}; //от 0 до 1, показывает насколько процентов мы перемещаем HUD
     float m_fZoomRotateTime{}; //время приближения
+    bool m_fFinishedZoom = false;
+    bool m_fTexturedScope = false;
     u32 skip_updated_frame{};
     bool HudInertionAllowed() const { return m_huditem_flags.test(fl_inertion_allow); }
     void AllowHudInertion(BOOL B) { m_huditem_flags.set(fl_inertion_allow, B); }

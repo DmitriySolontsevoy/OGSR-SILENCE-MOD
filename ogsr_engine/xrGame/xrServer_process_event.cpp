@@ -35,7 +35,7 @@ void xrServer::Process_event(NET_Packet& P, ClientID sender)
     {
         if (!receiver->owner)
         {
-            Msg("!![%s] Cnt't find owner for receiver with id [%u]. May be it already destroyed.", __FUNCTION__, destination);
+            Msg("!![%s] Can't find owner for receiver with id [%u]. Maybe it's already destroyed.", __FUNCTION__, destination);
             return;
         }
 

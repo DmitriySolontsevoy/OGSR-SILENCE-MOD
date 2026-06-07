@@ -630,6 +630,7 @@ void CExplosive::StartLight()
         m_pLight->set_active(true);
     }
 }
+
 void CExplosive::StopLight()
 {
     if (m_pLight)

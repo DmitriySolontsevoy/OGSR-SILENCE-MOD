@@ -33,6 +33,16 @@ ammo_class					= ammo_5.56x45_ss190, ammo_5.56x45_ap
 grenade_class				= ammo_m209
 fire_modes					= 1, -1
 
+ejects_casings 				= 1
+ejects_on_reload			= 0
+casings_section				= 5_56x45_casing
+casing_delay				= 0
+
+drops_mags					= 1
+mags_section				= mag_g36
+mag_delay					= 500
+mag_point					= 0.0, 0.0, 0.0
+
 hand_dependence				= 1
 single_handed				= 0	
 
@@ -41,10 +51,10 @@ animation_slot				= 2		; type of the animation that will be used
 
 inv_name	        		= G36
 inv_name_short				= G36
-inv_weight					= 3.74
+inv_weight					= 3.63
 
 icon_group              	= 1
-inv_grid_width				= 5
+inv_grid_width				= 6
 inv_grid_height				= 2
 inv_grid_x					= 0
 inv_grid_y					= 40
@@ -77,7 +87,7 @@ direction              		=  0, 0, 1
 fire_point             		=  0.0, 0.21, 0.58
 fire_point2            		=  0.0, 0.21, 0.71
 
-flame_particles				= weapons\generic_weapon05
+flame_particles				= weapons\new_effects\g36_3sides
 smoke_particles				= weapons\generic_shoot_00
 grenade_flame_particles		= weapons\generic_weapon01
 	
@@ -127,7 +137,7 @@ light_color					= 0.6,0.5,0.3
 light_range					= 5
 light_var_color				= 0.05
 light_var_range				= 0.5
-light_time 					= 0.2
+light_time 					= 0.1
 
 ph_mass						= 4
 ;cost						= 2100
@@ -135,7 +145,7 @@ ph_mass						= 4
 ;addons
 scope_status				= 1
 silencer_status				= 2
-grenade_launcher_status		= 2
+grenade_launcher_status		= 0
 
 zoom_enabled				= true						; (on,off)zoom mode (right mouse button)
 scope_zoom_factor	    	= 33.3 			;1.8X		; fov for zoom mode
@@ -144,10 +154,7 @@ scope_zoom_factor	    	= 33.3 			;1.8X		; fov for zoom mode
 ;scope_zoom_factor	    	= 15		;SUSAT 4X
 scope_texture				= wpn\wpn_crosshair_g36
 
-;scope_name 					= wpn_addon_scope_susat
-;scope_x 					= 78
-;scope_y 					= 0
-silencer_name  				= wpn_addon_silencer_rifle_2
+silencer_name  				= wpn_addon_silencer_rifle_hexagon
 silencer_x 					= 198
 silencer_y 					= 16
 grenade_launcher_name 		= wpn_addon_grenade_launcher_m203
@@ -162,9 +169,11 @@ snd_shoot1					= weapons\g36\shot
 snd_shoot2					= weapons\g36\shot
 snd_empty					= weapons\g36\empty
 snd_reload					= weapons\g36\reload
-snd_shoot_grenade				= weapons\g36\grenshoot
-snd_reload_grenade				= weapons\g36\grenload
+snd_reload_jammed			= weapons\g36\reload_jammed
+snd_shoot_grenade			= weapons\g36\grenshoot
+snd_reload_grenade			= weapons\g36\grenload
 snd_switch					= weapons\g36\switch
+snd_click_last				= weapons\_general\rifle_slide_click
 
 snd_aim_start       = weapons\_general\rifle_aim_start_2, 0.5
 snd_aim_end			= weapons\_general\rifle_aim_end_2, 0.5
@@ -186,78 +195,53 @@ silencer_light_color		= 0.6,0.5,0.3
 silencer_light_range		= 0.01
 silencer_light_var_color	= 0.05
 silencer_light_var_range	= 0.5
-silencer_light_time 		= 0.2
+silencer_light_time 		= 0.1
 
  
 [wpn_g36_hud]
-
-shell_point     	   	 	= 0,0,-0.7
+shell_point     	   	 	= 1.5,0,-0.7
 shell_dir			     	= 0.0, 1.0, 0.0
 
-fire_point					= 0,0,-0.6
+fire_point					= 0,0,-0.5
 fire_point2              	= 0,0,-0.6
 fire_bone               	= muzzle
-orientation             	= 0, 0, 0
-position                	= 0.15,-0.06,-0.05
+
+position					= -0.044,-0.2,0.14
+orientation					= 2,2,0
+
 visual                  	= weapons\g36\wpn_g36_hud.ogf
+
+mag_point					= 0.0, -0.5, -0.5
 
 grenade_bone            	= grenade
 
 anim_reload_effector = reload
 anim_reload_partly_effector = short_reload
-anim_reload_gl_effector = reload
-anim_reload_gl_partly_effector = short_reload
-anim_reload_g_effector = reload_grenade
+anm_reload_jammed_effector = short_reload
 
 anim_idle					= idle
-anim_idle_aim				= idle_aim
+anim_idle_aim				= aim
 anim_reload					= reload
 anim_reload_partly			= reload
+anm_reload_jammed			= reload
 anim_draw					= draw
 anim_holster				= holster
 anim_shoot					= shoot
-anim_idle_sprint			= idle_sprint_new
-			
-;анимации с подключенным подствольником
-;(режим стрельбы из подствольника)
-anim_idle_g					= idle_grenade
-anim_idle_g_aim				= idle_grenade_aim
-anim_reload_g				= reload_grenade
-anim_shoot_g				= shoot_grenade
-anim_switch_grenade_on		= switch_on
-anim_switch_grenade_off		= switch_off
-anim_draw_g					= draw_grenade
-anim_holster_g				= holster_grenade
-anim_idle_sprint_g			= idle_sprint_g
+anim_idle_sprint			= sprint
+anim_idle_moving			= moving
 
-;(режим обычной стрельбы)			  
-anim_idle_gl				= idle_w_gl
-anim_idle_gl_aim			= idle_w_gl_aim
-anim_reload_gl				= reload_w_gl
-anim_reload_gl_partly		= reload_w_gl
-anim_draw_gl				= draw_w_gl
-anim_holster_gl				= holster_w_gl
-anim_shoot_gl				= shoot_w_gl
-anim_idle_sprint_gl			= idle_sprint_g
+anim_reload_partly_stop_k = 0.52
 
-anim_reload_partly_speed_k 		= 0.9
-anim_reload_gl_partly_speed_k 	= 0.9
-anim_reload_partly_stop_k 		= 0.56
-anim_reload_gl_partly_stop_k 	= 0.56
+anm_reload_jammed_start_k = 0.55
+
+anim_idle_sprint_speed_k = 0.9
 
 ;смещения HUD для режима приближения
-zoom_offset			= -0.15,0.01,-0.4
-zoom_rotate_x		= 0
-zoom_rotate_y		= 0
+zoom_offset					= -0.1087,0.026,-0.175
+zoom_rotate_x				= 0.0415
+zoom_rotate_y				= 0.009
+
+zoom_rotate_time = 0.4
+
 ;прячем перекрестие прицела в зуме
 zoom_hide_crosshair	= true
-
-;тоже самое, но для прицепленого подствольника
-;режим подствольника
-grenade_zoom_offset			= 0,0,0
-grenade_zoom_rotate_x		= 0
-grenade_zoom_rotate_y		= 0
-
-grenade_normal_zoom_offset			= -0.15,0.0,-0.3
-grenade_normal_zoom_rotate_x		= 0
-grenade_normal_zoom_rotate_y		= 0

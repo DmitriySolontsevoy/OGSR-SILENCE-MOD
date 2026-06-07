@@ -161,12 +161,7 @@ void SSFX_ScreenSpaceReflections(float2 tc, float4 P, float3 N, float gloss, ino
 	float3 reflection = 0;
 	float2 uvcoor = 0;
 
-	// Sky is the reflection base...
-#ifdef G_SSR_CHEAP_SKYBOX
-	reflection = SSFX_calc_env(v2reflect) * G_SSR_SKY_INTENSITY;
-#else
 	reflection = SSFX_calc_sky(v2reflect) * G_SSR_SKY_INTENSITY;
-#endif
 
 	// Valid UV coor? SSFX_trace_ssr_ray return 0.0f if uv is out of bounds or sky.
 	if (all(hit_uv.xy))
@@ -227,7 +222,7 @@ void SSFX_ScreenSpaceReflections(float2 tc, float4 P, float3 N, float gloss, ino
 #ifdef G_SSR_BEEFS_NVGs_ADJUSTMENT
 	refl_power *= saturate(1.0f - (1.0f - G_SSR_BEEFS_NVGs_ADJUSTMENT) * (shader_param_8.x > 0.0f));
 #endif
-
+	
 	// Add the reflection to the scene.
 	color = lerp(color, reflection, refl_power);
 }

@@ -87,7 +87,10 @@ void CWeapon::FireTrace(const Fvector& P, const Fvector& D)
     StartShotParticles();
 
     if (m_bLightShotEnabled)
+    {
         Light_Start();
+        RenderLight();
+    }
 
     // Ammo
     m_magazine.pop_back();

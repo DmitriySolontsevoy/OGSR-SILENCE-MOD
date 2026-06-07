@@ -31,6 +31,15 @@ ammo_mag_size			= 30
 
 ammo_class			= ammo_9x19_pbp, ammo_9x19_fmj
 
+ejects_casings 				= 1
+ejects_on_reload			= 0
+casings_section				= 9x19_casing
+casing_delay				= 0
+
+drops_mags					= 1
+mags_section				= mag_mp5
+mag_delay					= 600
+mag_point					= 0.0, 0.0, 0.0
 
 fire_modes			= 1, 2, 3, -1
 
@@ -40,15 +49,15 @@ single_handed			= 0
 slot 				= 1,2		; primary
 animation_slot			= 8		; type of the animation that will be used
 
-inv_name			= MP5
+inv_name				= MP5
 inv_name_short			= MP5
-inv_weight			= 2.54
+inv_weight				= 2.54
 
 icon_group              = 1
-inv_grid_width			= 3
-inv_grid_height			= 1
-inv_grid_x			= 0
-inv_grid_y			= 65
+inv_grid_width			= 4
+inv_grid_height			= 2
+inv_grid_x				= 0
+inv_grid_y				= 59
 
 ;спавнить автоматически боеприпасы при подъеме оружия
 auto_spawn_ammo			= false
@@ -78,7 +87,7 @@ direction 			= 0, 0, 1
 
 fire_point 			= 0.0, 0.2, 0.392
 
-flame_particles			= weapons\generic_weapon05
+flame_particles			= weapons\new_effects\pistol_9x19
 smoke_particles 		= weapons\generic_shoot_00
 
 shell_point		 	= 0.0, 0.188, 0.082
@@ -122,7 +131,7 @@ light_color		 	= 0.6,0.5,0.3
 light_range		 	= 5
 light_var_color		 	= 0.05
 light_var_range		 	= 0.1
-light_time 		 	= 0.2
+light_time 		 		= 0.1
 
 ph_mass			 	= 3
 
@@ -134,9 +143,10 @@ grenade_launcher_status		= 0
 zoom_enabled			= true
 scope_zoom_factor	 	= 60
 
-silencer_name 			= wpn_addon_silencer
-silencer_x 			= 114
-silencer_y 			= -15
+silencer_extends_grid_x 	= 1
+silencer_name 		= wpn_addon_silencer_pistol_9mm
+silencer_x 			= 177
+silencer_y 			= 15
 
 ;sounds (name of the sound, volume (0.0 - 1.0), delay (sec))
 snd_draw			= weapons\mp5\draw
@@ -148,7 +158,9 @@ snd_shoot3			= weapons\mp5\mp5_shoot3
 snd_empty			= weapons\mp5\mp5_empty, 0.5
 snd_reload			= weapons\mp5\mp5_reload
 snd_reload_partly	= weapons\mp5\mp5_reload_partly
-snd_silncer_shot		= weapons\mp5\mp5_shot_sil
+snd_reload_jammed	= weapons\mp5\mp5_reload_jammed
+snd_silncer_shot	= weapons\mp5\mp5_shot_sil
+snd_click_last		= weapons\_general\smg_slide_click
 
 snd_aim_start       = weapons\_general\smg_aim_start, 0.5
 snd_aim_end			= weapons\_general\smg_aim_end, 0.5
@@ -167,23 +179,26 @@ silencer_light_color		= 0.6,0.5,0.3
 silencer_light_range		= 0.01
 silencer_light_var_color	= 0.05
 silencer_light_var_range	= 0.5
-silencer_light_time 		= 0.2
+silencer_light_time 		= 0.1
+
+hidden_bones = wpn_upgrade_picatinny_rail, wpn_upgrade_luminous_sights
 
 ;-----------------------------------------------------------------------------
 ;-- HUD DESCRIPTION
 ;-----------------------------------------------------------------------------
 [wpn_mp5_hud]
-
 allow_inertion			= true
 
-shell_point          	= 0.00, 0.00, -0.6
-shell_dir		 		=    0.0, 0.0, 0.0
+shell_point          	= 1.5, 0.0, 0.0
+shell_dir		 		= 0.0, 0.0, 0.0
 
-fire_point				= 0.01,0.07,-0.09
+fire_point				= 0,0.09,-0.18
 fire_bone               = wpn_body
 orientation             = 0, 0, 0
 position                = 0.03, -0.19, 0.28
 visual                  = weapons\mp5\wpn_mp5_hud.ogf
+
+mag_point				= -0.5, -0.5, -0.5
 
 anim_reload_effector = reload
 anim_reload_partly_effector = short_reload
@@ -192,15 +207,17 @@ anim_idle			= mp5_idle
 anim_idle_aim		= mp5_aim
 anim_reload			= mp5_reload
 anim_reload_partly	= mp5_reload_partly
+anm_reload_jammed	= mp5_reload_jammed
 anim_draw			= mp5_draw
 anim_holster		= mp5_holster
 anim_shoot			= mp5_shoot
 anim_idle_sprint	= mp5_sprint
+anim_idle_moving	= mp5_move
 
 
 ;смещения HUD для режима приближения
-zoom_offset			= -0.183, 0.03, -0.15
-zoom_rotate_x		= -0.02
+zoom_offset			= -0.183, 0.033, -0.15
+zoom_rotate_x		= -0.015
 zoom_rotate_y		= 0
 
 ;-----------------------------------------------------------------------------
@@ -208,5 +225,101 @@ zoom_rotate_y		= 0
 zoom_hide_crosshair		= true
 
 ;время поворота HUD (сек)
-zoom_rotate_time		= 0.3
+zoom_rotate_time 	= 0.4
 rotate_time			= 0.3
+
+hidden_bones = wpn_upgrade_picatinny_rail, wpn_upgrade_luminous_sights
+
+
+;;;;;;;;;;;;;;;;;
+;;;WEAPON MODS;;;
+;;;;;;;;;;;;;;;;;
+
+;;LUMINOUS SIGHTS
+[wpn_mp5:tritium]:wpn_mp5
+inv_grid_x = 5
+
+hidden_bones = wpn_upgrade_picatinny_rail
+
+hud = wpn_mp5:tritium_hud
+
+[wpn_mp5:tritium_hud]:wpn_mp5_hud
+hidden_bones = wpn_upgrade_picatinny_rail
+
+;;;PICATINNY ADAPTER
+[wpn_mp5:rail]:wpn_mp5
+inv_grid_x = 10
+
+inv_weight = 2.65
+
+scope_status = 2
+
+scopes_textured					= wpn_addon_scope_susat, wpn_addon_scope_pm2, wpn_addon_scope_1p86, wpn_addon_scope_acog
+scope_wpn_addon_scope_susat_x 	= 75
+scope_wpn_addon_scope_susat_y 	= -5
+
+scope_wpn_addon_scope_pm2_x 	= 57
+scope_wpn_addon_scope_pm2_y 	= -4
+
+scope_wpn_addon_scope_1p86_x 	= 45
+scope_wpn_addon_scope_1p86_y 	= -6
+
+scope_wpn_addon_scope_acog_x 	= 70
+scope_wpn_addon_scope_acog_y 	= -5
+
+scopes_physical						= wpn_addon_red_dot_aimpoint, wpn_addon_red_dot_eotech, wpn_addon_red_dot_gamo
+scope_wpn_addon_red_dot_aimpoint_x 	= 78
+scope_wpn_addon_red_dot_aimpoint_y 	= -5
+
+scope_wpn_addon_red_dot_eotech_x 	= 78
+scope_wpn_addon_red_dot_eotech_y 	= -5
+
+scope_wpn_addon_red_dot_gamo_x 		= 70
+scope_wpn_addon_red_dot_gamo_y 		= -5
+
+hidden_bones = wpn_upgrade_luminous_sights
+hud = wpn_mp5:rail_hud
+
+[wpn_mp5:rail_hud]:wpn_mp5_hud
+scopes_textured								= wpn_addon_scope_susat, wpn_addon_scope_pm2, wpn_addon_scope_1p86, wpn_addon_scope_acog
+scoped_wpn_addon_scope_susat_zoom_offset	= -0.183, -0.01, -0.6
+scoped_wpn_addon_scope_susat_zoom_rotate_x	= -0.02
+scoped_wpn_addon_scope_susat_zoom_rotate_y	= 0
+
+scoped_wpn_addon_scope_pm2_zoom_offset		= -0.183, 0.016, -0.45
+scoped_wpn_addon_scope_pm2_zoom_rotate_x	= -0.02
+scoped_wpn_addon_scope_pm2_zoom_rotate_y	= 0
+
+scoped_wpn_addon_scope_1p86_zoom_offset		= -0.183, 0.019, -0.45
+scoped_wpn_addon_scope_1p86_zoom_rotate_x	= -0.02
+scoped_wpn_addon_scope_1p86_zoom_rotate_y	= 0
+
+scoped_wpn_addon_scope_acog_zoom_offset		= -0.183, 0.01, -0.5
+scoped_wpn_addon_scope_acog_zoom_rotate_x	= -0.02
+scoped_wpn_addon_scope_acog_zoom_rotate_y	= 0
+
+scopes_physical									= wpn_addon_red_dot_aimpoint, wpn_addon_red_dot_eotech, wpn_addon_red_dot_gamo
+scoped_wpn_addon_red_dot_aimpoint_zoom_offset	= -0.183, 0.025, -0.15
+scoped_wpn_addon_red_dot_aimpoint_zoom_rotate_x	= -0.005
+scoped_wpn_addon_red_dot_aimpoint_zoom_rotate_y	= 0
+
+scoped_wpn_addon_red_dot_eotech_zoom_offset		= -0.184, 0.017, -0.15
+scoped_wpn_addon_red_dot_eotech_zoom_rotate_x	= -0.015
+scoped_wpn_addon_red_dot_eotech_zoom_rotate_y	= 0
+
+scoped_wpn_addon_red_dot_gamo_zoom_offset		= -0.184, 0.016, -0.15
+scoped_wpn_addon_red_dot_gamo_zoom_rotate_x		= -0.022
+scoped_wpn_addon_red_dot_gamo_zoom_rotate_y		= 0
+
+hidden_bones = wpn_upgrade_luminous_sights
+
+;;LUMINOUS SIGHTS + PICATINNY ADAPTER
+[wpn_mp5:rail:tritium]:wpn_mp5:rail
+inv_grid_x = 10
+
+hidden_bones = null
+
+hud = wpn_mp5:rail:tritium_hud
+
+[wpn_mp5:rail:tritium_hud]:wpn_mp5:rail_hud
+hidden_bones = null

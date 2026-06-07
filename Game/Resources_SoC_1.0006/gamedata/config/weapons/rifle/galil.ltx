@@ -34,6 +34,16 @@ ammo_mag_size			= 35				; clip (magazine) size
 
 ammo_class				= ammo_5.56x45_ss190, ammo_5.56x45_ap
 
+ejects_casings 				= 1
+ejects_on_reload			= 0
+casings_section				= 5_56x45_casing
+casing_delay				= 0
+
+drops_mags					= 1
+mags_section				= mag_galil
+mag_delay					= 300
+mag_point					= 0.0, 0.0, 0.0
+
 fire_modes			= -1, 1
 
 hand_dependence			= 2				; how many hands (1 or 2) we used to hold weapon in
@@ -44,13 +54,13 @@ animation_slot			= 2				; type of the animation that will be used
 
 inv_name	 		= "Galil ACE"			; name in inventory	
 inv_name_short		= "Galil ACE"	 
-inv_weight			= 3.44			; weight in inventory
+inv_weight			= 3.4			; weight in inventory
 
 icon_group              = 1
 inv_grid_width			= 5
 inv_grid_height			= 2
 inv_grid_x				= 0
-inv_grid_y				= 52
+inv_grid_y				= 42
 
 kill_msg_x			= 0
 kill_msg_y			= 28
@@ -65,7 +75,7 @@ kill_msg_height		= 28
 dispersion_start		= 2
 fire_dispersion_base		= 0.18				;угол (в градусах) базовой дисперсии оружи€ (оружи€ зажатого в тисках)
 control_inertion_factor		= 1.25f                 
-                                                        
+
 ;отдача                                               
 cam_relax_speed 		= 5.5 				;скорость возврата в исходное положение
 cam_relax_speed_ai      = 120.75
@@ -85,7 +95,7 @@ condition_shot_dec 		= 0.0001			;увеличение износа при каждом выстреле
 fire_point             		=  0,0.216,0.638			; position (3rd person view) for particles of fire 
 fire_point2            		=  0,0.216,0.730			; position (3rd person view) for particles of fire (when shooting with secondary fire)
 
-flame_particles				= weapons\generic_weapon05	; particles for shooting effects
+flame_particles				= weapons\new_effects\galil
 smoke_particles				= weapons\generic_shoot_00
 grenade_flame_particles		= weapons\generic_weapon01
 	
@@ -104,7 +114,7 @@ hit_impulse		 	= 64				; size of physic impulse by bullet
 hit_type 			= fire_wound 			; type of the wound
 
 fire_distance 			= 500				; maximum fire distance that bullet can fly
-bullet_speed			= 800				; starting bullet speed	 ; ќЁ‘‘»÷»≈Ќ“ начальной скорости пули
+bullet_speed			= 915				; starting bullet speed	 ; ќЁ‘‘»÷»≈Ќ“ начальной скорости пули
 rpm 					= 700				; max round per minute
 rpm_empty_click 	 	= 350
 
@@ -129,7 +139,7 @@ light_color					= 0.6,0.5,0.3				; params for light during the fire
 light_range					= 5							; radius
 light_var_color				= 0.05						
 light_var_range				= 0.5
-light_time 					= 0.2					
+light_time 					= 0.1					
 
 ph_mass				= 4				; physic mass (kg)
 
@@ -141,12 +151,35 @@ grenade_launcher_status		= 0				; 2 - attachable
 zoom_enabled			= true				; (on,off)zoom mode (right mouse button)
 scope_zoom_factor		= 65				; fov for zoom mode
 
-scope_name 					= wpn_addon_scope_susat			; section name for the attachable scope
-scope_x                     = 78		; offset in inventory icon
-scope_y                     = -6
-silencer_name  				= wpn_addon_silencer_rifle_2		; section name for the attachable silencer
-silencer_x                  = 200		; offset in inventory icon
-silencer_y                  = 11				
+
+scopes_textured					= wpn_addon_scope_susat, wpn_addon_scope_pm2, wpn_addon_scope_1p86, wpn_addon_scope_acog
+scope_wpn_addon_scope_susat_x 	= 78
+scope_wpn_addon_scope_susat_y 	= -8
+
+scope_wpn_addon_scope_pm2_x 	= 55
+scope_wpn_addon_scope_pm2_y 	= -8
+
+scope_wpn_addon_scope_1p86_x 	= 39
+scope_wpn_addon_scope_1p86_y 	= -9
+
+scope_wpn_addon_scope_acog_x 	= 71
+scope_wpn_addon_scope_acog_y 	= -8
+
+scopes_physical						= wpn_addon_red_dot_aimpoint, wpn_addon_red_dot_eotech, wpn_addon_red_dot_gamo
+scope_wpn_addon_red_dot_aimpoint_x 	= 82
+scope_wpn_addon_red_dot_aimpoint_y 	= -8
+
+scope_wpn_addon_red_dot_eotech_x 	= 82
+scope_wpn_addon_red_dot_eotech_y 	= -8
+
+scope_wpn_addon_red_dot_gamo_x 		= 75
+scope_wpn_addon_red_dot_gamo_y 		= -8
+
+silencer_extends_grid_x 	= 1
+silencer_name  				= wpn_addon_silencer_rifle_hexagon		; section name for the attachable silencer
+silencer_x                  = 225		; offset in inventory icon
+silencer_y                  = 11
+	
 grenade_launcher_name 		= wpn_addon_grenade_launcher; section name for the attachable grenade launcher
 grenade_launcher_x          = 90		; offset in inventory icon
 grenade_launcher_y          = 19
@@ -154,17 +187,19 @@ grenade_launcher_y          = 19
 ;sounds (name of the sound, volume (0.0 - 1.0), delay (sec))
 
 snd_draw			= weapons\_general\rifle_draw
-snd_holster			= weapons\sig_550\holster
+snd_holster			= weapons\sig550\holster
 snd_shoot			= weapons\galil\galil_shot, 0.6
 snd_shoot1			= weapons\galil\galil_shot, 0.6
 snd_shoot2			= weapons\galil\galil_shot, 0.6
 snd_shoot3			= weapons\galil\galil_shot, 0.6
 snd_empty			= weapons\gen_empty, 0.5
-snd_reload			= weapons\fnFal\reload
-snd_shoot_grenade		= weapons\gen_grenshoot
-snd_reload_grenade		= weapons\gen_grenload, 1.0, 0.8
+snd_reload			= weapons\galil\reload
+snd_reload_jammed	= weapons\galil\reload_jammed
+snd_shoot_grenade	= weapons\gen_grenshoot
+snd_reload_grenade	= weapons\gen_grenload, 1.0, 0.8
 snd_switch			= weapons\groza_switch, 1.0, 0.5
-snd_silncer_shot		= weapons\ak74\ak74_shot_sil
+snd_silncer_shot	= weapons\ak74\ak74_shot_sil
+snd_click_last		= weapons\_general\rifle_slide_click
 
 snd_aim_start       = weapons\_general\rifle_aim_start_2, 0.5
 snd_aim_end			= weapons\_general\rifle_aim_end_2, 0.5
@@ -186,54 +221,105 @@ silencer_light_color		= 0.6, 0.5, 0.3
 silencer_light_range		= 0.01
 silencer_light_var_color	= 0.05
 silencer_light_var_range	= 0.5
-silencer_light_time 		= 0.2
+silencer_light_time 		= 0.1
+
+hidden_bones = wpn_upgrade_luminous_sights
 
 ;-----------------------------------------------------------------------------
 ;-- HUD DESCRIPTION
 ;-----------------------------------------------------------------------------
- 
+
 [wpn_galil_hud]
 allow_inertion				= true
 
-shell_point					= 0,0,0
+shell_point					= 1.5,0,0
 shell_dir			     	= 0.0, 1.0, 0.0
 
-fire_point               	= -0.01, 0.05, 0
-fire_point2              	= 0.019,0.07,-0.47 ;  0.019,0.07,0.07
+fire_point               	= 0, 0.057, 0
+fire_point2              	= 0.019,0.07,-0.47
 fire_bone               	= wpn_body
 
 orientation              	= 0, 2, 0
-position                	= -0.08, -0.18, 0.2
+position                	= -0.03, -0.18, 0.2
 visual                  	= weapons\galil\wpn_galil_hud.ogf
+
+mag_point					= -0.3, -0.5, -0.5
 
 anim_reload_effector = reload
 anim_reload_partly_effector = short_reload
-
-; animation names
+anm_reload_jammed_effector = short_reload
 
 anim_idle					= idle
 anim_idle_aim				= idle_aim
 anim_reload					= reload
-anim_reload_partly			= reload
+anim_reload_partly			= reload_partly
+anm_reload_jammed			= reload
 anim_draw					= draw
 anim_holster				= holster
 anim_shoot					= shoot
 anim_idle_sprint			= sprint
+anim_idle_moving			= moving
 
-anim_reload_partly_speed_k = 0.95
-anim_reload_partly_stop_k  = 0.54
+anim_reload_speed_k 	   = 1.1
+anim_reload_partly_speed_k = 1.1
+anim_reload_partly_stop_k  = 0.95
 
 anim_idle_sprint_speed_k = 0.75
-anim_idle_speed_k 	 	 = 0.5
-anim_draw_speed_k 		 = 0.55
-anim_holster_speed_k 		 = 0.6
+anim_holster_speed_k 	 = 0.8
 
-zoom_offset			        = -0.14, 0.05, -0.12
-zoom_rotate_x		        = 0.025
-zoom_rotate_y				= -0.01
+anm_reload_jammed_start_k = 0.52
 
-scoped_zoom_offset		= -0.15, 0.01, -0.5
-scoped_zoom_rotate_x	= 0
-scoped_zoom_rotate_y	= 0
+zoom_offset			        = -0.129, 0.036, -0.12
+zoom_rotate_x		        = 0.018
+zoom_rotate_y				= 0.0
+
+zoom_rotate_time = 0.4
+
+scopes_textured								= wpn_addon_scope_susat, wpn_addon_scope_pm2, wpn_addon_scope_1p86, wpn_addon_scope_acog
+scoped_wpn_addon_scope_susat_zoom_offset	= -0.13, -0.02, -0.55
+scoped_wpn_addon_scope_susat_zoom_rotate_x	= 0
+scoped_wpn_addon_scope_susat_zoom_rotate_y	= 0
+
+scoped_wpn_addon_scope_pm2_zoom_offset		= -0.13, 0.01, -0.4
+scoped_wpn_addon_scope_pm2_zoom_rotate_x	= 0
+scoped_wpn_addon_scope_pm2_zoom_rotate_y	= 0
+
+scoped_wpn_addon_scope_1p86_zoom_offset		= -0.13, 0.015, -0.4
+scoped_wpn_addon_scope_1p86_zoom_rotate_x	= 0
+scoped_wpn_addon_scope_1p86_zoom_rotate_y	= 0
+
+scoped_wpn_addon_scope_acog_zoom_offset		= -0.13, 0.01, -0.5
+scoped_wpn_addon_scope_acog_zoom_rotate_x	= 0
+scoped_wpn_addon_scope_acog_zoom_rotate_y	= 0
+
+scopes_physical									= wpn_addon_red_dot_aimpoint, wpn_addon_red_dot_eotech, wpn_addon_red_dot_gamo
+scoped_wpn_addon_red_dot_aimpoint_zoom_offset	= -0.1285, 0.027, -0.12
+scoped_wpn_addon_red_dot_aimpoint_zoom_rotate_x	= 0.04
+scoped_wpn_addon_red_dot_aimpoint_zoom_rotate_y	= 0
+
+scoped_wpn_addon_red_dot_eotech_zoom_offset		= -0.128, 0.02, -0.12
+scoped_wpn_addon_red_dot_eotech_zoom_rotate_x	= 0.025
+scoped_wpn_addon_red_dot_eotech_zoom_rotate_y	= 0
+
+scoped_wpn_addon_red_dot_gamo_zoom_offset		= -0.129, 0.021, -0.12
+scoped_wpn_addon_red_dot_gamo_zoom_rotate_x		= 0.025
+scoped_wpn_addon_red_dot_gamo_zoom_rotate_y		= 0
 
 zoom_hide_crosshair	= true
+
+hidden_bones = wpn_upgrade_luminous_sights
+
+
+;;;;;;;;;;;;;;;;;
+;;;WEAPON MODS;;;
+;;;;;;;;;;;;;;;;;
+;;LUMINOUS SIGHTS
+[wpn_galil:tritium]:wpn_galil
+inv_grid_x = 6
+
+hidden_bones = null
+
+hud = wpn_galil:tritium_hud
+
+[wpn_galil:tritium_hud]:wpn_galil_hud
+hidden_bones = null

@@ -22,16 +22,20 @@ holder_fov_modifier		= 0.7              ; во сколько раз увеличиваетс€ eye_fov
 cost					 = 500	;1000
 weapon_class			 = shotgun
 
-ammo_limit		 = 60
+ammo_limit		 	 = 60
 ammo_current		 = 10
 ammo_elapsed		 = 0
 
+fire_modes			= 1,2
 f_mode				= 1
 
 ammo_mag_size		 = 2
 ammo_class			= ammo_12x70_buck, ammo_12x76_zhekan, ammo_12x76_dart 
 
-fire_modes			= 1,2
+ejects_casings 				= 1
+ejects_on_reload			= 1
+casings_section				= 12x70_casing
+casing_delay				= 1000
 
 ;-----------------------------------------------------------------------------------
 ;базова€ дисперси€
@@ -50,7 +54,7 @@ cam_max_angle_horz		= 20.0		;(degree) maximum shot horizontal degree
 cam_step_angle_horz		= 2.5		;(degree) size of step camera moved in horizontal position while shooting
 
 fire_dispersion_condition_factor= 5		;увеличение дисперсии в процентах при максимальном износе 
-misfire_probability 		= 0.005		;веро€тность осечки при максимальном износе 
+misfire_probability 		= 0.0		;веро€тность осечки при максимальном износе 
 misfire_condition_k		= 0.05
 condition_shot_dec 		= 0.0004 	;увеличение износа при каждом выстреле
 ;-----------------------------------------------------------------------------------
@@ -61,15 +65,15 @@ single_handed		 = 0
 slot 				 = 1,2		; // secondary
 animation_slot		 = 3		; type of the animation that will be used
 
-inv_name		= "“ќ«-34"
-inv_name_short	= "“ќ«-34"
-inv_weight		= 3.2
+inv_name		= "TOZ-34"
+inv_name_short	= "TOZ-34"
+inv_weight		= 3.3
 
-icon_group         			= 1
-inv_grid_width			= 5
-inv_grid_height			= 1
+icon_group         	= 1
+inv_grid_width		= 5
+inv_grid_height		= 1
 inv_grid_x			= 0
-inv_grid_y			= 64
+inv_grid_y			= 87
 
 kill_msg_x			= 127
 kill_msg_y			= 82
@@ -81,7 +85,7 @@ shell_point				 = 0.0, 0.183, 0.07
 fire_point               = 0.0, 0.183, 0.730
 fire_point2              = 0.0, 0.160, 0.730
 
-flame_particles		   = weapons\generic_weapon05
+flame_particles		   = weapons\new_effects\shtg_bm16
 smoke_particles		   = weapons\generic_shoot_00
 rpm_empty_click 	   = 200
 
@@ -98,7 +102,7 @@ hit_type 			= fire_wound
 hit_rate	        = 2.0
 fire_distance 			= 70
 bullet_speed			= 430			; начальна€ скорость пули
-rpm 				= 200
+rpm 				= 2000
 
 hud                      	= wpn_shotgun_hud
 normal  	                = 0, 1, 0
@@ -119,7 +123,7 @@ light_color		 = 0.6,0.5,0.3
 light_range		 = 6.0
 light_var_color		 = 0.05
 light_var_range		 = 0.5
-light_time 		 = 0.2
+light_time 		 	 = 0.1
 
 ph_mass			 = 3
 ;cost			 = 900
@@ -138,50 +142,54 @@ snd_holster			= weapons\toz34\holster
 snd_shoot			= weapons\toz34\shot
 snd_empty			= weapons\toz34\empty
 snd_reload			= weapons\toz34\reload_lr
-snd_shoot_duplet		= weapons\toz34\shot
-snd_reload_1				= weapons\toz34\reload_l		;reload left
+snd_shoot_duplet	= weapons\toz34\shot
+snd_reload_1		= weapons\toz34\reload_l
+snd_reload_full		= weapons\toz34\reload_lr
 
-snd_aim_start               = shotgun_aim_start, 0.5
-snd_aim_end                 = shotgun_aim_end, 0.5
+snd_aim_start               = weapons\_general\shotgun_aim_start, 0.5
+snd_aim_end                 = weapons\_general\shotgun_aim_end, 0.5
 
 snd_grab = pickups\grab_gun
  
 [wpn_shotgun_hud]
-shell_point		 = 0.0, 0.0, 0.0
+shell_point		 		 = 0.0, 0.0, -1.5
 fire_point               = 0,0.02,-0.65
 fire_point2              = 0,0,-0.65
 fire_bone                = muzzle
 
-orientation              = 0, 2, 0
-position                	= 0.13,-0.07,-0.100
+position				 = -0.12,-0.13,0.1
+orientation				 = 2,2,0
 
 visual                   = weapons\toz34\wpn_toz34_hud.ogf
 
 anim_reload_effector = reload
 anim_reload_1_effector = short_reload
 
-anim_idle					= idle
-anim_reload					= reload 
-anim_draw					= draw
-anim_holster				= holster
-anim_shoot					= shoot1
-anim_shoot_both 				= shoot1
-anim_idle_aim				= idle_aim
-anim_idle_sprint				= idle_sprint
+anim_idle				= idle
+anim_reload				= reload_both
+anim_draw				= draw
+anim_holster			= holster
+anim_shoot				= shoot
+anim_shoot_both 		= shoot
+anim_idle_aim			= aim
+anim_idle_sprint		= sprint
+anim_idle_moving		= moving
 
-anim_reload_1				= reload_one
-anim_shoot_1				= shoot1
+anim_reload_1			= reload_one
+anim_shoot_1			= shoot
 
-anim_idle_1					= idle
-anim_idle_2					= idle
+anim_idle_1				= idle
+anim_idle_2				= idle
 
-anim_zoomed_idle_1			= idle_aim
-anim_zoomedidle_2				= idle_aim
+anim_zoomed_idle_1		= aim
+anim_zoomedidle_2		= aim
 
+anim_idle_sprint_speed_k = 0.85
 
 ;смещени€ HUD дл€ режима приближени€
-zoom_rotate_time			= 0.30
-zoom_offset					= -0.13,0.065, 0.04
-zoom_rotate_x				= 0.032
-zoom_rotate_y				= 0.0
+zoom_offset				= -0.112,0.055,0.075
+zoom_rotate_x			= 0.037
+zoom_rotate_y			= 0.0349
+
 ;врем€ поворота HUD (сек)
+zoom_rotate_time 		= 0.4

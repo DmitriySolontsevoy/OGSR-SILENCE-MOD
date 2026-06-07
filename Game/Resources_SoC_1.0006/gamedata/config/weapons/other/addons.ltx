@@ -1,13 +1,18 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;	WEAPON ADDON
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-[wpn_addon_scope]:identity_immunities
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; SCOPES
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wpn_addon_scope_pso1]:identity_immunities
 GroupControlSection	= spawn_group
 discovery_dependency = 
 $spawn			= "weapons\addons\scope" ; option for Level Editor
 class			= WP_SCOPE
 cform           = skeleton
-visual          = weapons\upgrade\wpn_scope.ogf
+visual          = weapons\upgrade\wpn_scope_pso1.ogf
 $prefetch 		= 32
 description		= enc_weapons1_wpn-addon-scope
 cost			= 200
@@ -27,7 +32,7 @@ inv_grid_y			= 3
 
 scope_texture		= wpn\wpn_crosshair
 scope_zoom_factor	= 30
-
+scope_dynamic_zoom  = true
 
 [wpn_addon_scope_1p86]:identity_immunities
 GroupControlSection	= spawn_group
@@ -35,7 +40,7 @@ discovery_dependency =
 $spawn			= "weapons\addons\scope" ; option for Level Editor
 class			= WP_SCOPE
 cform           = skeleton
-visual          = weapons\upgrade\wpn_addon_scope_1p86.ogf
+visual          = weapons\upgrade\wpn_scope_1p86.ogf
 $prefetch 		= 32
 description		= enc_weapons1_wpn-addon-scope
 cost			= 200
@@ -54,7 +59,6 @@ inv_grid_x			= 7
 inv_grid_y			= 3
 scope_texture		= wpn\wpn_crosshair_1p86
 scope_zoom_factor	= 30
-
 
 
 [wpn_addon_scope_susat]:identity_immunities
@@ -83,16 +87,297 @@ inv_grid_height		= 1
 inv_grid_x			= 6
 inv_grid_y			= 3
 scope_texture		= wpn\wpn_crosshair_l85
-scope_zoom_factor	= 30		;SUSAT 2X
+scope_zoom_factor	= 30
 
 
-[wpn_addon_silencer]:identity_immunities
+[wpn_addon_scope_pm2]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\scope_susat" ; option for Level Editor
+class			= WP_SCOPE
+cform           = skeleton
+visual          = weapons\upgrade\wpn_scope_pm2.ogf
+description		= enc_weapons1_wpn-addon-scope-susat
+
+;$prefetch 		= 64
+
+cost			= 200
+
+holder_range_modifier	= 1.3
+holder_fov_modifier		= 0.3
+
+inv_name		= wpn-addon-scope-pm2
+inv_name_short	= wpn-addon-scope-pm2
+inv_weight		= .2
+
+icon_group          = 1
+inv_grid_width		= 2
+inv_grid_height		= 1
+inv_grid_x			= 13
+inv_grid_y			= 3
+scope_texture		= wpn\wpn_crosshair_l96a1
+scope_zoom_factor	= 10
+scope_dynamic_zoom  = true
+
+[wpn_addon_scope_po4x34]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\scope_susat" ; option for Level Editor
+class			= WP_SCOPE
+cform           = skeleton
+visual          = weapons\upgrade\wpn_scope_po4x34.ogf
+description		= enc_weapons1_wpn-addon-scope-susat
+
+;$prefetch 		= 64
+
+cost			= 200
+
+holder_range_modifier	= 1.3
+holder_fov_modifier		= 0.3
+
+inv_name		= wpn-addon-scope-po4x34
+inv_name_short	= wpn-addon-scope-po4x34
+inv_weight		= .2
+
+icon_group          = 1
+inv_grid_width		= 2
+inv_grid_height		= 1
+inv_grid_x			= 22
+inv_grid_y			= 3
+scope_texture		= wpn\wpn_crosshair_po4x34
+scope_zoom_factor	= 20
+
+[wpn_addon_scope_1p29]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\scope" ; option for Level Editor
+class			= WP_SCOPE
+cform           = skeleton
+visual          = weapons\upgrade\wpn_scope_1p29.ogf
+$prefetch 		= 32
+description		= enc_weapons1_wpn-addon-scope
+cost			= 200
+
+holder_range_modifier	= 1.2
+holder_fov_modifier		= 0.3
+
+inv_name		= wpn-addon-scope-1p29
+inv_name_short	= wpn-addon-scope-1p29
+inv_weight		= .2
+
+icon_group          = 1
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 19
+inv_grid_y			= 3
+
+scope_texture		= wpn\wpn_crosshair_1p29
+scope_zoom_factor	= 30
+
+[wpn_addon_scope_1p78]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\scope" ; option for Level Editor
+class			= WP_SCOPE
+cform           = skeleton
+visual          = weapons\upgrade\wpn_scope_1p78.ogf
+$prefetch 		= 32
+description		= enc_weapons1_wpn-addon-scope
+cost			= 200
+
+holder_range_modifier	= 1.2
+holder_fov_modifier		= 0.3
+
+inv_name		= wpn-addon-scope-1p78
+inv_name_short	= wpn-addon-scope-1p78
+inv_weight		= .2
+
+icon_group          = 1
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 20
+inv_grid_y			= 3
+
+scope_texture		= wpn\wpn_crosshair_1p78
+scope_zoom_factor	= 30
+
+[wpn_addon_scope_acog]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\scope" ; option for Level Editor
+class			= WP_SCOPE
+cform           = skeleton
+visual          = weapons\upgrade\wpn_scope_acog.ogf
+$prefetch 		= 32
+description		= enc_weapons1_wpn-addon-scope
+cost			= 200
+
+holder_range_modifier	= 1.2
+holder_fov_modifier		= 0.3
+
+inv_name		= wpn-addon-scope-acog
+inv_name_short	= wpn-addon-scope-acog
+inv_weight		= .2
+
+icon_group          = 1
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 21
+inv_grid_y			= 3
+
+scope_texture		= wpn\wpn_crosshair_acog
+scope_zoom_factor	= 30
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; RED DOT SIGHTS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wpn_addon_red_dot_aimpoint]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\scope_susat" ; option for Level Editor
+class			= WP_SCOPE
+cform           = skeleton
+visual          = weapons\upgrade\wpn_red_dot_aimpoint.ogf
+description		= enc_weapons1_wpn-addon-scope-susat
+
+;$prefetch 		= 64
+
+cost			= 200
+
+holder_range_modifier	= 1.3
+holder_fov_modifier		= 0.3
+
+inv_name		= wpn-addon-red_dot_aimpoint
+inv_name_short	= wpn-addon-red_dot_aimpoint
+inv_weight		= .2
+
+icon_group          = 1
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 15
+inv_grid_y			= 3
+scope_zoom_factor	= 40
+
+[wpn_addon_red_dot_pka]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\scope_susat" ; option for Level Editor
+class			= WP_SCOPE
+cform           = skeleton
+visual          = weapons\upgrade\wpn_red_dot_pka.ogf
+description		= enc_weapons1_wpn-addon-scope-susat
+
+;$prefetch 		= 64
+
+cost			= 200
+
+holder_range_modifier	= 1.3
+holder_fov_modifier		= 0.3
+
+inv_name		= wpn-addon-red_dot_pka
+inv_name_short	= wpn-addon-red_dot_pka
+inv_weight		= .2
+
+icon_group          = 1
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 18
+inv_grid_y			= 3
+scope_zoom_factor	= 40
+
+[wpn_addon_red_dot_eotech]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\scope_susat" ; option for Level Editor
+class			= WP_SCOPE
+cform           = skeleton
+visual          = weapons\upgrade\wpn_red_dot_eotech.ogf
+description		= enc_weapons1_wpn-addon-scope-susat
+
+;$prefetch 		= 64
+
+cost			= 200
+
+holder_range_modifier	= 1.3
+holder_fov_modifier		= 0.3
+
+inv_name		= wpn-addon-red_dot_eotech
+inv_name_short	= wpn-addon-red_dot_eotech
+inv_weight		= .2
+
+icon_group          = 1
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 24
+inv_grid_y			= 3
+scope_zoom_factor	= 40
+
+[wpn_addon_red_dot_cobra]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\scope_susat" ; option for Level Editor
+class			= WP_SCOPE
+cform           = skeleton
+visual          = weapons\upgrade\wpn_red_dot_cobra.ogf
+description		= enc_weapons1_wpn-addon-scope-susat
+
+;$prefetch 		= 64
+
+cost			= 200
+
+holder_range_modifier	= 1.3
+holder_fov_modifier		= 0.3
+
+inv_name		= wpn-addon-red_dot_cobra
+inv_name_short	= wpn-addon-red_dot_cobra
+inv_weight		= .2
+
+icon_group          = 1
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 16
+inv_grid_y			= 3
+scope_zoom_factor	= 40
+
+[wpn_addon_red_dot_gamo]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\scope_susat" ; option for Level Editor
+class			= WP_SCOPE
+cform           = skeleton
+visual          = weapons\upgrade\wpn_red_dot_gamo.ogf
+description		= enc_weapons1_wpn-addon-scope-susat
+
+;$prefetch 		= 64
+
+cost			= 200
+
+holder_range_modifier	= 1.3
+holder_fov_modifier		= 0.3
+
+inv_name		= wpn-addon-red_dot_gamo
+inv_name_short	= wpn-addon-red_dot_gamo
+inv_weight		= .2
+
+icon_group          = 1
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 17
+inv_grid_y			= 3
+scope_zoom_factor	= 40
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; SILENCERS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wpn_addon_silencer_pistol_9mm]:identity_immunities
 GroupControlSection	= spawn_group
 discovery_dependency = 
 $spawn			= "weapons\addons\silencer" ; option for Level Editor
 class			= W_SILENC
 cform           = skeleton
-visual          = weapons\upgrade\wpn_silencer_pistol.ogf
+visual          = weapons\upgrade\wpn_silencer_pistol_9mm.ogf
 description		= enc_weapons1_wpn-addon-silencer
 $prefetch 		= 32
 
@@ -112,13 +397,41 @@ bullet_speed_k	 	= 0.8
 fire_dispersion_base_k = 1.25;2
 cam_dispersion_k	= 0.8
 
-[wpn_addon_silencer_pistol_2]:identity_immunities
+
+[wpn_addon_silencer_pistol_9x33]:identity_immunities
 GroupControlSection	= spawn_group
 discovery_dependency = 
 $spawn			= "weapons\addons\silencer" ; option for Level Editor
 class			= W_SILENC
 cform           = skeleton
-visual          = weapons\upgrade\wpn_silencer_pistol_2.ogf
+visual          = weapons\upgrade\wpn_silencer_pistol_9x33.ogf
+description		= enc_weapons1_wpn-addon-silencer
+$prefetch 		= 32
+
+cost					 = 100;150
+inv_name		= wpn-addon-silencer
+inv_name_short	= wpn-addon-silencer
+inv_weight		= .1
+
+icon_group          = 1
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 36
+inv_grid_y			= 3
+
+bullet_hit_power_k	= 0.8
+bullet_speed_k	 	= 0.8
+fire_dispersion_base_k = 1.25;2
+cam_dispersion_k	= 0.8
+
+
+[wpn_addon_silencer_pistol_osprey]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\silencer" ; option for Level Editor
+class			= W_SILENC
+cform           = skeleton
+visual          = weapons\upgrade\wpn_silencer_pistol_osprey.ogf
 description		= enc_weapons1_wpn-addon-silencer
 $prefetch 		= 32
 
@@ -138,13 +451,68 @@ bullet_speed_k	 	= 0.8
 fire_dispersion_base_k = 1.25;2
 cam_dispersion_k	= 0.8
 
-[wpn_addon_silencer_rifle]:identity_immunities
+
+[wpn_addon_silencer_pistol_5-7]:identity_immunities
 GroupControlSection	= spawn_group
 discovery_dependency = 
 $spawn			= "weapons\addons\silencer" ; option for Level Editor
 class			= W_SILENC
 cform           = skeleton
-visual          = weapons\upgrade\wpn_silencer_rifle.ogf
+visual          = weapons\upgrade\wpn_silencer_pistol_5-7.ogf
+description		= enc_weapons1_wpn-addon-silencer
+$prefetch 		= 32
+
+cost					 = 100;150
+inv_name		= wpn-addon-silencer
+inv_name_short	= wpn-addon-silencer
+inv_weight		= .1
+
+icon_group          = 1
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 26
+inv_grid_y			= 3
+
+bullet_hit_power_k	= 0.8
+bullet_speed_k	 	= 0.8
+fire_dispersion_base_k = 1.25
+cam_dispersion_k	= 0.8
+
+
+[wpn_addon_silencer_pistol_50ae]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\silencer" ; option for Level Editor
+class			= W_SILENC
+cform           = skeleton
+visual          = weapons\upgrade\wpn_silencer_pistol_50ae.ogf
+description		= enc_weapons1_wpn-addon-silencer
+$prefetch 		= 32
+
+cost					 = 100;150
+inv_name		= wpn-addon-silencer
+inv_name_short	= wpn-addon-silencer
+inv_weight		= .1
+
+icon_group          = 1
+inv_grid_width		= 2
+inv_grid_height		= 1
+inv_grid_x			= 27
+inv_grid_y			= 3
+
+bullet_hit_power_k	= 0.8
+bullet_speed_k	 	= 0.8
+fire_dispersion_base_k = 1.25
+cam_dispersion_k	= 0.8
+
+
+[wpn_addon_silencer_rifle_pbs1]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\silencer" ; option for Level Editor
+class			= W_SILENC
+cform           = skeleton
+visual          = weapons\upgrade\wpn_silencer_rifle_pbs1.ogf
 description		= enc_weapons1_wpn-addon-silencer
 $prefetch 		= 32
 
@@ -164,13 +532,95 @@ bullet_speed_k	 	= 0.8
 fire_dispersion_base_k = 1.25;2
 cam_dispersion_k	= 0.8
 
-[wpn_addon_silencer_rifle_2]:identity_immunities
+
+[wpn_addon_silencer_rifle_pbs4]:identity_immunities
 GroupControlSection	= spawn_group
 discovery_dependency = 
 $spawn			= "weapons\addons\silencer" ; option for Level Editor
 class			= W_SILENC
 cform           = skeleton
-visual          = weapons\upgrade\wpn_silencer_rifle_2.ogf
+visual          = weapons\upgrade\wpn_silencer_rifle_pbs4.ogf
+description		= enc_weapons1_wpn-addon-silencer
+$prefetch 		= 32
+
+cost					 = 100;150
+inv_name		= wpn-addon-silencer
+inv_name_short	= wpn-addon-silencer
+inv_weight		= .1
+
+icon_group          = 1
+inv_grid_width		= 2
+inv_grid_height		= 1
+inv_grid_x			= 32
+inv_grid_y			= 3
+
+bullet_hit_power_k	= 0.8
+bullet_speed_k	 	= 0.8
+fire_dispersion_base_k = 1.25;2
+cam_dispersion_k	= 0.8
+
+
+[wpn_addon_silencer_rifle_9x39]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\silencer" ; option for Level Editor
+class			= W_SILENC
+cform           = skeleton
+visual          = weapons\upgrade\wpn_silencer_rifle_9x39.ogf
+description		= enc_weapons1_wpn-addon-silencer
+$prefetch 		= 32
+
+cost					 = 100;150
+inv_name		= wpn-addon-silencer
+inv_name_short	= wpn-addon-silencer
+inv_weight		= .1
+
+icon_group          = 1
+inv_grid_width		= 2
+inv_grid_height		= 1
+inv_grid_x			= 29
+inv_grid_y			= 3
+
+bullet_hit_power_k	= 0.8
+bullet_speed_k	 	= 0.8
+fire_dispersion_base_k = 1.25;2
+cam_dispersion_k	= 0.8
+
+
+[wpn_addon_silencer_rifle_awc]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\silencer" ; option for Level Editor
+class			= W_SILENC
+cform           = skeleton
+visual          = weapons\upgrade\wpn_silencer_rifle_awc.ogf
+description		= enc_weapons1_wpn-addon-silencer
+$prefetch 		= 32
+
+cost					 = 100;150
+inv_name		= wpn-addon-silencer
+inv_name_short	= wpn-addon-silencer
+inv_weight		= .1
+
+icon_group          = 1
+inv_grid_width		= 1
+inv_grid_height		= 1
+inv_grid_x			= 31
+inv_grid_y			= 3
+
+bullet_hit_power_k	= 0.8
+bullet_speed_k	 	= 0.8
+fire_dispersion_base_k = 1.25;2
+cam_dispersion_k	= 0.8
+
+
+[wpn_addon_silencer_rifle_hexagon]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\silencer" ; option for Level Editor
+class			= W_SILENC
+cform           = skeleton
+visual          = weapons\upgrade\wpn_silencer_rifle_hexagon.ogf
 description		= enc_weapons1_wpn-addon-silencer
 $prefetch 		= 32
 
@@ -190,13 +640,44 @@ bullet_speed_k	 	= 0.8
 fire_dispersion_base_k = 1.25;2
 cam_dispersion_k	= 0.8
 
-[wpn_addon_grenade_launcher]:identity_immunities
+
+[wpn_addon_silencer_shotgun]:identity_immunities
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\addons\silencer" ; option for Level Editor
+class			= W_SILENC
+cform           = skeleton
+visual          = weapons\upgrade\wpn_silencer_shotgun.ogf
+description		= enc_weapons1_wpn-addon-silencer
+$prefetch 		= 32
+
+cost					 = 100;150
+inv_name		= wpn-addon-silencer
+inv_name_short	= wpn-addon-silencer
+inv_weight		= .1
+
+icon_group          = 1
+inv_grid_width		= 2
+inv_grid_height		= 1
+inv_grid_x			= 34
+inv_grid_y			= 3
+
+bullet_hit_power_k	= 0.8
+bullet_speed_k	 	= 0.8
+fire_dispersion_base_k = 1.25;2
+cam_dispersion_k	= 0.8
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; UNDERBARREL GRENADE LAUNCHERS
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[wpn_addon_grenade_launcher_gp25]:identity_immunities
 GroupControlSection	= spawn_group
 discovery_dependency = 
 $spawn			= "weapons\addons\grenade_launcher" ; option for Level Editor
 class			= W_GLAUNC
 cform           = skeleton
-visual          = weapons\upgrade\wpn_grenade_launcher.ogf
+visual          = weapons\upgrade\wpn_grenade_launcher_gp25.ogf
 description		= enc_weapons1_wpn-addon-grenade-launcher
 $prefetch 		= 32
 
@@ -237,6 +718,10 @@ inv_grid_y			= 3
 
 grenade_vel			= 71
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; MISC
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [wpn_addon_pointer]:identity_immunities
 GroupControlSection	= spawn_group
 discovery_dependency = 
@@ -253,9 +738,9 @@ inv_name_short	= Pointer
 inv_weight		= 0.2
 
 icon_group          = 1
-inv_grid_width		= 2
+inv_grid_width		= 1
 inv_grid_height		= 1
-inv_grid_x			= 13
+inv_grid_x			= 25
 inv_grid_y			= 3
 
 range            = 80									
@@ -268,23 +753,3 @@ spot_angle       = 0.5
 
 snd_grab = pickups\grab_electronics
 
-[wpn_addon_foregrip]:identity_immunities
-GroupControlSection	= spawn_group
-discovery_dependency = 
-$spawn			= "weapons\addons\grenade_launcher_m203" ; option for Level Editor
-class			= W_FGRIP
-cform           = skeleton
-visual          = weapons\upgrade\wpn_foregrip.ogf
-description		= enc_weapons1_wpn-addon-grenade-launcher-m203
-$prefetch 		= 32
-
-cost		    = 30
-inv_name		= Foregrip
-inv_name_short	= Foregrip
-inv_weight		= 0.5
-
-icon_group          = 1
-inv_grid_width		= 1
-inv_grid_height		= 1
-inv_grid_x			= 15
-inv_grid_y			= 3

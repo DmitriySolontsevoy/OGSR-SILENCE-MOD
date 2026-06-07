@@ -26,10 +26,16 @@ ammo_limit		 			= 60
 ammo_current		 		= 10
 ammo_elapsed		 		= 0
 
+fire_modes			= 1,2
 f_mode				= 1
 
 ammo_mag_size		 		= 2
 ammo_class		 			= ammo_12x76_dart,ammo_12x76_zhekan,ammo_12x70_buck
+
+ejects_casings 				= 1
+ejects_on_reload			= 1
+casings_section				= 12x70_casing
+casing_delay				= 1000
 
 ;-----------------------------------------------------------------------------------
 ;базовая дисперсия
@@ -47,7 +53,7 @@ cam_max_angle_horz		= 20.0	;(degree) maximum shot horizontal degree
 cam_step_angle_horz		= 2.5	;(degree) size of step camera moved in horizontal position while shooting
 
 fire_dispersion_condition_factor = 5	;увеличение дисперсии в процентах при максимальном износе 
-misfire_probability 		= 0.003	;вероятность осечки при максимальном износе
+misfire_probability 		= 0.0	;вероятность осечки при максимальном износе
 misfire_condition_k			= 0.05 
 condition_shot_dec 			= 0.002 ;увеличение износа при каждом выстреле
 ;-----------------------------------------------------------------------------------
@@ -59,15 +65,15 @@ slot 						= 1,2		; // primary
 animation_slot				= 3 ;2 ;3		; type of the animation that will be used
 
 
-inv_name					= "Обрез ружья БМ-16"
-inv_name_short				= "Обрез ружья БМ-16"
+inv_name					= "Обрез ружья ТОЗ-66"
+inv_name_short				= "Обрез ружья ТОЗ-66"
 inv_weight					= 1.9
 
 icon_group         			= 1
 inv_grid_width				= 3
 inv_grid_height				= 1
 inv_grid_x					= 0
-inv_grid_y					= 62
+inv_grid_y					= 88
 
 kill_msg_x			= 0
 kill_msg_y			= 104
@@ -79,7 +85,7 @@ shell_point				 	= 0.0, 0.136, 0.07
 fire_point               	= 0.000000,0.136000,0.390000     	;r
 fire_point2              	= 0.000000,0.136000,0.390000		;l
 
-flame_particles		   		= weapons\generic_weapon05
+flame_particles		   		= weapons\new_effects\shtg_bm16
 smoke_particles		   		= weapons\generic_shoot_00
 rpm_empty_click 	   		= 200
 
@@ -90,7 +96,7 @@ hit_type 	        = fire_wound
 hit_rate	        = 1.85
 fire_distance       = 40
 bullet_speed		= 330
-rpm                 = 100
+rpm                 = 2000
 
 PDM_disp_base 			= 1.0
 PDM_disp_vel_factor 		= 1.1
@@ -120,7 +126,7 @@ light_color		 			= 0.6,0.5,0.3
 light_range		 			= 6.0
 light_var_color		 		= 0.05
 light_var_range		 		= 0.5
-light_time 		 			= 0.2
+light_time 		 			= 0.1
 
 ph_mass			 			= 3
 ;cost			 			= 900
@@ -138,51 +144,67 @@ snd_draw					= weapons\bm16\draw
 snd_holster					= weapons\bm16\holster
 snd_shoot					= weapons\bm16\shot
 snd_empty					= weapons\bm16\empty
-snd_reload					= weapons\bm16\reload_lr		
-snd_shoot_duplet				= weapons\bm16\shot
-snd_reload_1				= weapons\bm16\reload_l		
+snd_reload					= weapons\bm16\reload_lr
+snd_shoot_duplet			= weapons\bm16\shot
+snd_reload_1				= weapons\bm16\reload_l
+snd_reload_full				= weapons\bm16\reload_swap
 
-snd_aim_start               = shotgun_aim_start, 0.5
-snd_aim_end                 = shotgun_aim_end, 0.5
+snd_aim_start               = weapons\_general\shotgun_aim_start, 0.5
+snd_aim_end                 = weapons\_general\shotgun_aim_end, 0.5
 
 snd_grab = pickups\grab_gun
  
 [wpn_bm16_hud]
-shell_point		 			= 0.0, 0.0, 0.0
-fire_point               	= 0,0.02,-0.5
-fire_point2              	= 0,0,-0.5
-fire_bone                	= muzzle
+shell_point		 		 = 0.0, 0.0, -1.5
+fire_point               = 0,0.02,-0.4
+fire_point2              = 0,0,-0.5
+fire_bone                = muzzle
 
-orientation              	= 0, 2, 0
-position                	= 0.11,-0.09,-0.100
+position				= 0.06,-0.11,0.02
+orientation				= 2,2,0
 
-visual                   	= weapons\bm_16\wpn_bm-16_hud.ogf
+visual                   = weapons\bm_16\wpn_bm-16_hud.ogf
 
 anim_reload_effector = reload
 anim_reload_1_effector = short_reload
 
-anim_idle					= idle
-anim_reload					= reload
-anim_draw					= draw
-anim_holster				= holster
-anim_shoot					= shoot_left
-anim_shoot_both 			= shoot
-anim_idle_aim				= idle_aim
-anim_idle_sprint			= idle_sprint
+anim_reload				= reload_both
+anim_reload_full		= reload_swap
+anim_draw				= draw_both
+anim_draw_1				= draw_one
+anim_draw_2				= draw
+anim_holster			= holster_both
+anim_holster_1			= holster_one
+anim_holster_2			= holster
+anim_shoot				= shoot_both
+anim_shoot_both 		= shoot_one
+anim_idle_sprint		= sprint_both
+anim_idle_sprint_1		= sprint_one
+anim_idle_sprint_2		= sprint
+anim_idle_moving		= moving_both
+anim_idle_moving_1		= moving_one
+anim_idle_moving_2		= moving
 
-anim_reload_1				= reload_left
-anim_shoot_1				= shoot_right
+anim_reload_1			= reload_one
+anim_shoot_1			= shoot_one
 
-anim_idle_1					= idle_cock
-anim_idle_2					= idle_cocks
+anim_idle				= idle_both
+anim_idle_1				= idle_one
+anim_idle_2				= idle
 
-anim_zoomed_idle_1			= idle_cock_aim
-anim_zoomedidle_2			= idle_cocks_aim
+anim_idle_aim			= aim_both
+anim_zoomed_idle_1		= aim_one
+anim_zoomedidle_2		= aim
+
+anim_shoot_speed_k 		= 1.3
+anim_shoot_1_speed_k 	= 1.3
+anim_shoot_both_speed_k = 1.3
 
 ;смещения HUD для режима приближения
-zoom_rotate_time			= 0.25
-zoom_offset					= -0.11,0.062,-0.05
-zoom_rotate_x				= -0.005
-zoom_rotate_y				= 0.0
+zoom_offset				= -0.138,0.085,0.075
+zoom_rotate_x			= 0.02
+zoom_rotate_y			= 0.0385
+
+zoom_rotate_time 		= 0.4
 
 ;;SKINS;;

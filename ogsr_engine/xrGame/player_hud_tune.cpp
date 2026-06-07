@@ -18,6 +18,7 @@ enum HUD_ADJUST_MODE : int
     FIRE_POINT,
     FIRE_POINT2,
     SHELL_POINT,
+    MAG_POINT,
     ADJUST_DELTA_POS,
     ADJUST_DELTA_ROT,
     LASETDOT_POS,
@@ -34,6 +35,7 @@ static constexpr std::array<std::tuple<int, const char*>, _HUD_ADJUST_MODES_COUN
     {DIK_NUMPAD5, "adjusting FIRE POINT"},
     {DIK_NUMPAD6, "adjusting FIRE POINT 2"},
     {DIK_NUMPAD7, "adjusting SHELL POINT"},
+    {DIK_NUMLOCK, "adjusting MAG POINT"},
     {DIK_NUMPAD8, "adjusting pos STEP"},
     {DIK_NUMPAD9, "adjusting rot STEP"},
     {DIK_1, "adjusting LASER POINT"},
@@ -163,6 +165,8 @@ void attachable_hud_item::tune(const Ivector& values)
             m_measures.m_fire_point2_offset.add(diff);
         else if (g_bHudAdjustMode == SHELL_POINT)
             m_measures.m_shell_point_offset.add(diff);
+        else if (g_bHudAdjustMode == MAG_POINT)
+            m_measures.m_mag_point_offset.add(diff);
 
         if ((values.x) || (values.y) || (values.z))
         {
@@ -171,6 +175,7 @@ void attachable_hud_item::tune(const Ivector& values)
             Msg("fire_point = %f,%f,%f", m_measures.m_fire_point_offset.x, m_measures.m_fire_point_offset.y, m_measures.m_fire_point_offset.z);
             Msg("fire_point2 = %f,%f,%f", m_measures.m_fire_point2_offset.x, m_measures.m_fire_point2_offset.y, m_measures.m_fire_point2_offset.z);
             Msg("shell_point = %f,%f,%f", m_measures.m_shell_point_offset.x, m_measures.m_shell_point_offset.y, m_measures.m_shell_point_offset.z);
+            Msg("mag_point = %f,%f,%f", m_measures.m_mag_point_offset.x, m_measures.m_mag_point_offset.y, m_measures.m_mag_point_offset.z);
             Log("####################################");
         }
     }
@@ -200,6 +205,10 @@ void attachable_hud_item::debug_draw_firedeps()
         else if (g_bHudAdjustMode == SHELL_POINT)
         {
             render.draw_aabb(fd.vLastSP, 0.01f, 0.01f, 0.01f, D3DCOLOR_XRGB(0, 255, 0));
+        }
+        else if (g_bHudAdjustMode == MAG_POINT)
+        {
+            render.draw_aabb(fd.vLastMP, 0.01f, 0.01f, 0.01f, D3DCOLOR_XRGB(0, 255, 0));
         }
     }
 }
@@ -290,33 +299,6 @@ void player_hud::tune(const Ivector& _values)
                 Msg("scope_zoom_offset%s = %f,%f,%f", is_16x9 ? "_16x9" : "", pos_.x, pos_.y, pos_.z);
                 Msg("scope_zoom_rotate_x%s = %f", is_16x9 ? "_16x9" : "", rot_.x);
                 Msg("scope_zoom_rotate_y%s = %f", is_16x9 ? "_16x9" : "", rot_.y);
-                Log("####################################");
-            }
-            else if (idx == hud_item_measures::m_hands_offset_type_gl_scope)
-            {
-                Log("####################################");
-                Msg("[%s]", m_attached_items[g_bHudAdjustItemIdx]->m_sect_name.c_str());
-                Msg("scope_grenade_zoom_offset%s = %f,%f,%f", is_16x9 ? "_16x9" : "", pos_.x, pos_.y, pos_.z);
-                Msg("scope_grenade_zoom_rotate_x%s = %f", is_16x9 ? "_16x9" : "", rot_.x);
-                Msg("scope_grenade_zoom_rotate_y%s = %f", is_16x9 ? "_16x9" : "", rot_.y);
-                Log("####################################");
-            }
-            else if (idx == hud_item_measures::m_hands_offset_type_aim_gl_normal)
-            {
-                Log("####################################");
-                Msg("[%s]", m_attached_items[g_bHudAdjustItemIdx]->m_sect_name.c_str());
-                Msg("grenade_normal_zoom_offset%s = %f,%f,%f", is_16x9 ? "_16x9" : "", pos_.x, pos_.y, pos_.z);
-                Msg("grenade_normal_zoom_rotate_x%s = %f", is_16x9 ? "_16x9" : "", rot_.x);
-                Msg("grenade_normal_zoom_rotate_y%s = %f", is_16x9 ? "_16x9" : "", rot_.y);
-                Log("####################################");
-            }
-            else if (idx == hud_item_measures::m_hands_offset_type_gl_normal_scope)
-            {
-                Log("####################################");
-                Msg("[%s]", m_attached_items[g_bHudAdjustItemIdx]->m_sect_name.c_str());
-                Msg("scope_grenade_normal_zoom_offset%s = %f,%f,%f", is_16x9 ? "_16x9" : "", pos_.x, pos_.y, pos_.z);
-                Msg("scope_grenade_normal_zoom_rotate_x%s = %f", is_16x9 ? "_16x9" : "", rot_.x);
-                Msg("scope_grenade_normal_zoom_rotate_y%s = %f", is_16x9 ? "_16x9" : "", rot_.y);
                 Log("####################################");
             }
         }

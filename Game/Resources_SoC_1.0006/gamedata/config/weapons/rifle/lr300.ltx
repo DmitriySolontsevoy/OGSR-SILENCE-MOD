@@ -31,8 +31,18 @@ ammo_mag_size			= 30				; clip (magazine) size
 fire_modes					= 1, 3, -1
 f_mode				= 2
 
-ammo_class		= ammo_5.56x45_ss190, ammo_5.56x45_ap
+ammo_class			= ammo_5.56x45_ss190, ammo_5.56x45_ap
 grenade_class		= ammo_m209
+
+ejects_casings 				= 1
+ejects_on_reload			= 0
+casings_section				= 5_56x45_casing
+casing_delay				= 0
+
+drops_mags					= 1
+mags_section				= mag_lr300
+mag_delay					= 400
+mag_point					= 0.0, 0.0, 0.0
 
 launch_speed			= 0
 
@@ -50,7 +60,7 @@ icon_group             		= 1
 inv_grid_width				= 5
 inv_grid_height				= 2
 inv_grid_x					= 0
-inv_grid_y					= 38
+inv_grid_y					= 54
 
 kill_msg_x			= 175
 kill_msg_y			= 0
@@ -91,7 +101,7 @@ condition_shot_dec 		= 0.0002 ;увеличение износа при каждом выстреле
 fire_point              = 0.0, 0.190, 0.575
 fire_point2             = 0.0, 0.100, 0.595
 
-flame_particles				= weapons\generic_weapon05
+flame_particles				= weapons\new_effects\a1_type_ar15
 smoke_particles         	= weapons\generic_shoot_00
 grenade_flame_particles		= weapons\generic_weapon01
 	
@@ -112,7 +122,7 @@ hit_type 	        = fire_wound
 hit_rate	        = 1.85
 
 fire_distance       = 300
-bullet_speed		= 980
+bullet_speed		= 900
 rpm                 = 950
 
 use_aim_bullet				= true		;Поддерживается ли первая суппер пуля
@@ -143,25 +153,46 @@ light_color					= 0.6,0.5,0.3				; params for light during the fire
 light_range					= 5							; radius
 light_var_color				= 0.05						
 light_var_range				= 0.5
-light_time 					= 0.2						
+light_time 					= 0.1						
 
 ph_mass						= 5							; physic mass (kg)
 
 ;addons
 scope_status				= 2							; 0 - no addon
-silencer_status				= 2;2							; 1 - permanent
-grenade_launcher_status		= 2							; 2 - attachable
+silencer_status				= 2							; 1 - permanent
+grenade_launcher_status		= 0							; 2 - attachable
 
 zoom_enabled				= true						; (on,off)zoom mode (right mouse button)
 scope_zoom_factor	    	= 55						; fov for zoom mode
 
-scope_name 					= wpn_addon_scope_susat   ;wpn_addon_scope_susat       
-scope_x 					= 78
-scope_y 					= -5
 
-silencer_name  					= wpn_addon_silencer_rifle_2                ;wpn_addon_sil_556_ar
+scopes_textured					= wpn_addon_scope_susat, wpn_addon_scope_pm2, wpn_addon_scope_1p86, wpn_addon_scope_acog
+scope_wpn_addon_scope_susat_x 	= 82
+scope_wpn_addon_scope_susat_y 	= -5
+
+scope_wpn_addon_scope_pm2_x 	= 55
+scope_wpn_addon_scope_pm2_y 	= -5
+
+scope_wpn_addon_scope_1p86_x 	= 45
+scope_wpn_addon_scope_1p86_y 	= -7
+
+scope_wpn_addon_scope_acog_x 	= 67
+scope_wpn_addon_scope_acog_y 	= -5
+
+scopes_physical						= wpn_addon_red_dot_aimpoint, wpn_addon_red_dot_eotech, wpn_addon_red_dot_gamo
+scope_wpn_addon_red_dot_aimpoint_x 	= 80
+scope_wpn_addon_red_dot_aimpoint_y 	= -6
+
+scope_wpn_addon_red_dot_eotech_x 	= 83
+scope_wpn_addon_red_dot_eotech_y 	= -5
+
+scope_wpn_addon_red_dot_gamo_x 		= 82
+scope_wpn_addon_red_dot_gamo_y 		= -5
+
+
+silencer_name  				= wpn_addon_silencer_rifle_hexagon                ;wpn_addon_sil_556_ar
 silencer_x                  = 192
-silencer_y                  = 11
+silencer_y                  = 12
 
 grenade_launcher_name 		= wpn_addon_grenade_launcher_m203
 grenade_launcher_x 			= 123
@@ -176,10 +207,12 @@ snd_shoot2			= weapons\lr300\lr300_shoot
 snd_shoot3			= weapons\lr300\lr300_shoot   
 snd_empty			= weapons\lr300\lr300_empty, 0.6
 snd_reload			= weapons\lr300\lr300_reload, 0.9, 0.15
-snd_shoot_grenade		= weapons\lr300\M203_shot
-snd_reload_grenade		= weapons\lr300\M203_reload, 1.0, 0.11
+snd_reload_jammed	= weapons\lr300\lr300_reload_jammed, 0.9, 0.15
+snd_shoot_grenade	= weapons\lr300\M203_shot
+snd_reload_grenade	= weapons\lr300\M203_reload, 1.0, 0.11
 snd_switch			= weapons\lr300\M203_switch, 1.0, 0.5
-snd_silncer_shot		= weapons\lr300\lr300_shot_sil
+snd_silncer_shot	= weapons\lr300\lr300_shot_sil
+snd_click_last		= weapons\_general\rifle_slide_click
 
 snd_aim_start       = weapons\_general\rifle_aim_start_2, 0.5
 snd_aim_end			= weapons\_general\rifle_aim_end_2, 0.5
@@ -197,8 +230,10 @@ silencer_light_color		= 0.6,0.5,0.3
 silencer_light_range		= 0.01
 silencer_light_var_color	= 0.05
 silencer_light_var_range	= 0.5
-silencer_light_time 		= 0.2
+silencer_light_time 		= 0.1
 
+; HIDDEN BONES
+hidden_bones = wpn_upgrade_luminous_sights, wpn_upgrade_extended_magazine
 
 ;-----------------------------------------------------------------------------
 ;-- HUD DESCRIPTION
@@ -206,11 +241,10 @@ silencer_light_time 		= 0.2
  
 [wpn_lr300_hud]
 ;similar to corresponding params in weapon section but for 1st person view
-
-shell_point		= 0.028,0.029,-0.063
+shell_point				= 1.5,0.029,-0.063
 shell_dir               = 0.0, 1.0, 0.0
 
-fire_point 		= 0.0, 0.038, 0.13
+fire_point 		= 0.0, 0.07, 0
 fire_point2		= 0.060500, -6.929, -0.497
 
 fire_bone               	= wpn_body
@@ -219,45 +253,30 @@ position				= -0.0545,-0.16,0.131
 orientation				= 0, 0, 0
 visual           	    = weapons\lr300\wpn_lr300_hud.ogf
 
+mag_point					= 0.0, -0.5, -0.5
+
 grenade_bone            	= grenade
 
 anim_reload_effector = reload
 anim_reload_partly_effector = short_reload
-anim_reload_gl_effector = reload
-anim_reload_gl_partly_effector = short_reload
-anim_reload_g_effector = reload_grenade
 
-anim_idle			= lancew_lr300_idle
-anim_idle_aim		= lancew_lr300_idle_aim
-anim_reload			= lancew_lr300_reload
-anim_reload_partly	= lancew_lr300_reload
-anim_draw			= lancew_lr300_draw
-anim_holster		= lancew_lr300_holster
-anim_shoot			= lancew_lr300_shoot
-anim_idle_sprint	= idle_sprint
+anim_idle						= lancew_lr300_idle
+anim_idle_aim					= lancew_lr300_idle_aim
+anim_reload						= lancew_lr300_reload
+anim_reload_partly				= lancew_lr300_reload
+anm_reload_jammed				= lancew_lr300_reload
+anim_draw						= lancew_lr300_draw
+anim_holster					= lancew_lr300_holster
+anim_shoot						= lancew_lr300_shoot
+anim_idle_sprint				= idle_sprint
+anim_idle_moving    			= lancew_lr300_moving
 
-anim_idle_g					= lancew_lr300_idle_g
-anim_idle_g_aim				= lancew_lr300_idle_aim_g
-anim_reload_g				= lancew_lr300_reload_g
-anim_shoot_g				= lancew_lr300_shoot_g
-anim_switch_grenade_on		= lancew_lr300_switch_on
-anim_switch_grenade_off		= lancew_lr300_switch_off
-anim_draw_g					= lancew_lr300_draw_g
-anim_holster_g				= lancew_lr300_holster_g
-
-;(режим обычной стрельбы)			  
-anim_idle_gl				= lancew_lr300_idle_w_gl
-anim_idle_gl_aim			= lancew_lr300_idle_aim_w_gl
-anim_reload_gl				= lancew_lr300_reload_w_gl
-anim_reload_gl_partly		= lancew_lr300_reload_w_gl
-anim_draw_gl				= lancew_lr300_draw_w_gl
-anim_holster_gl				= lancew_lr300_holster_w_gl
-anim_shoot_gl				= lancew_lr300_shoot_w_gl
-
+anim_reload_stop_k				= 0.9
+anim_reload_gl_stop_k			= 0.9
 anim_reload_partly_speed_k		= 0.9
-anim_reload_gl_partly_speed_k	= 0.9
 anim_reload_partly_stop_k		= 0.495
-anim_reload_gl_partly_stop_k	= 0.495
+
+anm_reload_jammed_start_k = 0.52
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;HUD offset in zoom mode (to all)
@@ -267,23 +286,85 @@ zoom_offset			= -0.096, 0.005, -0.05
 zoom_rotate_x		= 0
 zoom_rotate_y		= 0
 
-scoped_zoom_offset		= -0.096, 0.0, -0.35
-scoped_zoom_rotate_x	= 0
-scoped_zoom_rotate_y	= 0
+
+scopes_textured								= wpn_addon_scope_susat, wpn_addon_scope_pm2, wpn_addon_scope_1p86, wpn_addon_scope_acog
+scoped_wpn_addon_scope_susat_zoom_offset	= -0.096, -0.015, -0.4
+scoped_wpn_addon_scope_susat_zoom_rotate_x	= 0
+scoped_wpn_addon_scope_susat_zoom_rotate_y	= 0
+
+scoped_wpn_addon_scope_pm2_zoom_offset		= -0.096, 0.01, -0.3
+scoped_wpn_addon_scope_pm2_zoom_rotate_x	= 0
+scoped_wpn_addon_scope_pm2_zoom_rotate_y	= 0
+
+scoped_wpn_addon_scope_1p86_zoom_offset		= -0.096, 0.013, -0.3
+scoped_wpn_addon_scope_1p86_zoom_rotate_x	= 0
+scoped_wpn_addon_scope_1p86_zoom_rotate_y	= 0
+
+scoped_wpn_addon_scope_acog_zoom_offset		= -0.096, 0.009, -0.35
+scoped_wpn_addon_scope_acog_zoom_rotate_x	= 0
+scoped_wpn_addon_scope_acog_zoom_rotate_y	= 0
+
+scopes_physical									= wpn_addon_red_dot_aimpoint, wpn_addon_red_dot_eotech, wpn_addon_red_dot_gamo
+scoped_wpn_addon_red_dot_aimpoint_zoom_offset	= -0.0958, 0.0085, -0.05
+scoped_wpn_addon_red_dot_aimpoint_zoom_rotate_x	= -0.005
+scoped_wpn_addon_red_dot_aimpoint_zoom_rotate_y	= 0
+
+scoped_wpn_addon_red_dot_eotech_zoom_offset		= -0.0965, 0.01, -0.05
+scoped_wpn_addon_red_dot_eotech_zoom_rotate_x	= -0.005
+scoped_wpn_addon_red_dot_eotech_zoom_rotate_y	= 0
+
+scoped_wpn_addon_red_dot_gamo_zoom_offset		= -0.0965, 0.01, -0.05
+scoped_wpn_addon_red_dot_gamo_zoom_rotate_x		= -0.005
+scoped_wpn_addon_red_dot_gamo_zoom_rotate_y		= 0
 
 zoom_hide_crosshair	= true						;to hide crosshair in zoom 
 
-; same as above, but for attached grenade launcher for
-; in NORMAL shoot mode
-grenade_normal_zoom_offset		= -0.096, 0.015, -0.05
-grenade_normal_zoom_rotate_x		= 0
-grenade_normal_zoom_rotate_y		= 0
-
-; same as above, but for attached grenade launcher for
-; in GRENADE mode
-grenade_zoom_offset			= -0.0887, -0.1358, 0.3
-grenade_zoom_rotate_x		= -0.171400
-grenade_zoom_rotate_y		= 0.026
-
-zoom_rotate_time	        = 0.3
+zoom_rotate_time 			= 0.4
 rotate_time			        = 0.2
+
+; HIDDEN BONES
+hidden_bones = wpn_upgrade_luminous_sights, wpn_upgrade_extended_magazine
+
+
+;;;;;;;;;;;;;;;;;
+;;;WEAPON MODS;;;
+;;;;;;;;;;;;;;;;;
+
+;;;Extended mag size - 40 (+10)
+[wpn_lr300:mag]:wpn_lr300
+inv_grid_x = 10
+
+hidden_bones = wpn_upgrade_luminous_sights
+mags_section				= mag_ar15_extended
+ammo_mag_size				= 40
+
+hud								= wpn_lr300:mag_hud
+
+[wpn_lr300:mag_hud]:wpn_lr300_hud
+hidden_bones = wpn_upgrade_luminous_sights
+
+anim_reload						= lancew_lr300_reload_extended
+anim_reload_partly				= lancew_lr300_reload_extended
+anm_reload_jammed				= lancew_lr300_reload_extended
+
+;;;LUMINOUS SIGHTS
+[wpn_lr300:tritium]:wpn_lr300
+inv_grid_x = 5
+
+hidden_bones = wpn_upgrade_extended_magazine
+
+hud = wpn_lr300:tritium_hud
+
+[wpn_lr300:tritium_hud]:wpn_lr300_hud
+hidden_bones = wpn_upgrade_extended_magazine
+
+;;;EXTENDED MAG + LUMINOUS SIGHTS
+[wpn_lr300:mag:tritium]:wpn_lr300:mag
+inv_grid_x = 10
+
+hidden_bones = magazin
+
+hud = wpn_lr300:mag:tritium_hud
+
+[wpn_lr300:mag:tritium_hud]:wpn_lr300:mag_hud
+hidden_bones = magazin

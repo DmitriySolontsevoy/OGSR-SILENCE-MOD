@@ -65,7 +65,7 @@ cam_max_angle_horz			= 5.0	;(degree) maximum shot horizontal degree
 cam_step_angle_horz			= 0.5	;(degree) size of step camera moved in horizontal position while shooting
 
 fire_dispersion_condition_factor = 5	;увеличение дисперсии в процентах при максимальном износе 
-misfire_probability 		= 0.0001	;вероятность осечки при максимальном износе 
+misfire_probability 		= 0.0	;вероятность осечки при максимальном износе 
 condition_shot_dec 			= 0.00003	;увеличение износа при каждом выстреле
 ;-----------------------------------------------------------------------------------
 
@@ -73,7 +73,8 @@ direction                	= 0, 0, 1
 shell_point				 	= 0.0, 0.0, 0.0
 fire_point               	= 0.0, 0.162, 0.35
 
-smoke_particles		   		= weapons\generic_weapon02;generic_rpg_shot
+flame_particles				= weapons\new_effects\glauncher
+smoke_particles		   		= weapons\new_effects\rpg_new_smoke
 
 rpm_empty_click 	 		= 200
 
@@ -84,7 +85,7 @@ hit_impulse					= 950
 hit_type 					= explosion
 
 fire_distance            	= 400
-bullet_speed			 	= 100 ;300			;начальная скорость пули
+bullet_speed			 	= 115 ;300			;начальная скорость пули
 rpm                      	= 200
 
 
@@ -115,7 +116,7 @@ light_color		 			= 0.95,0.95,0.3
 light_range		 			= 20.0
 light_var_color		 		= 0.05
 light_var_range		 		= 0.5
-light_time 		 			= 0.75
+light_time 		 			= 0.1
 
 ph_mass			 			= 1
 ;cost			 			= 350
@@ -154,33 +155,38 @@ wallmark_section			= explosion_marks
 auto_spawn_ammo	= false
 
 ;запрещение режима Sprint для Актера
-sprint_allowed			= false
+sprint_allowed			= true
 
  
 [wpn_rpg7_hud]
-shell_point		 			= 0.00, 0.00, -0.6
-fire_point               	= 0,0,-0.65
-fire_bone                	= grenade
-grenade_bone			 	= grenade
-orientation              	= 0,0,0
-position                 	= 0.12,0.041,-0.09
-visual                   	= weapons\rpg_7\wpn_rpg_7_hud.ogf
+shell_point 			= 0.0, 0.0, 0.0
+fire_point 				= 0.0, 0.0, 0.0
+fire_bone 				= muzzle
+grenade_bone 			= muzzle
+
+position 				= 0.0205,-0.166,0.2095
+orientation 			= 3.65,1.05,-0.05
+visual 					= weapons\rpg_7\wpn_rpg_7_hud.ogf
+
+grenade_bone 			= grenade
 
 anim_reload_effector = reload
 anim_reload_partly_effector = reload
 
-anim_idle					= idle
-anim_empty					= empty
-anim_reload					= reload
-anim_draw					= draw
-anim_holster				= holster
-anim_shoot					= shoot
-anim_idle_aim				= idle
+anim_idle 				= rpg7_idle
+anim_reload 			= rpg7_reload_alt
+anim_draw 				= rpg7_draw
+anim_holster			= rpg7_holster
+anim_shoot 				= rpg7_shoot
+anim_idle_aim			= rpg7_idle_aim
+anim_idle_sprint 		= rpg7_idle_sprint
+anim_idle_moving		= rpg7_idle_moving
 
-;смещения HUD для режима приближения
-zoom_offset					= -0.11,-0.05,-0.4
-zoom_rotate_x				= 0
-zoom_rotate_y				= 0
+zoom_offset 			= -0.14,-0.04,-0.4
+zoom_rotate_x 			= -0.0155
+zoom_rotate_y 			= 0.064
+
+zoom_rotate_time = 0.4
 
 [wpn_rpg7_missile]:identity_immunities
 GroupControlSection			= spawn_group
@@ -221,7 +227,7 @@ wallmark_section			= explosion_marks
 
 light_color		         = 1.9,1.4,0.5
 light_range		         = 24.0
-light_time 		         = 1.28
+light_time 		         = 0.1
 
 ph_mass			 			= 5
 

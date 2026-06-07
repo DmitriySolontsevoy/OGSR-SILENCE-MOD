@@ -1,12 +1,15 @@
 #include "stdafx.h"
 #include "weaponpistol.h"
 #include "ParticlesObject.h"
+#include "inventory.h"
+#include "hudmanager.h"
 #include "actor.h"
 
 CWeaponPistol::CWeaponPistol(LPCSTR name) : CWeaponCustomPistol(name)
 {
     m_eSoundClose = ESoundTypes(SOUND_TYPE_WEAPON_RECHARGING /*| eSoundType*/);
     m_opened = false;
+    m_IsPistol = true;
     m_fullReload = false;
     SetPending(FALSE);
 }
@@ -42,9 +45,17 @@ void CWeaponPistol::Load(LPCSTR section)
 
 void CWeaponPistol::PlayReloadSound()
 {
-    if (IsPartlyReloading() && sndReloadPartlyExist)
+    bool forActor = ParentIsActor();
+    m_pAmmo = smart_cast<CWeaponAmmo*>(m_pCurrentInventory->GetAmmo(*m_ammoTypes[m_ammoType], forActor));
+
+    if (!m_pAmmo)
+        m_fullReload = true;
+
+    if (IsMisfire() && !sndReloadJammed.sounds.empty())
+        PlaySound(sndReloadJammed, get_LastFP());
+    else if (IsPartlyReloading() && sndReloadPartlyExist)
         PlaySound(sndReloadPartly, get_LastFP());
-    else if (m_fullReload && sndReloadFullSet)
+    else if (m_fullReload && sndReloadFullSet && !m_opened)
         PlaySound(sndReloadFull, get_LastFP());
     else
         PlaySound(sndReload, get_LastFP());
@@ -80,14 +91,6 @@ void CWeaponPistol::PlayAnimShow()
         inherited::PlayAnimShow();
 }
 
-/*void CWeaponPistol::PlayAnimBore()
-{
-    if (m_opened)
-        PlayHUDMotion({ "anim_empty", "anm_bore_empty" }, true, GetState());
-    else
-        inherited::PlayAnimBore();
-}*/
-
 void CWeaponPistol::PlayAnimIdleSprint()
 {
     if (m_opened)
@@ -99,7 +102,7 @@ void CWeaponPistol::PlayAnimIdleSprint()
 void CWeaponPistol::PlayAnimIdleMoving()
 {
     if (m_opened)
-        PlayHUDMotion({"anim_empty", "anm_idle_moving_empty"}, true, GetState());
+        PlayHUDMotion({"anm_idle_moving_empty", "anm_idle_moving", "anim_idle_moving_empty", "anim_idle_moving", "anim_empty"}, true, GetState());
     else
         inherited::PlayAnimIdleMoving();
 }
@@ -189,14 +192,26 @@ void CWeaponPistol::PlayAnimAim()
 void CWeaponPistol::PlayAnimReload()
 {
     VERIFY(GetState() == eReload);
-    if (m_opened)
+
+    bool forActor = ParentIsActor();
+    m_pAmmo = smart_cast<CWeaponAmmo*>(m_pCurrentInventory->GetAmmo(*m_ammoTypes[m_ammoType], forActor));
+
+    if (!m_pAmmo)
+        m_fullReload = true;
+
+    if (m_opened && !IsMisfire())
+    {
         PlayHUDMotion({"anim_reload_empty", "anm_reload_empty"}, true, GetState());
-    else if (m_fullReload)
+        SpawnMag();
+    }
+    else if (m_fullReload && !IsMisfire())
+    {
         PlayHUDMotion({"anim_reload_full", "anim_reload_empty", "anm_reload_empty"}, true, GetState());
+        SpawnMag();
+    } 
     else
         inherited::PlayAnimReload();
 
-    m_fullReload = false;
     m_opened = false;
 }
 
@@ -224,7 +239,12 @@ void CWeaponPistol::PlayAnimShoot()
         return;
     }
 
+    bool misfire = false;
+
     if (iAmmoElapsed > 1)
+        misfire = CheckForMisfire();
+
+    if (iAmmoElapsed > 1 && !misfire)
     {
         PlayHUDMotion({"anim_shoot", "anm_shots"}, false, GetState());
         m_opened = false;
@@ -232,7 +252,19 @@ void CWeaponPistol::PlayAnimShoot()
     else
     {
         PlayHUDMotion({"anim_shot_last", "anm_shot_l"}, false, GetState());
-        m_opened = true;
+        if (!misfire)
+            m_opened = true;
+    }
+
+    if (misfire) {
+        if (IsMisfire())
+        {
+            if (smart_cast<CActor*>(H_Parent()))
+            {
+                HUD().GetUI()->AddInfoMessage("gun_jammed");
+                Misfire();
+            }
+        }
     }
 }
 

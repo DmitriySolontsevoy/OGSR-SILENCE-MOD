@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding="windows-1251"?>
+
+<xml>
+	<specific_character id="escape_trader" no_random="1">
+		<name>escape_trader_name</name>
+		<icon>ui_npc_u_trader</icon>
+		<bio>escape_trader_bio</bio>
+
+		<class>trader</class>
+		<community>trader</community>
+		<visual>actors\trader\trader</visual>
+				
+		<rank>330</rank>
+		<reputation>23</reputation>
+		<money min="100000" max="100000" infinitive="1"/> 
+		<supplies>
+			[spawn] \n
+			wpn_knife \n
+		</supplies>
+		
+		<start_dialog>trader_start_dialogue</start_dialog>
+	</specific_character>
+</xml>

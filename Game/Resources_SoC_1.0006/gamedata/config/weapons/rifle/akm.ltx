@@ -1,0 +1,349 @@
+[wpn_akm]:identity_immunities
+GroupControlSection		= spawn_group
+discovery_dependency	= 
+$spawn              	= "weapons\akm"	; name and section in level editor
+$npc					= on				
+$prefetch 				= 8
+scheduled				= off               ;[] option for ALife Simulator
+cform               	= skeleton
+class               	= WP_AK74			; class of the weapon that corresponding to CPP class
+min_radius 			= 5				; for AI
+max_radius 			= 100				; for AI
+description			= "Автомат Калашникова 74 года"
+	
+ef_main_weapon_type		= 2
+ef_weapon_type			= 6
+
+;-----------------------------------------------------------------------------------
+holder_range_modifier		= 1.0				; во сколько раз увеличивается eye_range 
+holder_fov_modifier		= 1.0				; во сколько раз увеличивается eye_fov
+;-----------------------------------------------------------------------------------
+
+cartridge_bullet    = true
+
+cost				= 2000				; the price of the item
+weapon_class			= assault_rifle			; the type of the box that will be used in buy-menu in multiplayer mode	
+	
+ammo_limit			= 210				; obsolete
+ammo_current			= 210
+ammo_elapsed			= 30				; obsolete
+ammo_mag_size			= 30				; clip (magazine) size
+
+ammo_class			= ammo_7.62x39_fmj 	; name of the ltx-section of used ammo 
+
+ejects_casings 				= 1
+ejects_on_reload			= 0
+casings_section				= 7_62x39_casing
+casing_delay				= 0
+
+drops_mags					= 1
+mags_section				= mag_akm
+mag_delay					= 400
+mag_point					= 0.0, 0.0, 0.0
+
+grenade_class			= ammo_vog-25, ammo_vog-25p		; name of the ltx-section of used grenades 
+launch_speed			= 0
+
+fire_modes			= 1, -1
+
+hand_dependence			= 2				; how many hands (1 or 2) we used to hold weapon in
+single_handed			= 0 
+	
+slot 				= 1,2				; number of slot in inventory we put weapon in (1 - knife slot, 2 - pistol, 3 - rifle, 4 - grenade, 5 - apparatus)
+animation_slot			= 2				; type of the animation that will be used
+
+inv_name	 			= AKM			; name in inventory	
+inv_name_short			= AKM	 
+inv_weight				= 4.1				; weight in inventory
+
+icon_group              = 1
+inv_grid_width			= 5
+inv_grid_height			= 2
+inv_grid_x				= 0
+inv_grid_y				= 12
+
+kill_msg_x			= 0
+kill_msg_y			= 28
+kill_msg_width		= 84
+kill_msg_height		= 28
+
+;спавнить автоматически боеприпасы при подъеме оружия
+;auto_spawn_ammo		= false
+
+;-----------------------------------------------------------------------------------
+;params of weapon recoil
+dispersion_start		= 2
+fire_dispersion_base		= 0.18				;угол (в градусах) базовой дисперсии оружия (оружия зажатого в тисках)
+control_inertion_factor		= 1.25f                 
+
+;отдача                                               
+cam_relax_speed 		= 5.5 				;скорость возврата в исходное положение
+cam_relax_speed_ai      = 120.75
+cam_dispersion 			= 0.62				;увеличения угла (в градусах) с каждым выстрелом
+cam_dispersion_inc		= 0.16				;увеличениe cam_dispersion с каждым выстрелом
+cam_dispertion_frac		= 0.75				;ствол будет подыматься на cam_dispersion*cam_dispertion_frac +- cam_dispersion*(1-cam_dispertion_frac)
+cam_max_angle			= 14.0				;максимальный угол отдачи
+cam_max_angle_horz		= 18.0				;(degree) maximum shot horizontal degree 
+cam_step_angle_horz		= 3.2				;(degree) size of step camera moved in horizontal position while shooting
+;--износ                                                
+fire_dispersion_condition_factor = 1.5	 	 	 	;увеличение дисперсии в процентах при максимальном износе 
+misfire_probability 		= 0.0001			;вероятность осечки при максимальном износе 
+misfire_condition_k		= 0.02                  
+condition_shot_dec 		= 0.0001			;увеличение износа при каждом выстреле
+;-----------------------------------------------------------------------------------
+
+fire_point             		=  0,0.216,0.638			; position (3rd person view) for particles of fire 
+fire_point2            		=  0,0.216,0.730			; position (3rd person view) for particles of fire (when shooting with secondary fire)
+
+flame_particles				= weapons\new_effects\akmsl
+smoke_particles				= weapons\generic_shoot_00
+grenade_flame_particles		= weapons\new_effects\glauncher
+	
+shell_point		 			= 0,0.216,0.174			; position (3rd person view) for shell to throw out
+shell_particles	 			= weapons\arsenal_shells1	; name of the particles for shells
+
+PDM_disp_base 			= 1.0
+PDM_disp_vel_factor 		= 1.3
+PDM_disp_accel_factor 		= 1.4
+PDM_crouch	 		= 0.9
+PDM_crouch_no_acc 		= 0.8
+
+;-- ttc
+hit_power 			= 0.611, 0.611, 0.611, 0.611	; size of damage by bullet
+hit_impulse		 	= 64				; size of physic impulse by bullet	
+hit_type 			= fire_wound 			; type of the wound
+
+fire_distance 			= 1650				; maximum fire distance that bullet can fly
+bullet_speed			= 910				; starting bullet speed	 ;КОЭФФИЦИЕНТ начальной скорости пули
+rpm 					= 600				; max round per minute
+rpm_empty_click 	 	= 300
+
+use_aim_bullet			= false				; Поддерживается ли первая суппер пуля
+time_to_aim			= 1.0	
+
+hud                      	= wpn_akm_hud						; name of the section of the hud
+
+position         	        = -0.026,-0.172,0			; position (offset) and orientation of the weapon in the hands of character
+orientation      	        = 0,0,0						; (3rd person view)
+
+
+;--STRAP PARAMETERS-----------------------------------------------------------------
+strap_position         		= -0.16,-0.40,0.15			; position (offset) and orientation of the weapon when it is strapped
+strap_orientation      		= -10,-5,10					; (3rd person view in degrees)
+strap_bone0					= bip01_spine2
+strap_bone1					= bip01_spine1
+
+visual         		        = weapons\akm\wpn_akm.ogf		; name of the model for 3rd person view
+
+light_color					= 0.6,0.5,0.3				; params for light during the fire
+light_range					= 5							; radius
+light_var_color				= 0.05						
+light_var_range				= 0.5
+light_time 					= 0.1					
+
+ph_mass				= 4				; physic mass (kg)
+
+;addons
+scope_status				= 2				; 0 - no addon
+silencer_status				= 2				; 1 - permanent
+grenade_launcher_status		= 0				; 2 - attachable
+pointer_status				= 2
+
+zoom_enabled			= true				; (on,off)zoom mode (right mouse button)
+scope_zoom_factor		= 65				; fov for zoom mode
+
+scopes_textured					= wpn_addon_scope_susat, wpn_addon_scope_pm2, wpn_addon_scope_1p86, wpn_addon_scope_acog
+scope_wpn_addon_scope_susat_x 	= 75
+scope_wpn_addon_scope_susat_y 	= -10
+
+scope_wpn_addon_scope_pm2_x 	= 50
+scope_wpn_addon_scope_pm2_y 	= -11
+
+scope_wpn_addon_scope_1p86_x 	= 40
+scope_wpn_addon_scope_1p86_y 	= -13
+
+scope_wpn_addon_scope_acog_x 	= 65
+scope_wpn_addon_scope_acog_y 	= -10
+
+scopes_physical						= wpn_addon_red_dot_aimpoint, wpn_addon_red_dot_eotech, wpn_addon_red_dot_gamo
+scope_wpn_addon_red_dot_aimpoint_x 	= 70
+scope_wpn_addon_red_dot_aimpoint_y 	= -10
+
+scope_wpn_addon_red_dot_eotech_x 	= 70
+scope_wpn_addon_red_dot_eotech_y 	= -10
+
+scope_wpn_addon_red_dot_gamo_x 		= 70
+scope_wpn_addon_red_dot_gamo_y 		= -10
+
+silencer_extends_grid_x 	= 1
+silencer_name  				= wpn_addon_silencer_rifle_pbs1		; section name for the attachable silencer
+silencer_x                  = 235		; offset in inventory icon
+silencer_y                  = 9
+
+pointer_bone       = wpn_pointer
+pointer_light_bone = wpn_pointer_focus
+
+pointer_name = wpn_addon_pointer
+pointer_x = 160
+pointer_y = 10
+
+;sounds (name of the sound, volume (0.0 - 1.0), delay (sec))
+
+snd_draw			= weapons\_general\rifle_draw
+snd_holster			= weapons\sig550\holster
+snd_shoot			= weapons\akm\shot	
+snd_empty			= weapons\gen_empty, 0.5
+snd_reload			= weapons\akm\reload
+snd_reload_partly	= weapons\akm\reload_partly
+snd_reload_jammed	= weapons\akm\reload_jammed
+snd_shoot_grenade	= weapons\gen_grenshoot
+snd_reload_grenade	= weapons\gen_grenload, 1.0, 0.8
+snd_switch			= weapons\groza_switch, 1.0, 0.5
+snd_silncer_shot	= weapons\ak74\ak74_shot_sil
+snd_click_last		= weapons\_general\rifle_slide_click
+
+snd_aim_start       = weapons\_general\rifle_aim_start_1, 0.5
+snd_aim_end			= weapons\_general\rifle_aim_end_1, 0.5
+
+snd_grab = pickups\grab_gun
+
+;params when silencer is attached 
+;similar to corresponding params without prefix silencer_
+
+;silencer_flame_particles	= weapons\generic_weapon01
+silencer_smoke_particles 	= weapons\generic_shoot_00
+
+silencer_hit_power 		= 0.580, 0.580, 0.580, 0.580
+silencer_hit_impulse	 	= 64
+silencer_fire_distance 		= 306
+silencer_bullet_speed	 	= 290
+
+silencer_light_color		= 0.6, 0.5, 0.3
+silencer_light_range		= 0.01
+silencer_light_var_color	= 0.05
+silencer_light_var_range	= 0.5
+silencer_light_time 		= 0.1
+
+; HIDDEN BONES
+hidden_bones = wpn_upgrade_luminous_sights, wpn_upgrade_extended_magazine
+
+;-----------------------------------------------------------------------------
+;-- HUD DESCRIPTION
+;-----------------------------------------------------------------------------
+ 
+[wpn_akm_hud]
+allow_inertion				= true
+
+shell_point					= 1.5,0,0
+shell_dir			     	= 0.0, 1.0, 0.0
+
+fire_point               	= 0.0, 0.06, 0.1
+fire_point2              	= 0.019,0.07,-0.47
+fire_bone               	= wpn_body
+
+position					= -0.025,-0.16,0.13
+orientation					= 2,2,0
+visual                  	= weapons\akm\wpn_akm_hud.ogf
+
+mag_point					= 0.0, -0.5, -0.5
+
+anim_reload_effector = reload
+anim_reload_partly_effector = short_reload
+
+anim_idle					= idle
+anim_idle_aim				= aim
+anim_reload					= reload
+anim_reload_partly			= reload_partly
+anm_reload_jammed			= reload
+anim_draw					= draw
+anim_holster				= holster
+anim_shoot					= shoot
+anim_idle_sprint			= sprint
+anim_idle_moving            = moving
+
+anm_reload_jammed_start_k 	= 0.63
+anim_idle_sprint_speed_k 	= 0.8
+anim_idle_moving_speed_k	= 0.9
+
+zoom_offset						= -0.1327,0.06,-0.13
+zoom_rotate_x					= 0.035
+zoom_rotate_y					= 0.03385
+
+scopes_textured								= wpn_addon_scope_susat, wpn_addon_scope_pm2, wpn_addon_scope_1p86, wpn_addon_scope_acog
+scoped_wpn_addon_scope_susat_zoom_offset	= -0.13, 0.01, -0.4
+scoped_wpn_addon_scope_susat_zoom_rotate_x	= 0.02
+scoped_wpn_addon_scope_susat_zoom_rotate_y	= 0
+
+scoped_wpn_addon_scope_pm2_zoom_offset		= -0.13195, 0.035, -0.33
+scoped_wpn_addon_scope_pm2_zoom_rotate_x	= 0.02
+scoped_wpn_addon_scope_pm2_zoom_rotate_y	= 0
+
+scoped_wpn_addon_scope_1p86_zoom_offset		= -0.13195, 0.035, -0.33
+scoped_wpn_addon_scope_1p86_zoom_rotate_x	= 0.02
+scoped_wpn_addon_scope_1p86_zoom_rotate_y	= 0
+
+scoped_wpn_addon_scope_acog_zoom_offset		= -0.125, 0.03, -0.35
+scoped_wpn_addon_scope_acog_zoom_rotate_x	= 0.02
+scoped_wpn_addon_scope_acog_zoom_rotate_y	= 0
+
+scopes_physical									= wpn_addon_red_dot_aimpoint, wpn_addon_red_dot_eotech, wpn_addon_red_dot_gamo
+scoped_wpn_addon_red_dot_aimpoint_zoom_offset	= -0.1323,0.037,-0.05
+scoped_wpn_addon_red_dot_aimpoint_zoom_rotate_x	= 0.04
+scoped_wpn_addon_red_dot_aimpoint_zoom_rotate_y	= 0.03385
+
+scoped_wpn_addon_red_dot_eotech_zoom_offset		= -0.1327,0.034,-0.05
+scoped_wpn_addon_red_dot_eotech_zoom_rotate_x	= 0.023
+scoped_wpn_addon_red_dot_eotech_zoom_rotate_y	= 0.03385
+
+scoped_wpn_addon_red_dot_gamo_zoom_offset		= -0.1327,0.031,-0.05
+scoped_wpn_addon_red_dot_gamo_zoom_rotate_x		= 0.02
+scoped_wpn_addon_red_dot_gamo_zoom_rotate_y		= 0.03385
+
+zoom_hide_crosshair	= true
+
+zoom_rotate_time = 0.4
+
+; HIDDEN BONES
+hidden_bones = wpn_upgrade_luminous_sights, wpn_upgrade_extended_magazine
+
+
+;;;;;;;;;;;;;;;;;
+;;;WEAPON MODS;;;
+;;;;;;;;;;;;;;;;;
+
+;;;EXTENDED MAG
+[wpn_akm:mag]:wpn_akm
+inv_grid_x = 12
+
+inv_weight = 4.25
+
+ammo_mag_size = 45
+mags_section = mag_akm_extended
+hidden_bones = wpn_upgrade_luminous_sights, magazin
+
+hud = wpn_akm:mag_hud
+
+[wpn_akm:mag_hud]:wpn_akm_hud
+hidden_bones = wpn_upgrade_luminous_sights, magazin
+
+;;;LUMINOUS SIGHTS
+[wpn_akm:tritium]:wpn_akm
+inv_grid_x = 6
+
+hidden_bones = wpn_upgrade_extended_magazine
+
+hud = wpn_akm:tritium_hud
+
+[wpn_akm:tritium_hud]:wpn_akm_hud
+hidden_bones = wpn_upgrade_extended_magazine
+
+;;;EXTENDED MAG + LUMINOUS SIGHTS
+[wpn_akm:mag:tritium]:wpn_akm:mag
+inv_grid_x = 12
+
+hidden_bones = magazin
+
+hud = wpn_akm:mag:tritium_hud
+
+[wpn_akm:mag:tritium_hud]:wpn_akm:mag_hud
+hidden_bones = magazin

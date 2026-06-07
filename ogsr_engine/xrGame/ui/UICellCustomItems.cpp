@@ -55,8 +55,9 @@ bool CUIInventoryCellItem::EqualTo(CUICellItem* itm)
 
 CUIInventoryCellItem::~CUIInventoryCellItem()
 {
-    if (auto item = object())
-        item->m_cell_item = NULL;
+    //TODO: find proper fix
+    /* if (auto item = object())
+        item->m_cell_item = NULL;*/
 }
 
 void CUIInventoryCellItem::OnFocusReceive()
@@ -462,7 +463,7 @@ void CUIWeaponCellItem::InitAddon(CUIStatic* s, CIconParams& params, Fvector2 ad
         s->SetHeading(GetHeading());
         Fvector2 offs;
         offs.set(0.0f, s->GetWndSize().y);
-        s->SetHeadingPivot(Fvector2().set(0.0f, 0.0f), /*Fvector2().set(0.0f,0.0f)*/ offs, true);
+        s->SetHeadingPivot(Fvector2().set(0.0f, 0.0f), offs, true);
     }
 
     s->SetWindowName("wpn_addon");

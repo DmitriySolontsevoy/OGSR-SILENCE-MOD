@@ -29,12 +29,21 @@ ammo_elapsed		 		= 16
 ammo_mag_size		 		= 10
 ammo_class		 			= ammo_11.43x23_fmj, ammo_11.43x23_hydro
 
+ejects_casings 				= 1
+ejects_on_reload			= 0
+casings_section				= 11_43x23_casing
+casing_delay				= 0
+
+drops_mags					= 1
+mags_section				= mag_sig250
+mag_delay					= 600
+mag_point					= 0.0, 0.0, 0.0
+
 hand_dependence		 		= 1
 single_handed				= 1							
 
 slot 			 			= 1,2
 animation_slot				= 1									; type of the animation that will be used
-
 
 inv_name					= SIG250
 inv_name_short				= SIG250
@@ -44,7 +53,7 @@ icon_group            		= 1
 inv_grid_width				= 2
 inv_grid_height				= 1
 inv_grid_x					= 0
-inv_grid_y					= 75
+inv_grid_y					= 79
 
 kill_msg_x			= 72
 kill_msg_y			= 177
@@ -84,7 +93,7 @@ hit_impulse		 	= 125
 hit_type 			= fire_wound	
 
 fire_distance       = 50 ;1000
-bullet_speed		= 280		
+bullet_speed		= 240		
 rpm                 = 270
 ; end ttc
 
@@ -113,7 +122,7 @@ orientation              	= 0, 0, 0
 direction           	    = 0, 0, 1
 fire_point               	= 0.0, 0.133, 0.161
 
-flame_particles		   		= weapons\generic_weapon03
+flame_particles		   		= weapons\new_effects\pistol_45acp
 smoke_particles		   		= weapons\generic_shoot_00
 
 shell_point		 			= 0.0, 0.133, 0.047
@@ -127,7 +136,7 @@ light_color		 			= 0.6,0.5,0.3
 light_range		 			= 3.0
 light_var_color		 		= 0.05
 light_var_range		 		= 0.5
-light_time 		 			= 0.2
+light_time 		 			= 0.1
 
 ph_mass			 			= 1
 ;cost			 			= 350
@@ -136,21 +145,22 @@ ph_mass			 			= 1
 scope_status				= 0
 silencer_status				= 2
 grenade_launcher_status		= 0
+pointer_status 				= 2
 
 zoom_enabled				= true
 scope_zoom_factor	    	= 55
 
 ;звуки
-snd_draw					= weapons\p228\draw
-snd_holster					= weapons\p228\holster
-snd_shoot					= weapons\p228\shot
-snd_shoot1					= weapons\p228\shot1
-snd_shoot2					= weapons\p228\shot2
-snd_shoot3					= weapons\p228\shot3
-snd_empty					= weapons\p228\empty
-snd_reload					= weapons\p228\reload
-snd_reload_partly			= weapons\p228\reload_partly
-snd_close					= weapons\p228\draw
+snd_draw					= weapons\p250\draw
+snd_holster					= weapons\p250\holster
+snd_shoot					= weapons\p250\shot
+snd_empty					= weapons\p250\empty
+snd_reload					= weapons\p250\reload
+snd_reload_partly			= weapons\p250\reload_partly
+snd_reload_full				= weapons\p250\reload_full
+snd_reload_jammed			= weapons\p250\reload_jammed
+snd_close					= weapons\p250\draw
+snd_click_last				= weapons\_general\pistol_slide_click
 
 snd_aim_start       = weapons\_general\pistol_aim_start_1, 0.5
 snd_aim_end			= weapons\_general\pistol_aim_end_1, 0.5
@@ -161,49 +171,96 @@ snd_grab = pickups\grab_gun
 ;; silencer
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-silencer_name  				= wpn_addon_silencer_pistol_2		; section name for the attachable silencer
-silencer_x 					= 60						; offset in inventory icon
-silencer_y 					= -17					
+silencer_extends_grid_x 	= 1
+silencer_name  				= wpn_addon_silencer_pistol_osprey		; section name for the attachable silencer
+silencer_x 					= 68						; offset in inventory icon
+silencer_y 					= -15
+
+pointer_bone       = wpn_pointer
+pointer_light_bone = wpn_pointer_focus
+
+pointer_name = wpn_addon_pointer
+pointer_x = 44
+pointer_y = -2
 
 ;params when silencer is attached 
 ;similar to corresponding params without prefix silencer_
 
 ;silencer_flame_particles 	= weapons\generic_weapon01
 silencer_smoke_particles 	= weapons\generic_shoot_00
-snd_silncer_shot			= weapons\p228\45cal-2 
+snd_silncer_shot			= weapons\p250\45cal-2 
 silencer_light_color		= 0.6,0.5,0.3
 silencer_light_range		= 0.01
 silencer_light_var_color	= 0.05
 silencer_light_var_range	= 0.5
-silencer_light_time 		= 0.2
- 
+silencer_light_time 		= 0.1
+
+hidden_bones = wpn_upgrade_luminous_sights
+
 [wpn_sig250_hud]
-shell_point			= 0.035000,0.038000,-0.239000
-fire_point			= 0.000000,0.031996,-0.229650
+shell_point			= 1.5,0.038,-0.239
+
+fire_point			= 0,0.05,-0.22965
 fire_bone                	= wpn_body
 
 position			= -0.006,-0.16, 0
 orientation			= 2.35,2.75,0.0
 visual                   	= weapons\sig250\wpn_sig250_hud.ogf 
 
+mag_point					= 0.0, -0.5, -0.5
+
 anim_reload_effector = short_reload
 anim_reload_empty_effector = short_reload
 
-anim_holster				= lancew_p220_holster
-anim_idle					= lancew_p220_idle
-anim_empty					= lancew_p220_idle_empty
+anim_holster				= pistol_holster
+anm_hide_jammed				= pistol_holster_empty
+anim_idle					= pistol_idle
+anm_idle_jammed				= pistol_idle_empty
+anim_empty					= pistol_idle_empty
 anim_reload					= lancew_p220_reload
 anim_reload_empty			= lancew_p220_reload_full
-anim_draw					= lancew_p220_draw
-anim_draw_empty				= lancew_p220_draw_empty
-anim_shoot					= lancew_p220_shoot
-anim_shot_last				= lancew_p220_shoot_empty
-anim_close					= lancew_p220_holster_empty
-anim_idle_aim				= lancew_p220_idle_aim
+anim_reload_full			= reload_full
+anm_reload_jammed			= reload_jammed
+anim_draw					= pistol_draw
+anim_draw_empty				= pistol_draw_empty
+anm_show_jammed				= pistol_draw_empty
+anim_shoot					= pistol_shoot
+anim_shot_last				= pistol_shoot_last
+anim_close					= pistol_holster_empty
+anim_idle_aim				= pistol_idle_aim
+anm_idle_aim_jammed			= pistol_idle_empty
 anim_idle_sprint			= lancew_p220_sprint
 anim_idle_sprint_empty      = lancew_p220_sprint_empty
+anm_idle_sprint_jammed      = lancew_p220_sprint_empty
+anim_idle_moving			= pistol_moving
+anim_idle_moving_empty		= pistol_moving_empty
+anm_idle_moving_jammed		= pistol_moving_empty
+
+anm_reload_jammed_speed_k = 0.8
+anm_reload_jammed_stop_k  = 0.6
+
+anim_reload_full_stop_k = 0.85
 
 ;смещения HUD для режима приближения
-zoom_offset			= -0.1115, 0.0375, -0.04
-zoom_rotate_x		= 0.032
-zoom_rotate_y		= 0.034
+zoom_offset				= -0.1218,0.05,-0.1
+zoom_rotate_x			= 0.05
+zoom_rotate_y			= 0.062
+
+zoom_rotate_time = 0.4
+
+hidden_bones = wpn_upgrade_luminous_sights
+
+
+;;;;;;;;;;;;;;;;;
+;;;WEAPON MODS;;;
+;;;;;;;;;;;;;;;;;
+;;LUMINOUS SIGHTS
+[wpn_sig250:tritium]:wpn_sig250
+inv_grid_x = 3
+
+hidden_bones = null
+
+hud = wpn_sig250:tritium_hud
+
+[wpn_sig250:tritium_hud]:wpn_sig250_hud
+hidden_bones = null

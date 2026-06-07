@@ -281,7 +281,7 @@ bool CInventory::DropItem(CGameObject* pObj)
 
             m_slots[pIItem->GetSlot()].m_pIItem = nullptr;
         }
-
+        
         // хак для учета снятия брони - надо менять визуал актору
         pIItem->OnDrop();
 
@@ -696,7 +696,7 @@ void CInventory::UpdateDropItem(PIItem pIItem)
         pIItem->object().u_EventGen(P, GE_OWNERSHIP_REJECT, pIItem->object().H_Parent()->ID());
         P.w_u16(u16(pIItem->object().ID()));
         pIItem->object().u_EventSend(P);
-    } // dropManual
+    }
 }
 
 //ищем на поясе гранату такоже типа

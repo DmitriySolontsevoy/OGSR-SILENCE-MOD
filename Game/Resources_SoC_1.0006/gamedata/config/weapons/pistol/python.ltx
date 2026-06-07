@@ -1,0 +1,232 @@
+[wpn_python]:identity_immunities
+GroupControlSection			= spawn_group
+discovery_dependency 		= 
+$spawn                   	= "weapons\Desert Eagle"					; option for Level Editor
+$npc			 			= on				; option for Level Editor
+$prefetch 					= 8
+scheduled            		= off              ; option for ALife Simulator
+cform                    	= skeleton
+class                    	= WP_VAL
+min_radius               	= 5
+max_radius               	= 30
+description					= enc_weapons1_wpn-desert-eagle
+
+ef_weapon_type				= 5
+
+;-----------------------------------------------------------------------------------
+holder_range_modifier	= 1.0               ; во сколько раз увеличивается eye_range 
+holder_fov_modifier		= 1.0              ; во сколько раз увеличивается eye_fov
+;-----------------------------------------------------------------------------------
+
+cartridge_bullet = false
+
+cost					 	= 2500
+
+ammo_limit		 			= 120
+ammo_current		 		= 90
+
+ammo_elapsed		 		= 6
+ammo_mag_size		 		= 6
+
+ammo_class		 			= ammo_9x33_jhp
+
+ejects_casings 				= 1
+ejects_on_reload			= 1
+casings_section				= 9x33_casing
+casing_delay				= 800
+
+drops_mags					= 0
+
+hand_dependence		 		= 1
+single_handed				= 1
+
+slot 				 		= 1,2		; // primary
+animation_slot		 		= 1		; type of the animation that will be used
+
+inv_name					= Colt Python
+inv_name_short				= Colt Python
+inv_weight					= 1.4
+
+icon_group             		= 1
+inv_grid_width				= 2
+inv_grid_height				= 1
+inv_grid_x					= 0
+inv_grid_y					= 29
+
+kill_msg_x			= 194
+kill_msg_y			= 123
+kill_msg_width		= 46
+kill_msg_height		= 27
+
+;-----------------------------------------------------------------------------------
+;базовая дисперсия
+fire_dispersion_base		= 0.2  ;угол (в градусах) базовой дисперсии оружия (оружия зажатого в тисках)
+control_inertion_factor		= 1.3f
+
+;отдача
+cam_relax_speed         	= 6.0	;скорость возврата в исходное положение
+cam_dispersion          	= 6.0	;увеличения угла (в градусах) с каждым выстрелом
+cam_dispersion_inc		= 0.0	;увеличениe cam_dispersion с каждым выстрелом
+cam_dispertion_frac		= 1.0	;ствол будет подыматься на cam_dispersion*cam_dispertion_frac +- cam_dispersion*(1-cam_dispertion_frac)
+cam_max_angle			= 90.0	;максимальный угол отдачи
+cam_max_angle_horz		= 10.0	;(degree) maximum shot horizontal degree 
+cam_step_angle_horz		= 1.5	;(degree) size of step camera moved in horizontal position while shooting
+
+fire_dispersion_condition_factor = 5	;увеличение дисперсии в процентах при максимальном износе 
+misfire_probability 		= 0.003	;вероятность осечки при максимальном износе
+misfire_condition_k			= 0.05 
+condition_shot_dec 			= 0.0003 ;увеличение износа при каждом выстреле
+;-----------------------------------------------------------------------------------
+
+direction                	= 0, 0, 1
+fire_point			= -0.005000,0.130000,0.220000
+
+flame_particles		   		= weapons\new_effects\pistol_50ae
+smoke_particles		   		= weapons\new_effects\smoke_muzzle_00
+rpm_empty_click 	 		= 200
+
+shell_point		 			= 0.0, 0.133, 0.06
+shell_dir		 			= 0.0, 0.0, 0.4
+shell_particles	 			= weapons\arsenal_shells1
+
+PDM_disp_base 			= 1.0
+PDM_disp_vel_factor 		= 1.1
+PDM_disp_accel_factor 		= 1.1
+PDM_crouch	 		= 1.0
+PDM_crouch_no_acc 		= 1.0
+
+; ttc
+hit_power           = 0.50, 0.54, 0.57, 0.60
+hit_impulse		 	= 140
+hit_type 			= fire_wound
+
+fire_distance       = 100
+bullet_speed		= 440			
+rpm                 = 200
+; end ttc
+
+use_aim_bullet				= true		;Поддерживается ли первая суппер пуля
+time_to_aim					= 1.0	
+
+silencer_hit_power       	= 0.65
+silencer_hit_impulse	 	= 60
+silencer_fire_distance   	= 100
+silencer_bullet_speed	 	= 250
+
+hud                      	= wpn_python_hud
+normal                   	= 0, 1, 0
+position                 	= -0.021, -0.09, 0.0
+orientation              	= 0, 0, 0
+
+;--STRAP PARAMETERS-----------------------------------------------------------------
+;strap_position         		= -0.1,-0.45,0.2			; position (offset) and orientation of the weapon when it is strapped
+;strap_orientation      		= 1.57,0,0						; (3rd person view)
+;strap_bone0					= bip01_spine2
+;strap_bone1					= bip01_spine1
+
+startup_ammo             	= 90
+visual                   	= weapons\python\wpn_python.ogf
+
+light_color		 			= 1.2,1.0,0.5
+light_range		 			= 5.0
+light_var_color		 		= 0.05
+light_var_range		 		= 0.5
+light_time 		 			= 0.1
+
+ph_mass			 			= 1
+;cost			 			= 350
+
+;addons
+scope_status				= 0
+silencer_status				= 2
+grenade_launcher_status		= 0
+
+zoom_enabled				= true
+scope_zoom_factor	   		= 55
+
+snd_draw					= weapons\deagle\draw
+snd_holster					= weapons\deagle\holster
+snd_shoot					= weapons\python\shot_1
+snd_shoot1					= weapons\python\shot_1
+snd_shoot2					= weapons\python\shot_2
+snd_shoot3					= weapons\python\shot_2
+snd_silncer_shot			= weapons\python\shoot_s_1
+snd_empty					= weapons\deagle\empty
+snd_reload					= weapons\python\reload
+snd_close					= weapons\deagle\draw
+
+snd_aim_start       = weapons\_general\pistol_aim_start_2, 0.5
+snd_aim_end			= weapons\_general\pistol_aim_end_2, 0.5
+
+snd_grab = pickups\grab_gun
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; silencer
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+silencer_extends_grid_x 	= 1
+silencer_name  				= wpn_addon_silencer_pistol_9x33
+silencer_x 					= 93
+silencer_y 					= -17
+
+;params when silencer is attached 
+;similar to corresponding params without prefix silencer_
+
+;silencer_flame_particles 	= weapons\generic_weapon01
+silencer_smoke_particles 	= weapons\generic_shoot_00
+silencer_light_color		= 0.6,0.5,0.3
+silencer_light_range		= 0.01
+silencer_light_var_color	= 0.05
+silencer_light_var_range	= 0.5
+silencer_light_time 		= 0.1
+
+; HIDDEN BONES
+hidden_bones = wpn_upgrade_luminous_sights
+
+[wpn_python_hud]
+shell_point					= 0.0,0.04,-0.5
+fire_point               	= -0.001,0.04,-0.13
+
+fire_bone                	= wpn_body
+position					= 0.033,-0.19,-0.05
+orientation					= 2.407309,2.234722,0.0
+visual                   	= weapons\python\wpn_python_hud.ogf
+
+anim_reload_effector = short_reload
+
+anim_holster				= pistol_holster
+anim_idle					= pistol_idle
+anim_reload					= reload
+anim_draw					= pistol_draw
+anim_shoot					= pistol_shoot
+anim_idle_aim				= pistol_idle_aim
+anim_idle_sprint			= sprint
+anim_idle_moving			= pistol_moving
+
+anim_shoot_speed_k 		 = 0.6
+
+;смещения HUD для режима приближения
+zoom_offset				= -0.1542,0.084,-0.1
+zoom_rotate_x			= 0.083
+zoom_rotate_y			= 0.064
+
+zoom_rotate_time = 0.4
+
+; HIDDEN BONES
+hidden_bones = wpn_upgrade_luminous_sights
+
+
+;;;;;;;;;;;;;;;;;
+;;;WEAPON MODS;;;
+;;;;;;;;;;;;;;;;;
+
+;;;LUMINOUS SIGHTS
+[wpn_python:tritium]:wpn_python
+inv_grid_x = 3
+
+hidden_bones = null
+
+hud = wpn_python:tritium_hud
+
+[wpn_python:tritium_hud]:wpn_python_hud
+hidden_bones = null

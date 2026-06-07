@@ -76,19 +76,25 @@ struct hud_item_measures
         m_hands_offset_type_normal, // Не прицеливаемся
         m_hands_offset_type_aim, // Смотрим в механический прицел
         m_hands_offset_type_gl, // Смотрим в механический прицел в режиме ПГ
-        m_hands_offset_type_scope, // Смотрим в присоединяемый текстурный прицел
-        m_hands_offset_type_aim_scope, // Смотрим в присоединяемый нетекстурный прицел (будь то 3д прицел или колиматор) если включен "use_scope_zoom"
-        m_hands_offset_type_gl_scope, // Смотрим в присоединяемый нетекстурный прицел (будь то 3д прицел или колиматор) в режиме ПГ если включен "use_scope_grenade_zoom" - мне вот
-                                      // щас не понятно зачем это надо, но это как-то используют.
-        m_hands_offset_type_aim_gl_normal, // Смотрим в механический прицел если гранатомет присоединен
-        m_hands_offset_type_gl_normal_scope, // Смотрим в присоединяемый нетекстурный прицел (будь то 3д прицел или колиматор) если включен "use_scope_zoom" и гранатомет
-                                             // присоединен
+        m_hands_offset_type_scope,   // Смотрим в присоединяемый текстурный прицел (1)
+        m_hands_offset_type_scope_2, // Смотрим в присоединяемый текстурный прицел (2)
+        m_hands_offset_type_scope_3, // Смотрим в присоединяемый текстурный прицел (3)
+        m_hands_offset_type_scope_4, // Смотрим в присоединяемый текстурный прицел (4)
+        m_hands_offset_type_scope_5, // Смотрим в присоединяемый текстурный прицел (5)
+        m_hands_offset_type_scope_6, // Смотрим в присоединяемый текстурный прицел (6)
+        m_hands_offset_type_aim_scope,   // Смотрим в присоединяемый нетекстурный прицел (будь то 3д прицел или колиматор) если включен "use_scope_zoom" (1)
+        m_hands_offset_type_aim_scope_2, // Смотрим в присоединяемый нетекстурный прицел (будь то 3д прицел или колиматор) если включен "use_scope_zoom" (2)
+        m_hands_offset_type_aim_scope_3, // Смотрим в присоединяемый нетекстурный прицел (будь то 3д прицел или колиматор) если включен "use_scope_zoom" (3)
+        m_hands_offset_type_aim_scope_4, // Смотрим в присоединяемый нетекстурный прицел (будь то 3д прицел или колиматор) если включен "use_scope_zoom" (4)
+        m_hands_offset_type_aim_scope_5, // Смотрим в присоединяемый нетекстурный прицел (будь то 3д прицел или колиматор) если включен "use_scope_zoom" (5)
+        m_hands_offset_type_aim_scope_6, // Смотрим в присоединяемый нетекстурный прицел (будь то 3д прицел или колиматор) если включен "use_scope_zoom" (6)
         m_hands_offset_type_size
     };
     Fvector m_hands_offset[m_hands_offset_size][m_hands_offset_type_size]{};
 
     u16 m_fire_bone;
     Fvector m_fire_point_offset;
+    Fvector m_mag_point_offset;
     u16 m_fire_bone2;
     Fvector m_fire_point2_offset;
     u16 m_shell_bone;

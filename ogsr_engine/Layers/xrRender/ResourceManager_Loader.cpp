@@ -152,8 +152,6 @@ void CResourceManager::LoadSharedFile(LPCSTR fname)
                 chunk->seek(0);
                 B->Load(*chunk, desc.version);
 
-                //Msg("Loading shader: [%s]", desc.cName);
-
                 std::pair<map_BlenderIt, bool> I = m_blenders.insert_or_assign(xr_strdup(desc.cName), B);
                 R_ASSERT2(I.second, "CResourceManager::LoadSharedFile - found shader name [%s]", desc.cName);
             }

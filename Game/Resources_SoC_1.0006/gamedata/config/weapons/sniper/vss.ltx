@@ -6,7 +6,7 @@ $npc 				= off
 $prefetch 			= 8
 scheduled 			= off 		; option for ALife Simulator
 cform 				= skeleton
-class 				= WP_VINT
+class 				= WP_VAL
 min_radius 			= 5
 max_radius 			= 150
 description			= enc_weapons1_wpn-vintorez
@@ -32,6 +32,16 @@ ammo_mag_size			= 10
 ammo_class			= ammo_9x39_pab9, ammo_9x39_sp5, ammo_9x39_ap
 tracers				= off
 
+ejects_casings 				= 1
+ejects_on_reload			= 0
+casings_section				= 9x39_casing
+casing_delay				= 0
+
+drops_mags					= 1
+mags_section				= mag_vintorez
+mag_delay					= 700
+mag_point					= 0.0, 0.0, 0.0
+
 fire_modes			= 1, -1
 
 hand_dependence			= 1
@@ -42,13 +52,13 @@ animation_slot			= 2		; type of the animation that will be used
 
 inv_name			= "ВСС "Винторез""
 inv_name_short		= "ВСС "Винторез""
-inv_weight			= 3.38
+inv_weight			= 2.6
 
 icon_group              = 1
 inv_grid_width			= 5
 inv_grid_height			= 2
-inv_grid_x			= 0
-inv_grid_y			= 18
+inv_grid_x				= 0
+inv_grid_y				= 100
 
 ;спавнить автоматически боеприпасы при подъеме оружия
 auto_spawn_ammo			= false
@@ -94,7 +104,7 @@ hit_impulse			= 64
 hit_type 			= fire_wound
 
 fire_distance 			= 300
-bullet_speed			= 295
+bullet_speed			= 290
 rpm 					= 900
 rpm_empty_click 	 	= 450
 ; end ttc
@@ -121,20 +131,40 @@ light_disabled			= true
 ph_mass			 	= 3
 
 ;addons
-scope_status			= 1
+scope_status			= 2
 silencer_status			= 1
-grenade_launcher_status		= 0
+grenade_launcher_status	= 0
 
-zoom_enabled			= true
-scope_zoom_factor	 	= 15		; ПСО-1 x4
-scope_texture			= wpn\wpn_crosshair
+scope_zoom_factor = 60
+zoom_enabled = true
+
+
+scopes_textured 				= wpn_addon_scope_pso1, wpn_addon_scope_1p29, wpn_addon_scope_1p78
+scope_wpn_addon_scope_pso1_x 	= 55
+scope_wpn_addon_scope_pso1_y 	= 6
+
+scope_wpn_addon_scope_1p29_x 	= 80
+scope_wpn_addon_scope_1p29_y 	= 10
+
+scope_wpn_addon_scope_1p78_x 	= 80
+scope_wpn_addon_scope_1p78_y 	= 4
+
+scopes_physical 				= wpn_addon_red_dot_pka, wpn_addon_red_dot_cobra
+scope_wpn_addon_red_dot_pka_x 	= 85
+scope_wpn_addon_red_dot_pka_y 	= 7
+
+scope_wpn_addon_red_dot_cobra_x = 89
+scope_wpn_addon_red_dot_cobra_y = 14
+
 
 ;sounds (name of the sound, volume (0.0 - 1.0), delay (sec))
 snd_draw					= weapons\_general\rifle_draw
-snd_holster					= weapons\sig_550\holster
+snd_holster					= weapons\sig550\holster
 snd_shoot					= weapons\vss\vss_shot 
 snd_empty					= weapons\vss\vss_empty, 0.8
 snd_reload					= weapons\vss\vss_reload
+snd_reload_jammed			= weapons\vss\vss_reload_jammed
+snd_click_last				= weapons\_general\rifle_slide_click
 
 snd_aim_start       = weapons\_general\rifle_aim_start_2, 0.5
 snd_aim_end			= weapons\_general\rifle_aim_end_2, 0.5
@@ -156,12 +186,15 @@ silencer_light_color		= 0.6, 0.5, 0.3
 silencer_light_range		= 0.01
 silencer_light_var_color	= 0.05
 silencer_light_var_range	= 0.5
-silencer_light_time 		= 0.2
+silencer_light_time 		= 0.1
 
 hit_probability_gd_novice	= 0.80				; точность стрельбы,      
 hit_probability_gd_stalker	= 0.85				; когда оружие в руках НПС
 hit_probability_gd_veteran	= 0.90				; в зависимости от уровня 
 hit_probability_gd_master	= 0.95				; сложности игры          
+
+; HIDDEN BONES
+hidden_bones = wpn_upgrade_luminous_sights, wpn_upgrade_extended_magazine
 
 ;-----------------------------------------------------------------------------
 ;-- HUD DESCRIPTION
@@ -169,7 +202,7 @@ hit_probability_gd_master	= 0.95				; сложности игры
 [wpn_vintorez_hud]
 allow_inertion			= true
 
-shell_point          		= 0,-0.1,-0.74
+shell_point          		= 1.5,-0.1,-0.74
 shell_dir			 		= 0.0, 1.0, 0.0
 
 fire_point               	= 0,0,-0.5
@@ -179,29 +212,105 @@ position                	= -0.02, -0.14, 0.2
 
 visual                   	= weapons\vintorez\wpn_vintorez_hud.ogf
 
+mag_point					= 0.0, -0.5, -0.5
+
 anim_reload_effector = reload
 anim_reload_partly_effector = short_reload
 
 anim_idle			= lancew_val_idle
 anim_reload			= lancew_val_reload
 anim_reload_partly  = lancew_val_reload
+anm_reload_jammed   = lancew_val_reload
 anim_draw			= lancew_val_draw
 anim_holster		= lancew_val_holster
 anim_shoot			= lancew_val_shoot
 anim_idle_aim		= lancew_val_idle_aim
 anim_idle_sprint	= lancew_val_sprint
+anim_idle_moving    = lancew_val_moving
 
 anim_reload_speed_k 			= 1.2
 anim_reload_partly_speed_k 		= 1.2
 anim_holster_speed_k 			= 1.4
 anim_reload_partly_stop_k 		= 0.57
 
+anm_reload_jammed_start_k = 0.65
+
 zoom_hide_crosshair			= true
 
-zoom_offset					= -0.13, 0.019, -0.35
-zoom_rotate_x				= 0.0
+zoom_offset					= -0.1292, 0.044, -0.1
+zoom_rotate_x				= -0.012
 zoom_rotate_y				= 0.0
 
+scopes_textured 								= wpn_addon_scope_pso1, wpn_addon_scope_1p29, wpn_addon_scope_1p78
+scoped_wpn_addon_scope_pso1_zoom_offset			= -0.121, 0.017, -0.3
+scoped_wpn_addon_scope_pso1_zoom_rotate_x		= 0.0
+scoped_wpn_addon_scope_pso1_zoom_rotate_y		= 0.0
+
+scoped_wpn_addon_scope_1p29_zoom_offset			= -0.121, 0.025, -0.45
+scoped_wpn_addon_scope_1p29_zoom_rotate_x		= 0.0
+scoped_wpn_addon_scope_1p29_zoom_rotate_y		= 0.0
+
+scoped_wpn_addon_scope_1p78_zoom_offset			= -0.121, 0.025, -0.45
+scoped_wpn_addon_scope_1p78_zoom_rotate_x		= 0.0
+scoped_wpn_addon_scope_1p78_zoom_rotate_y		= 0.0
+
+scopes_physical 								= wpn_addon_red_dot_pka, wpn_addon_red_dot_cobra
+scoped_wpn_addon_red_dot_pka_zoom_offset		= -0.128, 0.013, -0.1
+scoped_wpn_addon_red_dot_pka_zoom_rotate_x		= -0.01
+scoped_wpn_addon_red_dot_pka_zoom_rotate_y		= 0.0
+
+scoped_wpn_addon_red_dot_cobra_zoom_offset		= -0.1292, 0.022, -0.1
+scoped_wpn_addon_red_dot_cobra_zoom_rotate_x	= -0.005
+scoped_wpn_addon_red_dot_cobra_zoom_rotate_y	= 0.0
+
 ;время поворота HUD (сек)
-zoom_rotate_time		= 0.3
+zoom_rotate_time 	= 0.4
 rotate_time			= 0.3
+
+; HIDDEN BONES
+hidden_bones = wpn_upgrade_luminous_sights, wpn_upgrade_extended_magazine
+
+;;;;;;;;;;;;;;;;;
+;;;WEAPON MODS;;;
+;;;;;;;;;;;;;;;;;
+
+;;;EXTENDED MAG
+[wpn_vintorez:mag]:wpn_vintorez
+inv_grid_x = 10
+
+inv_weight = 2.8
+
+ammo_mag_size = 20
+mags_section = mag_val
+hidden_bones = wpn_upgrade_luminous_sights, magazin
+
+hud = wpn_vintorez:mag_hud
+
+[wpn_vintorez:mag_hud]:wpn_vintorez_hud
+anim_reload				= lancew_val_reload_extended
+anim_reload_partly		= lancew_val_reload_extended
+anm_reload_jammed		= lancew_val_reload_extended
+
+hidden_bones = wpn_upgrade_luminous_sights, magazin
+
+;;;LUMINOUS SIGHTS
+[wpn_vintorez:tritium]:wpn_vintorez
+inv_grid_x = 5
+
+hidden_bones = wpn_upgrade_extended_magazine
+
+hud = wpn_vintorez:tritium_hud
+
+[wpn_vintorez:tritium_hud]:wpn_vintorez_hud
+hidden_bones = wpn_upgrade_extended_magazine
+
+;;;EXTENDED MAG + LUMINOUS SIGHTS
+[wpn_vintorez:mag:tritium]:wpn_vintorez:mag
+inv_grid_x = 10
+
+hidden_bones = magazin
+
+hud = wpn_vintorez:mag:tritium_hud
+
+[wpn_vintorez:mag:tritium_hud]:wpn_vintorez:mag_hud
+hidden_bones = magazin

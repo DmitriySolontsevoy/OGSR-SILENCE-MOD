@@ -310,14 +310,10 @@ void CWeaponScript::set_hit_power(CWeapon* wpn, luabind::object const& t)
     vector.w = object_cast<float>(t[4]);
 }
 
-LPCSTR get_scope_name(CWeapon* I) { return I->m_sScopeName.c_str(); }
+LPCSTR get_scope_name(CWeapon* I) { return I->m_sCurrentScope.c_str(); }
 
 void set_scope_name(CWeapon* item, LPCSTR text)
-{
-    item->m_allScopeNames.erase(std::remove(item->m_allScopeNames.begin(), item->m_allScopeNames.end(), item->m_sScopeName), item->m_allScopeNames.end());
-    item->m_sScopeName = text;
-    item->m_allScopeNames.push_back(item->m_sScopeName);
-}
+{ item->m_sCurrentScope = text; }
 
 LPCSTR get_silencer_name(CWeapon* I) { return I->m_sSilencerName.c_str(); }
 
@@ -389,8 +385,6 @@ void CWeaponScript::script_register(lua_State* L)
 
                   .def_readwrite("grenade_launcher_x", &CWeapon::m_iGrenadeLauncherX)
                   .def_readwrite("grenade_launcher_y", &CWeapon::m_iGrenadeLauncherY)
-                  .def_readwrite("scope_x", &CWeapon::m_iScopeX)
-                  .def_readwrite("scope_y", &CWeapon::m_iScopeY)
                   .def_readwrite("silencer_x", &CWeapon::m_iSilencerX)
                   .def_readwrite("silencer_y", &CWeapon::m_iSilencerY)
                   .def_readwrite("pointer_x", &CWeapon::m_iPointerX)

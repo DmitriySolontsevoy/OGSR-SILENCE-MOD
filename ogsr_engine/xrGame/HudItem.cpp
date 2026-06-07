@@ -589,7 +589,7 @@ void CHudItem::PlayAnimIdleMovingSlow()
     auto wpn = smart_cast<CWeapon*>(this);
     PlayHUDMotion(
         {(wpn && wpn->IsMisfire()) ?
-             "anm_idle_moving_slow_jammed" :
+             "anm_idle_moving_slow_jammed", "anm_idle_moving_jammed" :
              ((wpn && ((wpn->GetAmmoElapsed() == 0 && !wpn->IsGrenadeMode()) || (wpn->GetAmmoElapsed2() == 0 && wpn->IsGrenadeMode()))) ? "anm_idle_moving_slow_empty" : "nullptr"),
          "anm_idle_moving_slow", "anm_idle_moving_slow", "anm_idle", "anim_idle_moving", "anim_idle"},
         true, GetState());
@@ -599,7 +599,7 @@ void CHudItem::PlayAnimIdleMovingCrouch()
 {
     auto wpn = smart_cast<CWeapon*>(this);
     PlayHUDMotion({(wpn && wpn->IsMisfire()) ?
-                       "anm_idle_moving_crouch_jammed" :
+                       "anm_idle_moving_crouch_jammed", "anm_idle_moving_jammed" :
                        ((wpn && ((wpn->GetAmmoElapsed() == 0 && !wpn->IsGrenadeMode()) || (wpn->GetAmmoElapsed2() == 0 && wpn->IsGrenadeMode()))) ? "anm_idle_moving_crouch_empty" :
                                                                                                                                                     "nullptr"),
                    "anm_idle_moving_crouch", "anm_idle_moving", "anm_idle", "anim_idle_moving", "anim_idle"},
@@ -609,7 +609,7 @@ void CHudItem::PlayAnimIdleMovingCrouch()
 void CHudItem::PlayAnimIdleMovingCrouchSlow()
 {
     auto wpn = smart_cast<CWeapon*>(this);
-    PlayHUDMotion({(wpn && wpn->IsMisfire()) ? "anm_idle_moving_crouch_slow_jammed" :
+    PlayHUDMotion({(wpn && wpn->IsMisfire()) ? "anm_idle_moving_crouch_slow_jammed", "anm_idle_moving_jammed" :
                                                ((wpn && ((wpn->GetAmmoElapsed() == 0 && !wpn->IsGrenadeMode()) || (wpn->GetAmmoElapsed2() == 0 && wpn->IsGrenadeMode()))) ?
                                                     "anm_idle_moving_crouch_slow_empty" :
                                                     "nullptr"),
@@ -923,6 +923,21 @@ void CHudItem::UpdateInertion(Fmatrix& trans)
     }
 }
 
+float easingInOut(float t)
+{
+    double t2;
+    if (t < 0.5)
+    {
+        t2 = t * t;
+        return 16 * t * t2 * t2;
+    }
+    else
+    {
+        t2 = (--t) * t;
+        return 1 + 16 * t * t2 * t2;
+    }
+}
+
 // Обновление координат текущего худа
 void CHudItem::UpdateHudAdditional(Fmatrix& trans, const bool need_update_collision)
 {
@@ -943,14 +958,33 @@ void CHudItem::UpdateHudAdditional(Fmatrix& trans, const bool need_update_collis
     if (b_aiming)
     {
         if (IsZoomed())
-            m_fZoomRotationFactor += Device.fTimeDelta / m_fZoomRotateTime;
+        {
+            if (m_fTexturedScope)
+                m_fZoomRotationFactor += 1.5 * Device.fTimeDelta / m_fZoomRotateTime;
+            else
+                m_fZoomRotationFactor += Device.fTimeDelta / m_fZoomRotateTime;
+        }
         else
-            m_fZoomRotationFactor -= Device.fTimeDelta / m_fZoomRotateTime;
+        {
+            if (m_fTexturedScope)
+                m_fZoomRotationFactor -= 1.5 * Device.fTimeDelta / m_fZoomRotateTime;
+            else
+                m_fZoomRotationFactor -= Device.fTimeDelta / m_fZoomRotateTime;
+        }
+
+        if (m_fZoomRotationFactor >= 0.7f)
+            m_fFinishedZoom = true;
+        else
+            m_fFinishedZoom = false;
 
         clamp(m_fZoomRotationFactor, 0.f, 1.f);
 
-        zr_offs.mul(m_fZoomRotationFactor);
-        zr_rot.mul(m_fZoomRotationFactor);
+        float eased = m_fZoomRotationFactor;
+        if (!m_fTexturedScope)
+            eased = easingInOut(m_fZoomRotationFactor);
+
+        zr_offs.mul(eased);
+        zr_rot.mul(eased);
 
         summary_offset.add(zr_offs);
     }

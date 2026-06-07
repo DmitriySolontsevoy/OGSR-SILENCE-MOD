@@ -21,8 +21,8 @@ inv_weight					= 0
 icon_group         			= 1
 inv_grid_width				= 2
 inv_grid_height				= 1
-inv_grid_x					= 0
-inv_grid_y					= 80
+inv_grid_x					= 2
+inv_grid_y					= 0
 
 kill_msg_x					= 197
 kill_msg_y					= 177
@@ -111,22 +111,20 @@ snd_shoot					= weapons\knife_1
 weapon_remove_time			= 5000	;время уничтожения оружия (с учетом TimeFactor) для мультиплеера
 
 [wpn_knife_hud]
-shell_point					= 0.0, 0.0, 0.0
-fire_point          		= 0.05, 0.0, 0.1
-fire_bone           		= wpn_body
+shell_point				= 0.0, 0.0, 0.0
+fire_point				= 0.004500,0.062500,-0.178499
+fire_bone               = knife
 
-orientation         		= 0,0,0
-position            		= 0,0,0
-visual              		= weapons\knife\wpn_knife_hud.ogf
+position				= 0.033,-0.1895,0.039
+orientation				= 2,2,0
+visual              	= weapons\knife\wpn_knife_hud.ogf
 
-anim_idle					= idle
-anim_draw					= draw
-anim_hide					= holster
-anim_shoot1_start			= shoot1_start
-anim_shoot2_start			= shoot2_start
-anim_shoot1_end				= shoot1_end
-anim_shoot2_end				= shoot2_end
-anim_idle_sprint			= idle_sprint
-
-anim_draw_speed_k			= 0.85
-anim_inspect_speed_k		= 0.8
+anim_idle				= idle
+anim_draw				= draw
+anim_hide				= holster
+anim_shoot1_start		= kick1_start
+anim_shoot2_start		= kick2_start
+anim_shoot1_end			= kick1_end
+anim_shoot2_end			= kick2_end
+anim_idle_sprint		= sprint
+anim_idle_moving		= moving

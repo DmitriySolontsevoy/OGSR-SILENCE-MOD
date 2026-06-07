@@ -29,6 +29,15 @@ ammo_elapsed		 		= 12
 ammo_mag_size		 		= 7
 ammo_class		 			= ammo_12.7x33_ae
 
+ejects_casings 				= 1
+ejects_on_reload			= 0
+casings_section				= 12_7x33_casing
+casing_delay				= 0
+
+drops_mags					= 1
+mags_section				= mag_desert_eagle
+mag_delay					= 300
+mag_point					= 0.0, 0.0, 0.0
 
 hand_dependence		 		= 1
 single_handed				= 1
@@ -38,13 +47,13 @@ animation_slot		 		= 1		; type of the animation that will be used
 
 inv_name					= Desert Eagle
 inv_name_short				= Desert Eagle
-inv_weight				= 1.7
+inv_weight					= 1.9
 
 icon_group             		= 1
-inv_grid_width				= 3
-inv_grid_height				= 1
+inv_grid_width				= 2
+inv_grid_height				= 2
 inv_grid_x					= 0
-inv_grid_y					= 79
+inv_grid_y					= 30
 
 kill_msg_x			= 194
 kill_msg_y			= 123
@@ -74,7 +83,7 @@ condition_shot_dec 			= 0.0003 ;увеличение износа при каждом выстреле
 direction                	= 0, 0, 1
 fire_point			= -0.005000,0.130000,0.220000
 
-flame_particles		   		= weapons\generic_weapon05
+flame_particles		   		= weapons\new_effects\pistol_50ae
 smoke_particles		   		= weapons\generic_shoot_00
 rpm_empty_click 	 		= 200
 
@@ -94,7 +103,7 @@ hit_impulse		 	= 140
 hit_type 			= fire_wound
 
 fire_distance       = 100
-bullet_speed		= 400			
+bullet_speed		= 470			
 rpm                 = 200
 ; end ttc
 
@@ -120,19 +129,34 @@ orientation              	= 0, 0, 0
 startup_ammo             	= 90
 visual                   	= weapons\desert_eagle\wpn_desert_eagle.ogf
 
-light_color		 			= 0.6,0.5,0.3
-light_range		 			= 3.0
+light_color		 			= 1.2,1.0,0.5
+light_range		 			= 5.0
 light_var_color		 		= 0.05
 light_var_range		 		= 0.5
-light_time 		 			= 0.2
+light_time 		 			= 0.1
 
 ph_mass			 			= 1
 ;cost			 			= 350
 
 ;addons
-scope_status				= 0
+scope_status				= 2
 silencer_status				= 2
 grenade_launcher_status		= 0
+pointer_status 				= 2
+
+scopes_textured					= wpn_addon_scope_acog
+scope_wpn_addon_scope_acog_x 	= 35
+scope_wpn_addon_scope_acog_y 	= 3
+
+scopes_physical						= wpn_addon_red_dot_aimpoint, wpn_addon_red_dot_eotech, wpn_addon_red_dot_gamo
+scope_wpn_addon_red_dot_aimpoint_x 	= 48
+scope_wpn_addon_red_dot_aimpoint_y 	= 3
+
+scope_wpn_addon_red_dot_eotech_x 	= 46
+scope_wpn_addon_red_dot_eotech_y 	= 3
+
+scope_wpn_addon_red_dot_gamo_x 		= 40
+scope_wpn_addon_red_dot_gamo_y 		= 3
 
 zoom_enabled				= true
 scope_zoom_factor	   		= 55
@@ -142,11 +166,15 @@ snd_holster					= weapons\deagle\holster
 snd_shoot					= weapons\deagle\shot
 snd_shoot1					= weapons\deagle\shot1
 snd_shoot2					= weapons\deagle\shot2
-snd_shoot3					= weapons\deagle\shot3     
+snd_shoot3					= weapons\deagle\shot3
+snd_silncer_shot			= weapons\deagle\silenced     
 snd_empty					= weapons\deagle\empty
 snd_reload					= weapons\deagle\reload
 snd_reload_partly			= weapons\deagle\reload_partly
+snd_reload_full				= weapons\colt\reload_full
+snd_reload_jammed			= weapons\deagle\reload_jammed
 snd_close					= weapons\deagle\draw
+snd_click_last				= weapons\_general\pistol_slide_click
 
 snd_aim_start       = weapons\_general\pistol_aim_start_2, 0.5
 snd_aim_end			= weapons\_general\pistol_aim_end_2, 0.5
@@ -157,52 +185,118 @@ snd_grab = pickups\grab_gun
 ;; silencer
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-silencer_name  				= wpn_addon_silencer_pistol_2		; section name for the attachable silencer
-silencer_x 					= 98						; offset in inventory icon
-silencer_y 					= -15					
+silencer_extends_grid_x 	= 1
+silencer_name  				= wpn_addon_silencer_pistol_50ae
+silencer_x 					= 70
+silencer_y 					= 17					
+
+pointer_bone       = wpn_pointer
+pointer_light_bone = wpn_pointer_focus
+
+pointer_name = wpn_addon_pointer
+pointer_x = 50
+pointer_y = 31
 
 ;params when silencer is attached 
 ;similar to corresponding params without prefix silencer_
 
 ;silencer_flame_particles 	= weapons\generic_weapon01
 silencer_smoke_particles 	= weapons\generic_shoot_00
-snd_silncer_shot			= weapons\deagle\Deagle
 silencer_light_color		= 0.6,0.5,0.3
 silencer_light_range		= 0.01
 silencer_light_var_color	= 0.05
 silencer_light_var_range	= 0.5
-silencer_light_time 		= 0.2
+silencer_light_time 		= 0.1
+
+hidden_bones = wpn_upgrade_luminous_sights
 
 [wpn_desert_eagle_hud]
-shell_point					= 0.020000,0.040000,-0.305000
-fire_point               	= -0.001000,0.057000,-0.13
+shell_point					= 1.0,0.04,-0.305
+fire_point               	= -0.001,0.057,-0.13
 
 fire_bone                	= wpn_body
 position					= 0.033,-0.17,-0.05
 orientation					= 2.407309,2.234722,0.0
 visual                   	= weapons\desert_eagle\wpn_desert_eagle_hud.ogf
 
+mag_point					= 0.2, -0.5, -0.5
+
 anim_reload_effector = short_reload
 anim_reload_empty_effector = short_reload
 
-anim_holster				= lancew_deagle_holster
-anim_idle					= lancew_deagle_idle
-anim_empty					= lancew_deagle_idle_empty
+anim_holster				= pistol_holster
+anm_hide_jammed				= pistol_holster_empty
+anim_idle					= pistol_idle
+anm_idle_jammed				= pistol_idle_empty
+anim_empty					= pistol_idle_empty
 anim_reload					= lancew_deagle_reload
 anim_reload_empty			= lancew_deagle_reload_full
-anim_draw					= lancew_deagle_draw
-anim_draw_empty				= lancew_deagle_draw_empty
-anim_shoot					= lancew_deagle_shoot
-anim_shot_last				= lancew_deagle_shoot_empty
-anim_close					= lancew_deagle_holster_empty ;draw
-anim_idle_aim				= lancew_deagle_idle_aim
+anim_reload_full			= reload_full
+anm_reload_jammed			= reload_jammed
+anim_draw					= pistol_draw
+anim_draw_empty				= pistol_draw_empty
+anm_show_jammed				= pistol_draw_empty
+anim_shoot					= pistol_shoot
+anim_shot_last				= pistol_shoot_last
+anim_close					= pistol_holster_empty
+anim_idle_aim				= pistol_idle_aim
+anm_idle_aim_jammed			= pistol_idle_empty
 anim_idle_sprint			= lancew_deagle_sprint
-anim_idle_sprint_empty		= lancew_deagle_sprint_empty
+anim_idle_sprint_empty      = lancew_deagle_sprint_empty
+anm_idle_sprint_jammed      = lancew_deagle_sprint_empty
+anim_idle_moving			= pistol_moving
+anim_idle_moving_empty		= pistol_moving_empty
+anm_idle_moving_jammed		= pistol_moving_empty
+
+anim_idle_moving_speed_k        = 0.9
+anim_idle_moving_empty_speed_k  = 0.9
+anim_shoot_speed_k				= 0.6
+anim_shot_last_speed_k			= 0.6
+
+anm_reload_jammed_speed_k = 0.8
+anm_reload_jammed_stop_k  = 0.6
+
+anim_reload_full_stop_k = 0.85
 
 ;смещения HUD для режима приближения
-zoom_offset			= -0.1455,0.0465,-0.06
-zoom_rotate_x		= 0.0291
-zoom_rotate_y		= 0.034
+zoom_offset				= -0.1533,0.05,-0.1
+zoom_rotate_x			= 0.035
+zoom_rotate_y			= 0.065
 
-;;SKINS;;
+scopes_textured								= wpn_addon_scope_acog
 
+scoped_wpn_addon_scope_acog_zoom_offset		= -0.1533,0.027,-0.45
+scoped_wpn_addon_scope_acog_zoom_rotate_x	= 0.035
+scoped_wpn_addon_scope_acog_zoom_rotate_y	= 0.065
+
+scopes_physical									= wpn_addon_red_dot_aimpoint, wpn_addon_red_dot_eotech, wpn_addon_red_dot_gamo
+scoped_wpn_addon_red_dot_aimpoint_zoom_offset	= -0.1533,0.0235,-0.1
+scoped_wpn_addon_red_dot_aimpoint_zoom_rotate_x	= 0.032
+scoped_wpn_addon_red_dot_aimpoint_zoom_rotate_y	= 0.065
+
+scoped_wpn_addon_red_dot_eotech_zoom_offset		= -0.1533,0.021,-0.1
+scoped_wpn_addon_red_dot_eotech_zoom_rotate_x	= 0.025
+scoped_wpn_addon_red_dot_eotech_zoom_rotate_y	= 0.0635
+
+scoped_wpn_addon_red_dot_gamo_zoom_offset		= -0.1533,0.019,-0.1
+scoped_wpn_addon_red_dot_gamo_zoom_rotate_x		= 0.015
+scoped_wpn_addon_red_dot_gamo_zoom_rotate_y		= 0.0635
+
+zoom_rotate_time = 0.4
+
+hidden_bones = wpn_upgrade_luminous_sights_front, wpn_upgrade_luminous_sights_rear
+
+
+;;;;;;;;;;;;;;;;;
+;;;WEAPON MODS;;;
+;;;;;;;;;;;;;;;;;
+;;LUMINOUS SIGHTS
+[wpn_desert_eagle:tritium]:wpn_desert_eagle
+inv_grid_x = 3
+
+hidden_bones = null
+
+hud = wpn_desert_eagle:tritium_hud
+
+[wpn_desert_eagle:tritium_hud]:wpn_desert_eagle_hud
+hidden_bones = null

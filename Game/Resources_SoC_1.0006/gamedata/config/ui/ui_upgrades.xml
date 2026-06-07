@@ -14,4 +14,9 @@
     <texture id="ui_cond_upgrade_d" x="150" y="75" width="75" height="75" />
     <texture id="ui_cond_upgrade_t" x="150" y="150" width="75" height="75" />
     <texture id="ui_cond_upgrade_h" x="150" y="225" width="75" height="75" />
+	
+	<texture id="ui_tritium_upgrade_e" x="225" y="0" width="75" height="75" />
+    <texture id="ui_tritium_upgrade_d" x="225" y="75" width="75" height="75" />
+    <texture id="ui_tritium_upgrade_t" x="225" y="150" width="75" height="75" />
+    <texture id="ui_tritium_upgrade_h" x="225" y="225" width="75" height="75" />
 </ui_texture>

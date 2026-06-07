@@ -29,7 +29,12 @@ ammo_elapsed			= 0
 ammo_mag_size			= 10
 ammo_class				= ammo_gauss
 
-sprint_allowed			= false
+drops_mags					= 1
+mags_section				= mag_gauss
+mag_delay					= 600
+mag_point					= 0.0, 0.0, 0.0
+
+sprint_allowed			= true
 ;-----------------------------------------------------------------------------------
 ;базовая дисперсия
 fire_dispersion_base		= 0.01 ;угол (в градусах) базовой дисперсии оружия (оружия зажатого в тисках)
@@ -62,7 +67,7 @@ icon_group              = 1
 inv_grid_width			= 6
 inv_grid_height			= 2
 inv_grid_x				= 0
-inv_grid_y				= 58
+inv_grid_y				= 44
 
 kill_msg_x			= 166
 kill_msg_y			= 59
@@ -113,7 +118,7 @@ light_color		 		= 1.3,1.5,2
 light_range		 		= 4.0
 light_var_color		 	= 0.05
 light_var_range		 	= 0.5
-light_time 		 		= 0.5
+light_time 		 		= 0.1
 
 ph_mass			 		= 3
 ;cost			 		= 900
@@ -126,11 +131,30 @@ grenade_launcher_status	= 0
 zoom_enabled			= true
 scope_zoom_factor	    = 35
 
-scope_texture			= wpn\wpn_crosshair_l85
 
-scope_name 				= wpn_addon_scope_susat
-scope_x 				= 83
-scope_y 				= -3
+scopes_textured					= wpn_addon_scope_susat, wpn_addon_scope_pm2, wpn_addon_scope_1p86, wpn_addon_scope_acog
+scope_wpn_addon_scope_susat_x 	= 84
+scope_wpn_addon_scope_susat_y 	= -1
+
+scope_wpn_addon_scope_pm2_x 	= 58
+scope_wpn_addon_scope_pm2_y 	= 1
+
+scope_wpn_addon_scope_1p86_x 	= 43
+scope_wpn_addon_scope_1p86_y 	= 0
+
+scope_wpn_addon_scope_acog_x 	= 70
+scope_wpn_addon_scope_acog_y 	= -1
+
+scopes_physical						= wpn_addon_red_dot_aimpoint, wpn_addon_red_dot_eotech, wpn_addon_red_dot_gamo
+scope_wpn_addon_red_dot_aimpoint_x 	= 84
+scope_wpn_addon_red_dot_aimpoint_y 	= -1
+
+scope_wpn_addon_red_dot_eotech_x 	= 82
+scope_wpn_addon_red_dot_eotech_y 	= -1
+
+scope_wpn_addon_red_dot_gamo_x 		= 76
+scope_wpn_addon_red_dot_gamo_y 		= -1
+
 
 ;звуки
 snd_draw				= weapons\gauss\draw
@@ -138,12 +162,15 @@ snd_holster				= weapons\gauss\holster
 snd_shoot				= weapons\gauss\shot
 snd_empty				= weapons\gauss\empty
 snd_reload				= weapons\gauss\reload
+snd_reload_jammed		= weapons\gauss\reload_jammed
 
 snd_aim_start       = weapons\_general\heavy_aim_start, 0.5
 snd_aim_end			= weapons\_general\heavy_aim_end, 0.5
 
 snd_grab = pickups\grab_gun
- 
+
+hidden_bones = wpn_upgrade_luminous_sights
+
 [wpn_gauss_hud]
 fire_point			= 0,0,-0.8
 fire_bone               = wpn_body
@@ -156,21 +183,74 @@ anim_reload_partly_effector = reload
 
 shell_point			= 0,0,-0.6				; position (3rd person view) for shell to throw out
 
+mag_point			= -1.5, 0.0, 0.0
 
-anim_holster	= gauss_holster
-anim_idle		= gauss_idle
-anim_idle_aim	= gauss_idle_aim
-anim_reload		= gauss_reload
-anim_draw		= gauss_draw
-anim_shoot		= gauss_shoot
-anim_inspect    = gauss_idle_bore
+anim_holster	 	= gauss_holster
+anim_idle		 	= gauss_idle
+anim_idle_aim	 	= gauss_idle_aim
+anim_reload		 	= gauss_reload
+anm_reload_jammed	= gauss_idle_bore2
+anim_draw		 	= gauss_draw
+anim_shoot		 	= gauss_shoot
+anim_inspect     	= gauss_idle_bore
+anim_idle_moving 	= gauss_idle_moving
 
+anim_idle_moving_speed_k    = 0.9
+anim_inspect_speed_k 		= 1.5
+anim_draw_speed_k    		= 0.7
+
+anm_reload_jammed_speed_k = 2.0
 
 ;смещения HUD для режима приближения
-zoom_offset			= -0.1327, 0.037, 0
-zoom_rotate_x		= -0.01
+zoom_offset			= -0.1327, 0.042, 0
+zoom_rotate_x		= 0.003
 zoom_rotate_y		= 0
 
-scoped_zoom_offset		= -0.1327, 0.015, -0.4
-scoped_zoom_rotate_x	= -0.004
-scoped_zoom_rotate_y	= 0
+zoom_rotate_time = 0.4
+
+scopes_textured								= wpn_addon_scope_susat, wpn_addon_scope_pm2, wpn_addon_scope_1p86, wpn_addon_scope_acog
+scoped_wpn_addon_scope_susat_zoom_offset	= -0.1327, 0.007, -0.4
+scoped_wpn_addon_scope_susat_zoom_rotate_x	= -0.004
+scoped_wpn_addon_scope_susat_zoom_rotate_y	= 0
+
+scoped_wpn_addon_scope_pm2_zoom_offset		= -0.1327, 0.027, -0.3
+scoped_wpn_addon_scope_pm2_zoom_rotate_x	= -0.004
+scoped_wpn_addon_scope_pm2_zoom_rotate_y	= 0
+
+scoped_wpn_addon_scope_1p86_zoom_offset		= -0.1327, 0.032, -0.3
+scoped_wpn_addon_scope_1p86_zoom_rotate_x	= -0.004
+scoped_wpn_addon_scope_1p86_zoom_rotate_y	= 0
+
+scoped_wpn_addon_scope_acog_zoom_offset		= -0.1327, 0.03, -0.35
+scoped_wpn_addon_scope_acog_zoom_rotate_x	= -0.004
+scoped_wpn_addon_scope_acog_zoom_rotate_y	= 0
+
+scopes_physical									= wpn_addon_red_dot_aimpoint, wpn_addon_red_dot_eotech, wpn_addon_red_dot_gamo
+scoped_wpn_addon_red_dot_aimpoint_zoom_offset	= -0.133, 0.03, 0
+scoped_wpn_addon_red_dot_aimpoint_zoom_rotate_x	= 0
+scoped_wpn_addon_red_dot_aimpoint_zoom_rotate_y	= 0
+
+scoped_wpn_addon_red_dot_eotech_zoom_offset		= -0.133, 0.0315, 0
+scoped_wpn_addon_red_dot_eotech_zoom_rotate_x	= 0
+scoped_wpn_addon_red_dot_eotech_zoom_rotate_y	= 0
+
+scoped_wpn_addon_red_dot_gamo_zoom_offset		= -0.133, 0.0325, 0
+scoped_wpn_addon_red_dot_gamo_zoom_rotate_x		= 0
+scoped_wpn_addon_red_dot_gamo_zoom_rotate_y		= 0
+
+hidden_bones = wpn_upgrade_luminous_sights
+
+
+;;;;;;;;;;;;;;;;;
+;;;WEAPON MODS;;;
+;;;;;;;;;;;;;;;;;
+;;LUMINOUS SIGHTS
+[wpn_gauss:tritium]:wpn_gauss
+inv_grid_x = 6
+
+hidden_bones = null
+
+hud = wpn_gauss:tritium_hud
+
+[wpn_gauss:tritium_hud]:wpn_gauss_hud
+hidden_bones = null

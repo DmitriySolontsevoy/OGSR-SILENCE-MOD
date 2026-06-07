@@ -1,0 +1,23 @@
+<game_dialogs>
+	<!--TRADER-->
+	<dialog id="trader_start_dialogue">
+		<dont_has_info>trader_initial_dialogue_passed</dont_has_info>
+		<phrase_list>
+            <phrase id="0">
+                <text>Ну, здорово!</text>
+                <next>1</next>
+            </phrase>
+            <phrase id="1">
+                <text>И тебе не хворать</text>
+				<next>2</next>
+            </phrase>
+			<phrase id="2">
+                <text>Вываливай консервные банки</text>
+				<give_info>trader_initial_dialogue_passed</give_info>
+            </phrase>
+        </phrase_list>
+	</dialog>
+	
+	
+	
+</game_dialogs>

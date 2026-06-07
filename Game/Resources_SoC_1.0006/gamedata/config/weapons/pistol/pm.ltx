@@ -29,22 +29,31 @@ ammo_elapsed		 		= 8
 ammo_mag_size		 		= 8;7
 ammo_class		 			= ammo_9x18_fmj, ammo_9x18_pmm
 
+ejects_casings 				= 1
+ejects_on_reload			= 0
+casings_section				= 9x18_casing
+casing_delay				= 0
+
+drops_mags					= 1
+mags_section				= mag_pm
+mag_delay					= 600
+mag_point					= 0.0, 0.0, 0.0
 
 hand_dependence			 	= 1
+single_handed				= 1
 
 slot 				 		= 1,2
 animation_slot		 		= 1		; type of the animation that will be used
-single_handed				= 1
 
-inv_name					= "ПМ"
-inv_name_short				= "ПМ"
+inv_name					= "PM"
+inv_name_short				= "PM"
 inv_weight					= 0.73
 
 icon_group            		= 1
 inv_grid_width				= 2
 inv_grid_height				= 1
 inv_grid_x					= 0
-inv_grid_y					= 70
+inv_grid_y					= 68
 
 kill_msg_x			= 227
 kill_msg_y			= 82
@@ -73,12 +82,12 @@ condition_shot_dec 			= 0.0003 ;увеличение износа при каждом выстреле
 direction                	= 0, 0, 1
 fire_point               	= 0.0, 0.127, 0.117
 
-flame_particles				= weapons\generic_weapon03
+flame_particles				= weapons\new_effects\pistol_9x18
 smoke_particles				= weapons\generic_shoot_00
 
 shell_point		 			= 0.0, 0.214, 0.039
 shell_dir		 			= 0.0, 0.0, 0.4
-shell_particles	 			= weapons\arsenal_shells1
+--shell_particles	 			= weapons\arsenal_shells1
 
 rpm_empty_click 	 		= 100
 
@@ -94,7 +103,7 @@ hit_impulse		 		= 100
 hit_type = fire_wound
 
 fire_distance           = 50 ;1000
-bullet_speed			= 300 ;290	;начальна€ скорость пули
+bullet_speed			= 315 ;290	;начальна€ скорость пули
 rpm                     = 260
 ; end ttc
 
@@ -120,11 +129,11 @@ orientation              	= 0, 0, 1
 ;startup_ammo             	= 90
 visual                   	= weapons\pm\wpn_pm.ogf
 
-light_color		 			= 0.6,0.5,0.3
+light_color		 			= 1.2,1.0,0.5
 light_range		 			= 3.0
 light_var_color		 		= 0.05
 light_var_range		 		= 0.5
-light_time 		 			= 0.2
+light_time 		 			= 0.1
 
 ph_mass			 			= 1
 ;cost			 			= 350
@@ -146,9 +155,11 @@ snd_shoot2					= weapons\pm\shot2
 snd_shoot3					= weapons\pm\shot3      
 snd_empty					= weapons\pm\empty
 snd_reload					= weapons\pm\reload
-snd_reload_full			    = weapons\pm\reload_full
 snd_reload_partly			= weapons\pm\reload_partly
+snd_reload_full				= weapons\colt\reload_full
+snd_reload_jammed			= weapons\glock\reload_jammed
 snd_close					= weapons\generic_close
+snd_click_last				= weapons\_general\pistol_slide_click
 
 snd_aim_start       = weapons\_general\pistol_aim_start_1, 0.5
 snd_aim_end			= weapons\_general\pistol_aim_end_1, 0.5
@@ -160,10 +171,11 @@ weapon_remove_time			= 5000
 ;; silencer
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-silencer_name  				= wpn_addon_silencer		; section name for the attachable silencer
-silencer_x 					= 48					; offset in inventory icon
-silencer_y 					= -17		
-silencer_bone			      = wpn_silencer
+silencer_extends_grid_x 	= 1
+silencer_name  				= wpn_addon_silencer_pistol_9mm		; section name for the attachable silencer
+silencer_x 					= 58					; offset in inventory icon
+silencer_y 					= -16		
+silencer_bone			    = wpn_silencer
 
 ;params when silencer is attached 
 ;similar to corresponding params without prefix silencer_
@@ -179,42 +191,76 @@ silencer_light_color		= 0.6,0.5,0.3
 silencer_light_range		= 0.01
 silencer_light_var_color	= 0.05
 silencer_light_var_range	= 0.5
-silencer_light_time 		= 0.2
+silencer_light_time 		= 0.1
 
- 
+hidden_bones = wpn_upgrade_luminous_sights
+
 [wpn_pm_hud]
-shell_point			= 0,0,-0.5
-fire_point			= 0,0.03,-0.2
+shell_point					= 1.5,0.03,-0.3
+
+fire_point					= 0,0.03,-0.2
 fire_bone                	= wpn_body
 orientation              	= 0,0,0
 position                 	= 0, -0.14, -0.05
 visual                   	= weapons\pm\wpn_pm_hud.ogf
 
-anim_reload_effector = short_reload
-anim_reload_full_effector = reload
-anim_reload_empty_effector = short_reload
-anim_reload_misfire_effector = short_reload
+mag_point					= -0.5, -0.5, -0.5
 
-anim_holster				= holster
-anim_holster_empty			= holster_empty
-anim_idle					= idle
-anim_empty					= empty
+anim_reload_effector 			= short_reload
+anim_reload_empty_effector 		= short_reload
+anim_reload_misfire_effector 	= short_reload
+
+anim_holster				= pistol_holster
+anm_hide_jammed				= pistol_holster_empty
+anim_idle					= pistol_idle
+anm_idle_jammed				= pistol_idle_empty
+anim_empty					= pistol_idle_empty
 anim_reload					= reload
-anim_reload_full			= full_reload
-anim_reload_empty			= reload_full
-anim_reload_misfire			= reload_full
-anim_draw					= draw
-anim_draw_empty				= draw_empty
-anim_shoot					= shoot
-anim_shot_last				= shoot_last
-anim_close					= holster
-anim_idle_aim				= idle_aim
+anim_reload_empty			= reload_empty
+anim_reload_full			= reload_full
+anm_reload_jammed			= reload_jammed
+anim_draw					= pistol_draw
+anim_draw_empty				= pistol_draw_empty
+anm_show_jammed				= pistol_draw_empty
+anim_shoot					= pistol_shoot
+anim_shot_last				= pistol_shoot_last
+anim_close					= pistol_holster_empty
+anim_idle_aim				= pistol_idle_aim
+anm_idle_aim_jammed			= pistol_idle_empty
 anim_idle_sprint			= idle_sprint
-anim_idle_sprint_empty		= idle_sprint_empty
+anim_idle_sprint_empty      = idle_sprint_empty
+anm_idle_sprint_jammed      = idle_sprint_empty
+anim_idle_moving			= pistol_moving
+anim_idle_moving_empty		= pistol_moving_empty
+anm_idle_moving_jammed		= pistol_moving_empty
+
+anm_reload_jammed_speed_k = 0.8
+anm_reload_jammed_stop_k  = 0.6
+
+anim_reload_full_stop_k = 0.85
 
 ;смещени€ HUD дл€ режима приближени€
-zoom_offset			= -0.115, 0.029, 0
-zoom_rotate_x		= -0.009
-zoom_rotate_y		= -0.007
+zoom_offset				= -0.1235,0.026,-0.1
+zoom_rotate_x			= -0.004
+zoom_rotate_y			= 0.02
+
+zoom_rotate_time = 0.4
 
 zoom_hide_crosshair	= true						;to hide crosshair in zoom 
+
+hidden_bones = wpn_upgrade_luminous_sights
+
+
+;;;;;;;;;;;;;;;;;
+;;;WEAPON MODS;;;
+;;;;;;;;;;;;;;;;;
+;;LUMINOUS SIGHTS
+[wpn_pm:tritium]:wpn_pm
+inv_grid_x = 3
+
+hidden_bones = null
+
+hud = wpn_pm:tritium_hud
+
+[wpn_pm:tritium_hud]:wpn_pm_hud
+hidden_bones = null

@@ -7,40 +7,55 @@
 #include "pistol\pb.ltx"
 #include "pistol\walther.ltx"
 #include "pistol\usp.ltx"
-#include "pistol\fort.ltx" 
+#include "pistol\fort.ltx"
+#include "pistol\hp.ltx"
+#include "pistol\glock.ltx"
+#include "pistol\python.ltx"
+#include "pistol\aps.ltx"
 
 #include "sniper\svd.ltx"
 #include "sniper\l96a1.ltx"
 #include "sniper\svu.ltx"
+#include "sniper\vsk94.ltx"
 #include "sniper\vss.ltx"
 #include "sniper\vssm.ltx"
 
 #include "rifle\val.ltx"
 #include "rifle\asm.ltx"
-#include "rifle\vsk94.ltx"
 #include "rifle\ak74.ltx"
 #include "rifle\ak47.ltx"
+#include "rifle\akm.ltx"
 #include "rifle\fnFal.ltx"
 #include "rifle\ak74u.ltx"
 #include "rifle\an94.ltx"
 #include "rifle\fn2000.ltx"
 #include "rifle\g36.ltx"
 #include "rifle\lr300.ltx"
+#include "rifle\ar15.ltx"
+#include "rifle\hk416.ltx"
 #include "rifle\sig550.ltx"
 #include "rifle\galil.ltx"
 #include "rifle\groza.ltx"
 #include "rifle\l85.ltx"
 #include "rifle\gauss.ltx"
 #include "rifle\ruger.ltx"
+#include "rifle\aug.ltx"
+#include "rifle\famas.ltx"
 
 #include "smg\mp5.ltx"
 #include "smg\ump45.ltx"
+#include "smg\vector.ltx"
 #include "smg\uzi.ltx"
+#include "smg\mac10.ltx"
+#include "smg\p90.ltx"
+#include "smg\bizon.ltx"
 
 #include "shotgun\bm16sawed.ltx"
 #include "shotgun\toz34.ltx" 
 #include "shotgun\spas12.ltx" 
-#include "shotgun\winchester1300.ltx"
+#include "shotgun\mossberg500.ltx"
+#include "shotgun\saiga.ltx"
+#include "shotgun\protecta.ltx"
 
 #include "heavy\rg6.ltx"
 #include "heavy\rpg.ltx"
@@ -916,6 +931,42 @@ box_size		= 20	;50
 
 inv_name		= ammo-12.7x33-ae
 inv_name_short	= ammo-12.7x33-ae_s
+inv_weight		= .3
+
+inv_grid_width		= 2
+inv_grid_height		= 1
+inv_grid_x			= 12
+inv_grid_y			= 14
+
+k_dist			= 1
+k_disp			= 3
+k_hit			= 1
+k_impulse		= 1
+k_pierce		= 1
+impair			= 1
+buck_shot		= 1
+tracer			= off
+wm_size         = 0.05
+
+snd_grab = pickups\grab_ammo_45_acp
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[ammo_9x33_jhp]:ammo_base
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\ammo\ammo_12.7x33_ae" ; option for Level Editor
+class			= AMMO
+cform                   = skeleton
+visual                  = weapons\ammo\ammo_9x33_jhp.ogf
+description				= enc_weapons1_ammo_ammo_9x33_jhp
+$prefetch 		= 64
+
+cost					 = 200
+
+box_size		= 20	;50
+
+inv_name		= ammo_9x33_jhp
+inv_name_short	= ammo_9x33_jhp_s
 inv_weight		= .3
 
 inv_grid_width		= 2

@@ -129,8 +129,8 @@ void dxEnvDescriptorRender::OnDeviceDestroy()
 
 dxEnvironmentRender::dxEnvironmentRender()
 {
-    tsky0 = DEV->_CreateTexture("$user$sky0");
-    tsky1 = DEV->_CreateTexture("$user$sky1");
+    tsky0 = DEV->_CreateTexture(r2_T_sky0);
+    tsky1 = DEV->_CreateTexture(r2_T_sky1);
 }
 
 void dxEnvironmentRender::OnFrame(CEnvironment& env)
@@ -185,7 +185,7 @@ void dxEnvironmentRender::OnFrame(CEnvironment& env)
 
 void dxEnvironmentRender::OnLoad()
 {
-    tonemap = DEV->_CreateTexture("$user$tonemap"); //. hack
+    tonemap = DEV->_CreateTexture(r2_RT_luminance_cur); //. hack
 }
 
 void dxEnvironmentRender::OnUnload() { tonemap = 0; }

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding="windows-1251"?>
+<game_information_portions>
+	<!-- Приветствия торговца -->
+	<info_portion id="esc_trader_hello_played"></info_portion>
+	<info_portion id="esc_trader_bye_played"></info_portion>
+	
+	<!-- Trader infos -->
+	<info_portion id="trader_initial_dialogue_passed"></info_portion>
+	
+</game_information_portions>

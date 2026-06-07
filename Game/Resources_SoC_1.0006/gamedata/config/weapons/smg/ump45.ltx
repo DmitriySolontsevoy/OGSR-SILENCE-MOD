@@ -31,6 +31,15 @@ ammo_mag_size			= 25
 
 ammo_class			= ammo_11.43x23_fmj, ammo_11.43x23_hydro
 
+ejects_casings 				= 1
+ejects_on_reload			= 0
+casings_section				= 11_43x23_casing
+casing_delay				= 0
+
+drops_mags					= 1
+mags_section				= mag_ump45
+mag_delay					= 600
+mag_point					= 0.0, 0.0, 0.0
 
 fire_modes			= 1, 2, 3, -1
 
@@ -40,15 +49,15 @@ single_handed			= 0
 slot 				= 1,2		; primary
 animation_slot			= 8		; type of the animation that will be used
 
-inv_name			= UMP45
+inv_name				= UMP45
 inv_name_short			= UMP45
-inv_weight			= 2.45
+inv_weight				= 2.5
 
 icon_group              = 1
 inv_grid_width			= 4
 inv_grid_height			= 2
 inv_grid_x				= 0
-inv_grid_y				= 68
+inv_grid_y				= 89
 
 ;спавнить автоматически боеприпасы при подъеме оружия
 auto_spawn_ammo			= false
@@ -78,7 +87,7 @@ direction 			= 0, 0, 1
 
 fire_point 			= 0.0, 0.2, 0.392
 
-flame_particles			= weapons\generic_weapon05
+flame_particles			= weapons\new_effects\pistol_45acp
 smoke_particles 		= weapons\generic_shoot_00
 
 shell_point		 	= 0.0, 0.188, 0.082
@@ -97,8 +106,8 @@ hit_impulse		 	= 64
 hit_type 			= fire_wound
 
 fire_distance 			= 150
-bullet_speed			= 400			; начальная скорость пули
-rpm 					= 660
+bullet_speed			= 260			; начальная скорость пули
+rpm 					= 600
 rpm_empty_click 	 	= 400
 ; end ttc
 
@@ -122,21 +131,48 @@ light_color		 	= 0.6,0.5,0.3
 light_range		 	= 5
 light_var_color		 	= 0.05
 light_var_range		 	= 0.1
-light_time 		 	= 0.2
+light_time 		 		= 0.1
 
 ph_mass			 	= 3
 
 ;addons
-scope_status			= 0
-silencer_status			= 2
+scope_status				= 2
+silencer_status				= 2
 grenade_launcher_status		= 0
 
 zoom_enabled			= true
 scope_zoom_factor	 	= 60
 
-silencer_name 			= wpn_addon_silencer
-silencer_x 			= 160
-silencer_y 			= 0
+
+scopes_textured					= wpn_addon_scope_susat, wpn_addon_scope_pm2, wpn_addon_scope_acog
+scope_wpn_addon_scope_susat_x 	= 72
+scope_wpn_addon_scope_susat_y 	= -8
+
+scope_wpn_addon_scope_pm2_x 	= 48
+scope_wpn_addon_scope_pm2_y 	= -8
+
+scope_wpn_addon_scope_acog_x 	= 62
+scope_wpn_addon_scope_acog_y 	= -10
+
+scopes_physical						= wpn_addon_red_dot_aimpoint, wpn_addon_red_dot_eotech, wpn_addon_red_dot_gamo
+scope_wpn_addon_red_dot_aimpoint_x 	= 73
+scope_wpn_addon_red_dot_aimpoint_y 	= -8
+
+scope_wpn_addon_red_dot_eotech_x 	= 72
+scope_wpn_addon_red_dot_eotech_y 	= -8
+
+scope_wpn_addon_red_dot_gamo_x 		= 70
+scope_wpn_addon_red_dot_gamo_y 		= -8
+
+silencer_extends_grid_x 	= 1
+silencer_name 		= wpn_addon_silencer_pistol_osprey
+silencer_x 			= 158
+silencer_y 			= 14
+
+pointer_status 	= 2
+pointer_name 	= wpn_addon_pointer
+pointer_x 		= 125
+pointer_y 		= 16
 
 ;sounds (name of the sound, volume (0.0 - 1.0), delay (sec))
 snd_draw			= weapons\mp5\draw
@@ -148,7 +184,9 @@ snd_shoot3			= weapons\ump45\ump45_shoot
 snd_empty			= weapons\mp5\mp5_empty, 0.5
 snd_reload			= weapons\ump45\ump45_reload
 snd_reload_partly	= weapons\ump45\ump45_reload_partly
-snd_silncer_shot		= weapons\ump45\ump45_shoot_sil
+snd_reload_jammed	= weapons\ump45\ump45_reload_jammed
+snd_silncer_shot	= weapons\ump45\ump45_shoot_sil
+snd_click_last		= weapons\_general\smg_slide_click
 
 snd_aim_start       = weapons\_general\smg_aim_start, 0.5
 snd_aim_end			= weapons\_general\smg_aim_end, 0.5
@@ -158,7 +196,7 @@ snd_grab = pickups\grab_gun
 ;silencer_flame_particles 	= weapons\generic_weapon01
 silencer_smoke_particles 	= weapons\generic_shoot_00
 
-silencer_hit_power 		= 0.32
+silencer_hit_power 			= 0.32
 silencer_hit_impulse	 	= 64
 silencer_fire_distance 		= 73
 silencer_bullet_speed	 	= 400
@@ -167,23 +205,26 @@ silencer_light_color		= 0.6,0.5,0.3
 silencer_light_range		= 0.01
 silencer_light_var_color	= 0.05
 silencer_light_var_range	= 0.5
-silencer_light_time 		= 0.2
+silencer_light_time 		= 0.1
+
+hidden_bones = wpn_upgrade_luminous_sights
 
 ;-----------------------------------------------------------------------------
 ;-- HUD DESCRIPTION
 ;-----------------------------------------------------------------------------
 [wpn_ump_hud]
-
 allow_inertion			= true
 
-shell_point          	= 0.00, 0.00, -0.6
-shell_dir		 		=    0.0, 0.0, 0.0
+shell_point          	= 1.5, 0.0, 0.0
+shell_dir		 		= 0.0, 0.0, 0.0
 
-fire_point				= 0.01,0.07,-0.09
+fire_point				= 0,0.08,-0.2
 fire_bone               = wpn_body
 orientation             = 0, 0, 0
 position                = 0.03, -0.19, 0.28
 visual                  = weapons\ump45\wpn_ump_hud.ogf
+
+mag_point				= -0.5, -0.5, -0.5
 
 anim_reload_effector = reload
 anim_reload_partly_effector = short_reload
@@ -192,21 +233,67 @@ anim_idle			= mp5_idle
 anim_idle_aim		= mp5_aim
 anim_reload			= mp5_reload
 anim_reload_partly	= mp5_reload_partly
+anm_reload_jammed	= mp5_reload_jammed
 anim_draw			= mp5_draw
 anim_holster		= mp5_holster
 anim_shoot			= mp5_shoot
 anim_idle_sprint	= mp5_sprint
+anim_idle_moving	= mp5_move
 
 
 ;смещения HUD для режима приближения
-zoom_offset			= -0.1853, 0.024, -0.15
-zoom_rotate_x		= -0.015
+zoom_offset			= -0.1823, 0.07, -0.15
+zoom_rotate_x		= 0.035
 zoom_rotate_y		= 0
+
+scopes_textured								= wpn_addon_scope_susat, wpn_addon_scope_pm2, wpn_addon_scope_acog
+scoped_wpn_addon_scope_susat_zoom_offset	= -0.1835, -0.008, -0.6
+scoped_wpn_addon_scope_susat_zoom_rotate_x	= -0.015
+scoped_wpn_addon_scope_susat_zoom_rotate_y	= 0
+
+scoped_wpn_addon_scope_pm2_zoom_offset		= -0.1835, 0.017, -0.4
+scoped_wpn_addon_scope_pm2_zoom_rotate_x	= -0.015
+scoped_wpn_addon_scope_pm2_zoom_rotate_y	= 0
+
+scoped_wpn_addon_scope_acog_zoom_offset		= -0.1835, 0.012, -0.5
+scoped_wpn_addon_scope_acog_zoom_rotate_x	= -0.015
+scoped_wpn_addon_scope_acog_zoom_rotate_y	= 0
+
+scopes_physical									= wpn_addon_red_dot_aimpoint, wpn_addon_red_dot_eotech, wpn_addon_red_dot_gamo
+scoped_wpn_addon_red_dot_aimpoint_zoom_offset	= -0.182, 0.045, -0.15
+scoped_wpn_addon_red_dot_aimpoint_zoom_rotate_x	= 0.038
+scoped_wpn_addon_red_dot_aimpoint_zoom_rotate_y	= 0
+
+scoped_wpn_addon_red_dot_eotech_zoom_offset 	= -0.1835, 0.04, -0.15
+scoped_wpn_addon_red_dot_eotech_zoom_rotate_x 	= 0.025
+scoped_wpn_addon_red_dot_eotech_zoom_rotate_y 	= 0
+
+scoped_wpn_addon_red_dot_gamo_zoom_offset		= -0.1835, 0.04, -0.15
+scoped_wpn_addon_red_dot_gamo_zoom_rotate_x		= 0.023
+scoped_wpn_addon_red_dot_gamo_zoom_rotate_y		= 0
 
 ;-----------------------------------------------------------------------------
 ;прячем перекрестие прицела в зуме
 zoom_hide_crosshair		= true
 
 ;время поворота HUD (сек)
-zoom_rotate_time		= 0.3
+zoom_rotate_time 	= 0.4
 rotate_time			= 0.3
+
+;;HIDDEN BONES
+hidden_bones = wpn_upgrade_luminous_sights
+
+
+;;;;;;;;;;;;;;;;;
+;;;WEAPON MODS;;;
+;;;;;;;;;;;;;;;;;
+;;LUMINOUS SIGHTS
+[wpn_ump:tritium]:wpn_ump
+inv_grid_x = 5
+
+hidden_bones = null
+
+hud = wpn_ump:tritium_hud
+
+[wpn_ump:tritium_hud]:wpn_ump_hud
+hidden_bones = null

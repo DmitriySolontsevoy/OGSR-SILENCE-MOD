@@ -145,11 +145,13 @@ public:
 
     // utilities
     CSE_Abstract* entity_Create(LPCSTR name);
+    void entity_Register(CSE_Abstract*& P);
     void entity_Destroy(CSE_Abstract*& P);
     u32 GetEntitiesNum() { return entities.size(); };
     CSE_Abstract* GetEntity(u32 Num);
 
     xrClientData* ID_to_client(ClientID ID, bool ScanAll = false) { return (xrClientData*)(IPureServer::ID_to_client(ID, ScanAll)); }
+    void RegisterEntity(CSE_Abstract* entity);
     CSE_Abstract* ID_to_entity(u16 ID);
 
     // main

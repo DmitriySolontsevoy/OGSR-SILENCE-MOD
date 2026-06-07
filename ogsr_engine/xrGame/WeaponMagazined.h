@@ -24,6 +24,7 @@ protected:
     HUD_SOUND sndShow;
     HUD_SOUND sndHide;
     HUD_SOUND sndShot;
+    HUD_SOUND sndClickLast;
     HUD_SOUND sndEmptyClick;
     HUD_SOUND sndReload, sndReloadPartly, sndReloadJammed, sndReloadJammedLast;
     bool sndReloadPartlyExist{};
@@ -212,6 +213,4 @@ protected:
 
     virtual void OnDrawUI();
     virtual void net_Relcase(CObject* object);
-
-    bool ScopeRespawn(PIItem);
 };

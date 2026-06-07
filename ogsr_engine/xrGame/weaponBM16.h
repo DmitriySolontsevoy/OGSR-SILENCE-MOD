@@ -8,11 +8,14 @@ class CWeaponBM16 : public CWeaponShotgun
     typedef CWeaponShotgun inherited;
 
 protected:
-    HUD_SOUND m_sndReload1;
+    HUD_SOUND m_sndReload1, sndReloadFull;
 
 public:
     virtual ~CWeaponBM16();
+    virtual bool Action(s32 cmd, u32 flags);
     virtual void Load(LPCSTR section);
+
+    bool m_fullReload;
 
 protected:
     virtual void PlayAnimShoot();

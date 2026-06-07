@@ -103,7 +103,6 @@ void CActor::OnEvent(NET_Packet& P, u16 type)
         if (inventory().DropItem(smart_cast<CGameObject*>(O)) && !O->getDestroy())
         {
             O->H_SetParent(0, dont_create_shell);
-            //.				feel_touch_deny(O,2000);
             Level().m_feel_deny.feel_touch_deny(O, 1000);
         }
 

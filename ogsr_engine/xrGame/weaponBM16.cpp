@@ -8,11 +8,14 @@ void CWeaponBM16::Load(LPCSTR section)
     inherited::Load(section);
 
     HUD_SOUND::LoadSound(section, "snd_reload_1", m_sndReload1, m_eSoundReload);
+    HUD_SOUND::LoadSound(section, "snd_reload_full", sndReloadFull, m_eSoundReload);
 }
 
 void CWeaponBM16::PlayReloadSound()
 {
-    if (m_magazine.size() == 1 || !HaveCartridgeInInventory(2))
+    if (m_fullReload)
+        PlaySound((IsMisfire() && !sndReloadJammed.sounds.empty()) ? sndReloadJammed : sndReloadFull, get_LastFP());
+    else if (m_magazine.size() == 1 || !HaveCartridgeInInventory(2))
         PlaySound((IsMisfire() && !sndReloadJammed.sounds.empty()) ? sndReloadJammed : m_sndReload1, get_LastFP());
     else
         PlaySound((IsMisfire() && !sndReloadJammed.sounds.empty()) ? sndReloadJammed : sndReload, get_LastFP());
@@ -79,7 +82,17 @@ void CWeaponBM16::PlayAnimHide()
 
 void CWeaponBM16::PlayAnimReload()
 {
-    if (m_magazine.size() == 1 || !HaveCartridgeInInventory(2))
+    // Actual Shell Drop
+    if (m_ejects_casings && m_ejects_on_reload)
+    {
+        SpawnCasing();
+        if (m_magazine.size() != 1)
+            SpawnCasing();
+    }
+
+    if (m_fullReload)
+        PlayHUDMotion({IsMisfire() ? "anm_reload_jammed_2" : "nullptr", "anim_reload_full", "anim_reload", "anm_reload_2"}, true, GetState());
+    else if (m_magazine.size() == 1 || !HaveCartridgeInInventory(2))
         PlayHUDMotion({IsMisfire() ? "anm_reload_jammed_1" : "nullptr", "anim_reload_1", "anm_reload_1"}, true, GetState());
     else
         PlayHUDMotion({IsMisfire() ? "anm_reload_jammed_2" : "nullptr", "anim_reload", "anm_reload_2"}, true, GetState());
@@ -310,4 +323,14 @@ void CWeaponBM16::PlayAnimDeviceSwitch()
         DeviceUpdate();
         SwitchState(eIdle);
     }
+}
+
+bool CWeaponBM16::Action(s32 cmd, u32 flags)
+{
+    if (cmd == kWPN_NEXT)
+        m_fullReload = true;
+    else
+        m_fullReload = false;
+
+    return inherited::Action(cmd, flags);
 }

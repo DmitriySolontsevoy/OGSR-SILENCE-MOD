@@ -31,6 +31,16 @@ ammo_mag_size			= 30				; clip (magazine) size
 
 ammo_class			= ammo_7.62x39_fmj 	; name of the ltx-section of used ammo 
 
+ejects_casings 				= 1
+ejects_on_reload			= 0
+casings_section				= 7_62x39_casing
+casing_delay				= 0
+
+drops_mags					= 1
+mags_section				= mag_ak47
+mag_delay					= 400
+mag_point					= 0.0, 0.0, 0.0
+
 grenade_class			= ammo_vog-25, ammo_vog-25p		; name of the ltx-section of used grenades 
 launch_speed			= 0
 
@@ -42,15 +52,15 @@ single_handed			= 0
 slot 				= 1,2				; number of slot in inventory we put weapon in (1 - knife slot, 2 - pistol, 3 - rifle, 4 - grenade, 5 - apparatus)
 animation_slot			= 2				; type of the animation that will be used
 
-inv_name	 		= АК47			; name in inventory	
+inv_name	 			= АК47			; name in inventory	
 inv_name_short			= АК47	 
-inv_weight			= 4.3				; weight in inventory
+inv_weight				= 3.9				; weight in inventory
 
 icon_group              = 1
 inv_grid_width			= 5
 inv_grid_height			= 2
 inv_grid_x				= 0
-inv_grid_y				= 32
+inv_grid_y				= 10
 
 kill_msg_x			= 0
 kill_msg_y			= 28
@@ -65,7 +75,7 @@ kill_msg_height		= 28
 dispersion_start		= 2
 fire_dispersion_base		= 0.18				;угол (в градусах) базовой дисперсии оружия (оружия зажатого в тисках)
 control_inertion_factor		= 1.25f                 
-                                                        
+
 ;отдача                                               
 cam_relax_speed 		= 5.5 				;скорость возврата в исходное положение
 cam_relax_speed_ai      = 120.75
@@ -85,9 +95,9 @@ condition_shot_dec 		= 0.0001			;увеличение износа при каждом выстреле
 fire_point             		=  0,0.216,0.638			; position (3rd person view) for particles of fire 
 fire_point2            		=  0,0.216,0.730			; position (3rd person view) for particles of fire (when shooting with secondary fire)
 
-flame_particles				= weapons\generic_weapon05	; particles for shooting effects
+flame_particles				= weapons\new_effects\akm
 smoke_particles				= weapons\generic_shoot_00
-grenade_flame_particles		= weapons\generic_weapon01
+grenade_flame_particles		= weapons\new_effects\glauncher
 	
 shell_point		 			= 0,0.216,0.174			; position (3rd person view) for shell to throw out
 shell_particles	 			= weapons\arsenal_shells1	; name of the particles for shells
@@ -129,7 +139,7 @@ light_color					= 0.6,0.5,0.3				; params for light during the fire
 light_range					= 5							; radius
 light_var_color				= 0.05						
 light_var_range				= 0.5
-light_time 					= 0.2					
+light_time 					= 0.1					
 
 ph_mass				= 4				; physic mass (kg)
 
@@ -141,30 +151,50 @@ grenade_launcher_status		= 2				; 2 - attachable
 zoom_enabled			= true				; (on,off)zoom mode (right mouse button)
 scope_zoom_factor		= 65				; fov for zoom mode
 
-scope_name 					= wpn_addon_scope			; section name for the attachable scope
-scope_x                     = 40		; offset in inventory icon
-scope_y                     = 7
-silencer_name  				= wpn_addon_silencer_rifle		; section name for the attachable silencer
-silencer_x                  = 213		; offset in inventory icon
-silencer_y                  = 16					
-grenade_launcher_name 		= wpn_addon_grenade_launcher; section name for the attachable grenade launcher
-grenade_launcher_x          = 107		; offset in inventory icon
-grenade_launcher_y          = 29
+
+scopes_textured 				= wpn_addon_scope_pso1, wpn_addon_scope_1p29, wpn_addon_scope_1p78
+scope_wpn_addon_scope_pso1_x 	= 55
+scope_wpn_addon_scope_pso1_y 	= -2
+
+scope_wpn_addon_scope_1p29_x 	= 80
+scope_wpn_addon_scope_1p29_y 	= 3
+
+scope_wpn_addon_scope_1p78_x 	= 80
+scope_wpn_addon_scope_1p78_y 	= -5
+
+scopes_physical 				= wpn_addon_red_dot_pka, wpn_addon_red_dot_cobra
+scope_wpn_addon_red_dot_pka_x 	= 85
+scope_wpn_addon_red_dot_pka_y 	= -2
+
+scope_wpn_addon_red_dot_cobra_x = 90
+scope_wpn_addon_red_dot_cobra_y = 5
+
+silencer_extends_grid_x 	= 1
+silencer_name  				= wpn_addon_silencer_rifle_pbs1		; section name for the attachable silencer
+silencer_x                  = 235		; offset in inventory icon
+silencer_y                  = 9	
+
+grenade_launcher_name 		= wpn_addon_grenade_launcher_gp25; section name for the attachable grenade launcher
+grenade_launcher_x          = 130		; offset in inventory icon
+grenade_launcher_y          = 22
 
 ;sounds (name of the sound, volume (0.0 - 1.0), delay (sec))
 
 snd_draw			= weapons\_general\rifle_draw
-snd_holster			= weapons\sig_550\holster
+snd_holster			= weapons\sig550\holster
 snd_shoot			= weapons\ak47\shot
 snd_shoot1			= weapons\ak47\shot
 snd_shoot2			= weapons\ak47\shot
 snd_shoot3			= weapons\ak47\shot	
 snd_empty			= weapons\gen_empty, 0.5
-snd_reload			= weapons\ak74\ak74_reload
-snd_shoot_grenade		= weapons\gen_grenshoot
-snd_reload_grenade		= weapons\gen_grenload, 1.0, 0.8
+snd_reload			= weapons\ak47\reload
+snd_reload_partly	= weapons\ak47\reload_partly
+snd_reload_jammed	= weapons\ak47\reload_jammed
+snd_shoot_grenade	= weapons\gen_grenshoot
+snd_reload_grenade	= weapons\gen_grenload, 1.0, 0.8
 snd_switch			= weapons\groza_switch, 1.0, 0.5
-snd_silncer_shot		= weapons\ak74\ak74_shot_sil
+snd_silncer_shot	= weapons\ak74\ak74_shot_sil
+snd_click_last		= weapons\_general\rifle_slide_click
 
 snd_aim_start       = weapons\_general\rifle_aim_start_1, 0.5
 snd_aim_end			= weapons\_general\rifle_aim_end_1, 0.5
@@ -186,7 +216,10 @@ silencer_light_color		= 0.6, 0.5, 0.3
 silencer_light_range		= 0.01
 silencer_light_var_color	= 0.05
 silencer_light_var_range	= 0.5
-silencer_light_time 		= 0.2
+silencer_light_time 		= 0.1
+
+; HIDDEN BONES
+hidden_bones = wpn_upgrade_luminous_sights, wpn_upgrade_extended_magazine
 
 ;-----------------------------------------------------------------------------
 ;-- HUD DESCRIPTION
@@ -195,78 +228,149 @@ silencer_light_time 		= 0.2
 [wpn_ak47_hud]
 allow_inertion				= true
 
-shell_point					= 0,0,0
+shell_point					= 1.5,0,0
 shell_dir			     	= 0.0, 1.0, 0.0
 
-fire_point               	= 0.0,0.09,0.07
-fire_point2              	= 0.019,0.07,-0.47 ;  0.019,0.07,0.07
+fire_point               	= -0.02, 0.04, 0.1
+fire_point2              	= 0.019,0.07,-0.47
 fire_bone               	= wpn_body
 
-orientation              	= 0, 0, 0
-position                	= 0.10,-0.045,-0.05
+position					= -0.025,-0.14,0.13
+orientation					= 2,2,0
 visual                  	= weapons\ak47\wpn_ak47_hud.ogf
 
-grenade_bone            	= wpn_grenade
+mag_point					= 0.0, -0.5, -0.5
 
-anim_reload_effector = short_reload
+grenade_bone            	= joint12
+
+anim_reload_effector = reload
 anim_reload_partly_effector = short_reload
-anim_reload_gl_effector = short_reload
+anim_reload_gl_effector = reload
 anim_reload_gl_partly_effector = short_reload
 anim_reload_g_effector = reload_grenade
 
 ; animation names
+anim_idle						= idle
+anim_idle_aim					= aim
+anim_reload						= reload
+anim_reload_partly				= reload_partly
+anm_reload_jammed				= reload
+anim_draw						= draw
+anim_holster					= holster
+anim_shoot						= shoot
+anim_idle_sprint				= sprint
+anim_idle_moving				= moving
+	
+anim_idle_g						= idle_w_gl
+anim_idle_g_aim					= aim_w_gl
+anim_reload_g					= reload_g
+anim_shoot_g					= shoot_g
+anim_switch_grenade_on			= aim_w_gl
+anim_switch_grenade_off			= aim_w_gl
+anim_draw_g						= draw_w_gl
+anim_holster_g					= holster_w_gl
+anim_idle_sprint_g				= sprint_w_gl
+anim_idle_moving_g				= moving_w_gl
 
-anim_idle					= idle
-anim_idle_aim				= idle_aim
-anim_reload					= reload
-anim_reload_partly			= reload
-anim_draw					= draw
-anim_holster				= holster
-anim_shoot					= shoot
+anim_idle_gl					= idle_w_gl
+anim_idle_gl_aim				= aim_w_gl
+anim_reload_gl					= reload_w_gl
+anim_reload_gl_partly			= reload_partly_w_gl
+anm_reload_jammed_w_gl			= reload_w_gl
+anim_draw_gl					= draw_w_gl
+anim_holster_gl					= holster_w_gl
+anim_shoot_gl					= shoot_w_gl
+anim_idle_sprint_gl				= sprint_w_gl
+anim_idle_moving_gl				= moving_w_gl
 
-; attached grenade launcher [NORMAL fire mode]
-anim_idle_gl				= idle_w_gl
-anim_idle_gl_aim			= idle_w_gl_aim
-anim_reload_gl				= reload_w_gl
-anim_reload_gl_partly		= reload_w_gl
-anim_draw_gl				= draw_w_gl
-anim_holster_gl				= holster_w_gl
-anim_shoot_gl				= shoot_w_gl
-anim_idle_sprint			= idle_sprint
+anm_reload_jammed_start_k 		= 0.63
+anm_reload_jammed_w_gl_start_k  = 0.63
 
+anim_idle_sprint_speed_k 	= 0.8
+anim_idle_sprint_gl_speed_k = 0.8
 
-anim_idle_g					=  idle_grenade
-anim_idle_g_aim				= idle_grenade
-anim_reload_g				= reload_grenade
-anim_shoot_g				= idle_grenade
-anim_switch_grenade_on		= grenade_on
-anim_switch_grenade_off		= grenade_off
-anim_draw_g					= draw_grenade
-anim_holster_g				= holster_grenade
+anim_idle_moving_speed_k	= 0.9
+anim_idle_moving_gl_speed_k = 0.9
 
-anim_reload_speed_k				= 1.2
-anim_reload_gl_speed_k			= 1.2
-anim_reload_partly_speed_k  	= 1.2
-anim_reload_gl_partly_speed_k  	= 1.2
-anim_reload_partly_stop_k   	= 0.53
-anim_reload_gl_partly_stop_k   	= 0.53
-			
-zoom_offset			        = -0.097,0.03,-0.05
-zoom_rotate_x		        = -0.02
-zoom_rotate_y				= 0
+zoom_offset						= -0.1325,0.058,-0.13
+zoom_rotate_x					= 0.048
+zoom_rotate_y					= 0.03385
 
-scoped_zoom_offset			= -0.1, 0.017, -0.26
-scoped_zoom_rotate_x		= 0.02
-scoped_zoom_rotate_y	    = 0.0
+zoom_rotate_time = 0.4
+
+scopes_textured 								= wpn_addon_scope_pso1, wpn_addon_scope_1p29, wpn_addon_scope_1p78
+scoped_wpn_addon_scope_pso1_zoom_offset			= -0.132,0.023,-0.3
+scoped_wpn_addon_scope_pso1_zoom_rotate_x		= 0.02
+scoped_wpn_addon_scope_pso1_zoom_rotate_y		= 0.03385
+
+scoped_wpn_addon_scope_1p29_zoom_offset			= -0.132,0.028,-0.4
+scoped_wpn_addon_scope_1p29_zoom_rotate_x		= 0.02
+scoped_wpn_addon_scope_1p29_zoom_rotate_y		= 0.03385
+
+scoped_wpn_addon_scope_1p78_zoom_offset			= -0.132,0.028,-0.4
+scoped_wpn_addon_scope_1p78_zoom_rotate_x		= 0.02
+scoped_wpn_addon_scope_1p78_zoom_rotate_y		= 0.03385
+
+scopes_physical 								= wpn_addon_red_dot_pka, wpn_addon_red_dot_cobra
+scoped_wpn_addon_red_dot_pka_zoom_offset		= -0.132,0.025,-0.13
+scoped_wpn_addon_red_dot_pka_zoom_rotate_x		= 0.03
+scoped_wpn_addon_red_dot_pka_zoom_rotate_y		= 0.03385
+
+scoped_wpn_addon_red_dot_cobra_zoom_offset		= -0.1315,0.037,-0.13
+scoped_wpn_addon_red_dot_cobra_zoom_rotate_x	= 0.04
+scoped_wpn_addon_red_dot_cobra_zoom_rotate_y	= 0.03385
 
 zoom_hide_crosshair	= true
 
-grenade_normal_zoom_offset		= -0.0975,0.0205,-0.05
-grenade_normal_zoom_rotate_x	= -0.03
-grenade_normal_zoom_rotate_y	= 0.0
+grenade_normal_zoom_offset			= -0.13195,0.03808,-0.13
+grenade_normal_zoom_rotate_x		= 0.0241
+grenade_normal_zoom_rotate_y		= 0.03385
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+grenade_zoom_offset					= -0.0993,-0.0115,-0.105
+grenade_zoom_rotate_x				= -0.078
+grenade_zoom_rotate_y				= 0.031
 
-grenade_zoom_offset			= -0.10,0.06,-0.05
-grenade_zoom_rotate_x		= 0.
-grenade_zoom_rotate_y		= 0.0
+; HIDDEN BONES
+hidden_bones = wpn_upgrade_luminous_sights, wpn_upgrade_extended_magazine
+
+
+;;;;;;;;;;;;;;;;;
+;;;WEAPON MODS;;;
+;;;;;;;;;;;;;;;;;
+
+;;;EXTENDED MAG
+[wpn_ak47:mag]:wpn_ak47
+inv_grid_x = 12
+
+inv_weight = 4.05
+
+ammo_mag_size = 45
+mags_section = mag_akm_extended
+hidden_bones = wpn_upgrade_luminous_sights, magazin
+
+hud = wpn_ak47:mag_hud
+
+[wpn_ak47:mag_hud]:wpn_ak47_hud
+hidden_bones = wpn_upgrade_luminous_sights, magazin
+
+;;;LUMINOUS SIGHTS
+[wpn_ak47:tritium]:wpn_ak47
+inv_grid_x = 6
+
+hidden_bones = wpn_upgrade_extended_magazine
+
+hud = wpn_ak47:tritium_hud
+
+[wpn_ak47:tritium_hud]:wpn_ak47_hud
+hidden_bones = wpn_upgrade_extended_magazine
+
+;;;EXTENDED MAG + LUMINOUS SIGHTS
+[wpn_ak47:mag:tritium]:wpn_ak47:mag
+inv_grid_x = 12
+
+hidden_bones = magazin
+
+hud = wpn_ak47:mag:tritium_hud
+
+[wpn_ak47:mag:tritium_hud]:wpn_ak47:mag_hud
+hidden_bones = magazin

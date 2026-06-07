@@ -28,11 +28,21 @@ ammo_limit			= 60
 ammo_current			= 60
 ammo_elapsed			= 10
 ammo_mag_size			= 10
-                       	
+
 ammo_class			= ammo_7.62x54_7h1, ammo_7.62x54_7h14, ammo_7.62x54_ap
 
-fire_modes					= -1, 1
-f_mode				= 1
+ejects_casings 				= 1
+ejects_on_reload			= 0
+casings_section				= 7_62x54_casing
+casing_delay				= 0
+
+drops_mags					= 1
+mags_section				= mag_svu
+mag_delay					= 1000
+mag_point					= 0.0, 0.0, 0.0
+
+fire_modes					= 1
+f_mode						= 1
 
 hand_dependence 		= 2
 single_handed			= 0
@@ -42,13 +52,13 @@ animation_slot			= 2			; type of the animation that will be used
 
 inv_name			= СВУ
 inv_name_short		= СВУ
-inv_weight			= 5.9
+inv_weight			= 3.6
 
 icon_group              = 1
-inv_grid_width			= 6
+inv_grid_width			= 5
 inv_grid_height			= 2
-inv_grid_x			= 0
-inv_grid_y			= 14
+inv_grid_x				= 0
+inv_grid_y				= 85
 
 ;спавнить автоматически боеприпасы при подъеме оружия
 auto_spawn_ammo			= false
@@ -101,7 +111,7 @@ hit_impulse		 	= 64
 hit_type 		 	= fire_wound
 
 fire_distance           	= 1300
-bullet_speed		 		= 830
+bullet_speed		 		= 800
 rpm                     	= 90
 rpm_empty_click 	 		= 45
 ; end ttc
@@ -128,17 +138,29 @@ light_disabled			= true
 ph_mass			 	= 5
 
 ;addons
-scope_status			= 1
-silencer_status			= 0
+scope_status				= 2
+silencer_status				= 1
 grenade_launcher_status		= 0
 
-scope_name 					= wpn_addon_scope_m1   ;wpn_addon_scope			; section name for the attachable scope
-scope_x 					= 50						; offset in inventory icon
-scope_y 					= 3
+scopes_textured 				= wpn_addon_scope_pso1, wpn_addon_scope_1p29, wpn_addon_scope_1p78
+scope_wpn_addon_scope_pso1_x 	= 50
+scope_wpn_addon_scope_pso1_y 	= 10
+
+scope_wpn_addon_scope_1p29_x 	= 75
+scope_wpn_addon_scope_1p29_y 	= 14
+
+scope_wpn_addon_scope_1p78_x 	= 80
+scope_wpn_addon_scope_1p78_y 	= 8
+
+scopes_physical 				= wpn_addon_red_dot_pka, wpn_addon_red_dot_cobra
+scope_wpn_addon_red_dot_pka_x 	= 80
+scope_wpn_addon_red_dot_pka_y 	= 12
+
+scope_wpn_addon_red_dot_cobra_x = 80
+scope_wpn_addon_red_dot_cobra_y = 19
 
 zoom_enabled			= true
-scope_zoom_factor		= 15		;ПСО-1 4X
-scope_texture			= wpn\wpn_crosshair
+scope_zoom_factor		= 50
 
 ;звуки
 snd_draw				= weapons\svu\draw
@@ -146,7 +168,9 @@ snd_holster				= weapons\svu\holster
 snd_shoot				= weapons\svu\shot
 snd_empty				= weapons\svu\empty
 snd_reload				= weapons\svu\reload
+snd_reload_jammed		= weapons\svu\reload_jammed
 snd_close				= weapons\svu\holster
+snd_click_last			= weapons\_general\heavy_slide_click
 
 snd_aim_start       = weapons\_general\heavy_aim_start, 0.5
 snd_aim_end			= weapons\_general\heavy_aim_end, 0.5
@@ -165,54 +189,106 @@ silencer_light_color		= 0.6, 0.5, 0.3
 silencer_light_range		= 0.01
 silencer_light_var_color	= 0.05
 silencer_light_var_range	= 0.5
-silencer_light_time 		= 0.2
+silencer_light_time 		= 0.1
 
 hit_probability_gd_novice	= 0.80			; точность стрельбы,      
 hit_probability_gd_stalker	= 0.85			; когда оружие в руках НПС
 hit_probability_gd_veteran	= 0.90			; в зависимости от уровня 
 hit_probability_gd_master	= 0.95			; сложности игры          
 
+hidden_bones = wpn_upgrade_luminous_sights
+
 ;-----------------------------------------------------------------------------
 ;-- HUD DESCRIPTION
 ;-----------------------------------------------------------------------------
 [wpn_svu_hud]
-
 allow_inertion			= true
 
-shell_point     	    	= 0.1,-0.05,-0.75
+shell_point     	= 1.5,-0.05,-0.75
 shell_dir			= 0.0, 1.0, 0.0
 
 fire_point			= 0.000000,0.010000,-0.480000
-fire_point2              	= 0,2,-0.5 
+fire_point2         = 0,2,-0.5 
 fire_bone 			= muzzle
-orientation 			= 2, 3, 0
-position                	= 0.14,-0.07,0.1
+position			= 0.065,-0.15,0.35
+orientation			= 2,2,0
 visual 				= weapons\svu\wpn_svu_hud.ogf
+
+mag_point			= -0.5, 0.0, -1.5
 
 anim_reload_effector = reload
 anim_reload_partly_effector = short_reload
+anm_reload_jammed_effector = short_reload
 
 anim_holster		= holster
 anim_idle			= idle
-anim_idle_aim		= idle_aim
+anim_idle_aim		= aim
 anim_reload			= reload
 anim_reload_partly  = reload
+anm_reload_jammed   = reload
 anim_draw			= draw
 anim_shoot			= shoot
-anim_idle_sprint	= idle_sprint
+anim_idle_sprint	= sprint
+anim_idle_moving	= moving
 
-anim_reload_partly_speed_k 		= 0.9
-anim_reload_partly_stop_k 		= 0.55
+anim_reload_speed_k 	   = 1.4
+anim_reload_partly_speed_k = 1.4
+anm_reload_jammed_speed_k  = 1.4
+
+anim_reload_partly_stop_k = 0.56
+anm_reload_jammed_start_k = 0.65
+
+anim_idle_sprint_speed_k = 0.9
 
 ;-----------------------------------------------------------------------------
 ;смещения HUD для режима приближения
-zoom_offset			= -0.13,0.025,-0.35
-zoom_rotate_x		= 0.041200
-zoom_rotate_y		= 0.036000
+zoom_offset				= -0.18,0.037,-0.15
+zoom_rotate_x			= 0.025
+zoom_rotate_y			= 0.047
+
+scopes_textured 								= wpn_addon_scope_pso1, wpn_addon_scope_1p29, wpn_addon_scope_1p78
+scoped_wpn_addon_scope_pso1_zoom_offset			= -0.18,0.034,-0.4
+scoped_wpn_addon_scope_pso1_zoom_rotate_x		= 0.025
+scoped_wpn_addon_scope_pso1_zoom_rotate_y		= 0.047
+
+scoped_wpn_addon_scope_1p29_zoom_offset			= -0.18,0.04,-0.45
+scoped_wpn_addon_scope_1p29_zoom_rotate_x		= 0.025
+scoped_wpn_addon_scope_1p29_zoom_rotate_y		= 0.047
+
+scoped_wpn_addon_scope_1p78_zoom_offset			= -0.18,0.04,-0.45
+scoped_wpn_addon_scope_1p78_zoom_rotate_x		= 0.025
+scoped_wpn_addon_scope_1p78_zoom_rotate_y		= 0.047
+
+scopes_physical 								= wpn_addon_red_dot_pka, wpn_addon_red_dot_cobra
+scoped_wpn_addon_red_dot_pka_zoom_offset		= -0.18,0.02,-0.15
+scoped_wpn_addon_red_dot_pka_zoom_rotate_x		= 0.015
+scoped_wpn_addon_red_dot_pka_zoom_rotate_y		= 0.047
+
+scoped_wpn_addon_red_dot_cobra_zoom_offset		= -0.178,0.028,-0.15
+scoped_wpn_addon_red_dot_cobra_zoom_rotate_x	= 0.012
+scoped_wpn_addon_red_dot_cobra_zoom_rotate_y	= 0.047
 
 ;-----------------------------------------------------------------------------
 ;прячем перекрестие прицела в зуме
 zoom_hide_crosshair		= true
+
 ;время поворота HUD (сек)
-zoom_rotate_time			= 0.3
+zoom_rotate_time 		= 0.4
 rotate_time				= 0.3
+
+hidden_bones = wpn_upgrade_luminous_sights
+
+
+;;;;;;;;;;;;;;;;;
+;;;WEAPON MODS;;;
+;;;;;;;;;;;;;;;;;
+;;LUMINOUS SIGHTS
+[wpn_svu:tritium]:wpn_svu
+inv_grid_x = 5
+
+hidden_bones = null
+
+hud = wpn_svu:tritium_hud
+
+[wpn_svu:tritium_hud]:wpn_svu_hud
+hidden_bones = null

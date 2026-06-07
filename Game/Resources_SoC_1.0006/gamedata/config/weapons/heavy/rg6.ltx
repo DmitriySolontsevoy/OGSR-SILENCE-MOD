@@ -31,7 +31,7 @@ ammo_elapsed		 		= 0
 ammo_mag_size		 		= 6
 ammo_class		 			= ammo_vog-25, ammo_vog-25p
 launch_speed				= 76;50 ;for rocket
-sprint_allowed				= false
+sprint_allowed				= true
 ;-----------------------------------------------------------------------------------
 ;базовая дисперсия
 fire_dispersion_base		= 0.5  ;угол (в градусах) базовой дисперсии оружия (оружия зажатого в тисках)
@@ -44,7 +44,7 @@ cam_max_angle_horz			= 5.0	;(degree) maximum shot horizontal degree
 cam_step_angle_horz			= 0.5	;(degree) size of step camera moved in horizontal position while shooting
 
 fire_dispersion_condition_factor = 5	;увеличение дисперсии в процентах при максимальном износе 
-misfire_probability 		= 0.003	    ;вероятность осечки при максимальном износе 
+misfire_probability 		= 0.0	    ;вероятность осечки при максимальном износе 
 condition_shot_dec 			= 0.00003	;увеличение износа при каждом выстреле
 ;-----------------------------------------------------------------------------------
 
@@ -56,13 +56,13 @@ animation_slot		 		= 10	; type of the animation that will be used
 
 inv_name					= RG-6
 inv_name_short				= RG-6
-inv_weight					= 6.2
+inv_weight					= 5.6
 
 icon_group         			= 1
 inv_grid_width				= 4
 inv_grid_height				= 2
 inv_grid_x					= 0
-inv_grid_y					= 54
+inv_grid_y					= 73
 
 kill_msg_x			= 0
 kill_msg_y			= 172
@@ -74,7 +74,7 @@ shell_point				 	= 0.0, 0.120, 0.20
 fire_point               	= 0.0, 0.120, 0.452
 fire_point2              	= 0.0, 0.120, 0.452
 
-flame_particles		   		= weapons\generic_weapon05
+flame_particles		   		= weapons\new_effects\glauncher
 smoke_particles		   		= weapons\generic_shoot_00
 rpm_empty_click 	   		= 200
 ; ttc
@@ -99,7 +99,7 @@ light_color		 			= 0.6,0.5,0.3
 light_range		 			= 6.0
 light_var_color		 		= 0.05
 light_var_range		 		= 0.5
-light_time 		 			= 0.2
+light_time 		 			= 0.1
 
 ph_mass			 			= 3
 ;cost			 			= 900
@@ -118,10 +118,10 @@ snd_holster					= weapons\rg6\holster
 snd_shoot					= weapons\rg6\shot
 snd_empty					= weapons\rg6\empty
 snd_reload					= weapons\rg6\reload1
-snd_shoot_duplet				= weapons\rg6\shot
-snd_open_weapon					= weapons\rg6\reload1		;change me
-snd_add_cartridge				= weapons\rg6\reload2		;was gen_grenload
-snd_close_weapon				= weapons\rg6\reload3		;change me
+snd_shoot_duplet			= weapons\rg6\shot
+snd_open_weapon				= weapons\rg6\reload1		;change me
+snd_add_cartridge			= weapons\rg6\reload2		;was gen_grenload
+snd_close_weapon			= weapons\rg6\reload3		;change me
 
 snd_aim_start       = weapons\_general\heavy_aim_start, 0.5
 snd_aim_end			= weapons\_general\heavy_aim_end, 0.5
@@ -129,29 +129,40 @@ snd_aim_end			= weapons\_general\heavy_aim_end, 0.5
 snd_grab = pickups\grab_gun
  
 [wpn_rg-6_hud]
-shell_point		 			= 0.0, 0.0, 0.0
-fire_point			= 0,0,-0.65
-fire_bone                	= muzzle
-orientation              	= 0, 0, 0
-position                 	= 0.15,-0.06,-0.05
+shell_point					= 0.0, 0.0, 0.0
+shell_dir					= 0.0, 1.0, 0.0
+shell_bone					= wpn_body
+
+fire_point					= -0.0,0.0,0.513
+fire_bone					= wpn_body
+
+position					= 0.02, -0.22,  0.18
+orientation					= 2,7,0
+
 visual                   	= weapons\rg-6\wpn_rg-6_hud.ogf
+
+anim_add_cartridge_effector = null
 
 anim_idle					= idle
 anim_reload					= reload
 anim_draw					= draw
 anim_holster				= holster
 anim_shoot					= shoot
-anim_shoot_both 				= shoot
-anim_idle_aim				= idle_aim
+anim_shoot_both 			= shoot
+anim_idle_aim				= aim
+anim_idle_sprint			= sprint
+anim_idle_moving			= moving
 
-anim_open_weapon				= reload1
-anim_add_cartridge			= reload2
-anim_close_weapon				= reload3
+anim_open_weapon			= reload_start
+anim_add_cartridge			= reload
+anim_close_weapon			= reload_end
+
+anim_add_cartridge_speed_k = 2.0
 
 ;смещения HUD для режима приближения
-zoom_offset			= -0.15,-0.063,-0.05
-zoom_rotate_x		= -0.13
-zoom_rotate_y		= 0
+zoom_offset			= -0.154,0.06,-0.05
+zoom_rotate_x		= 0.08
+zoom_rotate_y		= 0.023
 
 ;время поворота HUD (сек)
-;zoom_rotate_time			= 0.7
+zoom_rotate_time = 0.4

@@ -397,7 +397,10 @@ void CMissile::OnMotionMark(u32 state, const motion_marks& M)
     }
 }
 
-void CMissile::UpdatePosition(const Fmatrix& trans) { XFORM().mul(trans, offset()); }
+void CMissile::UpdatePosition(const Fmatrix& trans)
+{   
+    XFORM().mul(trans, offset());
+}
 
 void CMissile::UpdateXForm()
 {
@@ -680,11 +683,9 @@ void CMissile::activate_physic_shell()
     VERIFY(!m_pPhysicsShell);
     create_physic_shell();
     m_pPhysicsShell->Activate(m_throw_matrix, l_vel, a_vel);
-    //	m_pPhysicsShell->AddTracedGeom		();
     m_pPhysicsShell->SetAllGeomTraced();
     m_pPhysicsShell->add_ObjectContactCallback(ExitContactCallback);
     m_pPhysicsShell->set_CallbackData(smart_cast<CPhysicsShellHolder*>(entity_alive));
-    //	m_pPhysicsShell->remove_ObjectContactCallback	(ExitContactCallback);
     m_pPhysicsShell->SetAirResistance(0.f, 0.f);
     m_pPhysicsShell->set_DynamicScales(1.f, 1.f);
 
@@ -693,6 +694,7 @@ void CMissile::activate_physic_shell()
     kinematics->CalculateBones_Invalidate();
     kinematics->CalculateBones();
 }
+
 void CMissile::net_Relcase(CObject* O)
 {
     inherited::net_Relcase(O);

@@ -47,7 +47,7 @@ void uber_deffer(CBlender_Compile& C, bool hq, LPCSTR _vspec, LPCSTR _pspec, BOO
             xr_strcat(texDetailBumpX, "#");
         }
     }
-
+    
     if (_aref)
     {
         xr_strcat(ps, "_aref");

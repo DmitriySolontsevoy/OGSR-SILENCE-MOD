@@ -196,8 +196,8 @@ void CUIItemInfo::InitItem(CInventoryItem* pInvItem)
         v_r.x2 *= UI()->get_current_kx();
 
         UIItemImage->GetUIStaticItem().SetRect(v_r);
-        UIItemImage->SetWidth(_min(v_r.width(), UIItemImageSize.x));
-        UIItemImage->SetHeight(_min(v_r.height(), UIItemImageSize.y));
+        UIItemImage->SetWidth(rect.width() / 2.6);
+        UIItemImage->SetHeight(rect.height() / 2.1);
     }
 }
 

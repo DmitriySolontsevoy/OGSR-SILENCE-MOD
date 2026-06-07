@@ -641,9 +641,15 @@ void CWeaponMagazinedWGrenade::PlayAnimReload()
         if (IsMisfire())
             PlayHUDMotion({"anm_reload_jammed_w_gl", "anm_reload_empty_w_gl", "anim_reload_gl", "anm_reload_w_gl"}, true, GetState());
         else if (IsPartlyReloading())
+        {
             PlayHUDMotion({"anim_reload_gl_partly", "anm_reload_w_gl_partly", "anim_reload_gl", "anm_reload_w_gl"}, true, GetState());
+            SpawnMag();
+        }
         else
+        {
             PlayHUDMotion({"anm_reload_empty_w_gl", "anim_reload_gl", "anm_reload_w_gl"}, true, GetState());
+            SpawnMag();
+        }     
     }
     else
         inherited::PlayAnimReload();

@@ -31,6 +31,16 @@ ammo_elapsed			= 0
 ammo_mag_size			= 10
 ammo_class				= ammo_7.62x54_7h1, ammo_7.62x54_7h14, ammo_7.62x54_ap
 
+ejects_casings 				= 1
+ejects_on_reload			= 0
+casings_section				= 7_62x54_casing
+casing_delay				= 0
+
+drops_mags					= 1
+mags_section				= mag_svd
+mag_delay					= 800
+mag_point					= 0.0, 0.0, 0.0
+
 sprint_allowed			= true ;false
 ;-----------------------------------------------------------------------------------
 ;базовая дисперсия
@@ -61,13 +71,13 @@ animation_slot			= 2		; type of the animation that will be used
 
 inv_name				= СВД
 inv_name_short			= СВД
-inv_weight				= 4.3
+inv_weight				= 3.7
 
 icon_group              = 1
 inv_grid_width			= 6
 inv_grid_height			= 2
 inv_grid_x				= 0
-inv_grid_y				= 12
+inv_grid_y				= 83
 
 kill_msg_x			= 0
 kill_msg_y			= 0
@@ -78,7 +88,7 @@ direction               = 0, 0, 1
 
 fire_point              = 0.0, 0.129, 0.942
 
-flame_particles		    = weapons\generic_weapon06
+flame_particles		    = weapons\new_effects\akmsl_pkm
 smoke_particles		   	= weapons\generic_shoot_00
 rpm_empty_click 		= 200
 
@@ -126,33 +136,51 @@ light_color		 		= 0.6,0.5,0.3
 light_range		 		= 4.0
 light_var_color		 	= 0.05
 light_var_range		 	= 0.5
-light_time 		 		= 0.2
+light_time 		 		= 0.1
 
 ph_mass			 		= 3
 ;cost			 		= 900
 
 ;addons
-scope_status				= 1
-silencer_status				= 0
+scope_status				= 2
+silencer_status				= 2
 grenade_launcher_status		= 0
-zoom_enabled				= true
 
 zoom_enabled			= true
-scope_zoom_factor	    = 15		;ПСО-1 4X
+scope_zoom_factor	    = 50
 
-scope_texture			= wpn\wpn_crosshair
 
-silencer_name  				= wpn_addon_silencer_rifle
-silencer_x 					= 255
-silencer_y 					= 15
+scopes_textured 				= wpn_addon_scope_pso1, wpn_addon_scope_1p29, wpn_addon_scope_1p78
+scope_wpn_addon_scope_pso1_x 	= 25
+scope_wpn_addon_scope_pso1_y 	= 13
+
+scope_wpn_addon_scope_1p29_x 	= 50
+scope_wpn_addon_scope_1p29_y 	= 18
+
+scope_wpn_addon_scope_1p78_x 	= 50
+scope_wpn_addon_scope_1p78_y 	= 9
+
+scopes_physical 				= wpn_addon_red_dot_pka, wpn_addon_red_dot_cobra
+scope_wpn_addon_red_dot_pka_x 	= 55
+scope_wpn_addon_red_dot_pka_y 	= 15
+
+scope_wpn_addon_red_dot_cobra_x = 60
+scope_wpn_addon_red_dot_cobra_y = 20
+
+
+silencer_name  				= wpn_addon_silencer_rifle_pbs1
+silencer_x 					= 249
+silencer_y 					= 21
 
 ;звуки
-snd_draw		= weapons\svd\svd_draw
-snd_holster		= weapons\generic_holster
-snd_shoot		= weapons\svd\svd_shoot
-snd_empty		= weapons\gen_empty, 0.5
-snd_reload		= weapons\svd\svd_reload_right
+snd_draw			= weapons\svd\svd_draw
+snd_holster			= weapons\generic_holster
+snd_shoot			= weapons\svd\svd_shoot
+snd_empty			= weapons\gen_empty, 0.5
+snd_reload			= weapons\svd\svd_reload_right
+snd_reload_jammed	= weapons\svd\svd_reload_jammed
 snd_silncer_shot	= weapons\svd\svd_shoot_sil, 0.5
+snd_click_last		= weapons\_general\heavy_slide_click
 
 snd_aim_start       = weapons\_general\heavy_aim_start, 0.5
 snd_aim_end			= weapons\_general\heavy_aim_end, 0.5
@@ -163,36 +191,89 @@ silencer_light_color		= 0.6,0.5,0.3
 silencer_light_range		= 0.01
 silencer_light_var_color	= 0.05
 silencer_light_var_range	= 0.5
-silencer_light_time 		= 0.2
+silencer_light_time 		= 0.1
+
+hidden_bones = wpn_upgrade_luminous_sights
 
 [wpn_svd_hud]
-
-shell_point			= 0.0,0.0,0.0
+shell_point				= 1.5,0.0,0.0
 shell_dir		 		= 0.0, 1.0, 0.0
 
-fire_point				= -0.02, 0.07, 0.2
+fire_point				= -0.02, 0.095, 0.2
 fire_bone               = wpn_body
-position				= -0.04, -0.135, 0.08
-orientation				= 0, -0.3, 0
+
 visual                  = weapons\svd\wpn_svd_hud.ogf
+
+position					= 0.05,-0.01,0.25
+orientation					= 2,2,0
+
+mag_point				= 1.0, -0.5, -0.5
 
 anim_reload_effector = reload
 anim_reload_partly_effector = short_reload
 
-anim_holster			= svd_holster
-anim_idle				= svd_idle
-anim_idle_aim			= svd_idle_aim
-anim_reload				= svd_reload_new
-anim_reload_partly		= svd_reload_new
-anim_draw				= svd_draw
-anim_shoot				= svd_shoot
-anim_idle_sprint 		= idle_sprint_new
+anim_holster			= holster
+anim_idle				= idle
+anim_idle_aim			= aim
+anim_reload				= reload
+anim_reload_partly		= reload
+anm_reload_jammed		= reload
+anim_draw				= draw
+anim_shoot				= shoot
+anim_idle_sprint 		= sprint
+anim_idle_moving        = moving
 
-anim_reload_speed_k 			= 1.2
-anim_reload_partly_speed_k 		= 1.2
-anim_reload_partly_stop_k 		= 0.57
+anim_reload_speed_k 	   = 1.4
+anim_reload_partly_speed_k = 1.4
+anm_reload_jammed_speed_k  = 1.4
+anim_reload_partly_stop_k  = 0.59
+
+anm_reload_jammed_start_k = 0.6
 
 ;смещения HUD для режима приближения
-zoom_offset				= -0.1,0.015,-0.25
-zoom_rotate_x			= 0.000000
-zoom_rotate_y			= -0.020000
+zoom_offset				= -0.137,0.058,-0.25
+zoom_rotate_x			= 0.03
+zoom_rotate_y			= 0.031
+
+zoom_rotate_time = 0.4
+
+scopes_textured 								= wpn_addon_scope_pso1, wpn_addon_scope_1p29, wpn_addon_scope_1p78
+scoped_wpn_addon_scope_pso1_zoom_offset			= -0.137,0.032,-0.3
+scoped_wpn_addon_scope_pso1_zoom_rotate_x		= 0.03
+scoped_wpn_addon_scope_pso1_zoom_rotate_y		= 0.031
+
+scoped_wpn_addon_scope_1p29_zoom_offset			= -0.137,0.037,-0.35
+scoped_wpn_addon_scope_1p29_zoom_rotate_x		= 0.03
+scoped_wpn_addon_scope_1p29_zoom_rotate_y		= 0.031
+
+scoped_wpn_addon_scope_1p78_zoom_offset			= -0.137,0.036,-0.35
+scoped_wpn_addon_scope_1p78_zoom_rotate_x		= 0.03
+scoped_wpn_addon_scope_1p78_zoom_rotate_y		= 0.031
+
+scopes_physical 								= wpn_addon_red_dot_pka, wpn_addon_red_dot_cobra
+scoped_wpn_addon_red_dot_pka_zoom_offset		= -0.1355,0.026,-0.15
+scoped_wpn_addon_red_dot_pka_zoom_rotate_x		= 0.02
+scoped_wpn_addon_red_dot_pka_zoom_rotate_y		= 0.031
+
+scoped_wpn_addon_red_dot_cobra_zoom_offset		= -0.1362,0.0362,-0.1
+scoped_wpn_addon_red_dot_cobra_zoom_rotate_x	= 0.023
+scoped_wpn_addon_red_dot_cobra_zoom_rotate_y	= 0.031
+
+zoom_hide_crosshair	= true
+
+hidden_bones = wpn_upgrade_luminous_sights
+
+
+;;;;;;;;;;;;;;;;;
+;;;WEAPON MODS;;;
+;;;;;;;;;;;;;;;;;
+;;LUMINOUS SIGHTS
+[wpn_svd:tritium]:wpn_svd
+inv_grid_x = 6
+
+hidden_bones = null
+
+hud = wpn_svd:tritium_hud
+
+[wpn_svd:tritium_hud]:wpn_svd_hud
+hidden_bones = null

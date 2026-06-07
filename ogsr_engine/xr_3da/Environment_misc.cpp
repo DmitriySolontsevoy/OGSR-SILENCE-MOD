@@ -288,11 +288,10 @@ void CEnvDescriptor::load(CEnvironment& environment, CInifile& config)
     R_ASSERT3((tm.x >= 0) && (tm.x < 24) && (tm.y >= 0) && (tm.y < 60) && (tm.z >= 0) && (tm.z < 60), "Incorrect weather time", m_identifier.c_str());
     exec_time = tm.x * 3600.f + tm.y * 60.f + tm.z;
     exec_time_loaded = exec_time;
-    string_path st, st_env;
+    string_path st;
     xr_strcpy(st, config.r_string(m_identifier.c_str(), "sky_texture"));
-    strconcat(sizeof(st_env), st_env, st, "#small");
     sky_texture_name = st;
-    sky_texture_env_name = st_env;
+    sky_texture_env_name = st;
     clouds_texture_name = config.r_string(m_identifier.c_str(), "clouds_texture");
     LPCSTR cldclr = config.r_string(m_identifier.c_str(), "clouds_color");
     float multiplier = 0, save = 0;
@@ -371,11 +370,10 @@ void CEnvDescriptor::load_shoc(float exec_tm, LPCSTR S, CEnvironment& environmen
     m_identifier = S;
     exec_time = exec_tm;
     exec_time_loaded = exec_time;
-    string_path st, st_env;
+    string_path st;
     xr_strcpy(st, pSettings->r_string(m_identifier.c_str(), "sky_texture"));
-    strconcat(sizeof(st_env), st_env, st, "#small");
     sky_texture_name = st;
-    sky_texture_env_name = st_env;
+    sky_texture_env_name = st;
     clouds_texture_name = pSettings->r_string(m_identifier.c_str(), "clouds_texture");
     LPCSTR cldclr = pSettings->r_string(m_identifier.c_str(), "clouds_color");
     float multiplier = 0, save = 0;

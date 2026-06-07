@@ -1,4 +1,4 @@
-[wpn_winchester1300]:identity_immunities
+[wpn_mossberg500]:identity_immunities
 GroupControlSection			= spawn_group
 discovery_dependency 		= 
 $spawn                   	= "weapons\winchester1300"					; option for Level Editor
@@ -34,6 +34,11 @@ f_mode				= 1
 ammo_mag_size		 		= 6
 ammo_class		 			= ammo_12x76_dart,ammo_12x76_zhekan,ammo_12x70_buck
 
+ejects_casings 				= 1
+ejects_on_reload			= 0
+casings_section				= 12x70_casing
+casing_delay				= 500
+
 ;-----------------------------------------------------------------------------------
 ;базовая дисперсия
 fire_dispersion_base		= 0.28  ;угол (в градусах) базовой дисперсии оружия (оружия зажатого в тисках)
@@ -50,7 +55,7 @@ cam_max_angle_horz	= 9.0	;(degree) maximum shot horizontal degree
 cam_step_angle_horz	= 1.5	;(degree) size of step camera moved in horizontal position while shooting
 
 fire_dispersion_condition_factor = 5	;увеличение дисперсии в процентах при максимальном износе 
-misfire_probability 		= 0.005	    ;вероятность осечки при максимальном износе 
+misfire_probability 		= 0.05	    ;вероятность осечки при максимальном износе 
 misfire_condition_k			= 0.05
 condition_shot_dec 			= 0.0002	;увеличение износа при каждом выстреле
 ;-----------------------------------------------------------------------------------
@@ -61,15 +66,15 @@ single_handed				= 0
 slot 				 		= 1,2		; // secondary
 animation_slot		 		= 9		; type of the animation that will be used
 
-inv_name					= "Winchester 1300"
-inv_name_short				= "Winchester 1300"
-inv_weight				= 3.0
+inv_name					= "Mossberg 500"
+inv_name_short				= "Mossberg 500"
+inv_weight					= 3.2
 
 icon_group         = 1
-inv_grid_width     = 4
+inv_grid_width     = 5
 inv_grid_height    = 1
 inv_grid_x         = 0
-inv_grid_y         = 60
+inv_grid_y         = 58
 
 kill_msg_x			= 171
 kill_msg_y			= 104
@@ -81,7 +86,7 @@ shell_point				 	= 0.0, 0.180, 0.647
 fire_point               	= 0.0, 0.158, 0.647
 fire_point2              	= 0.0, 0.158, 0.647
 
-flame_particles		   		= weapons\generic_weapon05
+flame_particles		   		= weapons\new_effects\shtg_pump
 smoke_particles		   		= weapons\generic_shoot_00
 rpm_empty_click 	   		= 200
 
@@ -96,10 +101,10 @@ hit_impulse	        = 100
 hit_type 	        = fire_wound
 hit_rate	        = 2.0
 fire_distance       = 60
-bullet_speed		= 400
+bullet_speed		= 403
 rpm                 = 60
 
-hud                      	= wpn_winchester1300_hud
+hud                      	= wpn_mossberg500_hud
 normal                   	= 0, 1, 0
 position                 	= -0.024, -0.097, 0.
 orientation              	= 0, 0, 0      ;значение устанавливается в градусах
@@ -112,13 +117,13 @@ strap_bone0					= bip01_spine2
 strap_bone1					= bip01_spine1
 
 startup_ammo             	= 10
-visual                   	= weapons\winchester1300\wpn_winchester1300.ogf
+visual                   	= weapons\mossberg500\wpn_mossberg500.ogf
 
 light_color		 			= 0.6,0.5,0.3
 light_range		 			= 6.0
 light_var_color		 		= 0.05
 light_var_range		 		= 0.5
-light_time 		 			= 0.2
+light_time 		 			= 0.1
 
 ph_mass			 			= 3
 ;cost			 			= 900
@@ -137,45 +142,54 @@ snd_holster					= weapons\winchester\holster, 0.4
 snd_shoot					= weapons\winchester\w1300_shot
 snd_empty					= weapons\winchester\empty, 0.5
 snd_reload					= weapons\toz34_reload
-snd_shoot_duplet				= weapons\toz34_shoot_both
-snd_open_weapon					= weapons\winchester\draw		
-snd_add_cartridge				= weapons\winchester\load		
-snd_close_weapon				= weapons\winchester\reload_end		
+snd_reload_jammed			= weapons\winchester\reload_end
+snd_shoot_duplet			= weapons\toz34_shoot_both
+snd_open_weapon				= weapons\winchester\draw		
+snd_add_cartridge			= weapons\winchester\load		
+snd_close_weapon			= weapons\winchester\reload_end		
 
-snd_aim_start               = shotgun_aim_start, 0.5
-snd_aim_end                 = shotgun_aim_end, 0.5
+snd_aim_start               = weapons\_general\shotgun_aim_start, 0.5
+snd_aim_end                 = weapons\_general\shotgun_aim_end, 0.5
 
 snd_grab = pickups\grab_gun
 
-[wpn_winchester1300_hud]
-shell_point		 			= 0.0, 0.0, 0.0
-fire_point      			= 0,0,-0.65
+[wpn_mossberg500_hud]
+shell_point		 			= 1.0, 0.0, -1.0
+
+fire_point      			= 0,0.022,-0.45
 fire_point2				    = 0,0,-0.65
 fire_bone                	= muzzle
 
-orientation              	= 0, 2, 0
-position                 	= 0.13,-0.06,-0.05
+position					= 0,-0.14,0.14
+orientation					= 2,2,0
 
-visual                   	= weapons\winchester1300\wpn_winchester1300_hud.ogf
+visual                   	= weapons\mossberg500\wpn_mossberg500_hud.ogf
+
+anim_add_cartridge_effector = null
 
 anim_idle					= idle
 anim_reload					= draw
+anm_reload_jammed			= reload_jammed
 anim_draw					= draw
 anim_holster				= holster
-anim_shoot					= shoot_r
+anim_shoot					= shoot
 anim_shoot_both 			= shoot
-anim_idle_aim			= idle_aim
-anim_idle_sprint			= idle_sprint
+anim_idle_aim				= aim
+anim_idle_sprint			= sprint
+anim_idle_moving			= moving
 
+anim_open_weapon			= reload_start
+anim_add_cartridge			= reload
+anim_close_weapon			= reload_end
 
-anim_open_weapon			= reload1
-anim_add_cartridge		= reload2
-anim_close_weapon			= reload3
+anim_add_cartridge_speed_k  = 1.5
+
+anim_idle_sprint_speed_k = 0.85
 
 ;смещения HUD для режима приближения
-zoom_offset			= -0.13,0.058,,-0.05
-zoom_rotate_x		= 0.032
-zoom_rotate_y		= 0
+zoom_offset				= -0.153,0.073,-0.034
+zoom_rotate_x			= 0.027
+zoom_rotate_y			= 0.0348
 
 ;время поворота HUD (сек)
-;zoom_rotate_time			= 0.7
+zoom_rotate_time 		= 0.4

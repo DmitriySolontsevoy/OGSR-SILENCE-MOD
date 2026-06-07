@@ -141,7 +141,7 @@ void CPhysicObject::UpdateCL()
 #ifdef ANIMATED_PHYSICS_OBJECT_SUPPORT
     //Если наш физический объект анимированный, то
     //двигаем объект за анимацией
-    if (m_pPhysicsShell->PPhysicsShellAnimator())
+    if (m_pPhysicsShell && m_pPhysicsShell->PPhysicsShellAnimator())
     {
         m_pPhysicsShell->PPhysicsShellAnimator()->OnFrame();
     }

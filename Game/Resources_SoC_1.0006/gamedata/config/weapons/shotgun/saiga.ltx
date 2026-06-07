@@ -1,0 +1,346 @@
+[wpn_saiga]:identity_immunities
+GroupControlSection		= spawn_group
+discovery_dependency	= 
+$spawn              	= "weapons\ak-74"	; name and section in level editor
+$npc					= on				
+$prefetch 				= 8
+scheduled				= off               ;[] option for ALife Simulator
+cform               	= skeleton
+class               	= WP_AK74			; class of the weapon that corresponding to CPP class
+min_radius 			= 5				; for AI
+max_radius 			= 100				; for AI
+description			= "Автомат Калашникова 74 года";enc_weapons1_wpn-ak74
+	
+ef_main_weapon_type		= 2
+ef_weapon_type			= 6
+
+;-----------------------------------------------------------------------------------
+holder_range_modifier		= 1.0				; во сколько раз увеличивается eye_range 
+holder_fov_modifier		= 1.0				; во сколько раз увеличивается eye_fov
+;-----------------------------------------------------------------------------------
+
+cartridge_bullet    = true
+
+cost				= 2000				; the price of the item
+weapon_class			= assault_rifle			; the type of the box that will be used in buy-menu in multiplayer mode	
+	
+ammo_limit			= 210				; obsolete
+ammo_current			= 210
+ammo_elapsed			= 5				; obsolete
+ammo_mag_size			= 5				; clip (magazine) size
+
+ammo_class			= ammo_12x76_dart,ammo_12x76_zhekan,ammo_12x70_buck 	; name of the ltx-section of used ammo 
+
+ejects_casings 				= 1
+ejects_on_reload			= 0
+casings_section				= 12x70_casing
+casing_delay				= 0
+
+drops_mags					= 1
+mags_section				= mag_saiga
+mag_delay					= 300
+mag_point					= 0.0, 0.0, 0.0
+
+grenade_class			= ammo_vog-25, ammo_vog-25p		; name of the ltx-section of used grenades 
+launch_speed			= 0
+
+fire_modes			= 1
+
+hand_dependence			= 2				; how many hands (1 or 2) we used to hold weapon in
+single_handed			= 0 
+	
+slot 				= 1,2				; number of slot in inventory we put weapon in (1 - knife slot, 2 - pistol, 3 - rifle, 4 - grenade, 5 - apparatus)
+animation_slot			= 2				; type of the animation that will be used
+
+inv_name	 		= Saiga-12			; name in inventory	
+inv_name_short		= Saiga-12	 
+inv_weight			= 3.56				; weight in inventory
+
+icon_group              = 1
+inv_grid_width			= 4
+inv_grid_height			= 2
+inv_grid_x				= 0
+inv_grid_y				= 77
+
+kill_msg_x			= 0
+kill_msg_y			= 28
+kill_msg_width		= 84
+kill_msg_height		= 28
+
+;спавнить автоматически боеприпасы при подъеме оружия
+;auto_spawn_ammo		= false
+
+;-----------------------------------------------------------------------------------
+;params of weapon recoil
+dispersion_start		= 2
+fire_dispersion_base		= 0.18				;угол (в градусах) базовой дисперсии оружия (оружия зажатого в тисках)
+control_inertion_factor		= 1.25f                 
+
+;отдача                                               
+cam_relax_speed         	= 6.0	;скорость возврата в исходное положение
+cam_dispersion          	= 6.0	;увеличения угла (в градусах) с каждым выстрелом
+cam_dispersion_inc		= 0.0	;увеличениe cam_dispersion с каждым выстрелом
+cam_dispertion_frac		= 1.0	;ствол будет подыматься на cam_dispersion*cam_dispertion_frac +- cam_dispersion*(1-cam_dispertion_frac)
+cam_max_angle			= 90.0	;максимальный угол отдачи
+cam_max_angle_horz		= 10.0	;(degree) maximum shot horizontal degree 
+cam_step_angle_horz		= 1.5	;(degree) size of step camera moved in horizontal position while shooting
+
+;--износ                                                
+fire_dispersion_condition_factor= 1.5	 	 	 	;увеличение дисперсии в процентах при максимальном износе 
+misfire_probability 		= 0.0001			;вероятность осечки при максимальном износе 
+misfire_condition_k		= 0.02                  
+condition_shot_dec 		= 0.0001			;увеличение износа при каждом выстреле
+;-----------------------------------------------------------------------------------
+
+fire_point             		=  0,0.216,0.638			; position (3rd person view) for particles of fire 
+fire_point2            		=  0,0.216,0.730			; position (3rd person view) for particles of fire (when shooting with secondary fire)
+
+flame_particles				= weapons\new_effects\shtg_pump
+smoke_particles				= weapons\generic_shoot_00
+grenade_flame_particles		= weapons\generic_weapon01
+	
+shell_point		 			= 0,0.216,0.174			; position (3rd person view) for shell to throw out
+shell_particles	 			= weapons\arsenal_shells1	; name of the particles for shells
+
+PDM_disp_base 			= 1.0
+PDM_disp_vel_factor 		= 1.3
+PDM_disp_accel_factor 		= 1.4
+PDM_crouch	 		= 0.9
+PDM_crouch_no_acc 		= 0.8
+
+;-- ttc
+hit_power 			= 0.611, 0.611, 0.611, 0.611	; size of damage by bullet
+hit_impulse		 	= 64				; size of physic impulse by bullet	
+hit_type 			= fire_wound 			; type of the wound
+
+fire_distance 			= 1500				; maximum fire distance that bullet can fly
+bullet_speed			= 715				; starting bullet speed	 ;КОЭФФИЦИЕНТ начальной скорости пули
+rpm 					= 600				; max round per minute
+rpm_empty_click 	 	= 300
+
+use_aim_bullet			= false				; Поддерживается ли первая суппер пуля
+time_to_aim			= 1.0	
+
+hud                      	= wpn_saiga_hud						; name of the section of the hud
+
+position         	        = -0.026,-0.172,0			; position (offset) and orientation of the weapon in the hands of character
+orientation      	        = 0,0,0						; (3rd person view)
+
+
+;--STRAP PARAMETERS-----------------------------------------------------------------
+strap_position         		= -0.16,-0.40,0.15			; position (offset) and orientation of the weapon when it is strapped
+strap_orientation      		= -10,-5,10					; (3rd person view in degrees)
+strap_bone0					= bip01_spine2
+strap_bone1					= bip01_spine1
+
+visual         		        = weapons\saiga\wpn_saiga.ogf		; name of the model for 3rd person view
+
+light_color					= 0.6,0.5,0.3				; params for light during the fire
+light_range					= 5							; radius
+light_var_color				= 0.05						
+light_var_range				= 0.5
+light_time 					= 0.1					
+
+ph_mass				= 4				; physic mass (kg)
+
+;addons
+scope_status				= 2				; 0 - no addon
+silencer_status				= 2				; 1 - permanent
+grenade_launcher_status		= 0				; 2 - attachable
+pointer_status 				= 2
+
+zoom_enabled			= true				; (on,off)zoom mode (right mouse button)
+scope_zoom_factor		= 65				; fov for zoom mode
+
+scopes_textured 				= wpn_addon_scope_pso1, wpn_addon_scope_1p29, wpn_addon_scope_1p78
+scope_wpn_addon_scope_pso1_x 	= 27
+scope_wpn_addon_scope_pso1_y 	= -5
+
+scope_wpn_addon_scope_1p29_x 	= 50
+scope_wpn_addon_scope_1p29_y 	= 0
+
+scope_wpn_addon_scope_1p78_x 	= 50
+scope_wpn_addon_scope_1p78_y 	= -6
+
+scopes_physical 				= wpn_addon_red_dot_pka, wpn_addon_red_dot_cobra
+scope_wpn_addon_red_dot_pka_x 	= 60
+scope_wpn_addon_red_dot_pka_y 	= -3
+
+scope_wpn_addon_red_dot_cobra_x = 60
+scope_wpn_addon_red_dot_cobra_y = 2
+
+silencer_extends_grid_x 	= 1
+silencer_name  				= wpn_addon_silencer_shotgun		; section name for the attachable silencer
+silencer_x                  = 160		; offset in inventory icon
+silencer_y                  = 9
+
+grenade_launcher_name 		= wpn_addon_grenade_launcher; section name for the attachable grenade launcher
+grenade_launcher_x          = 107		; offset in inventory icon
+grenade_launcher_y          = 29
+
+pointer_bone       = wpn_pointer
+pointer_light_bone = wpn_pointer_focus
+
+pointer_name = wpn_addon_pointer
+pointer_x = 135
+pointer_y = 10
+
+;sounds (name of the sound, volume (0.0 - 1.0), delay (sec))
+snd_draw			= weapons\_general\rifle_draw
+snd_holster			= weapons\sig550\holster
+snd_shoot			= weapons\saiga\shot
+snd_shoot1			= weapons\saiga\shot
+snd_shoot2			= weapons\saiga\shot
+snd_shoot3			= weapons\saiga\shot
+snd_silncer_shot	= weapons\saiga\shot_silenced
+snd_empty			= weapons\gen_empty, 0.5
+snd_reload			= weapons\saiga\reload
+snd_reload_partly	= weapons\saiga\reload_partly
+snd_reload_jammed	= weapons\saiga\reload_jammed
+snd_shoot_grenade	= weapons\gen_grenshoot
+snd_reload_grenade	= weapons\gen_grenload, 1.0, 0.8
+snd_switch			= weapons\groza_switch, 1.0, 0.5
+snd_click_last		= weapons\_general\shotgun_slide_click
+
+snd_aim_start               = weapons\_general\shotgun_aim_start, 0.5
+snd_aim_end                 = weapons\_general\shotgun_aim_end, 0.5
+
+snd_grab = pickups\grab_gun
+
+;params when silencer is attached 
+;similar to corresponding params without prefix silencer_
+
+;silencer_flame_particles	= weapons\generic_weapon01
+silencer_smoke_particles 	= weapons\generic_shoot_00
+
+silencer_hit_power 		= 0.580, 0.580, 0.580, 0.580
+silencer_hit_impulse	 	= 64
+silencer_fire_distance 		= 306
+silencer_bullet_speed	 	= 290
+
+silencer_light_color		= 0.6, 0.5, 0.3
+silencer_light_range		= 0.01
+silencer_light_var_color	= 0.05
+silencer_light_var_range	= 0.5
+silencer_light_time 		= 0.1
+
+; HIDDEN BONES
+hidden_bones = wpn_upgrade_luminous_sights, wpn_upgrade_extended_magazine
+
+;-----------------------------------------------------------------------------
+;-- HUD DESCRIPTION
+;-----------------------------------------------------------------------------
+ 
+[wpn_saiga_hud]
+allow_inertion				= true
+
+shell_point					= 1.5,0,0
+shell_dir			     	= 0.0, 1.0, 0.0
+
+fire_point               	= -0.02, 0.07, 0.0
+fire_point2              	= 0.019,0.07,-0.47 ;  0.019,0.07,0.07
+fire_bone               	= wpn_body
+
+position					= -0.025,-0.14,0.13
+orientation					= 2,2,0
+visual                  	= weapons\saiga\wpn_saiga_hud.ogf
+
+mag_point					= 0.0, -0.5, -0.5
+
+grenade_bone            	= joint12
+
+anim_reload_effector = short_reload
+anim_reload_partly_effector = short_reload
+anm_reload_jammed_effector = short_reload
+
+anim_idle						= idle
+anim_idle_aim					= aim
+anim_reload						= reload
+anim_reload_partly				= reload_partly
+anm_reload_jammed				= reload
+anim_draw						= draw
+anim_holster					= holster
+anim_shoot						= shoot
+anim_idle_sprint				= sprint
+anim_idle_moving				= moving
+
+anm_reload_jammed_start_k 		= 0.63
+
+anim_idle_sprint_speed_k 	= 0.8
+
+anim_idle_moving_speed_k	= 0.9
+
+zoom_offset						= -0.13195,0.05,-0.13
+zoom_rotate_x					= 0.03
+zoom_rotate_y					= 0.03385
+
+zoom_rotate_time = 0.4
+
+scopes_textured 								= wpn_addon_scope_pso1, wpn_addon_scope_1p29, wpn_addon_scope_1p78
+scoped_wpn_addon_scope_pso1_zoom_offset			= -0.13195,0.018,-0.3
+scoped_wpn_addon_scope_pso1_zoom_rotate_x		= 0.0241
+scoped_wpn_addon_scope_pso1_zoom_rotate_y		= 0.03385
+
+scoped_wpn_addon_scope_1p29_zoom_offset			= -0.13195,0.022,-0.35
+scoped_wpn_addon_scope_1p29_zoom_rotate_x		= 0.0241
+scoped_wpn_addon_scope_1p29_zoom_rotate_y		= 0.03385
+
+scoped_wpn_addon_scope_1p78_zoom_offset			= -0.13195,0.025,-0.3
+scoped_wpn_addon_scope_1p78_zoom_rotate_x		= 0.0241
+scoped_wpn_addon_scope_1p78_zoom_rotate_y		= 0.03385
+
+scopes_physical 								= wpn_addon_red_dot_pka, wpn_addon_red_dot_cobra
+scoped_wpn_addon_red_dot_pka_zoom_offset		= -0.131,0.0135,-0.1
+scoped_wpn_addon_red_dot_pka_zoom_rotate_x		= 0.0241
+scoped_wpn_addon_red_dot_pka_zoom_rotate_y		= 0.03385
+
+scoped_wpn_addon_red_dot_cobra_zoom_offset		= -0.1305,0.0205,-0.1
+scoped_wpn_addon_red_dot_cobra_zoom_rotate_x	= 0.0241
+scoped_wpn_addon_red_dot_cobra_zoom_rotate_y	= 0.03385
+
+zoom_hide_crosshair	= true
+
+; HIDDEN BONES
+hidden_bones = wpn_upgrade_luminous_sights, wpn_upgrade_extended_magazine
+
+
+;;;;;;;;;;;;;;;;;
+;;;WEAPON MODS;;;
+;;;;;;;;;;;;;;;;;
+
+;;;EXTENDED MAG
+[wpn_saiga:mag]:wpn_saiga
+inv_grid_x = 10
+
+inv_weight	= 3.76
+
+ammo_mag_size = 10
+mags_section = mag_saiga_extended
+hidden_bones = wpn_upgrade_luminous_sights, magazin
+
+hud = wpn_saiga:mag_hud
+
+[wpn_saiga:mag_hud]:wpn_saiga_hud
+hidden_bones = wpn_upgrade_luminous_sights, magazin
+
+;;;LUMINOUS SIGHTS
+[wpn_saiga:tritium]:wpn_saiga
+inv_grid_x = 5
+
+hidden_bones = wpn_upgrade_extended_magazine
+
+hud = wpn_saiga:tritium_hud
+
+[wpn_saiga:tritium_hud]:wpn_saiga_hud
+hidden_bones = wpn_upgrade_extended_magazine
+
+;;;EXTENDED MAG + LUMINOUS SIGHTS
+[wpn_saiga:mag:tritium]:wpn_saiga:mag
+inv_grid_x = 10
+
+hidden_bones = magazin
+
+hud = wpn_saiga:mag:tritium_hud
+
+[wpn_saiga:mag:tritium_hud]:wpn_saiga:mag_hud
+hidden_bones = magazin

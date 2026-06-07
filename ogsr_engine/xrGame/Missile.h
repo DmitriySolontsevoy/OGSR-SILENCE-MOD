@@ -20,6 +20,8 @@ public:
     virtual void reinit();
     virtual CMissile* cast_missile() { return this; }
 
+    void spawn_fake_missile();
+
     virtual void Load(LPCSTR section);
     virtual BOOL net_Spawn(CSE_Abstract* DC);
     virtual void net_Destroy();
@@ -56,7 +58,6 @@ public:
 protected:
     virtual void UpdateXForm();
     void UpdatePosition(const Fmatrix& trans);
-    void spawn_fake_missile();
 
     //инициализация если вещь в активном слоте или спрятана на OnH_B_Chield
     virtual void OnActiveItem();

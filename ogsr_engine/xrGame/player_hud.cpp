@@ -7,6 +7,7 @@
 #include "ui_base.h"
 #include "level.h"
 #include "weapon.h"
+#include <sstream>
 
 player_hud* g_player_hud{};
 
@@ -285,6 +286,13 @@ void attachable_hud_item::setup_firedeps(firedeps& fd)
         fd.m_FireParticlesXForm.k.set(fd.vLastFD);
         Fvector::generate_orthonormal_basis_normalized(fd.m_FireParticlesXForm.k, fd.m_FireParticlesXForm.j, fd.m_FireParticlesXForm.i);
         VERIFY(_valid(fd.m_FireParticlesXForm));
+
+        Fmatrix& fire_mat_mag = m_model->LL_GetTransform(m_measures.m_fire_bone);
+        fire_mat_mag.transform_tiny(fd.vLastMP, m_measures.m_mag_point_offset);
+        m_item_transform.transform_tiny(fd.vLastMP);
+        fd.vLastMP.add(Device.vCameraPosition);
+        VERIFY(_valid(fd.vLastMP));
+        VERIFY(_valid(fd.vLastMP));
     }
 
     if (m_measures.m_prop_flags.test(hud_item_measures::e_fire_point2))
@@ -327,7 +335,7 @@ void hud_item_measures::load(const shared_str& sect_name, IKinematics* K)
     bool is_16x9 = UI()->is_widescreen();
     string64 _prefix;
     xr_sprintf(_prefix, "%s", is_16x9 ? "_16x9" : "");
-    string128 val_name, val_name2;
+    string128 val_name;
 
     strconcat(sizeof(val_name), val_name, "hands_position", _prefix);
     if (is_16x9 && !pSettings->line_exist(sect_name, val_name))
@@ -364,9 +372,17 @@ void hud_item_measures::load(const shared_str& sect_name, IKinematics* K)
             m_fire_bone = K->LL_BoneID(bone_name);
             ASSERT_FMT(m_fire_bone != BI_NONE, "!![%s] bone [%s] not found in weapon [%s]", __FUNCTION__, bone_name.c_str(), sect_name.c_str());
             m_fire_point_offset = pSettings->r_fvector3(sect_name, "fire_point");
+            
+            if (pSettings->line_exist(sect_name, "mag_point"))
+                m_mag_point_offset = pSettings->r_fvector3(sect_name, "mag_point");
+            else
+                m_mag_point_offset.set(0.f, 0.f, 0.f);
         }
         else
+        {
             m_fire_point_offset.set(0.f, 0.f, 0.f);
+            m_mag_point_offset.set(0.f, 0.f, 0.f);
+        }
 
         m_prop_flags.set(e_fire_point2, pSettings->line_exist(sect_name, "fire_bone") && pSettings->line_exist(sect_name, "fire_point2"));
         if (m_prop_flags.test(e_fire_point2))
@@ -408,10 +424,18 @@ void hud_item_measures::load(const shared_str& sect_name, IKinematics* K)
             ASSERT_FMT(m_fire_bone != BI_NONE, "!![%s] bone [%s] not found in weapon [%s]", __FUNCTION__, bone_name.c_str(), sect_name.c_str());
             m_fire_point_offset = pSettings->r_fvector3(sect_name, "fire_point");
             m_shoot_point_offset = READ_IF_EXISTS(pSettings, r_fvector3, sect_name, "shoot_point", (Fvector{m_fire_point_offset.x, m_fire_point_offset.y, -0.5f}));
+
+            if (pSettings->line_exist(sect_name, "mag_point"))
+                m_mag_point_offset = pSettings->r_fvector3(sect_name, "mag_point");
+            else
+                m_mag_point_offset.set(0.f, 0.f, 0.f);
         }
         else
+        {
             m_fire_point_offset.set(0.f, 0.f, 0.f);
-
+            m_mag_point_offset.set(0.f, 0.f, 0.f);
+        }
+            
         m_prop_flags.set(e_fire_point2, pSettings->line_exist(sect_name, "fire_bone2"));
         if (m_prop_flags.test(e_fire_point2))
         {
@@ -435,6 +459,7 @@ void hud_item_measures::load(const shared_str& sect_name, IKinematics* K)
             m_shell_point_offset.set(0.f, 0.f, 0.f);
     }
 
+    // Iron sight aiming
     strconcat(sizeof(val_name), val_name, "aim_hud_offset_pos", _prefix);
     if (is_16x9 && !pSettings->line_exist(sect_name, val_name))
         xr_strcpy(val_name, "aim_hud_offset_pos");
@@ -452,23 +477,7 @@ void hud_item_measures::load(const shared_str& sect_name, IKinematics* K)
     else
         m_hands_offset[m_hands_offset_rot][m_hands_offset_type_aim] = READ_IF_EXISTS(pSettings, r_fvector3, sect_name, val_name, Fvector{});
 
-    strconcat(sizeof(val_name), val_name, "scope_hud_offset_pos", _prefix);
-    if (is_16x9 && !pSettings->line_exist(sect_name, val_name))
-        xr_strcpy(val_name, "scope_hud_offset_pos");
-    if (!pSettings->line_exist(sect_name, val_name) && pSettings->line_exist(sect_name, "scoped_zoom_offset"))
-        m_hands_offset[m_hands_offset_pos][m_hands_offset_type_scope] = pSettings->r_fvector3(sect_name, "scoped_zoom_offset");
-    else
-        m_hands_offset[m_hands_offset_pos][m_hands_offset_type_scope] = READ_IF_EXISTS(pSettings, r_fvector3, sect_name, val_name, Fvector{});
-
-    strconcat(sizeof(val_name), val_name, "scope_hud_offset_rot", _prefix);
-    if (is_16x9 && !pSettings->line_exist(sect_name, val_name))
-        xr_strcpy(val_name, "scope_hud_offset_rot");
-    if (!pSettings->line_exist(sect_name, val_name) && pSettings->line_exist(sect_name, "scoped_zoom_rotate_x") && pSettings->line_exist(sect_name, "scoped_zoom_rotate_y"))
-        m_hands_offset[m_hands_offset_rot][m_hands_offset_type_scope] =
-            Fvector().set(pSettings->r_float(sect_name, "scoped_zoom_rotate_x"), pSettings->r_float(sect_name, "scoped_zoom_rotate_y"), 0.f);
-    else
-        m_hands_offset[m_hands_offset_rot][m_hands_offset_type_scope] = READ_IF_EXISTS(pSettings, r_fvector3, sect_name, val_name, Fvector{});
-
+    // Grenade launcher aiming
     strconcat(sizeof(val_name), val_name, "gl_hud_offset_pos", _prefix);
     if (is_16x9 && !pSettings->line_exist(sect_name, val_name))
         xr_strcpy(val_name, "gl_hud_offset_pos");
@@ -486,75 +495,77 @@ void hud_item_measures::load(const shared_str& sect_name, IKinematics* K)
     else
         m_hands_offset[m_hands_offset_rot][m_hands_offset_type_gl] = READ_IF_EXISTS(pSettings, r_fvector3, sect_name, val_name, Fvector{});
 
-    //ОГСР-специфичные параметры
-    xr_strconcat(val_name, "scope_zoom_offset", _prefix);
-    if (is_16x9 && !pSettings->line_exist(sect_name, val_name))
-        xr_strcpy(val_name, "scope_zoom_offset");
-    if (pSettings->line_exist(sect_name, val_name))
-        m_hands_offset[m_hands_offset_pos][m_hands_offset_type_aim_scope] = pSettings->r_fvector3(sect_name, val_name);
-
-    xr_strconcat(val_name, "scope_zoom_rotate_x", _prefix);
-    xr_strconcat(val_name2, "scope_zoom_rotate_y", _prefix);
-    if (is_16x9 && (!pSettings->line_exist(sect_name, val_name) || !pSettings->line_exist(sect_name, val_name2)))
+    // Textured scopes aiming
+    if (pSettings->line_exist(sect_name, "scopes_textured"))
     {
-        xr_strcpy(val_name, "scope_zoom_rotate_x");
-        xr_strcpy(val_name2, "scope_zoom_rotate_y");
-    }
-    if (pSettings->line_exist(sect_name, val_name) && pSettings->line_exist(sect_name, val_name2))
-        m_hands_offset[m_hands_offset_rot][m_hands_offset_type_aim_scope] = Fvector{pSettings->r_float(sect_name, val_name), pSettings->r_float(sect_name, val_name2)};
-    //
-    xr_strconcat(val_name, "scope_grenade_zoom_offset", _prefix);
-    if (is_16x9 && !pSettings->line_exist(sect_name, val_name))
-        xr_strcpy(val_name, "scope_grenade_zoom_offset");
-    if (pSettings->line_exist(sect_name, val_name))
-        m_hands_offset[m_hands_offset_pos][m_hands_offset_type_gl_scope] = pSettings->r_fvector3(sect_name, val_name);
+        auto scopes_list = pSettings->r_string(sect_name, "scopes_textured");
 
-    xr_strconcat(val_name, "scope_grenade_zoom_rotate_x", _prefix);
-    xr_strconcat(val_name2, "scope_grenade_zoom_rotate_y", _prefix);
-    if (is_16x9 && (!pSettings->line_exist(sect_name, val_name) || !pSettings->line_exist(sect_name, val_name2)))
-    {
-        xr_strcpy(val_name, "scope_grenade_zoom_rotate_x");
-        xr_strcpy(val_name2, "scope_grenade_zoom_rotate_y");
-    }
-    if (pSettings->line_exist(sect_name, val_name) && pSettings->line_exist(sect_name, val_name2))
-        m_hands_offset[m_hands_offset_rot][m_hands_offset_type_gl_scope] = Fvector{pSettings->r_float(sect_name, val_name), pSettings->r_float(sect_name, val_name2)};
-    //
-    xr_strconcat(val_name, "grenade_normal_zoom_offset", _prefix);
-    if (is_16x9 && !pSettings->line_exist(sect_name, val_name))
-        xr_strcpy(val_name, "grenade_normal_zoom_offset");
-    if (pSettings->line_exist(sect_name, val_name))
-        m_hands_offset[m_hands_offset_pos][m_hands_offset_type_aim_gl_normal] = pSettings->r_fvector3(sect_name, val_name);
-    else
-        m_hands_offset[m_hands_offset_pos][m_hands_offset_type_aim_gl_normal] = m_hands_offset[m_hands_offset_pos][m_hands_offset_type_aim];
+        std::vector<std::string> scopes;
+        std::stringstream ss(scopes_list);
+        std::string item;
 
-    xr_strconcat(val_name, "grenade_normal_zoom_rotate_x", _prefix);
-    xr_strconcat(val_name2, "grenade_normal_zoom_rotate_y", _prefix);
-    if (is_16x9 && (!pSettings->line_exist(sect_name, val_name) || !pSettings->line_exist(sect_name, val_name2)))
-    {
-        xr_strcpy(val_name, "grenade_normal_zoom_rotate_x");
-        xr_strcpy(val_name2, "grenade_normal_zoom_rotate_y");
-    }
-    if (pSettings->line_exist(sect_name, val_name) && pSettings->line_exist(sect_name, val_name2))
-        m_hands_offset[m_hands_offset_rot][m_hands_offset_type_aim_gl_normal] = Fvector{pSettings->r_float(sect_name, val_name), pSettings->r_float(sect_name, val_name2)};
-    else
-        m_hands_offset[m_hands_offset_rot][m_hands_offset_type_aim_gl_normal] = m_hands_offset[m_hands_offset_rot][m_hands_offset_type_aim];
-    //
-    xr_strconcat(val_name, "scope_grenade_normal_zoom_offset", _prefix);
-    if (is_16x9 && !pSettings->line_exist(sect_name, val_name))
-        xr_strcpy(val_name, "scope_grenade_normal_zoom_offset");
-    if (pSettings->line_exist(sect_name, val_name))
-        m_hands_offset[m_hands_offset_pos][m_hands_offset_type_gl_normal_scope] = pSettings->r_fvector3(sect_name, val_name);
+        while (getline(ss, item, ','))
+        {
+            scopes.push_back(item);
+        }
 
-    xr_strconcat(val_name, "scope_grenade_normal_zoom_rotate_x", _prefix);
-    xr_strconcat(val_name2, "scope_grenade_normal_zoom_rotate_y", _prefix);
-    if (is_16x9 && (!pSettings->line_exist(sect_name, val_name) || !pSettings->line_exist(sect_name, val_name2)))
-    {
-        xr_strcpy(val_name, "scope_grenade_normal_zoom_rotate_x");
-        xr_strcpy(val_name2, "scope_grenade_normal_zoom_rotate_y");
+        scopes.resize(6);
+
+        for (int i = 0; i < scopes.size(); ++i)
+        {
+            string128 scope_zoom_offset, scope_zoom_rot_x, scope_zoom_rot_y;
+            xr_strconcat(scope_zoom_offset, "scoped_", scopes[i].c_str(), "_zoom_offset");
+            xr_strconcat(scope_zoom_rot_x, "scoped_", scopes[i].c_str(), "_zoom_rotate_x");
+            xr_strconcat(scope_zoom_rot_y, "scoped_", scopes[i].c_str(), "_zoom_rotate_y");
+
+            if (pSettings->line_exist(sect_name, scope_zoom_offset))
+                m_hands_offset[m_hands_offset_pos][m_hands_offset_type_scope + i] = pSettings->r_fvector3(sect_name, scope_zoom_offset);
+            else
+                m_hands_offset[m_hands_offset_pos][m_hands_offset_type_scope + i] = Fvector{};
+
+            if (pSettings->line_exist(sect_name, scope_zoom_rot_x) && pSettings->line_exist(sect_name, scope_zoom_rot_y))
+                m_hands_offset[m_hands_offset_rot][m_hands_offset_type_scope + i] =
+                    Fvector().set(pSettings->r_float(sect_name, scope_zoom_rot_x), pSettings->r_float(sect_name, scope_zoom_rot_y), 0.f);
+            else
+                m_hands_offset[m_hands_offset_rot][m_hands_offset_type_scope + i] = Fvector{};
+        }
     }
-    if (pSettings->line_exist(sect_name, val_name) && pSettings->line_exist(sect_name, val_name2))
-        m_hands_offset[m_hands_offset_rot][m_hands_offset_type_gl_normal_scope] = Fvector{pSettings->r_float(sect_name, val_name), pSettings->r_float(sect_name, val_name2)};
-    //
+
+    // Physical scopes aiming
+    if (pSettings->line_exist(sect_name, "scopes_physical"))
+    {
+        auto scopes_list = pSettings->r_string(sect_name, "scopes_physical");
+        
+        std::vector<std::string> scopes;
+        std::stringstream ss(scopes_list);
+        std::string item;
+
+        while (getline(ss, item, ','))
+        {
+            scopes.push_back(item);
+        }
+
+        scopes.resize(6);
+
+        for (int i = 0; i < scopes.size(); ++i)
+        {
+            string128 scope_zoom_offset, scope_zoom_rot_x, scope_zoom_rot_y;
+            xr_strconcat(scope_zoom_offset, "scoped_", scopes[i].c_str(), "_zoom_offset");
+            xr_strconcat(scope_zoom_rot_x, "scoped_", scopes[i].c_str(), "_zoom_rotate_x");
+            xr_strconcat(scope_zoom_rot_y, "scoped_", scopes[i].c_str(), "_zoom_rotate_y");
+
+            if (pSettings->line_exist(sect_name, scope_zoom_offset))
+                m_hands_offset[m_hands_offset_pos][m_hands_offset_type_aim_scope + i] = pSettings->r_fvector3(sect_name, scope_zoom_offset);
+            else
+                m_hands_offset[m_hands_offset_pos][m_hands_offset_type_aim_scope + i] = Fvector{};
+
+            if (pSettings->line_exist(sect_name, scope_zoom_rot_x) && pSettings->line_exist(sect_name, scope_zoom_rot_y))
+                m_hands_offset[m_hands_offset_rot][m_hands_offset_type_aim_scope + i] = 
+                    Fvector().set(pSettings->r_float(sect_name, scope_zoom_rot_x), pSettings->r_float(sect_name, scope_zoom_rot_y), 0.f);
+            else
+                m_hands_offset[m_hands_offset_rot][m_hands_offset_type_aim_scope + i] = Fvector{}; 
+        }
+    }
 
     if (useCopFirePoint) // cop configs
     {
@@ -1921,7 +1932,6 @@ float player_hud::SetBlendAnmTime(LPCSTR name, float time)
     return 0;
 }
 
-
 player_hud_motion_container* player_hud::get_hand_motions(LPCSTR section, IKinematicsAnimated* animatedHudItem)
 {
     for (hand_motions* phm : m_hand_motions)
@@ -1937,4 +1947,3 @@ player_hud_motion_container* player_hud::get_hand_motions(LPCSTR section, IKinem
 
     return &res->pm;
 }
-

@@ -57,7 +57,7 @@ hit_type_frag		= fire_wound
 up_throw_factor		 = 1.2
 ;-----------------------------------------------------------------------------------
 
-explode_particles	= explosions\explosion_01
+explode_particles	= explosions_new\expl_fcc_1
 
 
 light_color		         = 1.9,1.4,0.5
@@ -90,21 +90,27 @@ wm_size                  = 0.1
 wallmark_section		 = explosion_marks
 
 [grenade_rgd5_hud]
-fire_point          = 0.05, 0.0, 0.1
-fire_bone           = grenade_0
-orientation         = 0,0,0
-position            = 0,0,0.15
+fire_point          	= 0,0,0
+fire_bone           	= wpn_body
+
+position				= -0.061,-0.16,0.0025
+orientation				= -0.5,1.0,-2.0
+
 visual              = weapons\grenade\wpn_rgd_5_hud.ogf
 
-throw_point				 = 0.0,-0.4,0.3
-;throw_point			= -0.05,-0.10,0.05
-throw_dir			= 0,0,1
+throw_point				= 0.0,0.4,0.3
+throw_dir				= 0,0,1
 
-anim_show			= draw
-anim_hide			= holster
-anim_idle			= idle
-anim_playing		= idle
-anim_throw_begin		= attack_begin
-anim_throw_idle		= attack_idle
-anim_throw_act		= attack_act	
-anim_throw_end		= attack_end
+anim_show				= draw
+anim_hide				= holster
+anim_idle				= idle
+anim_playing			= idle_sae
+anim_throw_begin		= throw_begin
+anim_throw_idle			= throw_idle
+anim_throw_act			= throw_act	
+anim_throw_end			= throw_end
+anim_idle_sprint		= sprint
+anim_idle_moving		= moving
+
+anim_idle_sprint_speed_k = 0.95
+anim_idle_moving_speed_k = 0.9

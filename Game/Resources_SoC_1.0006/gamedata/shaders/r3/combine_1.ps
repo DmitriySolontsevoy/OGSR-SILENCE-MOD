@@ -96,6 +96,9 @@ _out main(_input I, uint iSample : SV_SAMPLEINDEX)
         hspecular = 0;
 #endif
 
+	hdiffuse *= D.a;
+	hdiffuse = max(hdiffuse, float3(0.03f, 0.03f, 0.03f));
+	
     float4 light = float4(L.rgb + hdiffuse, L.w);
     float4 C = D * light;
 

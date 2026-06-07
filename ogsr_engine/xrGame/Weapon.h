@@ -174,8 +174,8 @@ public:
     virtual void InitAddons();
 
     // для отоброажения иконок апгрейдов в интерфейсе
-    int GetScopeX() { return m_iScopeX; }
-    int GetScopeY() { return m_iScopeY; }
+    int GetScopeX() { return m_sWpnScopeCoordinates.find(m_sCurrentScope)->second.first; }
+    int GetScopeY() { return m_sWpnScopeCoordinates.find(m_sCurrentScope)->second.second; }
     int GetSilencerX() { return m_iSilencerX; }
     int GetSilencerY() { return m_iSilencerY; }
     int GetGrenadeLauncherX() { return m_iGrenadeLauncherX; }
@@ -186,7 +186,7 @@ public:
     int GetForegripY() { return m_iForegripY; }
 
     const shared_str& GetGrenadeLauncherName() const { return m_sGrenadeLauncherName; }
-    const shared_str& GetScopeName() const { return m_sScopeName; }
+    const shared_str& GetScopeName() const { return m_sCurrentScope; }
     const shared_str& GetSilencerName() const { return m_sSilencerName; }
     const shared_str& GetPointerName() const { return m_sPointerName; }
     const shared_str& GetForegripName() const { return m_sForegripName; }
@@ -195,19 +195,22 @@ public:
     void SetAddonsState(u8 st) { m_flagsAddOnState = st; }
 
     // названия секций подключаемых аддонов
-    shared_str m_sScopeName;
-    xr_vector<shared_str> m_allScopeNames;
     shared_str m_sSilencerName;
     shared_str m_sGrenadeLauncherName;
     shared_str m_sPointerName;
     shared_str m_sForegripName;
 
-    xr_vector<shared_str> m_sWpn_scope_bones;
+    xr_vector<shared_str> m_sWpnScopes;
+    xr_map<shared_str, u8> m_sWpnScopeIndexes;
+    xr_map<shared_str, std::pair<int, int>> m_sWpnScopeCoordinates;
+    shared_str m_sCurrentScope = "none";
+    std::vector<std::string> m_sWpnTexturedScopeNames;
+
     shared_str m_sWpn_silencer_bone;
     shared_str m_sWpn_launcher_bone;
     shared_str m_sWpn_pointer_bone;
     shared_str m_sWpn_foregrip_bone;
-    xr_vector<shared_str> m_sHud_wpn_scope_bones;
+
     shared_str m_sHud_wpn_silencer_bone;
     shared_str m_sHud_wpn_launcher_bone;
     shared_str m_sHud_wpn_pointer_bone;
@@ -216,6 +219,12 @@ public:
 private:
     xr_vector<shared_str> hidden_bones;
     xr_vector<shared_str> hud_hidden_bones;
+
+    xr_vector<u32> m_casingsToSpawn;
+    xr_map<u16, u32> m_casingsToRemove;
+
+    xr_vector<u32> m_magsToSpawn;
+    xr_map<u16, u32> m_magsToRemove;
 
 protected:
     // состояние подключенных аддонов
@@ -229,7 +238,6 @@ protected:
     ALife::EWeaponAddonStatus m_eForegripStatus;
 
     // смещение иконов апгрейдов в инвентаре
-    int m_iScopeX, m_iScopeY;
     int m_iSilencerX, m_iSilencerY;
     int m_iGrenadeLauncherX, m_iGrenadeLauncherY;
     int m_iPointerX, m_iPointerY;
@@ -333,6 +341,7 @@ public:
     // загружаемые параметры
     Fvector vLoadedFirePoint;
     Fvector vLoadedFirePoint2;
+    Fvector vLoadedMagPoint;
 
 private:
     firedeps m_current_firedeps{};
@@ -368,6 +377,11 @@ public:
         UpdateFireDependencies_internal();
         return m_current_firedeps.vLastSP;
     }
+    IC const Fvector& get_LastMP()
+    {
+        UpdateFireDependencies_internal();
+        return m_current_firedeps.vLastMP;
+    }
     IC const Fvector& get_LastShootPoint()
     {
         UpdateFireDependencies_internal();
@@ -392,9 +406,16 @@ protected:
     // трассирование полета пули
     virtual void FireTrace(const Fvector& P, const Fvector& D);
     virtual float GetWeaponDeterioration();
+    virtual void SpawnCasing();
+    virtual void RemoveCasings(bool skipCheck);
+    virtual void SpawnMag();
+    virtual void RemoveMags(bool skipCheck);
 
-    virtual void FireStart() { CShootingObject::FireStart(); }
-    virtual void FireEnd(); // {CShootingObject::FireEnd();}
+    virtual void FireStart()
+    {
+        CShootingObject::FireStart();
+    }
+    virtual void FireEnd();
 
     virtual void Fire2Start();
     virtual void Fire2End();
@@ -514,6 +535,17 @@ protected:
     int iAmmoElapsed; // ammo in magazine, currently
     int iMagazineSize; // size (in bullets) of magazine
 
+    bool m_ejects_casings;
+    bool m_ejects_on_reload;
+    LPCSTR m_casings_section;
+    int m_casing_delay;
+
+    bool m_drops_mags;
+    LPCSTR m_mags_section;
+    int m_drop_mag_delay;
+ 
+    bool m_silencer_extends_grid_x;
+
     bool iСartridgeBullet;
 
     // для подсчета в GetAmmoCurrent
@@ -535,6 +567,8 @@ public:
     xr_vector<CCartridge> m_magazine;
     CCartridge m_DefaultCartridge;
     float m_fCurrentCartirdgeDisp;
+
+    bool m_IsPistol = false;
 
     bool unlimited_ammo();
     IC bool can_be_strapped() const { return m_can_be_strapped; };
@@ -611,12 +645,17 @@ public:
 
     Fvector flashlight_attach_offset{}, flashlight_pos{};
 
+    bool m_guaranteedNoMisfire = false;
+
     void SwitchMisfire(bool on)
     {
         if (on)
             m_flagsAddOnState |= CSE_ALifeItemWeapon::eWeaponMisfire;
         else
+        {
             m_flagsAddOnState &= ~CSE_ALifeItemWeapon::eWeaponMisfire;
+            m_guaranteedNoMisfire = true;
+        }
     }
     inline bool IsMisfire() const { return m_flagsAddOnState & CSE_ALifeItemWeapon::eWeaponMisfire; }
 

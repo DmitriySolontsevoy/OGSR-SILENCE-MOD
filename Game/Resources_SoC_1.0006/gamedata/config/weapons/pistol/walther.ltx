@@ -29,21 +29,31 @@ ammo_elapsed		 		= 16
 ammo_mag_size		 		= 15
 ammo_class		 			= ammo_9x19_fmj, ammo_9x19_pbp 
 
+ejects_casings 				= 1
+ejects_on_reload			= 0
+casings_section				= 9x19_casing
+casing_delay				= 0
+
+drops_mags					= 1
+mags_section				= mag_walther_99
+mag_delay					= 300
+mag_point					= 0.0, 0.0, 0.0
+
 hand_dependence		 		= 1
 single_handed				= 1
-							
+
 slot 			 			= 1,2
 animation_slot				= 1									; type of the animation that will be used
 
 inv_name					= "Walther P99"
 inv_name_short				= "Walther P99"
-inv_weight					= 0.69	;.5
+inv_weight					= 0.63
 
 icon_group            		= 1
 inv_grid_width				= 2
 inv_grid_height				= 1
 inv_grid_x					= 0
-inv_grid_y					= 73
+inv_grid_y					= 104
 
 kill_msg_x			= 168
 kill_msg_y			= 178
@@ -71,7 +81,7 @@ condition_shot_dec 		= 0.0003 ;увеличение износа при каждом выстреле
 
 direction           	    = 0, 0, 1
 fire_point               	= 0.0, 0.136, 0.133
-flame_particles		   		= weapons\generic_weapon03
+flame_particles		   		= weapons\new_effects\pistol_9x19
 smoke_particles		   		= weapons\generic_shoot_00
 
 shell_point		 			= 0.0, 0.136, 0.03
@@ -92,7 +102,7 @@ hit_impulse		 	= 125
 hit_type 			= fire_wound	
 
 fire_distance           = 50 ;1000
-bullet_speed		 	= 400 ;280		
+bullet_speed		 	= 408 ;280		
 rpm                     = 315
 ; end ttc
 
@@ -122,7 +132,7 @@ light_color		 			= 0.6,0.5,0.3
 light_range		 			= 3.0
 light_var_color		 		= 0.05
 light_var_range		 		= 0.5
-light_time 		 			= 0.2
+light_time 		 			= 0.1
 
 ph_mass			 			= 1
 ;cost			 			= 350
@@ -140,9 +150,12 @@ snd_draw					= weapons\walther\draw
 snd_holster					= weapons\walther\holster
 snd_shoot					= weapons\walther\shot         
 snd_empty					= weapons\walther\empty
-snd_reload					= weapons\fort\reload
-snd_reload_partly			= weapons\fort\reload_partly
+snd_reload					= weapons\walther\reload
+snd_reload_partly			= weapons\walther\reload_partly
+snd_reload_full				= weapons\colt\reload_full
+snd_reload_jammed			= weapons\glock\reload_jammed
 snd_close					= weapons\walther\draw
+snd_click_last				= weapons\_general\pistol_slide_click
 
 snd_aim_start       = weapons\_general\pistol_aim_start_1, 0.5
 snd_aim_end			= weapons\_general\pistol_aim_end_1, 0.5
@@ -153,9 +166,10 @@ snd_grab = pickups\grab_gun
 ;; silencer
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-silencer_name  				= wpn_addon_silencer		; section name for the attachable silencer
-silencer_x 					= 54						; offset in inventory icon
-silencer_y 					= -18					
+silencer_extends_grid_x 	= 1
+silencer_name  				= wpn_addon_silencer_pistol_9mm		; section name for the attachable silencer
+silencer_x 					= 62						; offset in inventory icon
+silencer_y 					= -17
 
 ;params when silencer is attached 
 ;similar to corresponding params without prefix silencer_
@@ -167,39 +181,76 @@ silencer_light_color		= 0.6,0.5,0.3
 silencer_light_range		= 0.01
 silencer_light_var_color	= 0.05
 silencer_light_var_range	= 0.5
-silencer_light_time 		= 0.2
+silencer_light_time 		= 0.1
+
+hidden_bones = wpn_upgrade_luminous_sights
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 [wpn_walther_hud]
-shell_point			        = 0.020000,0.040000,-0.300000
-fire_point			= 0.000600,0.040600,-0.239000
+shell_point			        = 1.0,0.04,-0.3
+fire_point					= 0.0006,0.0406,-0.2
 	
 fire_bone                	= wpn_body
 orientation              	= 0,0,0
 position                 	= 0, -0.16, -0.05
 visual                   	= weapons\walther_99\wpn_walther_99_hud.ogf
 
+mag_point					= 0.0, -0.5, -0.5
+
 anim_reload_effector = short_reload
 anim_reload_empty_effector = short_reload
 
-anim_holster				= lancew_fort12_holster
-anim_idle					= lancew_fort12_idle
-anim_empty					= lancew_fort12_idle_empty
-anim_reload					= lancew_fort12_reload
-anim_reload_empty			= lancew_fort12_reload_full
-anim_draw					= lancew_fort12_draw
-anim_draw_empty				= lancew_fort12_draw_empty
-anim_shoot					= lancew_fort12_shoot
-anim_shot_last				= lancew_fort12_shoot_empty
-anim_close					= lancew_fort12_holster_empty	;close
-anim_idle_aim				= lancew_fort12_idle_aim
-anim_idle_sprint			= lancew_fort12_sprint
-anim_idle_sprint_empty      = lancew_fort12_sprint_empty
+anim_holster				= pistol_holster
+anm_hide_jammed				= pistol_holster_empty
+anim_idle					= pistol_idle
+anm_idle_jammed				= pistol_idle_empty
+anim_empty					= pistol_idle_empty
+anim_reload					= reload
+anim_reload_empty			= reload_empty
+anim_reload_full			= reload_full
+anm_reload_jammed			= reload_jammed
+anim_draw					= pistol_draw
+anim_draw_empty				= pistol_draw_empty
+anm_show_jammed				= pistol_draw_empty
+anim_shoot					= pistol_shoot
+anim_shot_last				= pistol_shoot_last
+anim_close					= pistol_holster_empty
+anim_idle_aim				= pistol_idle_aim
+anm_idle_aim_jammed			= pistol_idle_empty
+anim_idle_sprint			= idle_sprint
+anim_idle_sprint_empty      = idle_sprint_empty
+anm_idle_sprint_jammed      = idle_sprint_empty
+anim_idle_moving			= pistol_moving
+anim_idle_moving_empty		= pistol_moving_empty
+anm_idle_moving_jammed		= pistol_moving_empty
+
+anm_reload_jammed_speed_k = 0.8
+anm_reload_jammed_stop_k  = 0.6
+
+anim_reload_full_stop_k = 0.85
 
 ;смещения HUD для режима приближения
-zoom_offset			= -0.11458, 0.043, -0.05
-zoom_rotate_x		= -0.01
-zoom_rotate_y		= -0.0065
+zoom_offset				= -0.123,0.053,-0.1
+zoom_rotate_x			= 0
+zoom_rotate_y			= 0.02
+
+zoom_rotate_time = 0.4
 
 zoom_hide_crosshair	= true						;to hide crosshair in zoom 
+
+hidden_bones = wpn_upgrade_luminous_sights
+
+
+;;;;;;;;;;;;;;;;;
+;;;WEAPON MODS;;;
+;;;;;;;;;;;;;;;;;
+;;LUMINOUS SIGHTS
+[wpn_walther:tritium]:wpn_walther
+inv_grid_x = 3
+
+hidden_bones = null
+
+hud = wpn_walther:tritium_hud
+
+[wpn_walther:tritium_hud]:wpn_walther_hud
+hidden_bones = null

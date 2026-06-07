@@ -513,13 +513,26 @@ void xrServer::SendTo_LL(ClientID ID, void* data, u32 size, u32 dwFlags, u32 dwT
 //--------------------------------------------------------------------
 CSE_Abstract* xrServer::entity_Create(LPCSTR name) { return F_entity_Create(name); }
 
+void xrServer::entity_Register(CSE_Abstract*& P) {
+    P->ID = PerformIDgen(P->ID);
+    entities.insert(mk_pair(P->ID, P));
+}
+
+std::string trim(const std::string& source)
+{
+    std::string s(source);
+    s.erase(0, s.find_first_not_of(" \n\r\t"));
+    s.erase(s.find_last_not_of(" \n\r\t") + 1);
+    return s;
+}
+
 void xrServer::entity_Destroy(CSE_Abstract*& P)
 {
-#ifdef DEBUG
-    Msg("xrServer::entity_Destroy : [%d][%s][%s]", P->ID, P->name(), P->name_replace());
-#endif
     R_ASSERT(P);
+    //Msg("xrServer::entity_Destroy : [%d][%s][%s]", P->ID, P->name(), P->name_replace());
+
     entities.erase(P->ID);
+
     m_tID_Generator.vfFreeID(P->ID, Device.TimerAsync());
 
     if (P->owner && P->owner->owner == P)

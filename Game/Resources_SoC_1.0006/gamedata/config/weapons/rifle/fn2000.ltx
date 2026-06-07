@@ -29,6 +29,16 @@ ammo_elapsed		     = 30
 
 ammo_mag_size		     = 30
 
+ejects_casings 				= 1
+ejects_on_reload			= 0
+casings_section				= 5_56x45_casing
+casing_delay				= 0
+
+drops_mags					= 1
+mags_section				= mag_fn2000
+mag_delay					= 500
+mag_point					= 0.0, 0.0, 0.0
+
 hand_dependence		     = 1
 single_handed			 = 0
 
@@ -41,13 +51,13 @@ animation_slot			 = 2		; type of the animation that will be used
 
 inv_name		         = FN2000
 inv_name_short		     = FN2000
-inv_weight		         = 3.8
+inv_weight		         = 4.6
 
 icon_group              	= 1
-inv_grid_width				= 4
+inv_grid_width				= 5
 inv_grid_height				= 2
 inv_grid_x					= 0
-inv_grid_y					= 42
+inv_grid_y					= 34
 
 kill_msg_x					= 131
 kill_msg_y					= 123
@@ -78,9 +88,9 @@ direction                = 0, 0, 1
 
 fire_point			= 0.010000,0.166000,0.475000
 
-flame_particles			 = weapons\generic_weapon05
+flame_particles			 = weapons\new_effects\fn2000
 smoke_particles			 = weapons\generic_shoot_00
-grenade_flame_particles	= weapons\generic_weapon01
+grenade_flame_particles	 = weapons\new_effects\glauncher
 
 shell_point			= -0.020000,0.186000,0.200000
 shell_dir		 		= 0.0, 1.0, 0.0
@@ -123,7 +133,7 @@ light_color		         = 0.6,0.5,0.3
 light_range		         = 4
 light_var_color		     = 0.05
 light_var_range		     = 0.1
-light_time 		         = 0.2
+light_time 		         = 0.1
 
 
 ph_mass			         = 4
@@ -136,14 +146,9 @@ grenade_launcher_status		= 1
 zoom_enabled				= true
 
 scope_texture		= wpn\wpn_crosshair_g36
-lens_texture		= wpn\wpn_crosshair_g36_lens
-lens_texture_x		= 183
-lens_texture_y		= 75
-lens_texture_w		= 648
-lens_texture_h		= 648
 
 
-silencer_name  				= wpn_addon_silencer_rifle_2
+silencer_name  				= wpn_addon_silencer_rifle_hexagon
 silencer_x 					= 166						; offset in inventory icon
 silencer_y 					= 13
 zoom_enabled				= true
@@ -158,9 +163,11 @@ snd_shoot2			= weapons\fn2000\shot2
 snd_shoot3			= weapons\fn2000\shot3
 snd_empty			= weapons\fn2000\empty
 snd_reload			= weapons\fn2000\reload
-snd_shoot_grenade		= weapons\fn2000\grenshoot
-snd_reload_grenade		= weapons\fn2000\grenload
+snd_reload_jammed	= weapons\fn2000\reload_jammed
+snd_shoot_grenade	= weapons\fn2000\grenshoot
+snd_reload_grenade	= weapons\fn2000\grenload
 snd_switch			= weapons\fn2000\switch
+snd_click_last		= weapons\_general\rifle_slide_click
 
 snd_aim_start       = weapons\_general\rifle_aim_start_2, 0.5
 snd_aim_end			= weapons\_general\rifle_aim_end_2, 0.5
@@ -179,66 +186,80 @@ silencer_light_color		= 0.6,0.5,0.3
 silencer_light_range		= 0.01
 silencer_light_var_color	= 0.05
 silencer_light_var_range	= 0.5
-silencer_light_time 		= 0.2
+silencer_light_time 		= 0.1
 
 grenade_vel					= 76
 
 grenade_class				= ammo_m209
 
 
-
 [wpn_fn2000_hud]
-shell_point			= 0,0,-0.5
+shell_point					= 1.0, 0.0, 1.5
 shell_dir		 			= 0.0, 1.0, 0.0
 
-fire_point			= 0,0,-0.55
-fire_bone                	= muzzle
+fire_point					= 0,0.054,-0.05
+fire_bone      	      		= wpn_body
 
 grenade_bone            	= grenade
 
-orientation              	= 0, 0, 0
-position                 	= 0.15, -0.04, 0.08
+position					= -0.032,-0.2145,0.3
+orientation					= 2.15,0.25,1.4
 visual                   	= weapons\fn2000\wpn_fn2000_hud.ogf
+
+mag_point					= 0.0, -0.5, -0.5
 
 anim_reload_effector = reload
 anim_reload_partly_effector = short_reload
+anm_reload_jammed_effector = short_reload
 
 anim_idle 			= idle
 anim_idle_aim 		= idle_aim
 anim_reload 		= reload
 anim_reload_partly 	= reload
-anim_draw 			= draw_new
+anm_reload_jammed 	= reload
+anim_draw 			= draw
 anim_holster 		= holster
 anim_shoot 			= shoot
 anim_idle_sprint	= idle_sprint
+anim_idle_moving    = idle_moving
 
-anim_idle_g				= idle_g
-anim_idle_g_aim         = idle_g_aim
-anim_reload_g			= reload_g
-anim_shoot_g			= shoot_g
-anim_switch_grenade_on	= switch_on
-anim_switch_grenade_off	= switch_off
-anim_draw_g				= draw_g_new
-anim_holster_g			= holster_g
+anim_idle_g				= idle_gl
+anim_idle_g_aim         = idle_aim_gl
+anim_reload_g			= reload_gl
+anim_shoot_g			= shoot_gl
+anim_switch_grenade_on	= switch
+anim_switch_grenade_off	= switch
+anim_draw_g				= draw_gl
+anim_holster_g			= holster_gl
+anim_idle_sprint_g      = idle_sprint_gl
+anim_idle_moving_g      = idle_moving_gl
 
 ; attached grenade launcher [NORMAL fire mode]
 anim_idle_gl				= idle
 anim_idle_gl_aim			= idle_aim
 anim_reload_gl				= reload
 anim_reload_gl_partly		= reload
-anim_draw_gl				= draw_new
+anm_reload_jammed_w_gl		= reload
+anim_draw_gl				= draw
 anim_holster_gl				= holster
 anim_shoot_gl				= shoot
+anim_idle_sprint_gl   		= idle_sprint
+anim_idle_moving_gl   		= idle_moving
 
 anim_reload_partly_speed_k 		= 0.9
 anim_reload_gl_partly_speed_k 	= 0.9
-anim_reload_partly_stop_k 		= 0.53
-anim_reload_gl_partly_stop_k 	= 0.53
+anim_reload_partly_stop_k 		= 0.54
+anim_reload_gl_partly_stop_k 	= 0.54
+
+anm_reload_jammed_start_k = 0.6
+anm_reload_jammed_w_gl_start_k = 0.6
 
 ;смещения HUD для режима приближения
-zoom_offset			= -0.15, 0.01, -0.5
+zoom_offset			= -0.112,0.0295,-0.318
 zoom_rotate_x		= 0
 zoom_rotate_y		= 0
+
+zoom_rotate_time = 0.4
 
 ;тоже самое, но для подствольника
 grenade_zoom_offset			= 0,0,0
