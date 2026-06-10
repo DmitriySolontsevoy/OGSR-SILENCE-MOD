@@ -20,10 +20,5 @@ Because of the limit of file size on GitHub next list of files need to be extrac
 7. Navigate to "Game/Resources_SoC_1.0006/gamedata/levels/marsh" and extract "level_geom.zip" into this same folder.
 8. Navigate to "Game/Resources_SoC_1.0006/gamedata/levels/yantar_old" and extract "level_geom.zip" into this same folder.
 9. Navigate to "Game/Resources_SoC_1.0006/gamedata/levels/chernobyl_2" and extract "level_geom.zip" into this same folder.
-10. Navigate to "Game/Resources_SoC_1.0006/gamedata/textures/detail" and extract "detail_grnd_asphalt.zip" into this same folder.
 11. Navigate to "Game/Resources_SoC_1.0006/gamedata/textures/detail" and extract "detail_grnd_asphalt_bump.rar" into this same folder.
 12. Navigate to "Game/Resources_SoC_1.0006/gamedata/textures/ui" and extract "ui_icon_equipment_1.zip" into this same folder.
-13. Navigate to "Game/Resources_SoC_1.0006/gamedata/textures/wpn/fnFal" and extract "fnfal.zip" into this same folder.
-14. Navigate to "Game/Resources_SoC_1.0006/gamedata/textures/wpn/fnFal" and extract "fnfal_bump.zip" into this same folder.
-15. Navigate to "Game/Resources_SoC_1.0006/gamedata/textures/wpn/gauss" and extract "gauss_bump.zip" into this same folder.
-16. 
