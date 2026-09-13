@@ -16,6 +16,8 @@
 #include "sniper\svd.ltx"
 #include "sniper\l96a1.ltx"
 #include "sniper\svu.ltx"
+#include "sniper\gm6.ltx"
+#include "sniper\mosin.ltx"
 #include "sniper\vsk94.ltx"
 #include "sniper\vss.ltx"
 #include "sniper\vssm.ltx"
@@ -1099,6 +1101,43 @@ snd_grab = pickups\grab_ammo_shells
 [ammo_12x76_zhekan_heli]:ammo_12x76_zhekan
 $spawn			= "weapons\ammo\ammo_12x76_zhekan_heli" ; option for Level Editor
 explosive		= on
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[ammo_12.7x99]:ammo_base
+GroupControlSection	= spawn_group
+discovery_dependency = 
+$spawn			= "weapons\ammo\ammo_12.7x99" ; option for Level Editor
+class			= AMMO
+cform                   = skeleton
+visual                  = weapons\ammo\ammo_127x99.ogf
+description				= enc_weapons1_ammo_ammo-7.62x54-7h1
+$prefetch 		= 64
+
+cost					 = 1800
+
+box_size		= 10
+
+inv_name		= ammo-12.7x99
+inv_name_short	= ammo-12.7x99
+inv_weight		= 1.1
+
+inv_grid_width		= 2
+inv_grid_height		= 1
+inv_grid_x			= 14
+inv_grid_y			= 14
+
+k_dist			= 1
+k_disp			= 1.5;3
+k_hit			= 2
+k_impulse		= 2
+k_pierce		= 2
+impair			= 1
+buck_shot		= 1
+tracer			= on
+wm_size         = 0.05
+explosive		= on
+
+snd_grab = pickups\grab_ammo_rifle
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 [ammo_og-7b]:ammo_base
